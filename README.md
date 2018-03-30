@@ -1,2 +1,2 @@
 # booking
-booking XML &amp; Web Services - student project
+XML &amp; Web Services - student project
