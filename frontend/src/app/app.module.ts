@@ -6,16 +6,16 @@ import { MatCheckboxModule, MatStepperModule, MatSelectModule} from '@angular/ma
 import {MatButtonModule} from '@angular/material/button';
 import {MatMenuModule} from '@angular/material/menu';
 import { AppRoutingModule } from './/app-routing.module';
-import { CertificateComponent } from './certificate/certificate.component';
 import { KeyStoreComponent } from './key-store/key-store.component';
 import { SelectKeyStoreComponent } from './select-key-store/select-key-store.component';
+import { CertificatComponent } from './certificat/certificat.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    CertificateComponent,
     KeyStoreComponent,
-    SelectKeyStoreComponent
+    SelectKeyStoreComponent,
+    CertificatComponent
   ],
   imports: [
     BrowserModule,

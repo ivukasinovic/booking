@@ -6,5 +6,13 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'app';
+  title = 'Wlcome to Security';
+
+  show = false;
+  show2 = false;
+
+  enable1(row: any) {
+    row.expand = true;
+  }
+
 }
