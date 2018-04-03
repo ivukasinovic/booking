@@ -1,0 +1,27 @@
+<mat-horizontal-stepper>
+  <mat-step label="Step 1">
+    <input name="nameKeyStore" #nameKeyStore placeholder="Type KeyStore">
+    <div>
+      <button mat-button matStepperPrevious>Back</button>
+      <button mat-button matStepperNext>Next</button>
+    </div>
+  </mat-step>
+  <mat-step label="Step 2">
+    <input name="passKeyStore" #passKeyStore type="password">
+    <div>
+      <button mat-button matStepperPrevious>Back</button>
+      <button mat-button matStepperNext>Next</button>
+    </div>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Done</ng-template>
+    You are now done.
+    <div>
+      <button class="btn btn-primary" (click)="KeyStoreProve(nameKeyStore.value,passKeyStore.value)"> Done !</button>
+      <!-- Na klik vezati akciju-->
+      <!--      <button mat-button matStepperPrevious>Back</button>
+            <button mat-button (click)="stepper.reset()">Reset</button>
+      -->
+    </div>
+  </mat-step>
+</mat-horizontal-stepper>
