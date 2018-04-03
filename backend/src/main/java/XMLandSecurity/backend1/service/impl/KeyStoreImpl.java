@@ -1,12 +1,17 @@
 package XMLandSecurity.backend1.service.impl;
+
+import XMLandSecurity.backend1.model.IssuerData;
 import XMLandSecurity.backend1.service.KeyStoreService;
+import org.bouncycastle.asn1.x500.X500Name;
+import org.bouncycastle.cert.jcajce.JcaX509CertificateHolder;
 import org.springframework.stereotype.Service;
+
 import java.io.*;
-import java.security.KeyStore;
-import java.security.KeyStoreException;
-import java.security.NoSuchAlgorithmException;
-import java.security.NoSuchProviderException;
+import java.security.*;
+import java.security.cert.Certificate;
+import java.security.cert.CertificateEncodingException;
 import java.security.cert.CertificateException;
+import java.security.cert.X509Certificate;
 import java.util.ArrayList;
 
 /**
@@ -41,15 +46,47 @@ public class KeyStoreImpl implements KeyStoreService {
     }
 
     @Override
-    public boolean createKeyStore(String alias, String password) {
+    public boolean createKeyStore(String name, String password) {
         loadKeyStore(null, password.toCharArray());
-        return saveKeyStore(alias, password.toCharArray());
+        return saveKeyStore(name, password.toCharArray());
     }
 
     @Override
-    public void delete(String alias) {
-        File file = new File("keystores/" + alias);
+    public void delete(String name) {
+        File file = new File("keystores/" + name);
         boolean uspeo = file.delete();
+    }
+
+    @Override
+    public void writeCertificate(String keyStoreName, String keyStorePw, Certificate certificate, String alias, PrivateKey pk) {
+        loadKeyStore(keyStoreName, keyStorePw.toCharArray());
+        try {
+            keyStore.setCertificateEntry(alias, certificate);
+            keyStore.setKeyEntry(alias, pk, keyStorePw.toCharArray(), new Certificate[]{certificate});
+        } catch (KeyStoreException e) {
+            e.printStackTrace();
+        }
+        saveKeyStore(keyStoreName, keyStorePw.toCharArray());
+    }
+
+    @Override
+    public IssuerData readIssuerFromStore(String keyStoreName, String keyStorePw, String alias) {
+        loadKeyStore(keyStoreName, keyStorePw.toCharArray());
+        try {
+            Certificate cert = keyStore.getCertificate(alias);
+            PrivateKey privKey = (PrivateKey) keyStore.getKey(alias, keyStorePw.toCharArray());
+            X500Name issuerName = new JcaX509CertificateHolder((X509Certificate) cert).getSubject();
+            return new IssuerData(privKey, issuerName);
+        } catch (KeyStoreException e) {
+            e.printStackTrace();
+        } catch (UnrecoverableKeyException e) {
+            e.printStackTrace();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        } catch (CertificateEncodingException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     public void loadKeyStore(String fileName, char[] password) {
@@ -89,3 +126,4 @@ public class KeyStoreImpl implements KeyStoreService {
         return false;
     }
 }
+

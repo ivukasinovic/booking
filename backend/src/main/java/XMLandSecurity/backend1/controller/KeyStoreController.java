@@ -29,19 +29,19 @@ public class KeyStoreController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<String> createKeyStore(@RequestParam String alias, @RequestParam String password) {
-        boolean saved = keyStoreService.createKeyStore(alias, password);
+    public ResponseEntity<String> createKeyStore(@RequestParam String name, @RequestParam String password) {
+        boolean saved = keyStoreService.createKeyStore(name, password);
         if (!saved) {
             return new ResponseEntity<>(HttpStatus.FORBIDDEN);
         }
-        return new ResponseEntity<>(alias, HttpStatus.CREATED);
+        return new ResponseEntity<>(name, HttpStatus.CREATED);
     }
 
     @RequestMapping(
             value = "/{name}",
             method = RequestMethod.DELETE)
-    public ResponseEntity<KeyStore> deleteKeyStore(@PathVariable("name") String alias) {
-        keyStoreService.delete(alias);
+    public ResponseEntity<KeyStore> deleteKeyStore(@PathVariable("name") String name) {
+        keyStoreService.delete(name);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
