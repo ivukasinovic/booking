@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { SelectKeyStoreComponent } from './select-key-store.component';
+import {SelectKeyStoreComponent} from './select-key-store.component';
 
 describe('SelectKeyStoreComponent', () => {
   let component: SelectKeyStoreComponent;
@@ -8,9 +8,9 @@ describe('SelectKeyStoreComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SelectKeyStoreComponent ]
+      declarations: [SelectKeyStoreComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

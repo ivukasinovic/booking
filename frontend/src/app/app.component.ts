@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -6,14 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'Wlcome to Security';
-
-  show = false;
-  show2 = false;
-
-  enable1(row: any) {
-    row.expand = true;
-  }
-
 
 }
