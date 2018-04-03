@@ -12,4 +12,16 @@ export class CertificatComponent implements OnInit {
   ngOnInit() {
   }
 
+  niz = [];
+
+  // Od dugmeta kada  potvrdi da pravi sertifikat ...
+  addNiz(CN: string , SN: string , GN: string, ON: string, LN: string, Country: string, Email: string) {
+    if (CN !== '' && SN !== '' && GN !== '' && ON !== '' && LN !== '' && Country !== '' && Email !== '') {
+      this.niz.push({
+        CN: CN, SN: SN, GN: GN, ON: ON, LN: LN, C: Country, E: Email
+      });
+    }
+
+  } // kraj metode
+
 }

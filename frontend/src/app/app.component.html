@@ -1,26 +1,22 @@
+<mat-toolbar><h1>{{title}}</h1> <div align="" ><button style="font-size: large;color: blue" mat-button [matMenuTriggerFor]="menu">Menu</button></div> </mat-toolbar>
 
-<h1>{{title}}</h1>
-
-<button mat-button [matMenuTriggerFor]="menu">Menu</button>
 <mat-menu #menu="matMenu">
-  <button mat-menu-item (click)="show = true && show2 = false" >Item 1</button>
-  <button mat-menu-item (click)="show2 = true" >Item 2</button>
+  <a mat-menu-item type="button" class="button" routerLink="/createKeyStore"style="font-size: large;color: darkblue"> Create KeyStore</a>
+  <a  mat-menu-item type="button" class="button" routerLink="/certificat" style="font-size: large;color: cornflowerblue" > Create Certificate</a>
+  <a  mat-menu-item type="button" class="button" routerLink="/selectKeyStore" style="font-size: large;color: blue" > Select KeyStore </a>
+  <!--<button mat-menu-item >Item 2</button> -->
 </mat-menu>
-
-<nav>
-  <a routerLink="/certificat"> Create Certificate</a>
-</nav>
 
 <router-outlet></router-outlet>
 
-<div *ngIf="show == true" >
-<app-certificat></app-certificat>
-</div>
+<!--<div *ngIf="show == true" >-->
+<!--<app-certificat></app-certificat>-->
+<!--</div>-->
 
-<div>
-<app-key-store></app-key-store>
-</div>
+<!--<div>-->
+<!--<app-key-store></app-key-store>-->
+<!--</div>-->
 
-<div>
-<app-select-key-store></app-select-key-store>
-</div>
+<!--<div>-->
+<!--<app-select-key-store></app-select-key-store>-->
+<!--</div>-->

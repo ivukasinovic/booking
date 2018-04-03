@@ -9,6 +9,7 @@ import { AppRoutingModule } from './/app-routing.module';
 import { KeyStoreComponent } from './key-store/key-store.component';
 import { SelectKeyStoreComponent } from './select-key-store/select-key-store.component';
 import { CertificatComponent } from './certificat/certificat.component';
+import {MatToolbarModule} from '@angular/material/toolbar';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { CertificatComponent } from './certificat/certificat.component';
     MatMenuModule,
     MatStepperModule,
     MatSelectModule,
+    MatToolbarModule,
     AppRoutingModule
   ],
   providers: [],
