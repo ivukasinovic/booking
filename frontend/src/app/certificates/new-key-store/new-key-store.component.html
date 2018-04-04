@@ -1,27 +1,49 @@
-<mat-horizontal-stepper>
-  <mat-step label="Step 1">
-    <input name="nameKeyStore" #nameKeyStore placeholder="Type KeyStore">
-    <div>
-      <button mat-button matStepperPrevious>Back</button>
-      <button mat-button matStepperNext>Next</button>
-    </div>
-  </mat-step>
-  <mat-step label="Step 2">
-    <input name="passKeyStore" #passKeyStore type="password">
-    <div>
-      <button mat-button matStepperPrevious>Back</button>
-      <button mat-button matStepperNext>Next</button>
-    </div>
-  </mat-step>
-  <mat-step>
-    <ng-template matStepLabel>Done</ng-template>
-    You are now done.
-    <div>
-      <button class="btn btn-primary" (click)="KeyStoreProve(nameKeyStore.value,passKeyStore.value)"> Done !</button>
-      <!-- Na klik vezati akciju-->
-      <!--      <button mat-button matStepperPrevious>Back</button>
-            <button mat-button (click)="stepper.reset()">Reset</button>
-      -->
-    </div>
-  </mat-step>
-</mat-horizontal-stepper>
+<!--<mat-horizontal-stepper>-->
+  <!--<mat-step label="Step 1">-->
+    <!--<input name="nameKeyStore" #nameKeyStore placeholder="Type KeyStore">-->
+    <!--<div>-->
+      <!--<button mat-button matStepperPrevious>Back</button>-->
+      <!--<button mat-button matStepperNext>Next</button>-->
+    <!--</div>-->
+  <!--</mat-step>-->
+  <!--<mat-step label="Step 2">-->
+    <!--<input name="passKeyStore" #passKeyStore type="password">-->
+    <!--<div>-->
+      <!--<button mat-button matStepperPrevious>Back</button>-->
+      <!--<button mat-button matStepperNext>Next</button>-->
+    <!--</div>-->
+  <!--</mat-step>-->
+  <!--<mat-step>-->
+    <!--<ng-template matStepLabel>Done</ng-template>-->
+    <!--You are now done.-->
+    <!--<div>-->
+      <!--<button class="btn btn-primary" (click)="KeyStoreProve(nameKeyStore.value,passKeyStore.value)"> Done !</button>-->
+      <!--&lt;!&ndash; Na klik vezati akciju&ndash;&gt;-->
+      <!--&lt;!&ndash;      <button mat-button matStepperPrevious>Back</button>-->
+            <!--<button mat-button (click)="stepper.reset()">Reset</button>-->
+      <!--&ndash;&gt;-->
+    <!--</div>-->
+  <!--</mat-step>-->
+<!--</mat-horizontal-stepper>-->
+
+<form class="example-form" align="center" >
+  <mat-form-field class="example-full-width">
+    <input matInput placeholder="name of ket store" #ime name="ime"  value="">
+  </mat-form-field>
+    <br>
+  <mat-form-field class="example-full-width">
+    <input matInput type="password" name="sifra1" #sifra1 placeholder="password" value="">
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+    <input matInput name="sifra2" #sifra2 type="password" placeholder="repeat same password" value="">
+  </mat-form-field>
+  <br>
+  <!--<mat-form-field class="example-full-width">-->
+    <!--<textarea matInput placeholder="Leave a comment"></textarea>-->
+  <!--</mat-form-field>-->
+  <button  mat-mini-fab color="primary" (click)="createKeyStore(ime.value,sifra1.value,sifra2.value)">Enter</button>
+</form>
+
+<div *ngIf="error" class="alert alert-error">{{error}}</div>
+
