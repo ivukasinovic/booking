@@ -13,11 +13,10 @@
         <mat-form-field>
           <mat-select [(value)]="selected">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let n of niz" [value]="n.CN">
+
+            <mat-option *ngFor="let n of samoCekirani" [value]="n.CN">
               <div> {{n.CN}}</div>
-            </mat-option> <!-- *ngIf="CA.value == true" -->
-            <!--<mat-option value="option2">Option 2</mat-option>-->
-            <!--<mat-option value="option3">Option 3</mat-option>-->
+            </mat-option>
           </mat-select>
         </mat-form-field>
       </td>
@@ -63,8 +62,8 @@
     <tr>
       <td>for CA:</td>
       <td>
-        <mat-checkbox #CA name="CA"></mat-checkbox>
-      </td>   <!-- (click)="checked = true" -->
+        <mat-checkbox [checked]="saveUsername" (change)="saveUsername = !saveUsername" #CA name="CA"></mat-checkbox>
+      </td>
     </tr>
 
     <!-- -->
