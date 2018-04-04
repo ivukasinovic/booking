@@ -14,7 +14,7 @@ export class Certificate {
   country: string;
   email: string;
   isCa: boolean;
-  orgNameUnit: boolean;
+  orgNameUnit: string;
   uid: string;
-   serialNumber: string;
+  serialNumber: string;
 }

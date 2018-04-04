@@ -35,8 +35,15 @@ export class CertificatComponent implements OnInit {
         SELEC: SELEC, CN: CN, SN: SN, GN: GN, ON: ON, LN: LN, C: Country, E: Email, CA: this.saveUsername
       });
 
-      this.certificate.issuerName = SELEC;
+      if(SELEC != null) {
+        this.certificate.issuerName = SELEC;
+      } else{
+        this.certificate.issuerName = '';
+
+      }
       this.certificate.commonName = CN;
+      this.certificate.orgNameUnit = CN;  // samo posle promeniti polje
+
       this.certificate.surname = SN;
       this.certificate.givenName = GN;
       this.certificate.orgName = ON;

@@ -110,6 +110,25 @@ public class KeyStoreImpl implements KeyStoreService {
         return null;
     }
 
+    @Override
+    public ArrayList<String> getIssuers(String keyStoreName, String keyStorePw) {
+        KeyStoreDTO ks = getKeyStore(keyStoreName,keyStorePw);
+        ArrayList<String> issuers = new ArrayList<String>();
+        if(ks != null){
+            ArrayList<String> certificateAliases = ks.getAliases();
+            for(int i=0;i<certificateAliases.size();i++){
+                try {
+                    Certificate cert = keyStore.getCertificate(certificateAliases.get(i));
+                    //if(cert.isCA????
+                    //issuers.add(certificates(i));
+                } catch (KeyStoreException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return issuers;
+    }
+
     public boolean loadKeyStore(String fileName, char[] password) {
         try {
             if (fileName != null) {

@@ -25,4 +25,7 @@ public interface KeyStoreService {
 
     IssuerData readIssuerFromStore(String keyStoreName, String keyStorePw, String alias);
 
+    ArrayList<String> getIssuers(String keyStoreName, String keyStorePw);
+
+
 }
