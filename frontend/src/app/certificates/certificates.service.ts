@@ -1,26 +1,21 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpParams} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs/Observable';
 import {KeyStore} from './model';
 
 @Injectable()
 export class CertificatesService {
+  private ks: KeyStore;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+    this.ks = new KeyStore();
+  }
 
   getKeyStores(): Observable<string[]> {
     return this.http.get<string[]>('/api/keyStore');
   }
-  getKeyStore(name: string, password: string) {
-    // const httpParams = new HttpParams();
-    // httpParams.append('name', name);
-    // httpParams.append('password', password);
-    // const headers = new HttpHeaders();
-    // headers.append('Content-Type', 'application/json');
-    // const params = new URLSearchParams();
-    // params.append('name', name);
-    // params.append('password', password);
-    //
-    // return this.http.get('/api/keyStore/getKeyStore',{headers: headers, params: params});
+  getKeyStore(keyStore: KeyStore) {
+    console.log(keyStore.name, keyStore.password);
+    return this.http.post('/api/keyStore/getKeyStore', keyStore);
   }
 }

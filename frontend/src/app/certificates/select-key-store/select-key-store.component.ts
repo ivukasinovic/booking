@@ -1,5 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {CertificatesService} from '../certificates.service';
+import {KeyStore} from '../model';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-select-key-store',
@@ -8,9 +10,11 @@ import {CertificatesService} from '../certificates.service';
 })
 export class SelectKeyStoreComponent implements OnInit {
   keyStores: string[];
-  selected: string;
-  password: string;
-  constructor(private  cerService: CertificatesService) {
+  keyStore: KeyStore;
+  error = '';
+
+  constructor(private  cerService: CertificatesService, private router: Router) {
+    this.keyStore = new KeyStore();
   }
 
   ngOnInit() {
@@ -18,12 +22,16 @@ export class SelectKeyStoreComponent implements OnInit {
       .subscribe(keyStores => {
         this.keyStores = keyStores;
       });
-    console.log(this.password);
   }
   getKeyStore() {
-    console.log(this.selected + this.password);
-    this.cerService.getKeyStore(this.selected, this.password)
+    this.cerService.getKeyStore(this.keyStore)
+      .subscribe((result: KeyStore) => {
+        this.keyStore = result;
+        this.router.navigate(['/certificates/keyStore']);
+        },
+        error => {
+          this.error = 'Pogresno korisnicko ime ili lozinka';
+        });
   }
-
 
 }

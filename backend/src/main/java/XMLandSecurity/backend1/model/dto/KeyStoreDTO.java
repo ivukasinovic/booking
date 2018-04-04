@@ -12,6 +12,9 @@ public class KeyStoreDTO {
     private ArrayList<String> certificates;
     private Date date;
 
+    public KeyStoreDTO(){
+
+    }
     public KeyStoreDTO(String name, String password, ArrayList<String> certificates, Date date) {
         this.name = name;
         this.password = password;

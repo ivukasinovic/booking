@@ -51,8 +51,12 @@ public class KeyStoreImpl implements KeyStoreService {
 
     @Override
     public KeyStoreDTO getKeyStore(String name, String password) {
-        loadKeyStore(name,password.toCharArray());
+        boolean succes =false;
         ArrayList<String> aliases = null;
+        succes = loadKeyStore(name,password.toCharArray());
+        if(!succes){
+            return null;
+        }
         try {
             Enumeration<String> aliasesEn = keyStore.aliases();
             aliases = Collections.list(aliasesEn);
@@ -106,7 +110,7 @@ public class KeyStoreImpl implements KeyStoreService {
         return null;
     }
 
-    public void loadKeyStore(String fileName, char[] password) {
+    public boolean loadKeyStore(String fileName, char[] password) {
         try {
             if (fileName != null) {
                 keyStore.load(new FileInputStream("keystores/" + fileName), password);
@@ -114,6 +118,7 @@ public class KeyStoreImpl implements KeyStoreService {
                 //Ako je cilj kreirati novi KeyStore poziva se i dalje load, pri cemu je prvi parametar null
                 keyStore.load(null, password);
             }
+            return true;
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         } catch (CertificateException e) {
@@ -123,6 +128,7 @@ public class KeyStoreImpl implements KeyStoreService {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return false;
     }
 
     public boolean saveKeyStore(String fileName, char[] password) {

@@ -2,17 +2,16 @@
 <br>
 <form class="example-form" action="certificates/keyStore">
   <mat-form-field>
-    <mat-select placeholder="Choose keystore" [(value)]="selected" >
-      <mat-option *ngFor="let keyStore of keyStores" [value]="keyStore" >{{keyStore}}</mat-option>
+    <mat-select placeholder="Choose keystore" [(value)]="this.keyStore.name" >
+      <mat-option *ngFor="let ks of keyStores" [value]="ks" >{{ks}}</mat-option>
     </mat-select>
   </mat-form-field>
   <mat-form-field class="example-full-width">
-    <input matInput placeholder="Enter password:" [(ngModel)]="password" name="password" >
+    <input matInput placeholder="Enter password:" [(ngModel)]="this.keyStore.password" name="password" >
   </mat-form-field>
   <button  mat-mini-fab color="primary" (click)="getKeyStore()">Enter</button>
 </form>
-
-
+<div *ngIf="error" class="alert alert-error">{{error}}</div>
 
 
 

@@ -33,8 +33,8 @@ public class KeyStoreController {
             value = "/getKeyStore",
             method = RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<KeyStoreDTO> getKeyStore(@RequestParam String name, @RequestParam String password){
-        KeyStoreDTO keyStore = keyStoreService.getKeyStore(name,password);
+    public ResponseEntity<KeyStoreDTO> getKeyStore(@RequestBody KeyStoreDTO keyStore){
+        keyStore = keyStoreService.getKeyStore(keyStore.getName(),keyStore.getPassword());
         if(keyStore == null){
             return new ResponseEntity<>(HttpStatus.FORBIDDEN);
         }

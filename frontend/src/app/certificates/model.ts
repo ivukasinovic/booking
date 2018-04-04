@@ -4,7 +4,3 @@ export class KeyStore {
   aliases: string[];
   date: string;
 }
-type KeyStoreEnter = {
-  name: string;
-  password: boolean;
-}
