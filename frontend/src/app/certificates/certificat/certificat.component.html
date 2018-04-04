@@ -11,7 +11,7 @@
 
       <td>
         <mat-form-field>
-          <mat-select [(value)]="selected">
+          <mat-select #SELEC name="SELEC" [(value)]="selected">
             <mat-option>None</mat-option>
 
             <mat-option *ngFor="let n of samoCekirani" [value]="n.CN">
@@ -71,7 +71,7 @@
     <tr>
       <td colspan="2" align="center">
         <button class="btn btn-primary" type="button"
-                (click)="addNiz(CN.value,SN.value,GN.value,ON.value,LN.value,C.value,E.value,CA.value)"> Potvrdi
+                (click)="getCertificate(SELEC.value,CN.value,SN.value,GN.value,ON.value,LN.value,C.value,E.value,CA.value)"> Potvrdi
           kreiranje sertifikata
         </button>
       </td>
@@ -85,6 +85,7 @@
 
   <table class="table">
     <tr>
+      <th>ISSUER:</th>
       <th>Common Name (CN):</th>
       <th>Surname (SN):</th>
       <th>Given Name (GN):</th>
@@ -96,6 +97,10 @@
     </tr>
 
     <tr *ngFor="let n of niz">
+
+      <td>
+        {{n.SELEC}}
+      </td>
 
       <td>
         {{n.CN}}
