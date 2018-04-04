@@ -15,5 +15,6 @@ public interface CertificateService {
 
     IssuerData newIssuerData(CertificateDTO certificate);
 
+    CertificateDTO getCertificateDTO(String id);
 
 }

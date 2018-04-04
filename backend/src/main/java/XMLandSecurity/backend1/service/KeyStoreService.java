@@ -1,6 +1,7 @@
 package XMLandSecurity.backend1.service;
 
 import XMLandSecurity.backend1.model.IssuerData;
+import XMLandSecurity.backend1.model.dto.CertificateDTO;
 import XMLandSecurity.backend1.model.dto.KeyStoreDTO;
 
 import java.security.KeyStore;
@@ -25,4 +26,5 @@ public interface KeyStoreService {
 
     IssuerData readIssuerFromStore(String keyStoreName, String keyStorePw, String alias);
 
+    CertificateDTO readCertificate(String id);
 }

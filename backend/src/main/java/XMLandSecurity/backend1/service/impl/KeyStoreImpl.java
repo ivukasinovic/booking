@@ -1,6 +1,7 @@
 package XMLandSecurity.backend1.service.impl;
 
 import XMLandSecurity.backend1.model.IssuerData;
+import XMLandSecurity.backend1.model.dto.CertificateDTO;
 import XMLandSecurity.backend1.model.dto.KeyStoreDTO;
 import XMLandSecurity.backend1.service.KeyStoreService;
 import org.bouncycastle.asn1.x500.X500Name;
@@ -107,6 +108,12 @@ public class KeyStoreImpl implements KeyStoreService {
         } catch (CertificateEncodingException e) {
             e.printStackTrace();
         }
+        return null;
+    }
+
+    //TODO: implementirati citanje sertifikata
+    @Override
+    public CertificateDTO readCertificate(String id) {
         return null;
     }
 

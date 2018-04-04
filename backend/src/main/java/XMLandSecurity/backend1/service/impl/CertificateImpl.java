@@ -39,7 +39,7 @@ public class CertificateImpl implements CertificateService {
         CertificateGenerator generator = new CertificateGenerator();
         X509Certificate certificate = null;
         try {
-            certificate = generator.generateCertificate(sd, id , certificateDTO.isCa());
+            certificate = generator.generateCertificate(sd, id , certificateDTO.isCa() , certificateDTO.getIssuerSerialNumber());
         } catch (CertIOException e) {
             e.printStackTrace();
         }
@@ -50,11 +50,9 @@ public class CertificateImpl implements CertificateService {
 
     public SubjectData newSubjectData(CertificateDTO certificate) {
 
-
         KeyPair keyPairSubject = generateKeyPair();
 
         //Datumi od kad do kad vazi sertifikat
-
         Date startDate = new Date();
         Calendar c = Calendar.getInstance();
         c.setTime(new Date());
@@ -76,13 +74,7 @@ public class CertificateImpl implements CertificateService {
         //UID (USER ID) je ID korisnika
         builder.addRDN(BCStyle.UID, certificate.getUid());
 
-        //Kreiraju se podaci za sertifikat, sto ukljucuje:
-        // - javni kljuc koji se vezuje za sertifikat
-        // - podatke o vlasniku
-        // - serijski broj sertifikata
-        // - od kada do kada vazi sertifikat
         return new SubjectData(keyPairSubject.getPublic(), keyPairSubject.getPrivate(), builder.build(), sn, startDate, endDate);
-
 
     }
 
@@ -92,21 +84,12 @@ public class CertificateImpl implements CertificateService {
     public IssuerData newIssuerData(CertificateDTO certificate) {
         String keyStoreName = "test";
         String keyStorePw = "test";
-        // KeyPair keyPairSubject = generateKeyPair();
-
 
         Date startDate = null;
-        //klasa X500NameBuilder pravi X500Name objekat koji predstavlja podatke o vlasniku
+
         X500NameBuilder builder = new X500NameBuilder(BCStyle.INSTANCE);
         KeyPair keyPairIssuer = generateKeyPair();
         if (certificate.getIssuerSerialNumber().equals("")) { //ako uzmemo u obzir da ce biti prazan string ako zeli issuera da doda
-
-
-            startDate = certificate.getStartDate();
-            Date endDate = certificate.getStartDate();
-
-            //Serijski broj sertifikata
-            String sn = certificate.getSerialNumber();
 
             builder.addRDN(BCStyle.CN, certificate.getCommonName());
             builder.addRDN(BCStyle.SURNAME, certificate.getSurname());
@@ -138,5 +121,10 @@ public class CertificateImpl implements CertificateService {
             e.printStackTrace();
         }
         return null;
+    }
+
+
+    public CertificateDTO getCertificateDTO(String id){
+        return keyStoreService.readCertificate(id);
     }
 }
