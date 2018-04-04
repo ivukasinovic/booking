@@ -8,6 +8,7 @@ import XMLandSecurity.backend1.service.CertificateService;
 import XMLandSecurity.backend1.service.KeyStoreService;
 import org.bouncycastle.asn1.x500.X500NameBuilder;
 import org.bouncycastle.asn1.x500.style.BCStyle;
+import org.bouncycastle.cert.CertIOException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
@@ -20,6 +21,8 @@ import java.util.Date;
 
 @Service
 public class CertificateImpl implements CertificateService {
+    @Autowired
+    private KeyStoreService keyStoreService;
 
     @Override
     public Certificate generateCertificate(CertificateDTO certificateDTO) {
@@ -34,9 +37,14 @@ public class CertificateImpl implements CertificateService {
 
 
         CertificateGenerator generator = new CertificateGenerator();
-        X509Certificate certificate = generator.generateCertificate(sd, id);
+        X509Certificate certificate = null;
+        try {
+            certificate = generator.generateCertificate(sd, id , certificateDTO.isCa());
+        } catch (CertIOException e) {
+            e.printStackTrace();
+        }
+        keyStoreService.writeCertificate("test", "test",certificate, certificate.getSerialNumber().toString(), sd.getPrivateKey());
 
-        //  KeyStoreUtility.writeCertificate("C:\\Users\\Jox\\Documents\\xmlandsecurity\\booking\\backend\\src\\main\\resources\\dataStores","proba","nesto", certificate);
         return null;
     }
 
@@ -79,11 +87,10 @@ public class CertificateImpl implements CertificateService {
     }
 
 
-    @Autowired
-    private KeyStoreService keyStoreService;
+
 
     public IssuerData newIssuerData(CertificateDTO certificate) {
-        String keyStoreName = "keyStore/test";
+        String keyStoreName = "test";
         String keyStorePw = "test";
         // KeyPair keyPairSubject = generateKeyPair();
 
@@ -92,7 +99,7 @@ public class CertificateImpl implements CertificateService {
         //klasa X500NameBuilder pravi X500Name objekat koji predstavlja podatke o vlasniku
         X500NameBuilder builder = new X500NameBuilder(BCStyle.INSTANCE);
         KeyPair keyPairIssuer = generateKeyPair();
-        if (certificate.getIssuerName().equals("")) { //ako uzmemo u obzir da ce biti prazan string ako zeli issuera da doda
+        if (certificate.getIssuerSerialNumber().equals("")) { //ako uzmemo u obzir da ce biti prazan string ako zeli issuera da doda
 
 
             startDate = certificate.getStartDate();
@@ -112,8 +119,7 @@ public class CertificateImpl implements CertificateService {
 
             return new IssuerData(keyPairIssuer.getPrivate(), builder.build());
         } else {
-            IssuerData id = keyStoreService.readIssuerFromStore(keyStoreName, keyStorePw, certificate.getIssuerName());
-            System.out.println("Vratio " + id);
+            IssuerData id = keyStoreService.readIssuerFromStore(keyStoreName, keyStorePw, certificate.getIssuerSerialNumber());
             return id;
         }
 
