@@ -1,5 +1,14 @@
 package XMLandSecurity.backend1.model.dto;
 
+import org.bouncycastle.asn1.x500.RDN;
+import org.bouncycastle.asn1.x500.X500Name;
+import org.bouncycastle.asn1.x500.style.BCStyle;
+import org.bouncycastle.asn1.x500.style.IETFUtils;
+import org.bouncycastle.cert.jcajce.JcaX509CertificateHolder;
+
+import java.security.cert.Certificate;
+import java.security.cert.CertificateEncodingException;
+import java.security.cert.X509Certificate;
 import java.util.Date;
 
 /**
@@ -25,6 +34,59 @@ public class CertificateDTO {
 
     public CertificateDTO() {
     }
+
+    public CertificateDTO(Certificate cert)
+    {
+
+        try {
+            X500Name subjName = new JcaX509CertificateHolder((X509Certificate) cert).getSubject();
+
+            RDN cn = subjName.getRDNs(BCStyle.CN)[0];
+            String cname = IETFUtils.valueToString(cn.getFirst().getValue());
+            this.commonName =cname;
+
+            RDN sn = subjName.getRDNs(BCStyle.SURNAME)[0];
+            String sname = IETFUtils.valueToString(sn.getFirst().getValue());
+            this.surname = sname;
+
+            RDN on = subjName.getRDNs(BCStyle.O)[0];
+            String oname = IETFUtils.valueToString(on.getFirst().getValue());
+            this.orgName = oname;
+
+            RDN oun = subjName.getRDNs(BCStyle.OU)[0];
+            String ouname = IETFUtils.valueToString(oun.getFirst().getValue());
+            this.orgNameUnit = ouname;
+
+            RDN con = subjName.getRDNs(BCStyle.C)[0];
+            String conname = IETFUtils.valueToString(con.getFirst().getValue());
+            this.country = conname;
+
+            RDN givn = subjName.getRDNs(BCStyle.GIVENNAME)[0];
+            String givname = IETFUtils.valueToString(givn.getFirst().getValue());
+            this.givenName = givenName;
+
+            RDN en = subjName.getRDNs(BCStyle.E)[0];
+            String emname = IETFUtils.valueToString(en.getFirst().getValue());
+            this.email = emname;
+
+            RDN uidn = subjName.getRDNs(BCStyle.UID)[0];
+            String uidname = IETFUtils.valueToString(uidn.getFirst().getValue());
+            this.uid = uidname;
+
+
+            this.startDate = ((X509Certificate) cert).getNotBefore();
+            this.endDate = ((X509Certificate) cert).getNotAfter();
+
+
+
+
+        } catch (CertificateEncodingException e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
 
     public CertificateDTO(String commonName, String surname, String orgName, String orgNameUnit, String givenName, String country, String email, boolean isCa, String uid, String serialNumber, Date endDate, Date startDate, String issuerSerialNumber, String issuerName) {
         this.commonName = commonName;

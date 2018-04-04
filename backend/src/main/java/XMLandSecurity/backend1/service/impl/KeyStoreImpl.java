@@ -119,8 +119,11 @@ public class KeyStoreImpl implements KeyStoreService {
             for(int i=0;i<certificateAliases.size();i++){
                 try {
                     Certificate cert = keyStore.getCertificate(certificateAliases.get(i));
-                    //if(cert.isCA????
-                    //issuers.add(certificates(i));
+
+                    int isCa = ((X509Certificate) cert).getBasicConstraints();
+                   if(isCa == 0)
+                    issuers.add(certificateAliases.get(i));
+
                 } catch (KeyStoreException e) {
                     e.printStackTrace();
                 }
@@ -166,6 +169,17 @@ public class KeyStoreImpl implements KeyStoreService {
             e.printStackTrace();
         }
         return false;
+    }
+
+    public Certificate getCert(String keyStoreName, String keyStorePw, String alias){
+        loadKeyStore(keyStoreName, keyStorePw.toCharArray());
+        try {
+            Certificate cert = keyStore.getCertificate(alias);
+            return  cert;
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return  null;
     }
 }
 

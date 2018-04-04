@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.xml.ws.Response;
+import java.security.KeyStore;
 import java.security.cert.Certificate;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,8 +26,8 @@ public class CertificateController {
     private KeyStoreService keyStoreService;
 
     @RequestMapping(value = "/genCertificate", method = RequestMethod.POST)
-    public ResponseEntity<String> genCertificate(@RequestBody CertificateDTO dto) {
-        Certificate certificate =  certificateService.generateCertificate(dto);
+    public ResponseEntity<String> genCertificate(@RequestHeader("keyStoreName") String keyStoreName, @RequestHeader("keyStorePw") String keyStorePw,@RequestBody CertificateDTO dto) {
+        Certificate certificate =  certificateService.generateCertificate(dto, keyStoreName, keyStorePw);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
     @RequestMapping(value="/getIssuers", method = RequestMethod.GET)
@@ -38,8 +39,9 @@ public class CertificateController {
     public ResponseEntity<CertificateDTO> getCertificate(@PathVariable String id, @RequestHeader("keyStoreName") String keyStoreName, @RequestHeader("keyStorePw") String keyStorePw){
         System.out.println("Primio " + id + "KEYSTORE: " + keyStoreName +  keyStorePw);
         //treba da vrati DTO
-        //CertificateDTO certificateDTO = new CertificateDTO(Certificate.....)
-        CertificateDTO certificateDTO = null;
+       Certificate cert = keyStoreService.getCert(keyStoreName, keyStorePw, id);
+        CertificateDTO certificateDTO = new CertificateDTO(cert);
+
         return new ResponseEntity<>(certificateDTO,HttpStatus.OK);
 
     }

@@ -25,7 +25,7 @@ public class CertificateImpl implements CertificateService {
     private KeyStoreService keyStoreService;
 
     @Override
-    public Certificate generateCertificate(CertificateDTO certificateDTO) {
+    public Certificate generateCertificate(CertificateDTO certificateDTO, String keyStoreName, String keyStorePw) {
         // Serijski broj sertifikata
         int randomNum = 0 + (int) (Math.random() * 10000000);
         String sn = String.valueOf(randomNum);
@@ -43,7 +43,7 @@ public class CertificateImpl implements CertificateService {
         } catch (CertIOException e) {
             e.printStackTrace();
         }
-        keyStoreService.writeCertificate("test", "test",certificate, certificate.getSerialNumber().toString(), sd.getPrivateKey());
+        keyStoreService.writeCertificate(keyStoreName, keyStorePw,certificate, certificate.getSerialNumber().toString(), sd.getPrivateKey());
 
         return null;
     }
@@ -124,7 +124,4 @@ public class CertificateImpl implements CertificateService {
     }
 
 
-    public CertificateDTO getCertificateDTO(String id){
-        return keyStoreService.readCertificate(id);
-    }
 }
