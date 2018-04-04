@@ -1,7 +1,6 @@
 package XMLandSecurity.backend1.service.impl;
 
 import XMLandSecurity.backend1.model.IssuerData;
-import XMLandSecurity.backend1.model.dto.CertificateDTO;
 import XMLandSecurity.backend1.model.dto.KeyStoreDTO;
 import XMLandSecurity.backend1.service.KeyStoreService;
 import org.bouncycastle.asn1.x500.X500Name;
@@ -111,10 +110,23 @@ public class KeyStoreImpl implements KeyStoreService {
         return null;
     }
 
-    //TODO: implementirati citanje sertifikata
     @Override
-    public CertificateDTO readCertificate(String id) {
-        return null;
+    public ArrayList<String> getIssuers(String keyStoreName, String keyStorePw) {
+        KeyStoreDTO ks = getKeyStore(keyStoreName,keyStorePw);
+        ArrayList<String> issuers = new ArrayList<String>();
+        if(ks != null){
+            ArrayList<String> certificateAliases = ks.getAliases();
+            for(int i=0;i<certificateAliases.size();i++){
+                try {
+                    Certificate cert = keyStore.getCertificate(certificateAliases.get(i));
+                    //if(cert.isCA????
+                    //issuers.add(certificates(i));
+                } catch (KeyStoreException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return issuers;
     }
 
     public boolean loadKeyStore(String fileName, char[] password) {

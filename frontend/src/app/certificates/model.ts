@@ -4,7 +4,9 @@ export class KeyStore {
   aliases: string[];
   date: string;
 }
+
 export class Certificate {
+  issuerName: string;
   commonName: string;
   surname: string;
   orgName: string;
@@ -12,6 +14,7 @@ export class Certificate {
   country: string;
   email: string;
   isCa: boolean;
+  orgNameUnit: string;
   uid: string;
   serialNumber: string;
 }
