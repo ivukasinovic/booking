@@ -9,7 +9,7 @@ import java.util.Date;
 public class KeyStoreDTO {
     private String name;
     private String password;
-    private ArrayList<String> certificates;
+    private ArrayList<String> aliases;
     private Date date;
 
     public KeyStoreDTO(){
@@ -18,7 +18,7 @@ public class KeyStoreDTO {
     public KeyStoreDTO(String name, String password, ArrayList<String> certificates, Date date) {
         this.name = name;
         this.password = password;
-        this.certificates = certificates;
+        this.aliases = certificates;
         this.date = date;
     }
 
@@ -38,12 +38,12 @@ public class KeyStoreDTO {
         this.password = password;
     }
 
-    public ArrayList<String> getCertificates() {
-        return certificates;
+    public ArrayList<String> getAliases() {
+        return aliases;
     }
 
-    public void setCertificates(ArrayList<String> certificates) {
-        this.certificates = certificates;
+    public void setAliases(ArrayList<String> aliases) {
+        this.aliases = aliases;
     }
 
     public Date getDate() {

@@ -15,7 +15,6 @@ export class CertificatesService {
     return this.http.get<string[]>('/api/keyStore');
   }
   getKeyStore(keyStore: KeyStore) {
-    console.log(keyStore.name, keyStore.password);
     return this.http.post('/api/keyStore/getKeyStore', keyStore);
   }
 }

@@ -4,13 +4,15 @@ import {CertificatComponent} from './certificates/certificat/certificat.componen
 import {SelectKeyStoreComponent} from './certificates/select-key-store/select-key-store.component';
 import {KeyStoreComponent} from './certificates/key-store/key-store.component';
 import {NewKeyStoreComponent} from './certificates/new-key-store/new-key-store.component';
+import {CertificateDetailsComponent} from './certificates/certificate-details/certificate-details.component';
 
 const routes: Routes = [
   {path: 'certificates/newCertificate', component: CertificatComponent},
   {path: 'selectKeyStore', component: SelectKeyStoreComponent},
   {path: 'createKeyStore', component: KeyStoreComponent},
   {path: 'certificates/newKeyStore', component: NewKeyStoreComponent},
-  {path: 'certificates/keyStore', component: KeyStoreComponent}
+  {path: 'certificates/keyStore', component: KeyStoreComponent},
+  {path: 'certificates/detail/:id', component: CertificateDetailsComponent},
 
 ];
 

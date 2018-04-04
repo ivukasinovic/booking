@@ -28,6 +28,8 @@ export class SelectKeyStoreComponent implements OnInit {
       .subscribe((result: KeyStore) => {
         this.keyStore = result;
         this.router.navigate(['/certificates/keyStore']);
+        localStorage.setItem('keyStoreName', this.keyStore.name);
+        localStorage.setItem('keyStorePw', this.keyStore.password);
         },
         error => {
           this.error = 'Pogresno korisnicko ime ili lozinka';
