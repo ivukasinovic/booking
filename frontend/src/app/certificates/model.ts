@@ -17,4 +17,10 @@ export class Certificate {
   orgNameUnit: string;
   uid: string;
   serialNumber: string;
+  endDate: Date;
+  startDate: Date;
+}
+export class NewKeyStore {
+  name: string;
+  password: string;
 }

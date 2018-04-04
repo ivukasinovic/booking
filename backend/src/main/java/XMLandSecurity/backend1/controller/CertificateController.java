@@ -37,13 +37,9 @@ public class CertificateController {
     }
     @RequestMapping(value = "/{id}",method = RequestMethod.GET)
     public ResponseEntity<CertificateDTO> getCertificate(@PathVariable String id, @RequestHeader("keyStoreName") String keyStoreName, @RequestHeader("keyStorePw") String keyStorePw){
-        System.out.println("Primio " + id + "KEYSTORE: " + keyStoreName +  keyStorePw);
-        //treba da vrati DTO
-       Certificate cert = keyStoreService.getCert(keyStoreName, keyStorePw, id);
+        Certificate cert = keyStoreService.getCert(keyStoreName,keyStorePw,id);
         CertificateDTO certificateDTO = new CertificateDTO(cert);
-
         return new ResponseEntity<>(certificateDTO,HttpStatus.OK);
-
     }
 
 

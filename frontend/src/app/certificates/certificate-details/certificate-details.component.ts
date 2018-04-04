@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
+import {CertificatesService} from '../certificates.service';
+import {Certificate} from '../model';
 
 @Component({
   selector: 'app-certificate-details',
@@ -8,12 +10,23 @@ import {ActivatedRoute} from '@angular/router';
 })
 export class CertificateDetailsComponent implements OnInit {
   serialNumber: number;
-  constructor(private route: ActivatedRoute) { }
+  certificate: Certificate;
+  constructor(private routeA: ActivatedRoute, private certificateService: CertificatesService) { }
 
   ngOnInit() {
-    this.route.params.subscribe(params => {
+    this.routeA.params.subscribe(params => {
       this.serialNumber = params['id'];
     });
+    this.getCertificateDetails(this.serialNumber);
+  }
+  getCertificateDetails(serialNumber: number) {
+        this.certificateService.getCertificateDetail(this.serialNumber)
+          .subscribe((result: Certificate) => {
+            this.certificate = result;
+          });
   }
 
+  back() {
+    window.history.back();
+  }
 }

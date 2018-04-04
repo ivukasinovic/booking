@@ -48,6 +48,7 @@ public class CertificateImpl implements CertificateService {
         return null;
     }
 
+
     public SubjectData newSubjectData(CertificateDTO certificate) {
 
         KeyPair keyPairSubject = generateKeyPair();
@@ -78,9 +79,6 @@ public class CertificateImpl implements CertificateService {
 
     }
 
-
-
-
     public IssuerData newIssuerData(CertificateDTO certificate) {
         String keyStoreName = "test";
         String keyStorePw = "test";
@@ -89,7 +87,7 @@ public class CertificateImpl implements CertificateService {
 
         X500NameBuilder builder = new X500NameBuilder(BCStyle.INSTANCE);
         KeyPair keyPairIssuer = generateKeyPair();
-        if (certificate.getIssuerSerialNumber().equals("")) { //ako uzmemo u obzir da ce biti prazan string ako zeli issuera da doda
+        if (certificate.getIssuerSerialNumber() == null) { //ako uzmemo u obzir da ce biti prazan string ako zeli issuera da doda
 
             builder.addRDN(BCStyle.CN, certificate.getCommonName());
             builder.addRDN(BCStyle.SURNAME, certificate.getSurname());

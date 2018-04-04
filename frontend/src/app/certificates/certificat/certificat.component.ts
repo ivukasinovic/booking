@@ -37,7 +37,7 @@ export class CertificatComponent implements OnInit {
 
       if(SELEC != null) {
         this.certificate.issuerName = SELEC;
-      } else{
+      } else {
         this.certificate.issuerName = '';
 
       }
@@ -64,6 +64,8 @@ export class CertificatComponent implements OnInit {
       console.log(this.certificate);
 
       this.cerService.getCertificates();
+      window.location.reload();
+      this.router.navigate(['certificates/keyStore']);
     }
 
   } // kraj metode
