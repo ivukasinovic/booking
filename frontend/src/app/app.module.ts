@@ -13,6 +13,9 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {CertificatesComponent} from './certificates/certificates.component';
 import {NavbarComponent} from './navbar/navbar.component';
 import {NewKeyStoreComponent} from './certificates/new-key-store/new-key-store.component';
+import {CertificatesService} from './certificates/certificates.service';
+import {HttpClientModule} from '@angular/common/http';
+import {FormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -34,9 +37,11 @@ import {NewKeyStoreComponent} from './certificates/new-key-store/new-key-store.c
     MatSelectModule,
     MatToolbarModule,
     AppRoutingModule,
-    MatInputModule
+    MatInputModule,
+    HttpClientModule,
+    FormsModule
   ],
-  providers: [],
+  providers: [CertificatesService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

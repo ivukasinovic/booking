@@ -1,5 +1,6 @@
 package XMLandSecurity.backend1.controller;
 
+import XMLandSecurity.backend1.model.dto.KeyStoreDTO;
 import XMLandSecurity.backend1.service.KeyStoreService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -7,6 +8,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.xml.ws.Response;
 import java.security.KeyStore;
 import java.util.ArrayList;
 
@@ -26,6 +28,17 @@ public class KeyStoreController {
     public ResponseEntity<ArrayList<String>> getKeyStores() {
         ArrayList<String> keyStores = keyStoreService.getKeyStores();
         return new ResponseEntity<>(keyStores, HttpStatus.OK);
+    }
+    @RequestMapping(
+            value = "/getKeyStore",
+            method = RequestMethod.POST,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<KeyStoreDTO> getKeyStore(@RequestParam String name, @RequestParam String password){
+        KeyStoreDTO keyStore = keyStoreService.getKeyStore(name,password);
+        if(keyStore == null){
+            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+        }
+        return new ResponseEntity<>(keyStore,HttpStatus.OK);
     }
 
     @RequestMapping(method = RequestMethod.POST)

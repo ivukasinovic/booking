@@ -1,7 +1,9 @@
 package XMLandSecurity.backend1.service;
 
 import XMLandSecurity.backend1.model.IssuerData;
+import XMLandSecurity.backend1.model.dto.KeyStoreDTO;
 
+import java.security.KeyStore;
 import java.security.PrivateKey;
 import java.security.cert.Certificate;
 import java.util.ArrayList;
@@ -12,6 +14,8 @@ import java.util.ArrayList;
 public interface KeyStoreService {
 
     ArrayList<String> getKeyStores();
+
+    KeyStoreDTO getKeyStore(String name, String password);
 
     boolean createKeyStore(String name, String password);
 

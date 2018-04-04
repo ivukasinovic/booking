@@ -1,6 +1,7 @@
 package XMLandSecurity.backend1.service.impl;
 
 import XMLandSecurity.backend1.model.IssuerData;
+import XMLandSecurity.backend1.model.dto.KeyStoreDTO;
 import XMLandSecurity.backend1.service.KeyStoreService;
 import org.bouncycastle.asn1.x500.X500Name;
 import org.bouncycastle.cert.jcajce.JcaX509CertificateHolder;
@@ -13,6 +14,9 @@ import java.security.cert.CertificateEncodingException;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Enumeration;
+import java.util.List;
 
 /**
  * Created by Ivan V. on 02-Apr-18
@@ -43,6 +47,19 @@ public class KeyStoreImpl implements KeyStoreService {
             }
         }
         return keyStores;
+    }
+
+    @Override
+    public KeyStoreDTO getKeyStore(String name, String password) {
+        loadKeyStore(name,password.toCharArray());
+        ArrayList<String> aliases = null;
+        try {
+            Enumeration<String> aliasesEn = keyStore.aliases();
+            aliases = Collections.list(aliasesEn);
+        } catch (KeyStoreException e) {
+            e.printStackTrace();
+        }
+        return new KeyStoreDTO(name,password,aliases,null);
     }
 
     @Override
