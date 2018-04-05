@@ -13,7 +13,7 @@ export class Certificate {
   givenName: string;
   country: string;
   email: string;
-  isCa: boolean;
+  isCa: string;
   orgNameUnit: string;
   uid: string;
   serialNumber: string;

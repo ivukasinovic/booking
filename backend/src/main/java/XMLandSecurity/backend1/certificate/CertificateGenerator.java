@@ -58,7 +58,7 @@ public class CertificateGenerator {
 
             // AIA extension
             GeneralName ocspLocation = new GeneralName(6,"http://localhost:8080/api/certificates/" + issuerID);
-            certGen.addExtension(Extension.authorityInfoAccess, false, new AuthorityInformationAccess(X509ObjectIdentifiers.ocspAccessMethod, ocspLocation));
+            certGen.addExtension(Extension.authorityInfoAccess, isCA, new AuthorityInformationAccess(X509ObjectIdentifiers.ocspAccessMethod, ocspLocation));
 
             JcaX509CertificateConverter certConverter = new JcaX509CertificateConverter();
             certConverter = certConverter.setProvider("BC");

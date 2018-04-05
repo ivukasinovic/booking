@@ -37,5 +37,8 @@ export class CertificatesService {
       }
     );  // {name: newk.name , passsword: newk.password }
   }
+  getIssuers() {
+    return this.http.get('/api/certificates/getIssuers');
+  }
 
 }

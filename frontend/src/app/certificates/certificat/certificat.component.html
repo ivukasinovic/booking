@@ -11,14 +11,23 @@
 
       <td>
         <mat-form-field>
-          <mat-select #SELEC name="SELEC" [(value)]="selected">
+          <mat-select placeholder="Choose keystore" [(value)]="this.issuer" >
             <mat-option>None</mat-option>
-
-            <mat-option *ngFor="let n of samoCekirani" [value]="n.CN">
-              <div> {{n.CN}}</div>
-            </mat-option>
+            <mat-option *ngFor="let issuer of issuers" [value]="issuer" >{{issuer}}</mat-option>
           </mat-select>
         </mat-form-field>
+
+
+        <!--<mat-form-field>-->
+          <!--<mat-select #SELEC name="SELEC" [(value)]="selected">-->
+            <!--<mat-option>None</mat-option>-->
+            <!--<mat-option *ngFor="let ks of keyStores" [value]="ks" >{{ks}}</mat-option>-->
+            <!--<mat-option *ngFor="let n of samoCekirani" [value]="n.CN">-->
+              <!--<div> {{n.CN}}</div>-->
+            <!--</mat-option>-->
+          <!--</mat-select>-->
+        <!--</mat-form-field>-->
+        <!---->
       </td>
 
     </tr>
@@ -71,7 +80,7 @@
     <tr>
       <td colspan="2" align="center">
         <button class="btn btn-primary" type="button"
-                (click)="getCertificate(SELEC.value,CN.value,SN.value,GN.value,ON.value,LN.value,C.value,E.value,CA.value)"> Potvrdi
+                (click)="getCertificate(CN.value,SN.value,GN.value,ON.value,LN.value,C.value,E.value,CA.value)"> Potvrdi
           kreiranje sertifikata
         </button>
       </td>
@@ -98,9 +107,9 @@
 
     <tr *ngFor="let n of niz">
 
-      <td>
-        {{n.SELEC}}
-      </td>
+      <!--<td>-->
+        <!--{{ }}-->
+      <!--</td>-->
 
       <td>
         {{n.CN}}

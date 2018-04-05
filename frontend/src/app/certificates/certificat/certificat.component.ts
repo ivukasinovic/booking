@@ -14,33 +14,38 @@ export class CertificatComponent implements OnInit {
   samoCekirani = [];        // Samo one kod kojih je cekiran cek-Box
   saveUsername: boolean;
   private certificate: Certificate;
+  issuers: string[];
+  issuer: string;
 
   constructor(private cerService: CertificatesService, private router: Router) {
     this.certificate = new Certificate();
-
     this.certificate.issuerName = '';
+    this.saveUsername = false;
+    this.issuer = '';
 
   }
 
   ngOnInit() {
+    this.getIssuers();
 
-    this.saveUsername = false;
   }
+getIssuers() {
+    this.cerService.getIssuers()
+      .subscribe((result: string[]) => {this.issuers = result});
+}
 
-
-  getCertificate(SELEC: string , CN: string, SN: string, GN: string, ON: string, LN: string, Country: string, Email: string, CA: boolean) {
+  getCertificate(CN: string, SN: string, GN: string, ON: string, LN: string, Country: string, Email: string, CA: boolean) {
     if (CN !== '' && SN !== '' && GN !== '' && ON !== '' && LN !== '' && Country !== '' && Email !== '') {
 
       this.niz.push({
-        SELEC: SELEC, CN: CN, SN: SN, GN: GN, ON: ON, LN: LN, C: Country, E: Email, CA: this.saveUsername
+         CN: CN, SN: SN, GN: GN, ON: ON, LN: LN, C: Country, E: Email, CA: this.saveUsername
       });
 
-      if(SELEC != null) {
-        this.certificate.issuerName = SELEC;
-      } else {
-        this.certificate.issuerName = '';
+       // if (SELEC != null) {
+       //  this.certificate.issuerName = SELEC;
+       // }
 
-      }
+      this.certificate.issuerName = this.issuer;
       this.certificate.commonName = CN;
       this.certificate.orgNameUnit = CN;  // samo posle promeniti polje
 
@@ -50,18 +55,25 @@ export class CertificatComponent implements OnInit {
       this.certificate.uid = LN;
       this.certificate.country = Country;
       this.certificate.email = Email;
-      this.certificate.isCa = this.saveUsername;
 
-      this.cerService.getCertificat(this.certificate).subscribe((result: Certificate) => {
-        this.certificate = result; });
+      if ( this.saveUsername === true ) {
+        this.certificate.isCa = 'true';
+      } else {
+        this.certificate.isCa = 'false';
+      }
 
-      console.log(CA + '  _______ ' + this.saveUsername);
+      console.log(this.certificate.isCa + '  _______ ' + this.saveUsername);
 
       if (this.saveUsername === true) {
+        // this.certificate.issuerName = SELEC;
         this.samoCekirani.push({CN: CN, SN: SN, GN: GN, ON: ON, LN: LN, C: Country, E: Email, CA: CA});
       }
 
       console.log(this.certificate);
+
+      this.cerService.getCertificat(this.certificate).subscribe((result: Certificate) => {
+        this.certificate = result; });
+
 
       this.cerService.getCertificates();
       window.location.reload();

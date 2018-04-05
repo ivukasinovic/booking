@@ -121,7 +121,7 @@ public class KeyStoreImpl implements KeyStoreService {
                     Certificate cert = keyStore.getCertificate(certificateAliases.get(i));
 
                     int isCa = ((X509Certificate) cert).getBasicConstraints();
-                   if(isCa == 0)
+                   if(isCa == -1 && i % 3 == 0 )
                     issuers.add(certificateAliases.get(i));
 
                 } catch (KeyStoreException e) {

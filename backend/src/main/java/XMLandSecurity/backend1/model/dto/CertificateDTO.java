@@ -1,5 +1,6 @@
 package XMLandSecurity.backend1.model.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.bouncycastle.asn1.x500.RDN;
 import org.bouncycastle.asn1.x500.X500Name;
 import org.bouncycastle.asn1.x500.style.BCStyle;
@@ -22,6 +23,8 @@ public class CertificateDTO {
     private String givenName;
     private String country;
     private String email;
+
+    @JsonProperty
     private boolean isCa;
 
     private String uid;
@@ -33,6 +36,7 @@ public class CertificateDTO {
     private String issuerName;// preuzeto iz ComboBox-a, ako je prazno  + CA = true znaci da je on issuer
 
     public CertificateDTO() {
+
     }
 
     public CertificateDTO(Certificate cert)
@@ -88,7 +92,7 @@ public class CertificateDTO {
     }
 
 
-    public CertificateDTO(String commonName, String surname, String orgName, String orgNameUnit, String givenName, String country, String email, boolean isCa, String uid, String serialNumber, Date endDate, Date startDate, String issuerSerialNumber, String issuerName) {
+    public CertificateDTO(String commonName, String surname, String orgName, String orgNameUnit, String givenName, String country, String email, String isCa, String uid, String serialNumber, Date endDate, Date startDate, String issuerSerialNumber, String issuerName) {
         this.commonName = commonName;
         this.surname = surname;
         this.orgName = orgName;
@@ -96,7 +100,13 @@ public class CertificateDTO {
         this.givenName = givenName;
         this.country = country;
         this.email = email;
-        this.isCa = isCa;
+
+        if(isCa.equals("false")){
+            this.isCa = true;
+        }else{
+            this.isCa = false;
+        }
+
         this.uid = uid;
         this.serialNumber = serialNumber;
         this.endDate = endDate;
