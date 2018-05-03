@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {CertificatesService} from '../certificates.service';
 import {Certificate} from '../model';
@@ -11,7 +11,9 @@ import {Certificate} from '../model';
 export class CertificateDetailsComponent implements OnInit {
   serialNumber: number;
   certificate: Certificate;
-  constructor(private routeA: ActivatedRoute, private certificateService: CertificatesService) { }
+
+  constructor(private routeA: ActivatedRoute, private certificateService: CertificatesService) {
+  }
 
   ngOnInit() {
     this.routeA.params.subscribe(params => {
@@ -19,11 +21,15 @@ export class CertificateDetailsComponent implements OnInit {
     });
     this.getCertificateDetails(this.serialNumber);
   }
+
   getCertificateDetails(serialNumber: number) {
-        this.certificateService.getCertificateDetail(this.serialNumber)
-          .subscribe((result: Certificate) => {
-            this.certificate = result;
-          });
+    this.certificateService.getCertificate(this.serialNumber)
+      .subscribe((result: Certificate) => {
+        this.certificate = result;
+      },
+        error1 => {
+        alert('Doslo je do greske');
+        });
   }
 
   back() {

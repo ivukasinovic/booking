@@ -10,7 +10,6 @@ import org.bouncycastle.asn1.x500.X500NameBuilder;
 import org.bouncycastle.asn1.x500.style.BCStyle;
 import org.bouncycastle.cert.CertIOException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.security.*;
@@ -18,18 +17,23 @@ import java.security.cert.Certificate;
 import java.security.cert.X509Certificate;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 @Service
-public class CertificateImpl implements CertificateService {
+public class CertificateServiceImpl implements CertificateService {
     @Autowired
     private KeyStoreService keyStoreService;
 
     @Override
-    public Certificate generateCertificate(CertificateDTO certificateDTO, String keyStoreName, String keyStorePw) {
+    public List<CertificateDTO> getAll() {
+        return null;
+    }
+
+    @Override
+    public Certificate generateCertificate(CertificateDTO certificateDTO) {
         // Serijski broj sertifikata
         int randomNum = 0 + (int) (Math.random() * 10000000);
         String sn = String.valueOf(randomNum);
-
         certificateDTO.setSerialNumber(sn);
 
         SubjectData sd = newSubjectData(certificateDTO);
@@ -39,13 +43,14 @@ public class CertificateImpl implements CertificateService {
         CertificateGenerator generator = new CertificateGenerator();
         X509Certificate certificate = null;
         try {
-            certificate = generator.generateCertificate(sd, id , certificateDTO.isCa() , certificateDTO.getIssuerSerialNumber());
+            certificate = generator.generateCertificate(sd, id, certificateDTO.isCa(), certificateDTO.getIssuerSerialNumber());
+            return certificate;
         } catch (CertIOException e) {
             e.printStackTrace();
         }
-        keyStoreService.writeCertificate(keyStoreName, keyStorePw,certificate, certificate.getSerialNumber().toString(), sd.getPrivateKey());
+        keyStoreService.writeCertificate(certificateDTO.isCa(), certificate, certificate.getSerialNumber().toString(), sd.getPrivateKey());
 
-        return null;
+        return certificate;
     }
 
 
@@ -80,11 +85,6 @@ public class CertificateImpl implements CertificateService {
     }
 
     public IssuerData newIssuerData(CertificateDTO certificate) {
-        String keyStoreName = "test";
-        String keyStorePw = "test";
-
-        Date startDate = null;
-
         X500NameBuilder builder = new X500NameBuilder(BCStyle.INSTANCE);
         KeyPair keyPairIssuer = generateKeyPair();
         if (certificate.getIssuerSerialNumber() == null) { //ako uzmemo u obzir da ce biti prazan string ako zeli issuera da doda
@@ -100,10 +100,9 @@ public class CertificateImpl implements CertificateService {
 
             return new IssuerData(keyPairIssuer.getPrivate(), builder.build());
         } else {
-            IssuerData id = keyStoreService.readIssuerFromStore(keyStoreName, keyStorePw, certificate.getIssuerSerialNumber());
-            return id;
+             IssuerData id = keyStoreService.readIssuerFromStore(certificate.getIssuerSerialNumber());
+             return id;
         }
-
 
     }
 

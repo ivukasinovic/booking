@@ -1,0 +1,24 @@
+<div class="container">
+  <a href="certificates/new-certificate" class="btn btn-success">New Certificate</a>
+  <div class="col-md-9">
+    <h3>Certificate list</h3>
+    <div
+      href="#"
+      class="list-group-item clearfix"
+      *ngFor="let certificate of certificates">
+      <div class="pull-left">
+        <a href="certificates/{{certificate.serialNumber}}"><h4 class="list-group-item-heading"><b>{{ certificate.serialNumber }}</b></h4></a>
+        <p class="list-group-item-text">{{ certificate.orgName }}</p>
+        <br>
+      </div>
+      <span class="pull-right">
+      <button class="btn btn-primary" (click)="check(certificate.serialNumber)">Check Validity</button>
+      <button class="btn btn-info" (click)="download(certificate.serialNumber)">Download</button>
+      <button class="btn btn-warning" (click)="revoke(certificate.serialNumber)">Revoke</button>
+      <button class="btn btn-danger" (click)="delete(certificate.serialNumber)">Delete</button>
+    </span>
+    </div>
+  </div>
+</div>
+
+

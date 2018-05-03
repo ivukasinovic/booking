@@ -3,14 +3,15 @@ package XMLandSecurity.backend1.service;
 import XMLandSecurity.backend1.model.IssuerData;
 import XMLandSecurity.backend1.model.SubjectData;
 import XMLandSecurity.backend1.model.dto.CertificateDTO;
-import org.springframework.web.bind.annotation.RequestHeader;
 
-import java.security.KeyPair;
 import java.security.cert.Certificate;
+import java.util.List;
 
 public interface CertificateService {
 
-    Certificate generateCertificate(CertificateDTO certificateDTO, String keyStoreName, String keyStorePw);
+    List<CertificateDTO> getAll();
+
+    Certificate generateCertificate(CertificateDTO certificateDTO);
 
     SubjectData newSubjectData(CertificateDTO certificate);
 

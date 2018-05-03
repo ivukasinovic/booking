@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
-import {HttpClient, HttpParams} from '@angular/common/http';
+import {Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs/Observable';
-import {Certificate, KeyStore, NewKeyStore} from './model';
+import {Certificate, KeyStore} from './model';
 
 @Injectable()
 export class CertificatesService {
@@ -11,34 +11,21 @@ export class CertificatesService {
     this.ks = new KeyStore();
   }
 
-  getKeyStores(): Observable<string[]> {
-    return this.http.get<string[]>('/api/keyStore');
-  }
-  getKeyStore(keyStore: KeyStore) {
-    return this.http.post('/api/keyStore/getKeyStore', keyStore);
-  }
-
-  getCertificates(): Observable<Certificate[]> {                  // treba napraviti kontroler za ovo
+  getCertificates(): Observable<Certificate[]> {
     return this.http.get<Certificate[]>('/api/certificates');
   }
-  getCertificat(certificat: Certificate) {
-    return this.http.post('/api/certificates/genCertificate', certificat);
+
+  postCertificate(certificate: Certificate) {
+    return this.http.post('/api/certificates', certificate);
   }
-  getCertificateDetail(serialNumber: number) {
+
+  getCertificate(serialNumber: number) {
     const url = '/api/certificates/' + serialNumber;
     return this.http.get(url);
   }
-  createKeyStore(newk: NewKeyStore) {
-    const url = '/api/keyStore?name=' + newk.name;
-    return this.http.post(url, newk , {
-        observe: 'body',
-        params: new HttpParams().set('password', newk.password)
-        //  params: new HttpParams.set('password', newk.password)
-      }
-    );  // {name: newk.name , passsword: newk.password }
-  }
+
   getIssuers() {
-    return this.http.get('/api/certificates/getIssuers');
+    return this.http.get('/api/certificates/issuers');
   }
 
 }

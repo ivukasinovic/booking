@@ -13,13 +13,14 @@ export class Certificate {
   givenName: string;
   country: string;
   email: string;
-  isCa: string;
+  caa: number;
   orgNameUnit: string;
   uid: string;
   serialNumber: string;
   endDate: Date;
   startDate: Date;
 }
+
 export class NewKeyStore {
   name: string;
   password: string;

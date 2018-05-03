@@ -1,18 +1,17 @@
-<h2>Certificate Details</h2>
-<p>Serial number: {{this.serialNumber}}</p>
-<p>Common Name: {{this.certificate.commonName}}</p>
-<p>Surname: {{this.certificate.surname}}</p>
-<p>Organisation Name: {{this.certificate.orgName}}</p>
-<p>Organisation Name UID: {{this.certificate.orgNameUnit}}</p>
-<p>Country: {{this.certificate.country}}</p>
-<p>Email: {{this.certificate.email}}</p>
-<p>End Date: {{this.certificate.endDate}}</p>
-<p>Start Date: {{this.certificate.startDate}}</p>
-
-<!--<p>Certificat: {{this.certificate.isCA}}</p> -->
-
-<button mat-button color="warn">Pull certificate</button>
-<br>
-<button mat-button color="primary" (click)="back()">Back</button>
+<div class="container">
+  <h2>Certificate Details</h2>
+  <p>Serial number: {{this.serialNumber}}</p>
+  <p>Common Name: {{this.certificate.commonName}}</p>
+  <p>Surname: {{this.certificate.surname}}</p>
+  <p>Organisation Name: {{this.certificate.orgName}}</p>
+  <p>Organisation Name UID: {{this.certificate.orgNameUnit}}</p>
+  <p>Country: {{this.certificate.country}}</p>
+  <p>Email: {{this.certificate.email}}</p>
+  <p>End Date: {{this.certificate.endDate}}</p>
+  <p>Start Date: {{this.certificate.startDate}}</p>
+  <br>
+  <button class="btn btn-primary" (click)="back()">Back</button>
 
 
+
+</div>

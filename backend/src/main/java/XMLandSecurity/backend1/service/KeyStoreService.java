@@ -1,31 +1,36 @@
 package XMLandSecurity.backend1.service;
 
 import XMLandSecurity.backend1.model.IssuerData;
-import XMLandSecurity.backend1.model.dto.KeyStoreDTO;
+import XMLandSecurity.backend1.model.dto.CertificateDTO;
 
-import java.security.KeyStore;
 import java.security.PrivateKey;
 import java.security.cert.Certificate;
+import java.security.cert.X509Certificate;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 /**
  * Created by Ivan V. on 02-Apr-18
  */
 public interface KeyStoreService {
 
-    ArrayList<String> getKeyStores();
+    List<X509Certificate> getCertificates();
 
-    KeyStoreDTO getKeyStore(String name, String password);
+    Optional<X509Certificate> getCertificate(String alias, int i);
 
-    boolean createKeyStore(String name, String password);
+    CertificateDTO getCertificateDTO(String alias);
 
-    void delete(String id);
+    List<CertificateDTO> getCertificatesDTO();
 
-    void writeCertificate(String keyStoreName, String keyStorePw, Certificate certificate, String alias, PrivateKey pk);
+    void writeCertificate(boolean isCa, Certificate certificate, String alias, PrivateKey pk);
 
-    IssuerData readIssuerFromStore(String keyStoreName, String keyStorePw, String alias);
+    IssuerData readIssuerFromStore(String alias);
 
-    ArrayList<String> getIssuers(String keyStoreName, String keyStorePw);
-    Certificate getCert(String keyStoreName, String keyStorePw, String alias);
+    ArrayList<String> getIssuers();
+
+    void loadKeyStore(String keyStoreName, String keyStorePassword);
+
+    void createKeyStores();
 
 }

@@ -1,20 +1,20 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import {SelectKeyStoreComponent} from './select-key-store.component';
+import {CertificatComponent} from './certificate-new.component';
 
-describe('SelectKeyStoreComponent', () => {
-  let component: SelectKeyStoreComponent;
-  let fixture: ComponentFixture<SelectKeyStoreComponent>;
+describe('CertificatComponent', () => {
+  let component: CertificatComponent;
+  let fixture: ComponentFixture<CertificatComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [SelectKeyStoreComponent]
+      declarations: [CertificatComponent]
     })
       .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SelectKeyStoreComponent);
+    fixture = TestBed.createComponent(CertificatComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

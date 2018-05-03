@@ -13,7 +13,6 @@ import org.bouncycastle.operator.OperatorCreationException;
 import org.bouncycastle.operator.jcajce.JcaContentSignerBuilder;
 
 import java.math.BigInteger;
-import java.security.PrivateKey;
 import java.security.Security;
 import java.security.cert.CertificateEncodingException;
 import java.security.cert.CertificateException;
@@ -50,21 +49,22 @@ public class CertificateGenerator {
             certGen.addExtension(Extension.basicConstraints, false, new BasicConstraints(isCA));
 
             //Dodatno polje svrha upotreba
-            if(isCA) {
+            if (isCA) {
                 certGen.addExtension(Extension.keyUsage, true, new KeyUsage(KeyUsage.keyCertSign));
-            }else {
+            } else {
                 certGen.addExtension(Extension.keyUsage, true, new KeyUsage(KeyUsage.digitalSignature));
             }
 
             // AIA extension
-            GeneralName ocspLocation = new GeneralName(6,"http://localhost:8080/api/certificates/" + issuerID);
+            GeneralName ocspLocation = new GeneralName(6, "http://localhost:8080/api/certificates/" + issuerID);
             certGen.addExtension(Extension.authorityInfoAccess, isCA, new AuthorityInformationAccess(X509ObjectIdentifiers.ocspAccessMethod, ocspLocation));
 
             JcaX509CertificateConverter certConverter = new JcaX509CertificateConverter();
             certConverter = certConverter.setProvider("BC");
 
             //Konvertuje objekat u sertifikat
-            return certConverter.getCertificate(certHolder); } catch (CertificateEncodingException e) {
+            return certConverter.getCertificate(certHolder);
+        } catch (CertificateEncodingException e) {
             e.printStackTrace();
         } catch (IllegalArgumentException e) {
             e.printStackTrace();

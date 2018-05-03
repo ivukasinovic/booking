@@ -1,6 +1,5 @@
 package XMLandSecurity.backend1.model.dto;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import org.bouncycastle.asn1.x500.RDN;
 import org.bouncycastle.asn1.x500.X500Name;
 import org.bouncycastle.asn1.x500.style.BCStyle;
@@ -23,14 +22,12 @@ public class CertificateDTO {
     private String givenName;
     private String country;
     private String email;
-
-    @JsonProperty
     private boolean isCa;
-
     private String uid;
     private String serialNumber;
     private Date endDate;
     private Date startDate;
+    private int caa;
 
     private String issuerSerialNumber;// za AIA i CDP
     private String issuerName;// preuzeto iz ComboBox-a, ako je prazno  + CA = true znaci da je on issuer
@@ -39,15 +36,14 @@ public class CertificateDTO {
 
     }
 
-    public CertificateDTO(Certificate cert)
-    {
+    public CertificateDTO(Certificate cert) {
 
         try {
             X500Name subjName = new JcaX509CertificateHolder((X509Certificate) cert).getSubject();
 
             RDN cn = subjName.getRDNs(BCStyle.CN)[0];
             String cname = IETFUtils.valueToString(cn.getFirst().getValue());
-            this.commonName =cname;
+            this.commonName = cname;
 
             RDN sn = subjName.getRDNs(BCStyle.SURNAME)[0];
             String sname = IETFUtils.valueToString(sn.getFirst().getValue());
@@ -77,12 +73,10 @@ public class CertificateDTO {
             String uidname = IETFUtils.valueToString(uidn.getFirst().getValue());
             this.uid = uidname;
 
-
+            this.serialNumber = String.valueOf(((X509Certificate) cert).getSerialNumber());
+            System.out.println(this.serialNumber);
             this.startDate = ((X509Certificate) cert).getNotBefore();
             this.endDate = ((X509Certificate) cert).getNotAfter();
-
-
-
 
         } catch (CertificateEncodingException e) {
             e.printStackTrace();
@@ -101,9 +95,9 @@ public class CertificateDTO {
         this.country = country;
         this.email = email;
 
-        if(isCa.equals("false")){
+        if (isCa.equals("false")) {
             this.isCa = true;
-        }else{
+        } else {
             this.isCa = false;
         }
 
@@ -226,5 +220,13 @@ public class CertificateDTO {
 
     public void setIssuerName(String issuerName) {
         this.issuerName = issuerName;
+    }
+
+    public int getCaa() {
+        return caa;
+    }
+
+    public void setCaa(int ca) {
+        this.caa = ca;
     }
 }

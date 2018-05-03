@@ -9,8 +9,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.xml.ws.Response;
-import java.security.KeyStore;
+import javax.print.attribute.standard.Media;
 import java.security.cert.Certificate;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,27 +25,38 @@ public class CertificateController {
     @Autowired
     private KeyStoreService keyStoreService;
 
-    @RequestMapping(value = "/genCertificate",
-            method = RequestMethod.POST,
-            consumes = MediaType.APPLICATION_JSON_VALUE
-    )
-    public ResponseEntity<String> genCertificate(@RequestHeader("keyStoreName") String keyStoreName, @RequestHeader("keyStorePw") String keyStorePw,@RequestBody CertificateDTO dto) {
-        Certificate certificate =  certificateService.generateCertificate(dto, keyStoreName, keyStorePw);
-//        if( dto.isCa() != true ){
-//            dto.setCa(true);
-//        }
-        return new ResponseEntity<>(HttpStatus.CREATED);
+    @RequestMapping(method = RequestMethod.GET)
+    public ResponseEntity<List<CertificateDTO>> getCerticatesAll() {
+        List<CertificateDTO> certificateDTOS = keyStoreService.getCertificatesDTO();
+        return new ResponseEntity<>(certificateDTOS, HttpStatus.OK);
     }
-    @RequestMapping(value="/getIssuers", method = RequestMethod.GET)
-    public ResponseEntity<List<String>> getIssuers(@RequestHeader("keyStoreName") String keyStoreName, @RequestHeader("keyStorePw") String keyStorePw){
-        ArrayList<String> issuers = keyStoreService.getIssuers(keyStoreName,keyStorePw);
-        return new ResponseEntity<>(issuers,HttpStatus.OK);
+
+    @RequestMapping(method = RequestMethod.POST,
+            consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<CertificateDTO> genCertificate(@RequestBody CertificateDTO dto) {
+        if (dto.getCaa() == 1) {
+            dto.setCa(true);
+        } else {
+            dto.setCa(false);
+        }
+        Certificate created = certificateService.generateCertificate(dto);
+        if(created!= null){
+            CertificateDTO creDto = new CertificateDTO(created);
+            return new ResponseEntity<>(creDto, HttpStatus.CREATED);
+        }
+        return new ResponseEntity<>(HttpStatus.FORBIDDEN);
     }
-    @RequestMapping(value = "/{id}",method = RequestMethod.GET)
-    public ResponseEntity<CertificateDTO> getCertificate(@PathVariable String id, @RequestHeader("keyStoreName") String keyStoreName, @RequestHeader("keyStorePw") String keyStorePw){
-        Certificate cert = keyStoreService.getCert(keyStoreName,keyStorePw,id);
-        CertificateDTO certificateDTO = new CertificateDTO(cert);
-        return new ResponseEntity<>(certificateDTO,HttpStatus.OK);
+
+    @RequestMapping(value = "/issuers", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<String>> getIssuers() {
+        ArrayList<String> issuers = keyStoreService.getIssuers();
+        return new ResponseEntity<>(issuers, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public ResponseEntity<CertificateDTO> getCertificate(@PathVariable String id) {
+        CertificateDTO certDto = keyStoreService.getCertificateDTO(id);
+        return new ResponseEntity<>(certDto, HttpStatus.OK);
     }
 
 
