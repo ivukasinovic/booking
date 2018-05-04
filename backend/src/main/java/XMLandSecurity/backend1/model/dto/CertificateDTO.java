@@ -74,7 +74,6 @@ public class CertificateDTO {
             this.uid = uidname;
 
             this.serialNumber = String.valueOf(((X509Certificate) cert).getSerialNumber());
-            System.out.println(this.serialNumber);
             this.startDate = ((X509Certificate) cert).getNotBefore();
             this.endDate = ((X509Certificate) cert).getNotAfter();
 

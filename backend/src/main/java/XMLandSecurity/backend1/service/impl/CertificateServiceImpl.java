@@ -12,12 +12,17 @@ import org.bouncycastle.cert.CertIOException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.xml.bind.DatatypeConverter;
+import java.io.*;
 import java.security.*;
 import java.security.cert.Certificate;
+import java.security.cert.CertificateEncodingException;
 import java.security.cert.X509Certificate;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class CertificateServiceImpl implements CertificateService {
@@ -44,7 +49,6 @@ public class CertificateServiceImpl implements CertificateService {
         X509Certificate certificate = null;
         try {
             certificate = generator.generateCertificate(sd, id, certificateDTO.isCa(), certificateDTO.getIssuerSerialNumber());
-            return certificate;
         } catch (CertIOException e) {
             e.printStackTrace();
         }
@@ -100,11 +104,46 @@ public class CertificateServiceImpl implements CertificateService {
 
             return new IssuerData(keyPairIssuer.getPrivate(), builder.build());
         } else {
-             IssuerData id = keyStoreService.readIssuerFromStore(certificate.getIssuerSerialNumber());
-             return id;
+            IssuerData id = keyStoreService.readIssuerFromStore(certificate.getIssuerSerialNumber());
+            return id;
         }
 
     }
+
+    @Override
+    public boolean check(String id) {
+        X509Certificate certificate = keyStoreService.getCertificate(id);
+        if(certificate == null){
+            return false;
+        }
+        List<X509Certificate> certificates = readRevoked();
+        if(certificate == null){
+            return false;
+        }
+        for (X509Certificate cert : certificates) {
+            if (cert.getSerialNumber().equals(certificate.getSerialNumber())) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public String download(String id) {
+        X509Certificate cert = keyStoreService.getCertificate(id);
+        StringWriter sw = new StringWriter();
+
+        try {
+            sw.write("-----BEGIN CERTIFICATE-----\n");
+            sw.write(DatatypeConverter.printBase64Binary(cert.getEncoded()).replaceAll("(.{64})", "$1\n"));
+            sw.write("\n-----END CERTIFICATE-----\n");
+        } catch (CertificateEncodingException e) {
+            e.printStackTrace();
+        }
+
+        return sw.toString();
+    }
+
 
     private KeyPair generateKeyPair() {
         try {
@@ -120,5 +159,80 @@ public class CertificateServiceImpl implements CertificateService {
         return null;
     }
 
+    public void revoke(String id) {
+        X509Certificate certificate = keyStoreService.getCertificate(id);
+        List<X509Certificate> certificates = new ArrayList<>();
 
+        try {
+            File file = new File("./revocation.crl");
+
+            if (!file.exists()) {
+                saveCRL(certificates, file);
+            } else {
+                ObjectInputStream iis = new ObjectInputStream(new FileInputStream(file));
+                certificates = (List<X509Certificate>) iis.readObject();
+                iis.close();
+            }
+
+            for (X509Certificate cert : certificates) {
+                if (cert.getSerialNumber().equals(certificate.getSerialNumber())) {
+                    return;
+                }
+            }
+
+            String issuer = certificate.getSubjectX500Principal().getName();
+
+            List<X509Certificate> allCertificates = keyStoreService.getCertificates();
+
+            List<X509Certificate> revokeList = allCertificates
+                    .stream()
+                    .filter(c -> c.getIssuerX500Principal().getName().equals(issuer))
+                    .collect(Collectors.toList());
+
+            allCertificates.removeAll(revokeList);
+            recursion(certificates, revokeList, allCertificates);
+
+            certificates.add(certificate);
+            certificates.addAll(revokeList);
+            saveCRL(certificates, file);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    private void saveCRL(List<X509Certificate> certificates, File file) throws Exception {
+        ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(file));
+        oos.writeObject(certificates);
+        oos.flush();
+        oos.close();
+    }
+
+    public void recursion(List<X509Certificate> certificates, List<X509Certificate> revokeList, List<X509Certificate> allCertificates) {
+        revokeList.forEach(rc -> {
+            List<X509Certificate> childRevokeList = allCertificates
+                    .stream()
+                    .filter(c -> c.getIssuerX500Principal().getName().equals(rc.getSubjectX500Principal().getName()))
+                    .collect(Collectors.toList());
+
+            certificates.addAll(childRevokeList);
+            allCertificates.removeAll(childRevokeList);
+            recursion(certificates, childRevokeList, allCertificates);
+        });
+    }
+    @Override
+    public List<X509Certificate> readRevoked(){
+        List<X509Certificate> certificates = new ArrayList<>();
+        File file = new File("./revocation.crl");
+        ObjectInputStream iis = null;
+        try {
+            iis = new ObjectInputStream(new FileInputStream(file));
+            certificates = (List<X509Certificate>) iis.readObject();
+            iis.close();
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+            return null;
+        }
+        return certificates;
+    }
 }

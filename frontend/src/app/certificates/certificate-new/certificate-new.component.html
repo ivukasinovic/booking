@@ -1,82 +1,49 @@
 <div class="container">
-  <div align="center">
-
-    <h2 style="font-family:fantasy "> Enter values </h2>
-
-    <table class="table">
-
-      <tr>
-
-        <td>Issuer</td>
-
-        <td>
-          <mat-form-field>
-            <mat-select placeholder="Choose keystore" [(value)]="this.issuer">
-              <mat-option>None</mat-option>
-              <mat-option *ngFor="let issuer of issuers" [value]="issuer">{{issuer}}</mat-option>
-            </mat-select>
-          </mat-form-field>
-
-        </td>
-
-      </tr>
-
-      <tr>
-        <td>Common Name (CN):</td>
-        <td><input type="text" #CN name="CN"></td>  <!--ime -->
-      </tr>
-
-      <tr>
-        <td>Surname (SN):</td>
-        <td><input type="text" #SN name="SN"></td>  <!-- #prezime-->
-      </tr>
-
-      <tr>
-        <td>Given Name (GN):</td>
-        <td><input type="text" #GN name="GN"></td>   <!-- #jmbg -->
-      </tr>
-
-
-      <tr>
-        <td>Organisation Name (ON):</td>
-        <td><input type="text" #ON name="ON"></td>
-      </tr>
-
-      <tr>
-        <td>Locality Name (LN):</td>
-        <td><input type="text" #LN name="LN"></td>
-      </tr>
-
-      <tr>
-        <td>Country (C):</td>
-        <td><input type="text" #C name="C"></td>
-      </tr>
-
-      <tr>
-        <td>Email (E):</td>
-        <td><input type="text" #E name="E"></td>
-      </tr>
-
-      <tr>
-        <td>for CA:</td>
-        <td>
-          <mat-checkbox [checked]="saveUsername" (change)="saveUsername = !saveUsername" #CA name="CA"></mat-checkbox>
-        </td>
-      </tr>
-
-
-      <tr>
-        <td colspan="2" align="center">
-          <button class="btn btn-success" type="button"
-                  (click)="getCertificate(CN.value,SN.value,GN.value,ON.value,LN.value,C.value,E.value,CA.value)">Create
-          </button>
-        </td>
-      </tr>
-
-    </table>
-    <div id="poruka"></div>
-
+  <div class="col-md-6">
+    <h3>New Certificate</h3>
+    <form>
+      <div class="form-group form-inline">
+        <label>Issuer</label>
+        <select class="form-control" name="issuer" [(ngModel)]="certificate.uid">
+          <option value="">none</option>
+          <option *ngFor="let issuer of issuers" value="{{issuer}}">{{issuer}}</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Common Name (CN)</label>
+        <input [(ngModel)]="certificate.commonName" class="form-control" name="commonName"  placeholder="Enter common name">
+      </div>
+      <div class="form-group">
+        <label>Surname (SN)</label>
+        <input [(ngModel)]="certificate.surname" class="form-control" name="surname"  placeholder="Enter surname">
+      </div>
+      <div class="form-group">
+        <label >Given Name (GN)</label>
+        <input [(ngModel)]="certificate.givenName" class="form-control" name="givenName" placeholder="Enter given name">
+      </div>
+      <div class="form-group">
+        <label >Organisation Name (ON)</label>
+        <input [(ngModel)]="certificate.orgName" class="form-control" name="orgName" placeholder="Enter organisation name">
+      </div>
+      <div class="form-group">
+        <label >Locality Name (LN)</label>
+        <input [(ngModel)]="certificate.orgNameUnit" class="form-control" name="localityName" placeholder="Enter locality name">
+      </div>
+      <div class="form-group">
+        <label>Country (ON)</label>
+        <input [(ngModel)]="certificate.country" class="form-control" name="country" placeholder="Enter Country name">
+      </div>
+      <div class="form-group">
+        <label >Email address (E)</label>
+        <input [(ngModel)]="certificate.email" type="email" class="form-control" name="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+      </div>
+      <div class="form-check">
+        <input [(ngModel)]="this.isCa" type="checkbox" class="form-check-input" name="exampleCheck1">
+        <label class="form-check-label" >Certificate Authority</label>
+      </div>
+      <button type="submit" class="btn btn-success" (click)="create()">Create</button>
+      <a class="btn btn-primary pull-right" href="/certificates">Back</a>
+    </form>
   </div>
-  <br>
-  <a href="certificates" class="btn btn-primary">Back</a>
+
 </div>

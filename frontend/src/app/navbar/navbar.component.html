@@ -1,4 +1,23 @@
-<mat-toolbar>
-  <h1>XML SECURITY </h1>
-  <a mat-button color="primary" href="/certificates"> Certificates</a>
-</mat-toolbar>
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <b><a class="navbar-brand" routerLink="/">Booking</a></b>
+      <a class="navbar-brand" routerLink="/certificates">Certificates</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li *ngIf="logged == true"><a routerLink="/fanpage">Fan Zona</a></li>
+
+    </ul>
+    <ul *ngIf="logged == true" class="nav navbar-nav navbar-right">
+      <li><a routerLink="/profil">Profil</a></li>
+      <li>
+        <p><b>Zdravo, {{username}}!</b></p>
+        <button class="btn btn-sm btn-warning">Odjava</button>
+      </li>
+    </ul>
+    <ul *ngIf="logged == false" class="nav navbar-nav navbar-right">
+      <li><a routerLink="/login">Prijava</a></li>
+      <li><a routerLink="/registracija">Registracija</a></li>
+    </ul>
+  </div>
+</nav>

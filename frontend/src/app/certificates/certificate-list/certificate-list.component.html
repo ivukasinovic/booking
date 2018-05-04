@@ -7,7 +7,8 @@
       class="list-group-item clearfix"
       *ngFor="let certificate of certificates">
       <div class="pull-left">
-        <a href="certificates/{{certificate.serialNumber}}"><h4 class="list-group-item-heading"><b>{{ certificate.serialNumber }}</b></h4></a>
+        <a href="certificates/{{certificate.serialNumber}}"><h4 class="list-group-item-heading"><b>{{
+          certificate.serialNumber }}</b></h4></a>
         <p class="list-group-item-text">{{ certificate.orgName }}</p>
         <br>
       </div>

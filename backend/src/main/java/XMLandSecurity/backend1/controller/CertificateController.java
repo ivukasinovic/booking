@@ -9,7 +9,6 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.print.attribute.standard.Media;
 import java.security.cert.Certificate;
 import java.util.ArrayList;
 import java.util.List;
@@ -39,8 +38,11 @@ public class CertificateController {
         } else {
             dto.setCa(false);
         }
+        if(dto.getUid() == null){
+            dto.setUid("");
+        }
         Certificate created = certificateService.generateCertificate(dto);
-        if(created!= null){
+        if (created != null) {
             CertificateDTO creDto = new CertificateDTO(created);
             return new ResponseEntity<>(creDto, HttpStatus.CREATED);
         }
@@ -57,6 +59,36 @@ public class CertificateController {
     public ResponseEntity<CertificateDTO> getCertificate(@PathVariable String id) {
         CertificateDTO certDto = keyStoreService.getCertificateDTO(id);
         return new ResponseEntity<>(certDto, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/check/{id}", method = RequestMethod.GET)
+    public ResponseEntity<String> checkCertificate(@PathVariable String id) {
+        String respond;
+        if (certificateService.check(id)) {
+            respond = "good";
+        } else {
+            respond = "revoked";
+        }
+
+        return new ResponseEntity<>(respond, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/download/{id}", method = RequestMethod.GET)
+    public ResponseEntity<String> download(@PathVariable String id) {
+        String file = certificateService.download(id);
+        return new ResponseEntity<>(file, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/revoke/{id}", method = RequestMethod.GET)
+    public ResponseEntity<CertificateDTO> revoke(@PathVariable String id) {
+        certificateService.revoke(id);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    public ResponseEntity<CertificateDTO> delete(@PathVariable String id) {
+        keyStoreService.delete(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
 

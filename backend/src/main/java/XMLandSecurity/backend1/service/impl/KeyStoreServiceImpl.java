@@ -86,12 +86,28 @@ public class KeyStoreServiceImpl implements KeyStoreService {
     }
 
     @Override
-    public CertificateDTO getCertificateDTO(String alias) {
-        for(int i=0;i<2;i++){
+    public X509Certificate getCertificate(String alias) {
+        for (int i = 0; i < 2; i++) {
             loadKeyStore(i);
             try {
                 X509Certificate cert = (X509Certificate) keyStore.getCertificate(alias);
-                if(cert != null){
+                if (cert != null) {
+                    return cert;
+                }
+            } catch (KeyStoreException e) {
+                e.printStackTrace();
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public CertificateDTO getCertificateDTO(String alias) {
+        for (int i = 0; i < 2; i++) {
+            loadKeyStore(i);
+            try {
+                X509Certificate cert = (X509Certificate) keyStore.getCertificate(alias);
+                if (cert != null) {
                     return new CertificateDTO(cert);
                 }
             } catch (KeyStoreException e) {
@@ -122,7 +138,7 @@ public class KeyStoreServiceImpl implements KeyStoreService {
         saveKeyStore(keyStoreName, keyStorePassword.toCharArray());
     }
 
-        @Override
+    @Override
     public IssuerData readIssuerFromStore(String alias) {
         loadKeyStore(0);
         try {
@@ -143,13 +159,12 @@ public class KeyStoreServiceImpl implements KeyStoreService {
         try {
             Enumeration<String> aliases = keyStore.aliases();
             issuers = Collections.list(aliases);
-
         } catch (Exception e) {
             e.printStackTrace();
         }
         return issuers;
     }
-
+    @Override
     public boolean saveKeyStore(String fileName, char[] password) {
         try {
             keyStore.store(new FileOutputStream("keystores/" + fileName), password);
@@ -173,6 +188,27 @@ public class KeyStoreServiceImpl implements KeyStoreService {
             e.printStackTrace();
         } catch (CertificateException e) {
             e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void delete(String alias) {
+        for (int i = 0; i < 2; i++) {
+            loadKeyStore(i);
+            try {
+                ArrayList<String> aliases = Collections.list(keyStore.aliases());
+                if (aliases.contains(alias)) {
+                    keyStore.deleteEntry(alias);
+                    if (i == 0) {
+                        saveKeyStore(PATH_CA, PASSWORD_CA.toCharArray());
+                    } else if (i == 1) {
+                        saveKeyStore(PATH_NONCA, PASSWORD_NONCA.toCharArray());
+                    }
+                    return;
+                }
+            } catch (KeyStoreException e) {
+                e.printStackTrace();
+            }
         }
     }
 

@@ -25,10 +25,10 @@ export class CertificateDetailsComponent implements OnInit {
   getCertificateDetails(serialNumber: number) {
     this.certificateService.getCertificate(this.serialNumber)
       .subscribe((result: Certificate) => {
-        this.certificate = result;
-      },
+          this.certificate = result;
+        },
         error1 => {
-        alert('Doslo je do greske');
+          alert('Doslo je do greske');
         });
   }
 

@@ -11,6 +11,7 @@ export class Certificate {
   surname: string;
   orgName: string;
   givenName: string;
+  local
   country: string;
   email: string;
   caa: number;

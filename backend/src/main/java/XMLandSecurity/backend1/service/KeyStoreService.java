@@ -19,6 +19,8 @@ public interface KeyStoreService {
 
     Optional<X509Certificate> getCertificate(String alias, int i);
 
+    X509Certificate getCertificate(String alias);
+
     CertificateDTO getCertificateDTO(String alias);
 
     List<CertificateDTO> getCertificatesDTO();
@@ -31,6 +33,10 @@ public interface KeyStoreService {
 
     void loadKeyStore(String keyStoreName, String keyStorePassword);
 
+    boolean saveKeyStore(String fileName, char[] password);
+
     void createKeyStores();
+
+    void delete(String alias);
 
 }

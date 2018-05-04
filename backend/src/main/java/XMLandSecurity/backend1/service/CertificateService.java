@@ -5,6 +5,7 @@ import XMLandSecurity.backend1.model.SubjectData;
 import XMLandSecurity.backend1.model.dto.CertificateDTO;
 
 import java.security.cert.Certificate;
+import java.security.cert.X509Certificate;
 import java.util.List;
 
 public interface CertificateService {
@@ -16,6 +17,14 @@ public interface CertificateService {
     SubjectData newSubjectData(CertificateDTO certificate);
 
     IssuerData newIssuerData(CertificateDTO certificate);
+
+    boolean check(String id);
+
+    String download(String id);
+
+    void revoke(String serialNumber);
+
+    List<X509Certificate> readRevoked();
 
 
 }

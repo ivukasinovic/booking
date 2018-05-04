@@ -9,25 +9,18 @@ import {Certificate} from '../model';
   styleUrls: ['./certificate-new.component.css']
 })
 export class CertificatComponent implements OnInit {
-
-  niz = [];
-  samoCekirani = [];        // Samo one kod kojih je cekiran cek-Box
-  saveUsername: boolean;
   issuers: string[];
-  issuer: string;
-  private certificate: Certificate;
+  certificate: Certificate;
+  isCa: boolean;
 
   constructor(private cerService: CertificatesService, private router: Router) {
     this.certificate = new Certificate();
-    this.certificate.issuerName = '';
-    this.saveUsername = false;
-    this.issuer = '';
+    this.isCa = false;
 
   }
 
   ngOnInit() {
     this.getIssuers();
-
   }
 
   getIssuers() {
@@ -36,58 +29,20 @@ export class CertificatComponent implements OnInit {
         this.issuers = result;
       });
   }
-
-  getCertificate(CN: string, SN: string, GN: string, ON: string, LN: string, Country: string, Email: string, CA: number) {
-    if (CN !== '' && SN !== '' && GN !== '' && ON !== '' && LN !== '' && Country !== '' && Email !== '') {
-
-      this.niz.push({
-        CN: CN, SN: SN, GN: GN, ON: ON, LN: LN, C: Country, E: Email, CA: this.saveUsername
-      });
-
-      // if (SELEC != null) {
-      //  this.certificate.issuerName = SELEC;
-      // }
-
-      this.certificate.issuerName = this.issuer;
-      this.certificate.commonName = CN;
-      this.certificate.orgNameUnit = CN;  // samo posle promeniti polje
-
-      this.certificate.surname = SN;
-      this.certificate.givenName = GN;
-      this.certificate.orgName = ON;
-      this.certificate.uid = LN;
-      this.certificate.country = Country;
-      this.certificate.email = Email;
-
-      if (this.saveUsername === true) {
-        this.certificate.caa = 1;
-      } else {
-        this.certificate.caa = 0;
-      }
-
-      console.log(this.certificate.caa + '  _______ ' + this.saveUsername);
-
-      if (this.saveUsername === true) {
-        // this.certificate.issuerName = SELEC;
-        this.samoCekirani.push({CN: CN, SN: SN, GN: GN, ON: ON, LN: LN, C: Country, E: Email, CA: CA});
-      }
-
-      console.log(this.certificate);
-
-      this.cerService.postCertificate(this.certificate)
-        .subscribe((data: Certificate) => {
-            this.certificate = data;
-            alert('Uspesno kreiran sertifikat.');
-            this.router.navigate(['certificates']);
-          },
-          error1 => {
-            alert('Doslo je do greske, pokusajte ponovo!');
-          });
-
-      this.cerService.getCertificates();
+  create() {
+    console.log(this.certificate);
+    if (this.isCa) {
+      this.certificate.caa = 1;
+    } else {
+      this.certificate.caa = 0;
     }
-
-  } // kraj metode
+    this.cerService.postCertificate(this.certificate)
+      .subscribe(data => {
+        alert('Success!');
+        this.router.navigate(['/certificates']);
+        location.reload();
+      });
+  }
 
 
 }
