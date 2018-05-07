@@ -1,11 +1,16 @@
 package XMLandSecurity.backend1.controller;
 
+import XMLandSecurity.backend1.domain.Role;
+import XMLandSecurity.backend1.domain.User;
 import XMLandSecurity.backend1.model.json.request.AuthenticationRequest;
 import XMLandSecurity.backend1.model.json.response.AuthenticationResponse;
 import XMLandSecurity.backend1.model.security.CustomUser;
 import XMLandSecurity.backend1.security.TokenUtils;
+import XMLandSecurity.backend1.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mobile.device.Device;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -15,6 +20,7 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -24,7 +30,6 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.logging.Logger;
 
 @RestController
-@RequestMapping("${route.authentication}")
 public class AuthenticationController {
 
     private final Logger logger = Logger.getLogger(this.getClass().getName());
@@ -41,8 +46,11 @@ public class AuthenticationController {
     @Autowired
     private UserDetailsService userDetailsService;
 
+    @Autowired
+    private UserService userService;
 
-    @RequestMapping(method = RequestMethod.POST)
+
+    @RequestMapping(method = RequestMethod.POST, value ="${route.authentication}")
     public ResponseEntity<?> authenticationRequest(@RequestBody AuthenticationRequest authenticationRequest, Device device) throws AuthenticationException {
 
         // Perform the authentication
@@ -72,6 +80,21 @@ public class AuthenticationController {
         } else {
             return ResponseEntity.badRequest().body(null);
         }
+    }
+
+    @RequestMapping(
+            value = "/register",
+            method = RequestMethod.POST,
+            produces = MediaType.APPLICATION_JSON_VALUE,
+            consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<User> register(@RequestBody User user){
+        if((userService.findByUsername(user.getUsername()) != null) || (userService.findByEmail(user.getEmail()) != null) ){
+            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+        }
+        user.setRole(Role.USER);
+        user.setPasswordHash(new BCryptPasswordEncoder().encode(user.getPasswordHash()));
+        User savedUser = userService.save(user);
+        return new ResponseEntity<>(savedUser, HttpStatus.CREATED);
     }
 
 }

@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Router} from '@angular/router';
 import {JwtHelperService} from '@auth0/angular-jwt';
+import {User} from './model';
 
 @Injectable()
 export class AuthService {
@@ -20,6 +21,9 @@ export class AuthService {
 
   login(username: string, password: string) {
     return this.http.post('api/login', {username: username, password: password});
+  }
+  register(user: User) {
+    return this.http.post('api/register', user );
   }
 
   getToken(): string {

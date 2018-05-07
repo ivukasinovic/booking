@@ -7,15 +7,15 @@
       <li *ngIf="logged == true"><a routerLink="/certificates">Certificates</a></li>
     </ul>
     <ul *ngIf="logged == true" class="nav navbar-nav navbar-right">
-      <li><a routerLink="/profil">Profil</a></li>
+      <li><a routerLink="/profil">Profile</a></li>
       <li>
-        <p><b>Zdravo, {{username}}!</b></p>
-        <button class="btn btn-sm btn-warning" (click)="logout()">Odjava</button>
+        <p><b>Hi, {{username}}!</b></p>
+        <button class="btn btn-sm btn-warning" (click)="logout()">Logout</button>
       </li>
     </ul>
     <ul *ngIf="logged == false" class="nav navbar-nav navbar-right">
-      <li><a routerLink="/login">Prijava</a></li>
-      <li><a routerLink="/registracija">Registracija</a></li>
+      <li><a routerLink="/login">Sign in</a></li>
+      <li><a routerLink="/registration">Join</a></li>
     </ul>
   </div>
 </nav>

@@ -16,6 +16,7 @@ import {TokenInterceptor} from './token-interceptor';
 import {AuthGuardService} from './auth-guard.service';
 import {AuthService} from './auth.service';
 import {RoleGuardService} from './role-guard.service';
+import { RegistrationComponent } from './registration/registration.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import {RoleGuardService} from './role-guard.service';
     NavbarComponent,
     CertificateDetailsComponent,
     CertificateListComponent,
-    LoginComponent
+    LoginComponent,
+    RegistrationComponent
   ],
   imports: [
     BrowserModule,
