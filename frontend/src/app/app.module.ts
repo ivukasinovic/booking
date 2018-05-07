@@ -10,7 +10,12 @@ import {FormsModule} from '@angular/forms';
 import {CertificateDetailsComponent} from './certificates/certificate-details/certificate-details.component';
 import {CertificateListComponent} from './certificates/certificate-list/certificate-list.component';
 import {CertificatesService} from './certificates/certificates.service';
-import {HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
+import {LoginComponent} from './login/login.component';
+import {TokenInterceptor} from './token-interceptor';
+import {AuthGuardService} from './auth-guard.service';
+import {AuthService} from './auth.service';
+import {RoleGuardService} from './role-guard.service';
 
 @NgModule({
   declarations: [
@@ -19,7 +24,8 @@ import {HttpClientModule} from '@angular/common/http';
     CertificatesComponent,
     NavbarComponent,
     CertificateDetailsComponent,
-    CertificateListComponent
+    CertificateListComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -28,7 +34,14 @@ import {HttpClientModule} from '@angular/common/http';
     FormsModule,
     HttpClientModule
   ],
-  providers: [CertificatesService],
+  providers: [CertificatesService, {
+    provide: HTTP_INTERCEPTORS,
+    useClass: TokenInterceptor,
+    multi: true
+  },
+    AuthGuardService,
+    AuthService,
+    RoleGuardService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

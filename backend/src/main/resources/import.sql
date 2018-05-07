@@ -1,0 +1,6 @@
+-- password == username
+INSERT INTO user (role, city, email, name, number, password_hash, surname, username) VALUES ('ADMIN', 'Novi Sad', 'adminfan@admin.com', 'Ivan', '0635569989', '$2a$10$gvI2xtxfH3appKH3z8n7VeLPi84yNLwz5BgsA5VPACZYvfGlX6gLW', 'Vukasinovic', 'admin');
+INSERT INTO user (role, city, email, name, number, password_hash, surname, username) VALUES ('AGENT', 'Beograd', 'agent@agent.com','Jovana', '0641569989', '$2a$10$7KP/ADSkFDZvXY29PKY/7.auVm6wh.5/yoDfqPzZVWu.ynXywu3/a', 'Novakovic', 'agent');
+INSERT INTO user (role, city, email, name, number, password_hash, surname, username) VALUES ('USER', 'Vranje', 'user@user.com','User', '0641569589', '$2a$10$HcZhQGkdYjhCo88cS.ItSuLS3k6sf5LX5Q1vzubkeuBs5xtUrQlGW', 'Useric', 'user');
+INSERT INTO user (role, city, email, name, number, password_hash, surname, username) VALUES ('USER', 'Beograd', 'dejan@stojkic.com', 'Dejan', '0615565239', '$2a$10$6m31kUpEGWGUzgprvOr1HuR8UN6MLVsZ5WhWsggbB5cFGAq/ag17O', 'Stojkic', 'dejan');
+INSERT INTO user (role, city, email, name, number, password_hash, surname, username) VALUES ('USER', 'Novi Sad', 'stefan@milanovic.com', 'Stefan', '0645565239', '$2a$10$JTD4TwVJR52Z1pNuDBLi/e3DofPF34O.wA45lCTQj98TW1ZjRloQC', 'Milanovic', 'stefan');

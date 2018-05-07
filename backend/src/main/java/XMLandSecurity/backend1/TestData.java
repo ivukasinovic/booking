@@ -19,6 +19,11 @@ public class TestData {
     private void init() {
 //        System.out.println("Kreiranje keystorova");
 //        keyStoreService.createKeyStores();
+
+        //generating hash for passwords
+//        BCryptPasswordEncoder bc = new BCryptPasswordEncoder();
+//        System.out.println(bc.encode("agent"));
+
     }
 
 }

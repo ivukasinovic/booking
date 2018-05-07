@@ -2,17 +2,15 @@
   <div class="container-fluid">
     <div class="navbar-header">
       <b><a class="navbar-brand" routerLink="/">Booking</a></b>
-      <a class="navbar-brand" routerLink="/certificates">Certificates</a>
     </div>
     <ul class="nav navbar-nav">
-      <li *ngIf="logged == true"><a routerLink="/fanpage">Fan Zona</a></li>
-
+      <li *ngIf="logged == true"><a routerLink="/certificates">Certificates</a></li>
     </ul>
     <ul *ngIf="logged == true" class="nav navbar-nav navbar-right">
       <li><a routerLink="/profil">Profil</a></li>
       <li>
         <p><b>Zdravo, {{username}}!</b></p>
-        <button class="btn btn-sm btn-warning">Odjava</button>
+        <button class="btn btn-sm btn-warning" (click)="logout()">Odjava</button>
       </li>
     </ul>
     <ul *ngIf="logged == false" class="nav navbar-nav navbar-right">

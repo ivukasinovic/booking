@@ -3,11 +3,16 @@ import {RouterModule, Routes} from '@angular/router';
 import {CertificatComponent} from './certificates/certificate-new/certificate-new.component';
 import {CertificateDetailsComponent} from './certificates/certificate-details/certificate-details.component';
 import {CertificateListComponent} from './certificates/certificate-list/certificate-list.component';
+import {LoginComponent} from './login/login.component';
+import {AuthGuardService} from './auth-guard.service';
+import {RoleGuardService} from './role-guard.service';
 
 const routes: Routes = [
   {path: 'certificates/new-certificate', component: CertificatComponent},
+  {path: 'login', component: LoginComponent},
   {path: 'certificates/:id', component: CertificateDetailsComponent},
-  {path: 'certificates', component: CertificateListComponent}
+  {path: 'certificates', component: CertificateListComponent,
+    canActivate: [AuthGuardService], data: {expectedRole: 'ADMIN'}}
 
 ];
 
