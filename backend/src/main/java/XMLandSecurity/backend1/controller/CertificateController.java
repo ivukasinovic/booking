@@ -1,8 +1,12 @@
 package XMLandSecurity.backend1.controller;
 
+import XMLandSecurity.backend1.domain.Role;
+import XMLandSecurity.backend1.domain.User;
 import XMLandSecurity.backend1.model.dto.CertificateDTO;
+import XMLandSecurity.backend1.repository.UserRepository;
 import XMLandSecurity.backend1.service.CertificateService;
 import XMLandSecurity.backend1.service.KeyStoreService;
+import XMLandSecurity.backend1.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -10,7 +14,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.security.cert.Certificate;
+import java.security.cert.X509Certificate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,6 +29,9 @@ public class CertificateController {
     private CertificateService certificateService;
 
     @Autowired
+    private UserService userService;
+
+    @Autowired
     private KeyStoreService keyStoreService;
 
     @RequestMapping(method = RequestMethod.GET)
@@ -33,7 +42,7 @@ public class CertificateController {
 
     @RequestMapping(method = RequestMethod.POST,
             consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<CertificateDTO> genCertificate(@RequestBody CertificateDTO dto) {
+    public ResponseEntity<CertificateDTO> genCertificate(@RequestBody CertificateDTO dto, Principal principal) {
         if (dto.getCaa() == 1) {
             dto.setCa(true);
         } else {
@@ -42,7 +51,13 @@ public class CertificateController {
         if(dto.getUid() == null){
             dto.setUid("");
         }
-        Certificate created = certificateService.generateCertificate(dto);
+        if(dto.isCa()){
+            User user = userService.findByUsername(principal.getName());
+            if(user.getRole() != Role.ADMIN){
+                return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+            }
+        }
+        X509Certificate created = certificateService.generateCertificate(dto);
         if (created != null) {
             CertificateDTO creDto = new CertificateDTO(created);
             return new ResponseEntity<>(creDto, HttpStatus.CREATED);

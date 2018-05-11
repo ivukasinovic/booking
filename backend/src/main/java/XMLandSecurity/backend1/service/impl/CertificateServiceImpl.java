@@ -18,10 +18,7 @@ import java.security.*;
 import java.security.cert.Certificate;
 import java.security.cert.CertificateEncodingException;
 import java.security.cert.X509Certificate;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -29,13 +26,9 @@ public class CertificateServiceImpl implements CertificateService {
     @Autowired
     private KeyStoreService keyStoreService;
 
-    @Override
-    public List<CertificateDTO> getAll() {
-        return null;
-    }
 
     @Override
-    public Certificate generateCertificate(CertificateDTO certificateDTO) {
+    public X509Certificate generateCertificate(CertificateDTO certificateDTO) {
         // Serijski broj sertifikata
         int randomNum = 0 + (int) (Math.random() * 10000000);
         String sn = String.valueOf(randomNum);
@@ -181,7 +174,6 @@ public class CertificateServiceImpl implements CertificateService {
             }
 
             String issuer = certificate.getSubjectX500Principal().getName();
-
             List<X509Certificate> allCertificates = keyStoreService.getCertificates();
 
             List<X509Certificate> revokeList = allCertificates
@@ -189,11 +181,12 @@ public class CertificateServiceImpl implements CertificateService {
                     .filter(c -> c.getIssuerX500Principal().getName().equals(issuer))
                     .collect(Collectors.toList());
 
+
             allCertificates.removeAll(revokeList);
             recursion(certificates, revokeList, allCertificates);
-
             certificates.add(certificate);
             certificates.addAll(revokeList);
+            keyStoreService.deleteList(certificates);
             saveCRL(certificates, file);
         } catch (Exception e) {
             e.printStackTrace();

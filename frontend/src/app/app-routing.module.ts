@@ -13,7 +13,7 @@ const routes: Routes = [
   {path: 'registration', component: RegistrationComponent},
   {path: 'certificates/:id', component: CertificateDetailsComponent},
   {path: 'certificates', component: CertificateListComponent,
-    canActivate: [AuthGuardService], data: {expectedRole: 'ADMIN'}}
+    canActivate: [AuthGuardService]}
 
 ];
 

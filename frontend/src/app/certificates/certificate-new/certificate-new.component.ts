@@ -18,7 +18,6 @@ export class CertificatComponent implements OnInit {
     this.isCa = false;
 
   }
-
   ngOnInit() {
     this.getIssuers();
   }
@@ -41,7 +40,10 @@ export class CertificatComponent implements OnInit {
         alert('Success!');
         this.router.navigate(['/certificates']);
         location.reload();
-      });
+      },
+        error1 => {
+        alert('Error!');
+        });
   }
 
 

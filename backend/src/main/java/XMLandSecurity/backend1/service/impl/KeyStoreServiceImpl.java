@@ -102,6 +102,16 @@ public class KeyStoreServiceImpl implements KeyStoreService {
     }
 
     @Override
+    public ArrayList<String> getCertficatesSN() {
+        List<X509Certificate> certificates = getCertificates();
+        ArrayList<String> serialNumbers = new ArrayList<>();
+        for (X509Certificate cert: certificates){
+            serialNumbers.add(cert.getSerialNumber().toString());
+        }
+        return serialNumbers;
+    }
+
+    @Override
     public CertificateDTO getCertificateDTO(String alias) {
         for (int i = 0; i < 2; i++) {
             loadKeyStore(i);
@@ -209,6 +219,13 @@ public class KeyStoreServiceImpl implements KeyStoreService {
             } catch (KeyStoreException e) {
                 e.printStackTrace();
             }
+        }
+    }
+
+    @Override
+    public void deleteList(List<X509Certificate> certificates) {
+        for(X509Certificate cert: certificates){
+            delete(cert.getSerialNumber().toString());
         }
     }
 

@@ -10,9 +10,7 @@ import java.util.List;
 
 public interface CertificateService {
 
-    List<CertificateDTO> getAll();
-
-    Certificate generateCertificate(CertificateDTO certificateDTO);
+    X509Certificate generateCertificate(CertificateDTO certificateDTO);
 
     SubjectData newSubjectData(CertificateDTO certificate);
 

@@ -21,6 +21,8 @@ public interface KeyStoreService {
 
     X509Certificate getCertificate(String alias);
 
+    ArrayList<String> getCertficatesSN();
+
     CertificateDTO getCertificateDTO(String alias);
 
     List<CertificateDTO> getCertificatesDTO();
@@ -38,5 +40,7 @@ public interface KeyStoreService {
     void createKeyStores();
 
     void delete(String alias);
+
+    void deleteList(List<X509Certificate> certificates);
 
 }
