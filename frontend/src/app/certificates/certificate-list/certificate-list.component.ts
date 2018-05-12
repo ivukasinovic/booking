@@ -12,6 +12,7 @@ export class CertificateListComponent implements OnInit {
   certificates: Certificate[];
   file: string;
   respond: string;
+  serial: number;
 
   constructor(private certificateService: CertificatesService) {
   }

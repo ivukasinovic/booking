@@ -173,14 +173,15 @@ public class CertificateServiceImpl implements CertificateService {
                 }
             }
 
-            String issuer = certificate.getSubjectX500Principal().getName();
+            String issuerSN = new CertificateDTO(certificate).getSerialNumber();
             List<X509Certificate> allCertificates = keyStoreService.getCertificates();
 
-            List<X509Certificate> revokeList = allCertificates
-                    .stream()
-                    .filter(c -> c.getIssuerX500Principal().getName().equals(issuer))
-                    .collect(Collectors.toList());
-
+            List<X509Certificate> revokeList = new ArrayList<>();
+            for(X509Certificate cert : allCertificates){
+                if(new CertificateDTO(cert).getUid().equals(issuerSN)){
+                    revokeList.add(cert);
+                }
+            }
 
             allCertificates.removeAll(revokeList);
             recursion(certificates, revokeList, allCertificates);
@@ -202,17 +203,23 @@ public class CertificateServiceImpl implements CertificateService {
     }
 
     public void recursion(List<X509Certificate> certificates, List<X509Certificate> revokeList, List<X509Certificate> allCertificates) {
-        revokeList.forEach(rc -> {
-            List<X509Certificate> childRevokeList = allCertificates
-                    .stream()
-                    .filter(c -> c.getIssuerX500Principal().getName().equals(rc.getSubjectX500Principal().getName()))
-                    .collect(Collectors.toList());
-
+            List<X509Certificate> childRevokeList = new ArrayList<>();
+            for(X509Certificate cert: revokeList){
+                CertificateDTO certDTO = new CertificateDTO(cert);
+                for(X509Certificate cert1: allCertificates){
+                    if(new CertificateDTO(cert1).getUid().equals(certDTO.getSerialNumber())){
+                        childRevokeList.add(cert1);
+                    }
+                }
+            }
+            if(childRevokeList.size() ==0){
+                return;
+            }
             certificates.addAll(childRevokeList);
             allCertificates.removeAll(childRevokeList);
             recursion(certificates, childRevokeList, allCertificates);
-        });
     }
+
     @Override
     public List<X509Certificate> readRevoked(){
         List<X509Certificate> certificates = new ArrayList<>();

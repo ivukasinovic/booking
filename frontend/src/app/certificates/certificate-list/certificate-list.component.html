@@ -1,7 +1,18 @@
 <div class="container">
   <a href="certificates/new-certificate" class="btn btn-success">New Certificate</a>
   <div class="col-md-9">
-    <h3>Certificate list</h3>
+
+    <div>
+      <form class="form-inline">
+        <input type="text" [(ngModel)]="serial" class="form-control" name="serial" placeholder="Enter Serial Number">
+        <button class="btn btn-primary" (click)="check(serial)">Check Validity</button>
+        <button class="btn btn-info" (click)="download(serial)">Download</button>
+        <button class="btn btn-warning" (click)="revoke(serial)">Revoke</button>
+        <button class="btn btn-danger" (click)="delete(serial)">Delete</button>
+      </form>
+
+    </div>
+    <h3>Certificate list (not revoked)</h3>
     <div
       href="#"
       class="list-group-item clearfix"
