@@ -13,6 +13,7 @@ export class CertificateListComponent implements OnInit {
   file: string;
   respond: string;
   serial: number;
+  role: string;
 
   constructor(private certificateService: CertificatesService) {
   }
@@ -26,6 +27,7 @@ export class CertificateListComponent implements OnInit {
         error1 => {
           alert('Nije uspelo preuzimanje sertifikata!');
         });
+    this.role = localStorage.getItem('role');
   }
 
   check(serialNumber: number) {

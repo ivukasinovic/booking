@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.method.P;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -44,14 +45,11 @@ public class CertificateController {
             consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<CertificateDTO> genCertificate(@RequestBody CertificateDTO dto, Principal principal) {
         if (dto.getCaa() == 1) {
-            dto.setCa(true);
+            dto.setIsCa(true);
         } else {
-            dto.setCa(false);
+            dto.setIsCa(false);
         }
-        if(dto.getUid() == null){
-            dto.setUid("");
-        }
-        if(dto.isCa()){
+        if(dto.getisCa()){
             User user = userService.findByUsername(principal.getName());
             if(user.getRole() != Role.ADMIN){
                 return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
@@ -79,19 +77,16 @@ public class CertificateController {
 
     @RequestMapping(value = "/check/{id}", method = RequestMethod.GET)
     public ResponseEntity<String> checkCertificate(@PathVariable String id) {
-        String respond;
-        if (certificateService.check(id)) {
-            respond = "good";
-        } else {
-            respond = "revoked";
-        }
-
+        String respond = certificateService.check(id);
         return new ResponseEntity<>(respond, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/download/{id}", method = RequestMethod.GET)
     public ResponseEntity<String> download(@PathVariable String id) {
         String file = certificateService.download(id);
+        if(file == null){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
         return new ResponseEntity<>(file, HttpStatus.OK);
     }
     @PreAuthorize("hasAuthority('ADMIN')")
@@ -101,6 +96,7 @@ public class CertificateController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    @PreAuthorize("hasAuthority('ADMIN')")
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<CertificateDTO> delete(@PathVariable String id) {
         keyStoreService.delete(id);

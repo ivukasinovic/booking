@@ -77,6 +77,14 @@ public class CertificateDTO {
             this.startDate = ((X509Certificate) cert).getNotBefore();
             this.endDate = ((X509Certificate) cert).getNotAfter();
 
+            X500Name issName = new JcaX509CertificateHolder((X509Certificate) cert).getIssuer();
+
+            RDN isn = issName.getRDNs(BCStyle.CN)[0];
+            String isname = IETFUtils.valueToString(isn.getFirst().getValue());
+            this.issuerName = isname;
+            RDN isUID = issName.getRDNs(BCStyle.UID)[0];
+            this.issuerSerialNumber = IETFUtils.valueToString(isUID.getFirst().getValue());
+
         } catch (CertificateEncodingException e) {
             e.printStackTrace();
         }
@@ -164,11 +172,11 @@ public class CertificateDTO {
         this.email = email;
     }
 
-    public boolean isCa() {
+    public boolean getisCa() {
         return isCa;
     }
 
-    public void setCa(boolean ca) {
+    public void setIsCa(boolean ca) {
         isCa = ca;
     }
 

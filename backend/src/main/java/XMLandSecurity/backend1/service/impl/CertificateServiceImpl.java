@@ -15,17 +15,24 @@ import org.springframework.stereotype.Service;
 import javax.xml.bind.DatatypeConverter;
 import java.io.*;
 import java.security.*;
-import java.security.cert.Certificate;
 import java.security.cert.CertificateEncodingException;
 import java.security.cert.X509Certificate;
 import java.util.*;
-import java.util.stream.Collectors;
 
 @Service
 public class CertificateServiceImpl implements CertificateService {
     @Autowired
     private KeyStoreService keyStoreService;
 
+
+    @Override
+    public List<CertificateDTO> convertToDTO(List<X509Certificate> certificates) {
+        ArrayList<CertificateDTO> certificateDTOS = new ArrayList<>();
+        for(X509Certificate cert: certificates){
+            certificateDTOS.add(new CertificateDTO(cert));
+        }
+        return certificateDTOS;
+    }
 
     @Override
     public X509Certificate generateCertificate(CertificateDTO certificateDTO) {
@@ -41,11 +48,11 @@ public class CertificateServiceImpl implements CertificateService {
         CertificateGenerator generator = new CertificateGenerator();
         X509Certificate certificate = null;
         try {
-            certificate = generator.generateCertificate(sd, id, certificateDTO.isCa(), certificateDTO.getIssuerSerialNumber());
+            certificate = generator.generateCertificate(sd, id, certificateDTO.getisCa(), certificateDTO.getIssuerSerialNumber());
         } catch (CertIOException e) {
             e.printStackTrace();
         }
-        keyStoreService.writeCertificate(certificateDTO.isCa(), certificate, certificate.getSerialNumber().toString(), sd.getPrivateKey());
+        keyStoreService.writeCertificate(certificateDTO.getisCa(), certificate, certificate.getSerialNumber().toString(), sd.getPrivateKey());
 
         return certificate;
     }
@@ -75,8 +82,9 @@ public class CertificateServiceImpl implements CertificateService {
         builder.addRDN(BCStyle.C, certificate.getCountry());
         builder.addRDN(BCStyle.E, certificate.getEmail());
         //UID (USER ID) je ID korisnika
-        builder.addRDN(BCStyle.UID, certificate.getUid());
+        builder.addRDN(BCStyle.UID, sn);
 
+        //podaci o sertifikatu  javni kljuc, podaci o vlasniku, serijski broj, od kad do kad vazi
         return new SubjectData(keyPairSubject.getPublic(), keyPairSubject.getPrivate(), builder.build(), sn, startDate, endDate);
 
     }
@@ -84,7 +92,8 @@ public class CertificateServiceImpl implements CertificateService {
     public IssuerData newIssuerData(CertificateDTO certificate) {
         X500NameBuilder builder = new X500NameBuilder(BCStyle.INSTANCE);
         KeyPair keyPairIssuer = generateKeyPair();
-        if (certificate.getIssuerSerialNumber() == null) { //ako uzmemo u obzir da ce biti prazan string ako zeli issuera da doda
+        String isn = certificate.getIssuerSerialNumber();
+        if ((isn == "") || isn == null) { //ako uzmemo u obzir da ce biti prazan string ako zeli issuera da doda
 
             builder.addRDN(BCStyle.CN, certificate.getCommonName());
             builder.addRDN(BCStyle.SURNAME, certificate.getSurname());
@@ -93,7 +102,7 @@ public class CertificateServiceImpl implements CertificateService {
             builder.addRDN(BCStyle.OU, certificate.getOrgNameUnit());
             builder.addRDN(BCStyle.C, certificate.getCountry());
             builder.addRDN(BCStyle.E, certificate.getEmail());
-            builder.addRDN(BCStyle.UID, certificate.getUid());
+            builder.addRDN(BCStyle.UID, certificate.getSerialNumber());
 
             return new IssuerData(keyPairIssuer.getPrivate(), builder.build());
         } else {
@@ -104,26 +113,28 @@ public class CertificateServiceImpl implements CertificateService {
     }
 
     @Override
-    public boolean check(String id) {
-        X509Certificate certificate = keyStoreService.getCertificate(id);
-        if(certificate == null){
-            return false;
-        }
-        List<X509Certificate> certificates = readRevoked();
-        if(certificate == null){
-            return false;
-        }
-        for (X509Certificate cert : certificates) {
-            if (cert.getSerialNumber().equals(certificate.getSerialNumber())) {
-                return false;
+    public String check(String id) {
+
+        List<X509Certificate> revoked = readRevoked();
+        for (X509Certificate cert : revoked) {
+            if (cert.getSerialNumber().toString().equals(id)) {
+                return "revoked";
             }
         }
-        return true;
+        X509Certificate certificate = keyStoreService.getCertificate(id);
+        if(certificate == null){
+            return "undefined";
+        }
+
+        return "good";
     }
 
     @Override
     public String download(String id) {
         X509Certificate cert = keyStoreService.getCertificate(id);
+        if(cert == null){
+            return null;
+        }
         StringWriter sw = new StringWriter();
 
         try {
@@ -178,13 +189,13 @@ public class CertificateServiceImpl implements CertificateService {
 
             List<X509Certificate> revokeList = new ArrayList<>();
             for(X509Certificate cert : allCertificates){
-                if(new CertificateDTO(cert).getUid().equals(issuerSN)){
+                if(new CertificateDTO(cert).getIssuerSerialNumber().equals(issuerSN)){
                     revokeList.add(cert);
                 }
             }
 
             allCertificates.removeAll(revokeList);
-            recursion(certificates, revokeList, allCertificates);
+            revokeRecursion(certificates, revokeList, allCertificates);
             certificates.add(certificate);
             certificates.addAll(revokeList);
             keyStoreService.deleteList(certificates);
@@ -202,12 +213,12 @@ public class CertificateServiceImpl implements CertificateService {
         oos.close();
     }
 
-    public void recursion(List<X509Certificate> certificates, List<X509Certificate> revokeList, List<X509Certificate> allCertificates) {
+    public void revokeRecursion(List<X509Certificate> certificates, List<X509Certificate> revokeList, List<X509Certificate> allCertificates) {
             List<X509Certificate> childRevokeList = new ArrayList<>();
             for(X509Certificate cert: revokeList){
                 CertificateDTO certDTO = new CertificateDTO(cert);
                 for(X509Certificate cert1: allCertificates){
-                    if(new CertificateDTO(cert1).getUid().equals(certDTO.getSerialNumber())){
+                    if(new CertificateDTO(cert1).getIssuerSerialNumber().equals(certDTO.getSerialNumber())){
                         childRevokeList.add(cert1);
                     }
                 }
@@ -217,7 +228,7 @@ public class CertificateServiceImpl implements CertificateService {
             }
             certificates.addAll(childRevokeList);
             allCertificates.removeAll(childRevokeList);
-            recursion(certificates, childRevokeList, allCertificates);
+            revokeRecursion(certificates, childRevokeList, allCertificates);
     }
 
     @Override

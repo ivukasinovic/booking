@@ -43,7 +43,7 @@ public class KeyStoreServiceImpl implements KeyStoreService {
         List<X509Certificate> certificates = new ArrayList<>();
 
         try {
-            for (int i = 0; i < 3; i++) {
+            for (int i = 0; i < 2; i++) {
                 loadKeyStore(i);
                 Enumeration<String> aliases = keyStore.aliases();
 

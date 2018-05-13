@@ -7,8 +7,8 @@
         <input type="text" [(ngModel)]="serial" class="form-control" name="serial" placeholder="Enter Serial Number">
         <button class="btn btn-primary" (click)="check(serial)">Check Validity</button>
         <button class="btn btn-info" (click)="download(serial)">Download</button>
-        <button class="btn btn-warning" (click)="revoke(serial)">Revoke</button>
-        <button class="btn btn-danger" (click)="delete(serial)">Delete</button>
+        <button *ngIf="role == 'ADMIN'" class="btn btn-warning" (click)="revoke(serial)">Revoke</button>
+        <button *ngIf="role == 'ADMIN'" class="btn btn-danger" (click)="delete(serial)">Delete</button>
       </form>
 
     </div>
@@ -26,8 +26,8 @@
       <span class="pull-right">
       <button class="btn btn-primary" (click)="check(certificate.serialNumber)">Check Validity</button>
       <button class="btn btn-info" (click)="download(certificate.serialNumber)">Download</button>
-      <button class="btn btn-warning" (click)="revoke(certificate.serialNumber)">Revoke</button>
-      <button class="btn btn-danger" (click)="delete(certificate.serialNumber)">Delete</button>
+      <button *ngIf="role == 'ADMIN'" class="btn btn-warning" (click)="revoke(certificate.serialNumber)">Revoke</button>
+      <button *ngIf="role == 'ADMIN'" class="btn btn-danger" (click)="delete(certificate.serialNumber)">Delete</button>
     </span>
     </div>
   </div>

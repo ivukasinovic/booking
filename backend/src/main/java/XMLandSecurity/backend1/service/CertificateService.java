@@ -10,13 +10,15 @@ import java.util.List;
 
 public interface CertificateService {
 
+    List<CertificateDTO> convertToDTO(List<X509Certificate> certificates);
+
     X509Certificate generateCertificate(CertificateDTO certificateDTO);
 
     SubjectData newSubjectData(CertificateDTO certificate);
 
     IssuerData newIssuerData(CertificateDTO certificate);
 
-    boolean check(String id);
+    String check(String id);
 
     String download(String id);
 

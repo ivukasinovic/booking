@@ -18,6 +18,7 @@ export class Certificate {
   orgNameUnit: string;
   uid: string;
   serialNumber: string;
+  issuerSerialNumber: string;
   endDate: Date;
   startDate: Date;
 }

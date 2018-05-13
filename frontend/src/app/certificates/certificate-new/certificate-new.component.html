@@ -4,7 +4,7 @@
     <form>
       <div class="form-group form-inline">
         <label>Issuer</label>
-        <select class="form-control" name="issuer" [(ngModel)]="certificate.uid">
+        <select class="form-control" name="issuer" [(ngModel)]="certificate.issuerSerialNumber">
           <option value="">none</option>
           <option *ngFor="let issuer of issuers" value="{{issuer}}">{{issuer}}</option>
         </select>
