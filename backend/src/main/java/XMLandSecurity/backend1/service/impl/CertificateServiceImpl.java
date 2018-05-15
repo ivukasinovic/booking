@@ -17,7 +17,10 @@ import java.io.*;
 import java.security.*;
 import java.security.cert.CertificateEncodingException;
 import java.security.cert.X509Certificate;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
 
 @Service
 public class CertificateServiceImpl implements CertificateService {
@@ -28,7 +31,7 @@ public class CertificateServiceImpl implements CertificateService {
     @Override
     public List<CertificateDTO> convertToDTO(List<X509Certificate> certificates) {
         ArrayList<CertificateDTO> certificateDTOS = new ArrayList<>();
-        for(X509Certificate cert: certificates){
+        for (X509Certificate cert : certificates) {
             certificateDTOS.add(new CertificateDTO(cert));
         }
         return certificateDTOS;
@@ -122,7 +125,7 @@ public class CertificateServiceImpl implements CertificateService {
             }
         }
         X509Certificate certificate = keyStoreService.getCertificate(id);
-        if(certificate == null){
+        if (certificate == null) {
             return "undefined";
         }
 
@@ -132,7 +135,7 @@ public class CertificateServiceImpl implements CertificateService {
     @Override
     public String download(String id) {
         X509Certificate cert = keyStoreService.getCertificate(id);
-        if(cert == null){
+        if (cert == null) {
             return null;
         }
         StringWriter sw = new StringWriter();
@@ -188,8 +191,8 @@ public class CertificateServiceImpl implements CertificateService {
             List<X509Certificate> allCertificates = keyStoreService.getCertificates();
 
             List<X509Certificate> revokeList = new ArrayList<>();
-            for(X509Certificate cert : allCertificates){
-                if(new CertificateDTO(cert).getIssuerSerialNumber().equals(issuerSN)){
+            for (X509Certificate cert : allCertificates) {
+                if (new CertificateDTO(cert).getIssuerSerialNumber().equals(issuerSN)) {
                     revokeList.add(cert);
                 }
             }
@@ -214,25 +217,25 @@ public class CertificateServiceImpl implements CertificateService {
     }
 
     public void revokeRecursion(List<X509Certificate> certificates, List<X509Certificate> revokeList, List<X509Certificate> allCertificates) {
-            List<X509Certificate> childRevokeList = new ArrayList<>();
-            for(X509Certificate cert: revokeList){
-                CertificateDTO certDTO = new CertificateDTO(cert);
-                for(X509Certificate cert1: allCertificates){
-                    if(new CertificateDTO(cert1).getIssuerSerialNumber().equals(certDTO.getSerialNumber())){
-                        childRevokeList.add(cert1);
-                    }
+        List<X509Certificate> childRevokeList = new ArrayList<>();
+        for (X509Certificate cert : revokeList) {
+            CertificateDTO certDTO = new CertificateDTO(cert);
+            for (X509Certificate cert1 : allCertificates) {
+                if (new CertificateDTO(cert1).getIssuerSerialNumber().equals(certDTO.getSerialNumber())) {
+                    childRevokeList.add(cert1);
                 }
             }
-            if(childRevokeList.size() ==0){
-                return;
-            }
-            certificates.addAll(childRevokeList);
-            allCertificates.removeAll(childRevokeList);
-            revokeRecursion(certificates, childRevokeList, allCertificates);
+        }
+        if (childRevokeList.size() == 0) {
+            return;
+        }
+        certificates.addAll(childRevokeList);
+        allCertificates.removeAll(childRevokeList);
+        revokeRecursion(certificates, childRevokeList, allCertificates);
     }
 
     @Override
-    public List<X509Certificate> readRevoked(){
+    public List<X509Certificate> readRevoked() {
         List<X509Certificate> certificates = new ArrayList<>();
         File file = new File("./revocation.crl");
         ObjectInputStream iis = null;

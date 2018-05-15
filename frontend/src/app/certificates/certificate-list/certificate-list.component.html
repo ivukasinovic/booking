@@ -1,7 +1,6 @@
 <div class="container">
   <a href="certificates/new-certificate" class="btn btn-success">New Certificate</a>
   <div class="col-md-9">
-
     <div>
       <form class="form-inline">
         <input type="text" [(ngModel)]="serial" class="form-control" name="serial" placeholder="Enter Serial Number">
@@ -19,8 +18,9 @@
       *ngFor="let certificate of certificates">
       <div class="pull-left">
         <a href="certificates/{{certificate.serialNumber}}"><h4 class="list-group-item-heading"><b>{{
-          certificate.serialNumber }}</b></h4></a>
-        <p class="list-group-item-text">{{ certificate.orgName }}</p>
+          certificate.serialNumber }} </b></h4></a>
+        <p class="list-group-item-text"> ON: {{ certificate.orgName }}</p>
+        <p>CN: {{certificate.commonName}}</p>
         <br>
       </div>
       <span class="pull-right">

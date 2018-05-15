@@ -18,14 +18,12 @@ import java.util.logging.Logger;
 @Component
 public class TokenUtils {
 
+    public static final String TOKEN_NAME = "Auth-Token";
     private final Logger logger = Logger.getLogger(this.getClass().getName());
-
     private final String AUDIENCE_UNKNOWN = "unknown";
     private final String AUDIENCE_WEB = "web";
     private final String AUDIENCE_MOBILE = "mobile";
     private final String AUDIENCE_TABLET = "tablet";
-    public static final String TOKEN_NAME = "Auth-Token";
-
     @Value("${token.secret}")
     private String secret;
 

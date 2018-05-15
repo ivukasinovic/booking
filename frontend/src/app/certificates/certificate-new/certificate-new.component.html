@@ -11,35 +11,39 @@
       </div>
       <div class="form-group">
         <label>Common Name (CN)</label>
-        <input [(ngModel)]="certificate.commonName" class="form-control" name="commonName"  placeholder="Enter common name">
+        <input [(ngModel)]="certificate.commonName" class="form-control" name="commonName"
+               placeholder="Enter common name">
       </div>
       <div class="form-group">
         <label>Surname (SN)</label>
-        <input [(ngModel)]="certificate.surname" class="form-control" name="surname"  placeholder="Enter surname">
+        <input [(ngModel)]="certificate.surname" class="form-control" name="surname" placeholder="Enter surname">
       </div>
       <div class="form-group">
-        <label >Given Name (GN)</label>
+        <label>Given Name (GN)</label>
         <input [(ngModel)]="certificate.givenName" class="form-control" name="givenName" placeholder="Enter given name">
       </div>
       <div class="form-group">
-        <label >Organisation Name (ON)</label>
-        <input [(ngModel)]="certificate.orgName" class="form-control" name="orgName" placeholder="Enter organisation name">
+        <label>Organisation Name (ON)</label>
+        <input [(ngModel)]="certificate.orgName" class="form-control" name="orgName"
+               placeholder="Enter organisation name">
       </div>
       <div class="form-group">
-        <label >Locality Name (LN)</label>
-        <input [(ngModel)]="certificate.orgNameUnit" class="form-control" name="localityName" placeholder="Enter locality name">
+        <label>Locality Name (LN)</label>
+        <input [(ngModel)]="certificate.orgNameUnit" class="form-control" name="localityName"
+               placeholder="Enter locality name">
       </div>
       <div class="form-group">
-        <label>Country (ON)</label>
+        <label>Country (C)</label>
         <input [(ngModel)]="certificate.country" class="form-control" name="country" placeholder="Enter Country name">
       </div>
       <div class="form-group">
-        <label >Email address (E)</label>
-        <input [(ngModel)]="certificate.email" type="email" class="form-control" name="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+        <label>Email address (E)</label>
+        <input [(ngModel)]="certificate.email" type="email" class="form-control" name="exampleInputEmail1"
+               aria-describedby="emailHelp" placeholder="Enter email">
       </div>
       <div class="form-check">
         <input [(ngModel)]="this.isCa" type="checkbox" class="form-check-input" name="exampleCheck1">
-        <label class="form-check-label" >Certificate Authority</label>
+        <label class="form-check-label">Certificate Authority</label>
       </div>
       <button type="submit" class="btn btn-success" (click)="create()">Create</button>
       <a class="btn btn-primary pull-right" href="/certificates">Back</a>

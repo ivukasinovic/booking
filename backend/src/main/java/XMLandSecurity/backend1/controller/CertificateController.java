@@ -3,7 +3,6 @@ package XMLandSecurity.backend1.controller;
 import XMLandSecurity.backend1.domain.Role;
 import XMLandSecurity.backend1.domain.User;
 import XMLandSecurity.backend1.model.dto.CertificateDTO;
-import XMLandSecurity.backend1.repository.UserRepository;
 import XMLandSecurity.backend1.service.CertificateService;
 import XMLandSecurity.backend1.service.KeyStoreService;
 import XMLandSecurity.backend1.service.UserService;
@@ -11,12 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.method.P;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
-import java.security.cert.Certificate;
 import java.security.cert.X509Certificate;
 import java.util.ArrayList;
 import java.util.List;
@@ -49,9 +46,9 @@ public class CertificateController {
         } else {
             dto.setIsCa(false);
         }
-        if(dto.getisCa()){
+        if (dto.getisCa()) {
             User user = userService.findByUsername(principal.getName());
-            if(user.getRole() != Role.ADMIN){
+            if (user.getRole() != Role.ADMIN) {
                 return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
             }
         }
@@ -84,11 +81,12 @@ public class CertificateController {
     @RequestMapping(value = "/download/{id}", method = RequestMethod.GET)
     public ResponseEntity<String> download(@PathVariable String id) {
         String file = certificateService.download(id);
-        if(file == null){
+        if (file == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(file, HttpStatus.OK);
     }
+
     @PreAuthorize("hasAuthority('ADMIN')")
     @RequestMapping(value = "/revoke/{id}", method = RequestMethod.GET)
     public ResponseEntity<CertificateDTO> revoke(@PathVariable String id) {

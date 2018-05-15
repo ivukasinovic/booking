@@ -105,7 +105,7 @@ public class KeyStoreServiceImpl implements KeyStoreService {
     public ArrayList<String> getCertficatesSN() {
         List<X509Certificate> certificates = getCertificates();
         ArrayList<String> serialNumbers = new ArrayList<>();
-        for (X509Certificate cert: certificates){
+        for (X509Certificate cert : certificates) {
             serialNumbers.add(cert.getSerialNumber().toString());
         }
         return serialNumbers;
@@ -174,6 +174,7 @@ public class KeyStoreServiceImpl implements KeyStoreService {
         }
         return issuers;
     }
+
     @Override
     public boolean saveKeyStore(String fileName, char[] password) {
         try {
@@ -224,7 +225,7 @@ public class KeyStoreServiceImpl implements KeyStoreService {
 
     @Override
     public void deleteList(List<X509Certificate> certificates) {
-        for(X509Certificate cert: certificates){
+        for (X509Certificate cert : certificates) {
             delete(cert.getSerialNumber().toString());
         }
     }

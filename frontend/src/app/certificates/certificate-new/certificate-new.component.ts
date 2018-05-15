@@ -18,6 +18,7 @@ export class CertificatComponent implements OnInit {
     this.isCa = false;
 
   }
+
   ngOnInit() {
     this.getIssuers();
   }
@@ -28,21 +29,26 @@ export class CertificatComponent implements OnInit {
         this.issuers = result;
       });
   }
+
   create() {
     console.log(this.certificate);
     if (this.isCa) {
       this.certificate.caa = 1;
     } else {
+      if ((this.certificate.issuerSerialNumber == null) || (this.certificate.issuerSerialNumber === '')) {
+        alert('Must choose issuer or make CA checked!');
+        return;
+      }
       this.certificate.caa = 0;
     }
     this.cerService.postCertificate(this.certificate)
       .subscribe(data => {
-        alert('Success!');
-        this.router.navigate(['/certificates']);
-        location.reload();
-      },
+          alert('Success!');
+          this.router.navigate(['/certificates']);
+          location.reload();
+        },
         error1 => {
-        alert('Error!');
+          alert('Error!');
         });
   }
 

@@ -4,7 +4,6 @@ import XMLandSecurity.backend1.model.IssuerData;
 import XMLandSecurity.backend1.model.SubjectData;
 import XMLandSecurity.backend1.model.dto.CertificateDTO;
 
-import java.security.cert.Certificate;
 import java.security.cert.X509Certificate;
 import java.util.List;
 

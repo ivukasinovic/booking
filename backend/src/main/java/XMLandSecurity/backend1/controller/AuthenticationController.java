@@ -50,7 +50,7 @@ public class AuthenticationController {
     private UserService userService;
 
 
-    @RequestMapping(method = RequestMethod.POST, value ="${route.authentication}")
+    @RequestMapping(method = RequestMethod.POST, value = "${route.authentication}")
     public ResponseEntity<?> authenticationRequest(@RequestBody AuthenticationRequest authenticationRequest, Device device) throws AuthenticationException {
 
         // Perform the authentication
@@ -87,8 +87,8 @@ public class AuthenticationController {
             method = RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE,
             consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<User> register(@RequestBody User user){
-        if((userService.findByUsername(user.getUsername()) != null) || (userService.findByEmail(user.getEmail()) != null) ){
+    public ResponseEntity<User> register(@RequestBody User user) {
+        if ((userService.findByUsername(user.getUsername()) != null) || (userService.findByEmail(user.getEmail()) != null)) {
             return new ResponseEntity<>(HttpStatus.FORBIDDEN);
         }
         user.setRole(Role.USER);
