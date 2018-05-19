@@ -12,6 +12,7 @@
       <label for="password">Password&nbsp;</label>
       <input type="password" class="form-control" name="password" id="password" [(ngModel)]="model.password" #password="ngModel"
              required/>
+      <a href="/forgot-password">Forgot password?</a>
       <span *ngIf="f.submitted && !password.valid" class="help-block">Password is required</span>
     </div>
     <div class="form-group">

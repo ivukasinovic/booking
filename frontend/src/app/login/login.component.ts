@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {AuthService} from '../auth.service';
+import {AuthService} from '../services/auth.service';
 import {Router} from '@angular/router';
 import * as decode from 'jwt-decode';
 
@@ -14,6 +14,7 @@ export class LoginComponent implements OnInit {
   model: any = {};
   error = '';
   loading = false;
+  public isCollapsed = false;
 
   constructor(private router: Router, private authenticationService: AuthService) {
     const token = localStorage.getItem('token');

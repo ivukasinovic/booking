@@ -9,3 +9,7 @@ export class User {
   role: string;
   passwordHash: string;
 }
+export class ChangePasssword {
+  oldPw: string;
+  newPw: string;
+}

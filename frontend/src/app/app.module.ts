@@ -14,9 +14,13 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {LoginComponent} from './login/login.component';
 import {TokenInterceptor} from './token-interceptor';
 import {AuthGuardService} from './auth-guard.service';
-import {AuthService} from './auth.service';
+import {AuthService} from './services/auth.service';
 import {RoleGuardService} from './role-guard.service';
 import { RegistrationComponent } from './registration/registration.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
+import {UserService} from './services/user.service';
 
 @NgModule({
   declarations: [
@@ -27,7 +31,10 @@ import { RegistrationComponent } from './registration/registration.component';
     CertificateDetailsComponent,
     CertificateListComponent,
     LoginComponent,
-    RegistrationComponent
+    RegistrationComponent,
+    UserProfileComponent,
+    ForgotPasswordComponent,
+    ChangePasswordComponent
   ],
   imports: [
     BrowserModule,
@@ -43,7 +50,8 @@ import { RegistrationComponent } from './registration/registration.component';
   },
     AuthGuardService,
     AuthService,
-    RoleGuardService],
+    RoleGuardService,
+    UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

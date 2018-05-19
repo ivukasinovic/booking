@@ -6,6 +6,9 @@ import {CertificateListComponent} from './certificates/certificate-list/certific
 import {LoginComponent} from './login/login.component';
 import {AuthGuardService} from './auth-guard.service';
 import {RegistrationComponent} from './registration/registration.component';
+import {UserProfileComponent} from './user-profile/user-profile.component';
+import {ForgotPasswordComponent} from './forgot-password/forgot-password.component';
+import {ChangePasswordComponent} from './change-password/change-password.component';
 
 const routes: Routes = [
   {path: 'certificates/new-certificate', component: CertificatComponent},
@@ -13,7 +16,12 @@ const routes: Routes = [
   {path: 'registration', component: RegistrationComponent},
   {path: 'certificates/:id', component: CertificateDetailsComponent},
   {path: 'certificates', component: CertificateListComponent,
-    canActivate: [AuthGuardService]}
+    canActivate: [AuthGuardService]},
+  {path: 'profile', component: UserProfileComponent,
+    canActivate: [AuthGuardService]},
+  {path: 'change-password', component: ChangePasswordComponent,
+    canActivate: [AuthGuardService]},
+  {path: 'forgot-password', component: ForgotPasswordComponent},
 
 ];
 

@@ -7,7 +7,7 @@
       <li *ngIf="logged == true"><a routerLink="/certificates">Certificates</a></li>
     </ul>
     <ul *ngIf="logged == true" class="nav navbar-nav navbar-right">
-      <li><a routerLink="/profil">Profile</a></li>
+      <li><a routerLink="/profile">Profile</a></li>
       <li>
         <p><b>Hi, {{username}}!</b></p>
         <button class="btn btn-sm btn-warning" (click)="logout()">Logout</button>
