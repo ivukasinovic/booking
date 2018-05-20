@@ -1,8 +1,12 @@
 package XMLandSecurity.backend1.domain;
 
+import com.sun.org.apache.regexp.internal.RE;
+
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by Ivan V. on 07-May-18
@@ -46,6 +50,79 @@ public class User implements Serializable {
     @Column(nullable = false)
     private boolean activated;
 
+
+    @OneToMany(mappedBy = "receiver", cascade = CascadeType.ALL)
+    private List<Message> receviedMessages = new ArrayList<Message>();
+
+    @OneToMany(mappedBy = "sender", cascade = CascadeType.ALL)
+    private List<Message> sentMessages = new ArrayList<Message>();
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Lodging> lodgings = new ArrayList<Lodging>();
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Rating> ratings = new ArrayList<Rating>();
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Reservation> reservations = new ArrayList<Reservation>();
+
+    public User(String username, String passwordHash, String name, String surname, String email, String city, String number, Role role, Date lastPasswordReset, boolean activated, List<Message> receviedMessages, List<Message> sentMessages, List<Lodging> lodgings, List<Rating> ratings, List<Reservation> reservations) {
+        this.username = username;
+        this.passwordHash = passwordHash;
+        this.name = name;
+        this.surname = surname;
+        this.email = email;
+        this.city = city;
+        this.number = number;
+        this.role = role;
+        this.lastPasswordReset = lastPasswordReset;
+        this.activated = activated;
+        this.receviedMessages = receviedMessages;
+        this.sentMessages = sentMessages;
+        this.lodgings = lodgings;
+        this.ratings = ratings;
+        this.reservations = reservations;
+    }
+
+    public List<Message> getReceviedMessages() {
+        return receviedMessages;
+    }
+
+    public void setReceviedMessages(List<Message> receviedMessages) {
+        this.receviedMessages = receviedMessages;
+    }
+
+    public List<Message> getSentMessages() {
+        return sentMessages;
+    }
+
+    public void setSentMessages(List<Message> sentMessages) {
+        this.sentMessages = sentMessages;
+    }
+
+    public List<Lodging> getLodgings() {
+        return lodgings;
+    }
+
+    public void setLodgings(List<Lodging> lodgings) {
+        this.lodgings = lodgings;
+    }
+
+    public List<Rating> getRatings() {
+        return ratings;
+    }
+
+    public void setRatings(List<Rating> ratings) {
+        this.ratings = ratings;
+    }
+
+    public List<Reservation> getReservations() {
+        return reservations;
+    }
+
+    public void setReservations(List<Reservation> reservations) {
+        this.reservations = reservations;
+    }
 
     public Long getId() {
         return id;
