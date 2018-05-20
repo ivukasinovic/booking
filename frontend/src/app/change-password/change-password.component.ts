@@ -28,7 +28,8 @@ export class ChangePasswordComponent implements OnInit {
     this.chp.oldPw = this.oldPw;
     this.userService.changePassword(this.chp)
       .subscribe(response => {
-         alert('Succes changed');
+         alert('Succesfully changed');
+         this.router.navigate(['/']);
         },
         err => {
           alert('Nije uspela promena lozinke, proverite polja');

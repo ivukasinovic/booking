@@ -2,11 +2,14 @@ package XMLandSecurity.backend1.controller;
 
 import XMLandSecurity.backend1.domain.Role;
 import XMLandSecurity.backend1.domain.User;
+import XMLandSecurity.backend1.model.dto.ChangePasswordDto;
 import XMLandSecurity.backend1.model.json.request.AuthenticationRequest;
 import XMLandSecurity.backend1.model.json.response.AuthenticationResponse;
 import XMLandSecurity.backend1.model.security.CustomUser;
 import XMLandSecurity.backend1.security.TokenUtils;
+import XMLandSecurity.backend1.service.EmailService;
 import XMLandSecurity.backend1.service.UserService;
+import XMLandSecurity.backend1.utility.EncDecSimple;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -21,12 +24,10 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.security.Principal;
 import java.util.logging.Logger;
 
 @RestController
@@ -48,6 +49,12 @@ public class AuthenticationController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private EmailService emailService;
+
+    @Autowired
+    private EncDecSimple encDecSimple;
 
 
     @RequestMapping(method = RequestMethod.POST, value = "${route.authentication}")
@@ -93,8 +100,70 @@ public class AuthenticationController {
         }
         user.setRole(Role.USER);
         user.setPasswordHash(new BCryptPasswordEncoder().encode(user.getPasswordHash()));
+        user.setActivated(false);
         User savedUser = userService.save(user);
+        emailService.sendActivationMail(user);
         return new ResponseEntity<>(savedUser, HttpStatus.CREATED);
+    }
+    @RequestMapping(
+            value = "/change-password",
+            method = RequestMethod.POST,
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<User> changePassword(@RequestBody ChangePasswordDto chp, Principal principal){
+        HttpStatus status = HttpStatus.FORBIDDEN;
+        User user = userService.findByUsername(principal.getName());
+        BCryptPasswordEncoder bc = new BCryptPasswordEncoder();
+        if(bc.matches(chp.getOldPw(),user.getPasswordHash())){
+            user.setPasswordHash(bc.encode(chp.getNewPw()));
+            userService.save(user);
+            status = HttpStatus.OK;
+        }
+        return new ResponseEntity<>(user,status);
+    }
+
+    @RequestMapping(
+            value = "/reset-password-req",
+            method = RequestMethod.POST)
+    public ResponseEntity<User> forgotPasswordReq(@RequestBody String email){
+        User user =userService.findByEmail(email);
+        if((user == null) || (user.getRole() != Role.USER)){
+            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+        }
+        emailService.sendResetPassword(user);
+        return new ResponseEntity<>(user,HttpStatus.OK);
+    }
+    @RequestMapping(
+            value = "/reset-password/{code}",
+            method = RequestMethod.POST,
+            consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<User> forgotPassword(@PathVariable String code, @RequestBody ChangePasswordDto chp){
+        //symetric
+      //  byte[] username = encDecSimple.decrypt(code.getBytes())
+//
+//        System.out.println("Posle: " + code);
+//        String username = Base64.decodeBase64(code).toString();
+        User user =userService.findByUsername(new String(code));
+        if(user == null){
+            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+        }
+        BCryptPasswordEncoder bc = new BCryptPasswordEncoder();
+        user.setPasswordHash(bc.encode(chp.getNewPw()));
+        userService.save(user);
+        return new ResponseEntity<>(user,HttpStatus.OK);
+    }
+
+    @RequestMapping(
+            value = "/activate/{username}",
+            method = RequestMethod.GET)
+    public String activateUser(@PathVariable("username") String username ){
+        User user = userService.findByUsername(username);
+        if(user == null){
+            return "Error!";
+        }
+        user.setActivated(true);
+        userService.save(user);
+        return "Your account is now activated!";
     }
 
 }
