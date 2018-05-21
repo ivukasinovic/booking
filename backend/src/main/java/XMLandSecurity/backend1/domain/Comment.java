@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "comments")
+@Table
 public class Comment implements Serializable {
 
     @Id

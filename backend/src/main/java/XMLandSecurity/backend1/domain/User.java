@@ -1,7 +1,5 @@
 package XMLandSecurity.backend1.domain;
 
-import com.sun.org.apache.regexp.internal.RE;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -50,7 +48,6 @@ public class User implements Serializable {
     @Column(nullable = false)
     private boolean activated;
 
-
     @OneToMany(mappedBy = "receiver", cascade = CascadeType.ALL)
     private List<Message> receviedMessages = new ArrayList<Message>();
 
@@ -58,15 +55,12 @@ public class User implements Serializable {
     private List<Message> sentMessages = new ArrayList<Message>();
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private List<Lodging> lodgings = new ArrayList<Lodging>();
-
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private List<Rating> ratings = new ArrayList<Rating>();
-
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Reservation> reservations = new ArrayList<Reservation>();
 
-    public User(String username, String passwordHash, String name, String surname, String email, String city, String number, Role role, Date lastPasswordReset, boolean activated, List<Message> receviedMessages, List<Message> sentMessages, List<Lodging> lodgings, List<Rating> ratings, List<Reservation> reservations) {
+    public User() {
+    }
+
+    public User(String username, String passwordHash, String name, String surname, String email, String city, String number, Role role, Date lastPasswordReset, boolean activated, List<Message> receviedMessages, List<Message> sentMessages, List<Reservation> reservations) {
         this.username = username;
         this.passwordHash = passwordHash;
         this.name = name;
@@ -79,8 +73,6 @@ public class User implements Serializable {
         this.activated = activated;
         this.receviedMessages = receviedMessages;
         this.sentMessages = sentMessages;
-        this.lodgings = lodgings;
-        this.ratings = ratings;
         this.reservations = reservations;
     }
 
@@ -98,22 +90,6 @@ public class User implements Serializable {
 
     public void setSentMessages(List<Message> sentMessages) {
         this.sentMessages = sentMessages;
-    }
-
-    public List<Lodging> getLodgings() {
-        return lodgings;
-    }
-
-    public void setLodgings(List<Lodging> lodgings) {
-        this.lodgings = lodgings;
-    }
-
-    public List<Rating> getRatings() {
-        return ratings;
-    }
-
-    public void setRatings(List<Rating> ratings) {
-        this.ratings = ratings;
     }
 
     public List<Reservation> getReservations() {

@@ -2,11 +2,10 @@ package XMLandSecurity.backend1.domain;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "typesoflodgings")
+@Table
 public class TypeOfLodging implements Serializable {
 
     @Id
@@ -20,16 +19,12 @@ public class TypeOfLodging implements Serializable {
     @Column(name = "name", nullable = false)
     private String name;
 
-    @OneToMany(mappedBy = "type", cascade = CascadeType.ALL)
-    private List<Lodging> lodgingList = new ArrayList<Lodging>();
-
     public TypeOfLodging() {
     }
 
     public TypeOfLodging(String label, String name, List<Lodging> lodgingList) {
         this.label = label;
         this.name = name;
-        this.lodgingList = lodgingList;
     }
 
     public Long getId() {
@@ -56,11 +51,4 @@ public class TypeOfLodging implements Serializable {
         this.name = name;
     }
 
-    public List<Lodging> getLodgingList() {
-        return lodgingList;
-    }
-
-    public void setLodgingList(List<Lodging> lodgingList) {
-        this.lodgingList = lodgingList;
-    }
 }

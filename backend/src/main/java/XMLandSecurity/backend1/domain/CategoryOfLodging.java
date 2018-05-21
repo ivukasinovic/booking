@@ -5,7 +5,7 @@ import java.io.Serializable;
 import java.util.List;
 
 @Entity
-@Table(name = "categoriesoflodgings")
+@Table
 public class CategoryOfLodging implements Serializable {
 
     @Id
@@ -18,9 +18,6 @@ public class CategoryOfLodging implements Serializable {
     @Column(name = "name")
     private String name;
 
-    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Lodging> lodgingList;
-
     public CategoryOfLodging() {
     }
 
@@ -28,7 +25,6 @@ public class CategoryOfLodging implements Serializable {
         this.id = id;
         this.label = label;
         this.name = name;
-        this.lodgingList = lodgingList;
     }
 
     public Long getId() {
@@ -55,11 +51,4 @@ public class CategoryOfLodging implements Serializable {
         this.name = name;
     }
 
-    public List<Lodging> getLodgingList() {
-        return lodgingList;
-    }
-
-    public void setLodgingList(List<Lodging> lodgingList) {
-        this.lodgingList = lodgingList;
-    }
 }

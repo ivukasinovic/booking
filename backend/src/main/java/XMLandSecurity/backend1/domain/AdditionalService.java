@@ -5,7 +5,7 @@ import java.io.Serializable;
 import java.util.List;
 
 @Entity
-@Table(name = "additionalservices")
+@Table
 public class AdditionalService implements Serializable {
 
     @Id
@@ -36,14 +36,6 @@ public class AdditionalService implements Serializable {
     @Column(name = "private_bathroom")
     private Boolean privateBathroom;
 
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    @JoinTable(
-            name = "lodgings_additionalservices",
-            joinColumns = {@JoinColumn(name = "additional_service_id")},
-            inverseJoinColumns = {@JoinColumn(name = "lodging_id")}
-    )
-    private List<Lodging> lodgingList;
-
     public AdditionalService() {
     }
 
@@ -57,7 +49,6 @@ public class AdditionalService implements Serializable {
         this.tv = tv;
         this.kitchen = kitchen;
         this.privateBathroom = privateBathroom;
-        this.lodgingList = lodgingList;
     }
 
     public Long getId() {
@@ -132,11 +123,4 @@ public class AdditionalService implements Serializable {
         this.privateBathroom = privateBathroom;
     }
 
-    public List<Lodging> getLodgingList() {
-        return lodgingList;
-    }
-
-    public void setLodgingList(List<Lodging> lodgingList) {
-        this.lodgingList = lodgingList;
-    }
 }

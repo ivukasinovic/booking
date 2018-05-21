@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "countries")
+@Table
 public class Country implements Serializable {
 
     @Id

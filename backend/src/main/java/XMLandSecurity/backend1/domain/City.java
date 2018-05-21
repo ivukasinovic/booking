@@ -1,13 +1,11 @@
 package XMLandSecurity.backend1.domain;
 
 import javax.persistence.*;
-import javax.xml.soap.SAAJResult;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "cities")
+@Table
 public class City implements Serializable {
 
     @Id
@@ -22,16 +20,12 @@ public class City implements Serializable {
     @JoinColumn(name = "country_id", nullable = false)
     private Country country;
 
-    @OneToMany(mappedBy = "city", cascade = CascadeType.ALL)
-    private List<Lodging> lodgingList = new ArrayList<Lodging>();
-
     public City() {
     }
 
     public City(String name, Country country, List<Lodging> lodgingList) {
         this.name = name;
         this.country = country;
-        this.lodgingList = lodgingList;
     }
 
     public Long getId() {
@@ -58,11 +52,4 @@ public class City implements Serializable {
         this.country = country;
     }
 
-    public List<Lodging> getLodgingList() {
-        return lodgingList;
-    }
-
-    public void setLodgingList(List<Lodging> lodgingList) {
-        this.lodgingList = lodgingList;
-    }
 }

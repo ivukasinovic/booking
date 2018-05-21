@@ -2,11 +2,10 @@ package XMLandSecurity.backend1.domain;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "reservations")
+@Table
 public class Reservation implements Serializable {
 
     @Id

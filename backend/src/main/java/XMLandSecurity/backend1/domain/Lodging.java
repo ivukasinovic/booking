@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "lodgings")
+@Table
 public class Lodging implements Serializable {
 
     @Id
@@ -23,11 +23,14 @@ public class Lodging implements Serializable {
     @Column(name = "image")
     private String image;
 
+    @Column(name = "rating", columnDefinition = "Decimal(3,2)")
+    private Double rating;
+
     @Column(name = "persons_number", nullable = false)
     private Integer persons_number;
 
     @ManyToOne
-    @JoinColumn(name = "category_id", nullable = false)
+    @JoinColumn(name = "category_id")
     private CategoryOfLodging category;
 
     @ManyToOne
@@ -38,13 +41,12 @@ public class Lodging implements Serializable {
     @JoinColumn(name = "city_id", nullable = false)
     private City city;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
-    private User user;
-
     @OneToMany(mappedBy = "lodging", cascade = CascadeType.ALL)
     private List<PriceList> priceLists = new ArrayList<PriceList>();
 
+    @ManyToOne
+    @JoinColumn(name = "agent_id", nullable = false)
+    private User agent;
 
     @OneToMany(mappedBy = "lodging", cascade = CascadeType.ALL)
     private List<Comment> comments = new ArrayList<Comment>();
@@ -52,31 +54,55 @@ public class Lodging implements Serializable {
     @OneToMany(mappedBy = "lodging", cascade = CascadeType.ALL)
     private List<Reservation> reservations = new ArrayList<Reservation>();
 
-    @ManyToMany(mappedBy = "lodgingList", cascade =
-            {CascadeType.PERSIST, CascadeType.MERGE})
-    private List<AdditionalService> additionalServiceList = new ArrayList<AdditionalService>();
+    @ManyToOne
+    @JoinColumn(name = "additional_service_id", nullable = false)
+    private AdditionalService additionalService;
 
-
-    @ManyToMany(mappedBy = "lodgingList", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @OneToMany(mappedBy = "lodging", cascade = CascadeType.ALL)
     private List<Rating> ratingList = new ArrayList<Rating>();
 
     public Lodging() {
     }
 
-    public Lodging(String address, String details, String image, Integer persons_number, CategoryOfLodging category, TypeOfLodging type, City city, User user, List<PriceList> priceLists, List<Comment> comments, List<Reservation> reservations, List<AdditionalService> additionalServiceList, List<Rating> ratingList) {
+    public Lodging(String address, String details, String image, Double rating, Integer persons_number, CategoryOfLodging category, TypeOfLodging type, City city, List<PriceList> priceLists, User agent, List<Comment> comments, List<Reservation> reservations, AdditionalService additionalService, List<Rating> ratingList) {
         this.address = address;
         this.details = details;
         this.image = image;
+        this.rating = rating;
         this.persons_number = persons_number;
         this.category = category;
         this.type = type;
         this.city = city;
-        this.user = user;
         this.priceLists = priceLists;
+        this.agent = agent;
         this.comments = comments;
         this.reservations = reservations;
-        this.additionalServiceList = additionalServiceList;
+        this.additionalService = additionalService;
         this.ratingList = ratingList;
+    }
+
+    public Double getRating() {
+        return rating;
+    }
+
+    public void setRating(Double rating) {
+        this.rating = rating;
+    }
+
+    public User getAgent() {
+        return agent;
+    }
+
+    public void setAgent(User agent) {
+        this.agent = agent;
+    }
+
+    public AdditionalService getAdditionalService() {
+        return additionalService;
+    }
+
+    public void setAdditionalService(AdditionalService additionalService) {
+        this.additionalService = additionalService;
     }
 
     public CategoryOfLodging getCategory() {
@@ -103,14 +129,6 @@ public class Lodging implements Serializable {
         this.city = city;
     }
 
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
     public List<PriceList> getPriceLists() {
         return priceLists;
     }
@@ -133,14 +151,6 @@ public class Lodging implements Serializable {
 
     public void setReservations(List<Reservation> reservations) {
         this.reservations = reservations;
-    }
-
-    public List<AdditionalService> getAdditionalServiceList() {
-        return additionalServiceList;
-    }
-
-    public void setAdditionalServiceList(List<AdditionalService> additionalServiceList) {
-        this.additionalServiceList = additionalServiceList;
     }
 
     public List<Rating> getRatingList() {

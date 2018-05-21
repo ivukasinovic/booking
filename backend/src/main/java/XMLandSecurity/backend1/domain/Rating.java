@@ -3,11 +3,9 @@ package XMLandSecurity.backend1.domain;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
-@Table(name = "ratings")
+@Table
 public class Rating implements Serializable {
 
     @Id
@@ -25,23 +23,18 @@ public class Rating implements Serializable {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @ManyToMany(cascade =
-            {CascadeType.PERSIST, CascadeType.MERGE})
-    @JoinTable(
-            name = "lodgings_ratings",
-            joinColumns = {@JoinColumn(name = "rating_id")},
-            inverseJoinColumns = {@JoinColumn(name = "lodging_id")}
-    )
-    private List<Lodging> lodgingList = new ArrayList<Lodging>();
+    @ManyToOne
+    @JoinColumn(name = "lodging_id", nullable = false)
+    private Lodging lodging;
 
     public Rating() {
     }
 
-    public Rating(LocalDateTime dateCreated, Long star, User user, List<Lodging> lodgingList) {
+    public Rating(LocalDateTime dateCreated, Long star, User user, Lodging lodging) {
         this.dateCreated = dateCreated;
         this.star = star;
         this.user = user;
-        this.lodgingList = lodgingList;
+        this.lodging = lodging;
     }
 
     public Long getId() {
@@ -76,11 +69,11 @@ public class Rating implements Serializable {
         this.user = user;
     }
 
-    public List<Lodging> getLodgingList() {
-        return lodgingList;
+    public Lodging getLodging() {
+        return lodging;
     }
 
-    public void setLodgingList(List<Lodging> lodgingList) {
-        this.lodgingList = lodgingList;
+    public void setLodging(Lodging lodging) {
+        this.lodging = lodging;
     }
 }
