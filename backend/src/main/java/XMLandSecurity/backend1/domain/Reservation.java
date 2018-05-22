@@ -13,10 +13,10 @@ public class Reservation implements Serializable {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "date_start", nullable = false)
+    @Column(name = "date_start",nullable = false,columnDefinition="DATETIME")
     private LocalDateTime dateStart;
 
-    @Column(name = "date_end", nullable = false)
+    @Column(name = "date_end",nullable = false,columnDefinition="DATETIME")
     private LocalDateTime dateEnd;
 
     @Column(name = "active", nullable = false, columnDefinition = "boolean default true")

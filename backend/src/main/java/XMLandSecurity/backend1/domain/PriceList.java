@@ -15,7 +15,7 @@ public class PriceList implements Serializable {
     @Column(name = "year", length = 4, nullable = false)
     private String year;
 
-    @Column(name = "date_created", nullable = false)
+    @Column(name = "date_created", nullable = false,columnDefinition="DATETIME")
     private LocalDateTime dateCreated;
 
     @Column(name = "january", columnDefinition = "Decimal(8,2)")

@@ -19,7 +19,7 @@ public class Message implements Serializable {
     @Column(name = "body", nullable = false)
     private String body;
 
-    @Column(name = "date_sent", nullable = false)
+    @Column(name = "date_sent", nullable = false,columnDefinition="DATETIME")
     private LocalDateTime dateSent;
 
     @ManyToOne

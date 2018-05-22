@@ -13,7 +13,7 @@ public class Rating implements Serializable {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "date_created", nullable = false)
+    @Column(name = "date_created", nullable = false,columnDefinition="DATETIME")
     private LocalDateTime dateCreated;
 
     @Column(name = "star", nullable = false)
