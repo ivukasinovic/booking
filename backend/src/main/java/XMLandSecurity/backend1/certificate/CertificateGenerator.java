@@ -42,8 +42,7 @@ public class CertificateGenerator {
                     subjectData.getX500name(),
                     subjectData.getPublicKey());
 
-            //Generise se sertifikat
-            X509CertificateHolder certHolder = certGen.build(contentSigner);
+
 
             //Dodatno polje da li je CA
             certGen.addExtension(Extension.basicConstraints, false, new BasicConstraints(isCA));
@@ -59,6 +58,8 @@ public class CertificateGenerator {
             GeneralName ocspLocation = new GeneralName(6, "http://localhost:8080/api/certificates/" + issuerID);
             certGen.addExtension(Extension.authorityInfoAccess, isCA, new AuthorityInformationAccess(X509ObjectIdentifiers.ocspAccessMethod, ocspLocation));
 
+            //Generise se sertifikat
+            X509CertificateHolder certHolder = certGen.build(contentSigner);
             JcaX509CertificateConverter certConverter = new JcaX509CertificateConverter();
             certConverter = certConverter.setProvider("BC");
 
