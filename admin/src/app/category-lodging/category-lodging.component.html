@@ -1,0 +1,18 @@
+<!--<p>-->
+  <!--( nekategorisan ili 1-5 zvezdica )-->
+<!--</p>-->
+
+<div align="center">
+
+  <pre>
+    <input value="Uncategorized" type="checkbox" (click)="men()" > Uncategorized
+
+  </pre>
+  <div *ngIf="!checked">
+  <ngb-rating [(rate)]="currentRate" max="5" ></ngb-rating>
+  <hr>
+  <pre>Rate: <b>{{currentRate}}</b></pre>
+  </div>
+
+</div>
+
