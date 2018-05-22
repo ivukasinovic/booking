@@ -1,41 +1,28 @@
 package XMLandSecurity.backend1.controller;
 
-import XMLandSecurity.backend1.domain.User;
-import XMLandSecurity.backend1.service.UserService;
+import XMLandSecurity.backend1.domain.TypeOfLodging;
+import XMLandSecurity.backend1.service.TypeOfLodgingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
-/**
- * Created by Ivan V. on 19-May-18
- */
 @RestController
-@RequestMapping(value = "/users")
-public class UserController {
+@RequestMapping(value = "/type-lodging")
+public class TypeOfLodgingController {
 
     @Autowired
-    private UserService userService;
+    private TypeOfLodgingService typeOfLodgingService;
 
-    @RequestMapping(
-            method = RequestMethod.GET,
-            produces = MediaType.APPLICATION_JSON_VALUE
-    )
-    public ResponseEntity<List<User>> getAllUsers() {
-        List<User> listaAdminaFanZone = userService.findAll();
-        return new ResponseEntity<>(listaAdminaFanZone, HttpStatus.OK);
-    }
 
     @RequestMapping(
             value = "/{id}",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public ResponseEntity<User> getUser(@PathVariable("id") Long id) {
-        User listaAdminaFanZone = userService.findOne(id);
+    public ResponseEntity<TypeOfLodging> getUser(@PathVariable("id") Long id) {
+        TypeOfLodging listaAdminaFanZone = typeOfLodgingService.findOne(id) ; //findOne(user);
         return new ResponseEntity<>(listaAdminaFanZone, HttpStatus.OK);     // "200 OK"
     }
 
@@ -44,11 +31,10 @@ public class UserController {
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public ResponseEntity<User> CreateUser (@RequestBody User user) {
-        User userNew = userService.save(user);
+    public ResponseEntity<TypeOfLodging> CreateCity (@RequestBody TypeOfLodging categoryOfLodging) {
+        TypeOfLodging userNew = typeOfLodgingService.save(categoryOfLodging);
         return new ResponseEntity(userNew, HttpStatus.OK);
     }
-
 
     @RequestMapping(
             value = "/{id}",
@@ -56,8 +42,8 @@ public class UserController {
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public ResponseEntity<User> updateUsers (@PathVariable("id") Long id) {
-        User listaAdminaFanZone = userService.findOne(id);
+    public ResponseEntity<TypeOfLodging> updateUsers (@PathVariable("id") Long id) {
+        TypeOfLodging listaAdminaFanZone = typeOfLodgingService.findOne(id);
         return new ResponseEntity(listaAdminaFanZone, HttpStatus.OK);     // "200 OK"
     }
 
@@ -66,10 +52,9 @@ public class UserController {
             method = RequestMethod.DELETE,
             consumes = MediaType.APPLICATION_JSON_VALUE
     )
-    public ResponseEntity<User> izbrisi(@PathVariable("id") Long id){
-        userService.delete(id);
+    public ResponseEntity<TypeOfLodging> izbrisi(@PathVariable("id") Long id){
+        typeOfLodgingService.delete(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
-
 
 }

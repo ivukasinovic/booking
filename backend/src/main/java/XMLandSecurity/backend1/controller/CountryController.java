@@ -1,51 +1,40 @@
 package XMLandSecurity.backend1.controller;
 
-import XMLandSecurity.backend1.domain.User;
-import XMLandSecurity.backend1.service.UserService;
+import XMLandSecurity.backend1.domain.Country;
+import XMLandSecurity.backend1.service.CountryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
-/**
- * Created by Ivan V. on 19-May-18
- */
 @RestController
-@RequestMapping(value = "/users")
-public class UserController {
+@RequestMapping(value = "/country")
+public class CountryController {
 
     @Autowired
-    private UserService userService;
-
-    @RequestMapping(
-            method = RequestMethod.GET,
-            produces = MediaType.APPLICATION_JSON_VALUE
-    )
-    public ResponseEntity<List<User>> getAllUsers() {
-        List<User> listaAdminaFanZone = userService.findAll();
-        return new ResponseEntity<>(listaAdminaFanZone, HttpStatus.OK);
-    }
+    private CountryService countryService;
 
     @RequestMapping(
             value = "/{id}",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public ResponseEntity<User> getUser(@PathVariable("id") Long id) {
-        User listaAdminaFanZone = userService.findOne(id);
+    public ResponseEntity<Country> getUser (@PathVariable("id") Long id) {
+        Country listaAdminaFanZone = countryService.findOne(id) ; //findOne(user);
         return new ResponseEntity<>(listaAdminaFanZone, HttpStatus.OK);     // "200 OK"
     }
+
+    // ===
+
 
     @RequestMapping(
             method = RequestMethod.POST,
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public ResponseEntity<User> CreateUser (@RequestBody User user) {
-        User userNew = userService.save(user);
+    public ResponseEntity<Country> CreateCity (@RequestBody Country country) {
+        Country userNew = countryService.save(country);
         return new ResponseEntity(userNew, HttpStatus.OK);
     }
 
@@ -56,8 +45,8 @@ public class UserController {
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public ResponseEntity<User> updateUsers (@PathVariable("id") Long id) {
-        User listaAdminaFanZone = userService.findOne(id);
+    public ResponseEntity<Country> updateUsers (@PathVariable("id") Long id) {
+        Country listaAdminaFanZone = countryService.findOne(id);
         return new ResponseEntity(listaAdminaFanZone, HttpStatus.OK);     // "200 OK"
     }
 
@@ -66,10 +55,9 @@ public class UserController {
             method = RequestMethod.DELETE,
             consumes = MediaType.APPLICATION_JSON_VALUE
     )
-    public ResponseEntity<User> izbrisi(@PathVariable("id") Long id){
-        userService.delete(id);
+    public ResponseEntity<Country> izbrisi(@PathVariable("id") Long id){
+        countryService.delete(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
-
 
 }
