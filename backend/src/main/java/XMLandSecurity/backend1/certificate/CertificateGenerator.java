@@ -28,7 +28,6 @@ public class CertificateGenerator {
 
             Security.addProvider(new org.bouncycastle.jce.provider.BouncyCastleProvider());
             JcaContentSignerBuilder builder = new JcaContentSignerBuilder("SHA256WithRSAEncryption");
-
             builder = builder.setProvider("BC");
 
             //Formira se objekat koji ce sadrzati privatni kljuc i koji ce se koristiti za potpisivanje sertifikata

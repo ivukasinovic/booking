@@ -27,6 +27,7 @@ public class CertificateServiceImpl implements CertificateService {
     @Autowired
     private KeyStoreService keyStoreService;
 
+    private KeyPair keyPair;
 
     @Override
     public List<CertificateDTO> convertToDTO(List<X509Certificate> certificates) {
@@ -43,7 +44,7 @@ public class CertificateServiceImpl implements CertificateService {
         int randomNum = 0 + (int) (Math.random() * 10000000);
         String sn = String.valueOf(randomNum);
         certificateDTO.setSerialNumber(sn);
-
+        keyPair = generateKeyPair();
         SubjectData sd = newSubjectData(certificateDTO);
         IssuerData id = newIssuerData(certificateDTO);
 
@@ -62,8 +63,6 @@ public class CertificateServiceImpl implements CertificateService {
 
 
     public SubjectData newSubjectData(CertificateDTO certificate) {
-
-        KeyPair keyPairSubject = generateKeyPair();
 
         //Datumi od kad do kad vazi sertifikat
         Date startDate = new Date();
@@ -88,13 +87,13 @@ public class CertificateServiceImpl implements CertificateService {
         builder.addRDN(BCStyle.UID, sn);
 
         //podaci o sertifikatu  javni kljuc, podaci o vlasniku, serijski broj, od kad do kad vazi
-        return new SubjectData(keyPairSubject.getPublic(), keyPairSubject.getPrivate(), builder.build(), sn, startDate, endDate);
+        return new SubjectData(keyPair.getPublic(), keyPair.getPrivate(), builder.build(), sn, startDate, endDate);
 
     }
 
     public IssuerData newIssuerData(CertificateDTO certificate) {
         X500NameBuilder builder = new X500NameBuilder(BCStyle.INSTANCE);
-        KeyPair keyPairIssuer = generateKeyPair();
+
         String isn = certificate.getIssuerSerialNumber();
         if ((isn == "") || isn == null) { //ako uzmemo u obzir da ce biti prazan string ako zeli issuera da doda
 
@@ -107,7 +106,7 @@ public class CertificateServiceImpl implements CertificateService {
             builder.addRDN(BCStyle.E, certificate.getEmail());
             builder.addRDN(BCStyle.UID, certificate.getSerialNumber());
 
-            return new IssuerData(keyPairIssuer.getPrivate(), builder.build());
+            return new IssuerData(keyPair.getPrivate(), builder.build());
         } else {
             IssuerData id = keyStoreService.readIssuerFromStore(certificate.getIssuerSerialNumber());
             return id;
