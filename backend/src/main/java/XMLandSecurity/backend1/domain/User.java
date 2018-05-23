@@ -34,11 +34,14 @@ public class User implements Serializable {
     @Column(nullable = false)
     private String surname;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false, unique = true)  // Moze biti nula zbog agenta kad se registruje ne unosi email (ali smo mi dodali)
     private String email;
 
     @Column(nullable = false)
     private String city;
+
+    @Column(nullable = true)  // Posto nema za obicne korisnike
+    private String adress;
 
     @Column(nullable = false)
     private String number;
@@ -194,5 +197,13 @@ public class User implements Serializable {
 
     public void setActivated(boolean activated) {
         this.activated = activated;
+    }
+
+    public String getAdress() {
+        return this.adress;
+    }
+
+    public void setAdress(String adress) {
+       this.adress = adress;
     }
 }

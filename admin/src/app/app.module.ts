@@ -24,6 +24,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import {HttpClientModule} from '@angular/common/http';
 import { AdminComponent } from './admin/admin.component';
 import { AddAgentComponent } from './add-agent/add-agent.component';
+import { CommentComponent } from './comment/comment.component';
 
 // import {MatCardModule} from '@angular/material/card';
 // import {MatCheckbox} from "@angular/material/checkbox";
@@ -38,7 +39,8 @@ import { AddAgentComponent } from './add-agent/add-agent.component';
     LoginComponent,
     NavbarComponent,
     AdminComponent,
-    AddAgentComponent
+    AddAgentComponent,
+    CommentComponent
   ],
 
   imports: [

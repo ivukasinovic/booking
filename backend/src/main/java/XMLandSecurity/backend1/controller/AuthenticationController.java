@@ -105,6 +105,26 @@ public class AuthenticationController {
         emailService.sendActivationMail(user);
         return new ResponseEntity<>(savedUser, HttpStatus.CREATED);
     }
+    // ===
+    @RequestMapping(
+            value = "/registerAgent",
+            method = RequestMethod.POST,
+            produces = MediaType.APPLICATION_JSON_VALUE,
+            consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<User> registerAgent(@RequestBody User user) {
+        if ((userService.findByUsername(user.getUsername()) != null) ) {
+            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+        }
+        user.setRole(Role.AGENT);
+        user.setPasswordHash(new BCryptPasswordEncoder().encode(user.getPasswordHash()));
+        user.setActivated(false);
+        User savedUser = userService.save(user);
+         //emailService.sendActivationMail(user);
+        return new ResponseEntity<>(savedUser, HttpStatus.CREATED);
+    }
+
+    // ===
+
     @RequestMapping(
             value = "/change-password",
             method = RequestMethod.POST,

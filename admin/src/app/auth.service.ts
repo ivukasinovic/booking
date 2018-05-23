@@ -27,6 +27,14 @@ export class AuthService {
     return this.http.post('api/register', user );
   }
 
+  registerAgent(user: User) {
+    return this.http.post('api/registerAgent', user );
+  }
+
+  allComments() {
+    return this.http.get('api/comment/all-not');
+  }
+
   getToken(): string {
     return localStorage.getItem('token');;
   }

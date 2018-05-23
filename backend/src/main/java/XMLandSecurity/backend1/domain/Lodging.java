@@ -70,35 +70,41 @@ public class Lodging implements Serializable {
     @OneToMany(mappedBy = "lodging", cascade = CascadeType.ALL)
     private List<Reservation> reservations = new ArrayList<Reservation>();
 
-    @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-    @JsonIdentityReference(alwaysAsId = true)
-    @ManyToOne
-    @JoinColumn(name = "additional_service_id", nullable = false)
-    private AdditionalService additionalService;
+//    @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+//    @JsonIdentityReference(alwaysAsId = true)
+//    @ManyToOne
+//    @JoinColumn(name = "additional_service_id", nullable = false)
+//    private AdditionalService additionalService;
 
 
     @OneToMany(mappedBy = "lodging", cascade = CascadeType.ALL)
     private List<Rating> ratingList = new ArrayList<Rating>();
 
+    // ==========
+    @ManyToMany(mappedBy = "lodgingList", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    private List<AdditionalService> additionalServiceList = new ArrayList<AdditionalService>();
+    // ==========
+
+
     public Lodging() {
     }
 
-    public Lodging(String address, String details, String image, Double rating, Integer persons_number, CategoryOfLodging category, TypeOfLodging type, City city, List<PriceList> priceLists, User agent, List<Comment> comments, List<Reservation> reservations, AdditionalService additionalService, List<Rating> ratingList) {
-        this.address = address;
-        this.details = details;
-        this.image = image;
-        this.rating = rating;
-        this.persons_number = persons_number;
-        this.category = category;
-        this.type = type;
-        this.city = city;
-        this.priceLists = priceLists;
-        this.agent = agent;
-        this.comments = comments;
-        this.reservations = reservations;
-        this.additionalService = additionalService;
-        this.ratingList = ratingList;
-    }
+//    public Lodging(String address, String details, String image, Double rating, Integer persons_number, CategoryOfLodging category, TypeOfLodging type, City city, List<PriceList> priceLists, User agent, List<Comment> comments, List<Reservation> reservations, AdditionalService additionalService, List<Rating> ratingList) {
+//        this.address = address;
+//        this.details = details;
+//        this.image = image;
+//        this.rating = rating;
+//        this.persons_number = persons_number;
+//        this.category = category;
+//        this.type = type;
+//        this.city = city;
+//        this.priceLists = priceLists;
+//        this.agent = agent;
+//        this.comments = comments;
+//        this.reservations = reservations;
+//        this.additionalService = additionalService;
+//        this.ratingList = ratingList;
+//    }
 
     public Double getRating() {
         return rating;
@@ -116,13 +122,13 @@ public class Lodging implements Serializable {
         this.agent = agent;
     }
 
-    public AdditionalService getAdditionalService() {
-        return additionalService;
-    }
-
-    public void setAdditionalService(AdditionalService additionalService) {
-        this.additionalService = additionalService;
-    }
+//    public AdditionalService getAdditionalService() {
+//        return additionalService;
+//    }
+//
+//    public void setAdditionalService(AdditionalService additionalService) {
+//        this.additionalService = additionalService;
+//    }
 
     public CategoryOfLodging getCategory() {
         return category;
@@ -218,6 +224,14 @@ public class Lodging implements Serializable {
 
     public void setPersons_number(Integer persons_number) {
         this.persons_number = persons_number;
+    }
+
+    public List<AdditionalService> getAdditionalServiceList() {
+        return additionalServiceList;
+    }
+
+    public void setAdditionalServiceList(List<AdditionalService> additionalServiceList) {
+        this.additionalServiceList = additionalServiceList;
     }
 }
 

@@ -8,6 +8,8 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping(value = "/comment")
 public class CommentController {
@@ -58,6 +60,18 @@ public class CommentController {
     public ResponseEntity<Comment> izbrisi(@PathVariable("id") Long id){
         commentService.delete(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    // Lista komentara
+    @RequestMapping(
+            value = "/all-not",
+            method = RequestMethod.GET,
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    public ResponseEntity<List<Comment>> pronadjiSveKojiNisuOdobreni(){
+        List<Comment> listaKomentara = commentService.findByAccepted(false);
+        return new ResponseEntity(listaKomentara, HttpStatus.OK);
     }
 
 

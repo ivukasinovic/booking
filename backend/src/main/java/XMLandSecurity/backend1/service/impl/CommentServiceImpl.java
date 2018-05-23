@@ -35,5 +35,10 @@ public class CommentServiceImpl implements CommentService {
         commentRepository.delete(id);
     }
 
+    @Override
+    public List<Comment> findByAccepted(boolean prihvacen) {
+        return commentRepository.findByAccepted(prihvacen);
+    }
+
 
 }

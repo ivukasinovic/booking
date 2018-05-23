@@ -15,5 +15,7 @@ public interface CommentService {
 
     void delete(Long id);
 
+    List<Comment> findByAccepted(boolean prihvacen);
+
 
 }

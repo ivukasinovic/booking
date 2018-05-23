@@ -1,5 +1,6 @@
 package XMLandSecurity.backend1.controller;
 
+import XMLandSecurity.backend1.domain.Role;
 import XMLandSecurity.backend1.domain.User;
 import XMLandSecurity.backend1.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -27,6 +29,24 @@ public class UserController {
     public ResponseEntity<List<User>> getAllUsers() {
         List<User> listaAdminaFanZone = userService.findAll();
         return new ResponseEntity<>(listaAdminaFanZone, HttpStatus.OK);
+    }
+
+    @RequestMapping(
+            value = "/samo",
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    public ResponseEntity<ArrayList<User>> getAllUsuallyUsers() {
+        List<User> listausera = userService.findAll();
+        ArrayList<User> SAMO = new ArrayList<>();
+
+        for(int i=0;i< listausera.size();i++){
+            if(listausera.get(i).getRole().equals(Role.USER)){
+                SAMO.add(listausera.get(i));
+            }
+        }
+
+        return new ResponseEntity<>(SAMO, HttpStatus.OK);
     }
 
     @RequestMapping(

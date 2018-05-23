@@ -1,7 +1,5 @@
 package XMLandSecurity.backend1.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -22,7 +20,7 @@ public class Country implements Serializable {
     @Column(name = "code", nullable = false)
     private String code;
 
-    @JsonIgnore
+
     @OneToMany(mappedBy = "country", cascade = CascadeType.ALL)
     private List<City> cityList = new ArrayList<City>();
 
