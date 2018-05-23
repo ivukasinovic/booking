@@ -1,0 +1,19 @@
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <b><a class="navbar-brand" routerLink="/">Admins panel</a></b>
+    </div>
+
+    <ul *ngIf="logged == true" class="nav navbar-nav navbar-right">
+      <li><a routerLink="/profil">Profile</a></li>
+      <li>
+        <p><b>Hi, {{username}}!</b></p>
+        <button class="btn btn-sm btn-warning" (click)="logout()">Logout</button>
+      </li>
+    </ul>
+    <ul *ngIf="logged == false" class="nav navbar-nav navbar-right">
+      <li><a routerLink="/login">Sign in</a></li>
+      <!--<li><a routerLink="/registration">Join</a></li>-->
+    </ul>
+  </div>
+</nav>

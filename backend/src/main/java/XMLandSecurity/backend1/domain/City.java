@@ -1,5 +1,7 @@
 package XMLandSecurity.backend1.domain;
 
+import com.fasterxml.jackson.annotation.*;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
@@ -16,8 +18,11 @@ public class City implements Serializable {
     @Column(name = "name", nullable = false)
     private String name;
 
-    @ManyToOne
+
+    @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+    @JsonIdentityReference(alwaysAsId = true)
     @JoinColumn(name = "country_id", nullable = false)
+    @ManyToOne
     private Country country;
 
     public City() {

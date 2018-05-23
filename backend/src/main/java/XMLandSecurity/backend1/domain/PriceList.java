@@ -1,5 +1,9 @@
 package XMLandSecurity.backend1.domain;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -54,6 +58,8 @@ public class PriceList implements Serializable {
     @Column(name = "december", columnDefinition = "Decimal(8,2)")
     private Double december;
 
+    @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+    @JsonIdentityReference(alwaysAsId = true)
     @ManyToOne
     @JoinColumn(name = "lodging_id")
     private Lodging lodging;

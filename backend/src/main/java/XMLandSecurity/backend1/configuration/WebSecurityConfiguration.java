@@ -72,7 +72,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/registration").permitAll()
                 .antMatchers("/reset-password-req").permitAll()
                 .antMatchers("/reset-password/**").permitAll()
-                .anyRequest().fullyAuthenticated();
+                .anyRequest().permitAll();   // fullyAuthenticated();
 
         // Custom JWT based authentication
         httpSecurity

@@ -1,5 +1,10 @@
 package XMLandSecurity.backend1.domain;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -29,34 +34,48 @@ public class Lodging implements Serializable {
     @Column(name = "persons_number", nullable = false)
     private Integer persons_number;
 
+    @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+    @JsonIdentityReference(alwaysAsId = true)
     @ManyToOne
     @JoinColumn(name = "category_id")
     private CategoryOfLodging category;
 
+    @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+    @JsonIdentityReference(alwaysAsId = true)
     @ManyToOne
     @JoinColumn(name = "type_id", nullable = false)
     private TypeOfLodging type;
 
+    @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+    @JsonIdentityReference(alwaysAsId = true)
     @ManyToOne
     @JoinColumn(name = "city_id", nullable = false)
     private City city;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "lodging", cascade = CascadeType.ALL)
     private List<PriceList> priceLists = new ArrayList<PriceList>();
 
+    @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+    @JsonIdentityReference(alwaysAsId = true)
     @ManyToOne
     @JoinColumn(name = "agent_id", nullable = false)
     private User agent;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "lodging", cascade = CascadeType.ALL)
     private List<Comment> comments = new ArrayList<Comment>();
 
+    @JsonIgnore
     @OneToMany(mappedBy = "lodging", cascade = CascadeType.ALL)
     private List<Reservation> reservations = new ArrayList<Reservation>();
 
+    @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+    @JsonIdentityReference(alwaysAsId = true)
     @ManyToOne
     @JoinColumn(name = "additional_service_id", nullable = false)
     private AdditionalService additionalService;
+
 
     @OneToMany(mappedBy = "lodging", cascade = CascadeType.ALL)
     private List<Rating> ratingList = new ArrayList<Rating>();

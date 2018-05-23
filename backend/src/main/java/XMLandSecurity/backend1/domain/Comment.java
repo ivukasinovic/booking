@@ -1,5 +1,9 @@
 package XMLandSecurity.backend1.domain;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -18,12 +22,16 @@ public class Comment implements Serializable {
     @Column(name = "accepted", nullable = false, columnDefinition = "boolean default false")
     private Boolean accepted;
 
-    @ManyToOne
+    @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+    @JsonIdentityReference(alwaysAsId = true)
     @JoinColumn(name = "lodging_id", nullable = false)
+    @ManyToOne
     private Lodging lodging;
 
-    @ManyToOne
+    @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+    @JsonIdentityReference(alwaysAsId = true)
     @JoinColumn(name = "user_id", nullable = false)
+    @ManyToOne
     private User user;
 
     public Comment() {

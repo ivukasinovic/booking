@@ -46,10 +46,10 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         return userRepository.save(user);
     }
 
-    @Override
-    public void delete(User user) {
-        userRepository.delete(user);
-    }
+//    @Override
+//    public void delete(User user) {
+//        userRepository.delete(user);
+//    }
 
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
@@ -60,5 +60,11 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         } else {
             return CustomUserFactory.create(user);
         }
+    }
+
+
+    @Override
+    public void delete(Long id) {
+        userRepository.delete(id);
     }
 }
