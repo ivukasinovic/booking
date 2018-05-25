@@ -7,6 +7,13 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
@@ -16,57 +23,79 @@ import java.util.List;
  * Created by Ivan V. on 07-May-18
  */
 @Entity
+
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlRootElement(name="user")
+@XmlType
 public class User implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(unique = true, nullable = false)
+    @XmlElement(name="id", required=true)
     private Long id;
 
     @Column(nullable = false, unique = true)
+    @XmlElement(name="username", required=true)
     private String username;
 
     @Column(nullable = false)
+    @XmlElement(name="passwordHash", required=true)
     private String passwordHash;
 
     @Column(nullable = false)
+    @XmlElement(name="name", required=true)
     private String name;
 
     @Column(nullable = false)
+    @XmlElement(name="surname", required=true)
     private String surname;
 
     @Column(nullable = false, unique = true)  // Moze biti nula zbog agenta kad se registruje ne unosi email (ali smo mi dodali)
+    @XmlElement(name="email", required=true)
     private String email;
 
     @Column(nullable = false)
+    @XmlElement(name="city", required=true)
     private String city;
 
     @Column(nullable = true)  // Posto nema za obicne korisnike
+    @XmlElement(name="adress", required=false)
     private String adress;
 
     @Column(nullable = false)
+    @XmlElement(name="number", required=true)
     private String number;
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
+    @XmlElement(name="role", required=true)
     private Role role;
 
     @Column(nullable = true)
+    @XmlElement(name="lastPasswordReset", required=false)
     private Date lastPasswordReset;
 
     @Column(nullable = false)
+    @XmlElement(name="activated", required=true)
     private boolean activated;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "receiver")                                  //, cascade = CascadeType.ALL
+    @OneToMany(mappedBy = "receiver", cascade = CascadeType.ALL)
+    @XmlElementWrapper(name="receviedMessages", required=false)
+    @XmlElement(name="message", required=false)
     private List<Message> receviedMessages = new ArrayList<Message>();
 
     @JsonIgnore
-    @OneToMany(mappedBy = "sender")     // , cascade = CascadeType.ALL
+    @OneToMany(mappedBy = "sender", cascade = CascadeType.ALL)
+    @XmlElementWrapper(name="sentMessages", required=false)
+    @XmlElement(name="message", required=false)
     private List<Message> sentMessages = new ArrayList<Message>();
 
     @JsonIgnore
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @XmlElementWrapper(name="reservations", required=false)
+    @XmlElement(name="reservation", required=false)
     private List<Reservation> reservations = new ArrayList<Reservation>();
 
     public User() {
@@ -205,6 +234,6 @@ public class User implements Serializable {
     }
 
     public void setAdress(String adress) {
-       this.adress = adress;
+        this.adress = adress;
     }
 }

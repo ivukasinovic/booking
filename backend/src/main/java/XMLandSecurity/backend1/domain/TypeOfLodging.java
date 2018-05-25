@@ -1,22 +1,34 @@
 package XMLandSecurity.backend1.domain;
 
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
+
 import java.io.Serializable;
 import java.util.List;
 
 @Entity
 @Table
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlRootElement(name="typeOfLodging")
+@XmlType
 public class TypeOfLodging implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
+    @XmlElement(name="id", required=true)
     private Long id;
 
     @Column(name = "label", nullable = false)
+    @XmlElement(name="label", required=true)
     private String label;
-
-    @Column(name = "name", nullable = true)
+  
+    @XmlElement(name="name", required=true)
+    @Column(name = "name", nullable = false)
     private String name;
 
     public TypeOfLodging() {

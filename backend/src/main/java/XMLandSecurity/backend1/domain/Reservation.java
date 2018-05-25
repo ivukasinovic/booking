@@ -4,48 +4,65 @@ import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
-import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Date;
+
+import javax.persistence.*;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
 
 @Entity
 @Table
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlRootElement(name="reservation")
+@XmlType
 public class Reservation implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
+    @XmlElement(name="id", required=true)
     private Long id;
 
     @Column(name = "date_start",nullable = false,columnDefinition="DATETIME")
-    private LocalDateTime dateStart;
+    @XmlElement(name="dateStart", required=true)
+    private Date dateStart;
 
     @Column(name = "date_end",nullable = false,columnDefinition="DATETIME")
-    private LocalDateTime dateEnd;
+    @XmlElement(name="dateEnd", required=true)
+    private Date dateEnd;
 
     @Column(name = "active", nullable = false, columnDefinition = "boolean default true")
+    @XmlElement(name="active", required=true)
     private Boolean active;
 
     @Column(name = "visited", nullable = false, columnDefinition = "boolean default false")
+    @XmlElement(name="visited", required=true)
     private Boolean visited;
 
     @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
     @JsonIdentityReference(alwaysAsId = true)
     @ManyToOne
     @JoinColumn(name = "lodging_id", nullable = false)
+    @XmlElement(name="lodging", required=true)
     private Lodging lodging;
 
     @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
     @JsonIdentityReference(alwaysAsId = true)
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
+    @XmlElement(name="user", required=true)
     private User user;
 
 
     public Reservation() {
     }
 
-    public Reservation(LocalDateTime dateStart, LocalDateTime dateEnd, Boolean active, Boolean visited, Lodging lodging, User user) {
+    public Reservation(Date dateStart, Date dateEnd, Boolean active, Boolean visited, Lodging lodging, User user) {
         this.dateStart = dateStart;
         this.dateEnd = dateEnd;
         this.active = active;
@@ -62,19 +79,19 @@ public class Reservation implements Serializable {
         this.id = id;
     }
 
-    public LocalDateTime getDateStart() {
+    public Date getDateStart() {
         return dateStart;
     }
 
-    public void setDateStart(LocalDateTime dateStart) {
+    public void setDateStart(Date dateStart) {
         this.dateStart = dateStart;
     }
 
-    public LocalDateTime getDateEnd() {
+    public Date getDateEnd() {
         return dateEnd;
     }
 
-    public void setDateEnd(LocalDateTime dateEnd) {
+    public void setDateEnd(Date dateEnd) {
         this.dateEnd = dateEnd;
     }
 

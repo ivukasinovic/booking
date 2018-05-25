@@ -3,25 +3,39 @@ package XMLandSecurity.backend1.domain;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
+
 import java.io.Serializable;
 import java.util.List;
 
 @Entity
 @Table
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlRootElement(name="additionalService")
+@XmlType
 public class AdditionalService implements Serializable {
 
     @Id
     @Column(name = "id")
+    @XmlElement(name="id", required=true)
     private Long id;
 
     @Column(name = "name")
+    @XmlElement(name="name", required=true)
     private String name;
 
     @JsonIgnore
     @JoinTable(
             name = "lodging_additional_service",
             joinColumns = {@JoinColumn(name = "additional_service_id")},
-            inverseJoinColumns = {@JoinColumn(name = "lodging_id")}      )
+            inverseJoinColumns = {@JoinColumn(name = "lodging_id")}
+    @XmlElementWrapper(name="lodgingList", required=true)
+    @XmlElement(name="lodging", required=true)
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private List<Lodging> lodgingList;
 

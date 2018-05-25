@@ -6,68 +6,94 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlRootElement(name="lodging")
+@XmlType
 public class Lodging implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
+    @XmlElement(name="id", required=true)
     private Long id;
 
     @Column(name = "address", nullable = false)
+    @XmlElement(name="address", required=true)
     private String address;
 
     @Column(name = "details")
+    @XmlElement(name="details", required=true)
     private String details;
 
     @Column(name = "image")
+    @XmlElement(name="image", required=true)
     private String image;
 
     @Column(name = "rating", columnDefinition = "Decimal(3,2)")
+    @XmlElement(name="rating", required=true)
     private Double rating;
 
     @Column(name = "persons_number", nullable = false)
+    @XmlElement(name="persons_number", required=true)
     private Integer persons_number;
 
     @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
     @JsonIdentityReference(alwaysAsId = true)
     @ManyToOne
     @JoinColumn(name = "category_id")
+    @XmlElement(name="category", required=true)
     private CategoryOfLodging category;
 
     @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
     @JsonIdentityReference(alwaysAsId = true)
     @ManyToOne
     @JoinColumn(name = "type_id", nullable = false)
+    @XmlElement(name="type", required=true)
     private TypeOfLodging type;
 
     @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
     @JsonIdentityReference(alwaysAsId = true)
     @ManyToOne
     @JoinColumn(name = "city_id", nullable = false)
+    @XmlElement(name="city", required=true)
     private City city;
 
     @JsonIgnore
     @OneToMany(mappedBy = "lodging", cascade = CascadeType.ALL)
+    @XmlElementWrapper(name="priceLists", required=true)
+    @XmlElement(name="priceList", required=true)
     private List<PriceList> priceLists = new ArrayList<PriceList>();
 
     @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
     @JsonIdentityReference(alwaysAsId = true)
     @ManyToOne
     @JoinColumn(name = "agent_id", nullable = false)
+    @XmlElement(name="agent", required=true)
     private User agent;
 
     @JsonIgnore
     @OneToMany(mappedBy = "lodging", cascade = CascadeType.ALL)
+    @XmlElementWrapper(name="comments", required=true)
+    @XmlElement(name="comment", required=true)
     private List<Comment> comments = new ArrayList<Comment>();
 
     @JsonIgnore
     @OneToMany(mappedBy = "lodging", cascade = CascadeType.ALL)
+    @XmlElementWrapper(name="reservations", required=true)
+    @XmlElement(name="reservation", required=true)
     private List<Reservation> reservations = new ArrayList<Reservation>();
 
 //    @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
@@ -78,11 +104,15 @@ public class Lodging implements Serializable {
 
 
     @OneToMany(mappedBy = "lodging", cascade = CascadeType.ALL)
+    @XmlElementWrapper(name="ratingList", required=true)
+    @XmlElement(name="rating", required=true)
     private List<Rating> ratingList = new ArrayList<Rating>();
 
     // ==========
     @JsonIgnore
     @ManyToMany(mappedBy = "lodgingList", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @XmlElementWrapper(name="additionalServiceList", required=true)
+    @XmlElement(name="additionalService", required=true)
     private List<AdditionalService> additionalServiceList = new ArrayList<AdditionalService>();
     // ==========
 
