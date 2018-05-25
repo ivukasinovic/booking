@@ -8,6 +8,8 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping(value = "/type-lodging")
 public class TypeOfLodgingController {
@@ -15,6 +17,15 @@ public class TypeOfLodgingController {
     @Autowired
     private TypeOfLodgingService typeOfLodgingService;
 
+
+    @RequestMapping(
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    public ResponseEntity<List<TypeOfLodging>> getAll() {
+        List<TypeOfLodging> listaAdminaFanZone = typeOfLodgingService.findAll() ; //findOne(user);
+        return new ResponseEntity<>(listaAdminaFanZone, HttpStatus.OK);     // "200 OK"
+    }
 
     @RequestMapping(
             value = "/{id}",
@@ -49,8 +60,7 @@ public class TypeOfLodgingController {
 
     @RequestMapping(
             value = "/{id}",
-            method = RequestMethod.DELETE,
-            consumes = MediaType.APPLICATION_JSON_VALUE
+            method = RequestMethod.DELETE
     )
     public ResponseEntity<TypeOfLodging> izbrisi(@PathVariable("id") Long id){
         typeOfLodgingService.delete(id);

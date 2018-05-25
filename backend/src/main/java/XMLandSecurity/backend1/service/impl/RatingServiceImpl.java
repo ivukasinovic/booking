@@ -4,9 +4,11 @@ import XMLandSecurity.backend1.domain.Rating;
 import XMLandSecurity.backend1.repository.RatingRepository;
 import XMLandSecurity.backend1.service.RatingService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class RatingServiceImpl implements RatingService {
 
     @Autowired

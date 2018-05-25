@@ -14,4 +14,8 @@ public interface LodgingService {
 
     void delete(Long id);
 
+    Lodging findByAgent(Long id);
+
+    List<Lodging> findByAdditionalServiceList(Long id);
+
 }

@@ -1,5 +1,7 @@
 package XMLandSecurity.backend1.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
@@ -15,12 +17,12 @@ public class AdditionalService implements Serializable {
     @Column(name = "name")
     private String name;
 
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JsonIgnore
     @JoinTable(
             name = "lodging_additional_service",
             joinColumns = {@JoinColumn(name = "additional_service_id")},
-            inverseJoinColumns = {@JoinColumn(name = "lodging_id")}
-            )
+            inverseJoinColumns = {@JoinColumn(name = "lodging_id")}      )
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private List<Lodging> lodgingList;
 
 

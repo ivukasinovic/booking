@@ -13,9 +13,11 @@ public interface CommentService {
 
     Comment save(Comment user);
 
-    void delete(Long id);
+    void delete(Comment comment);
 
     List<Comment> findByAccepted(boolean prihvacen);
+
+    List<Comment> findByUser(Long id);
 
 
 }

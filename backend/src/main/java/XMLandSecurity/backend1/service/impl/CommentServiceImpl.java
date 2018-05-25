@@ -31,13 +31,18 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public void delete(Long id) {
+    public void delete(Comment id) {
         commentRepository.delete(id);
     }
 
     @Override
     public List<Comment> findByAccepted(boolean prihvacen) {
         return commentRepository.findByAccepted(prihvacen);
+    }
+
+    @Override
+    public List<Comment> findByUser(Long id) {
+        return commentRepository.findByUser(id);
     }
 
 

@@ -33,4 +33,14 @@ public class MessageServiceImpl implements MessageService {
     public void delete(Long id) {
         messageRepository.delete(id);
     }
+
+    @Override
+    public List<Message> findBySender(Long id) {
+        return messageRepository.findBySender(id);
+    }
+
+    @Override
+    public List<Message> findByReceiver(Long id) {
+        return messageRepository.findByReceiver(id);
+    }
 }

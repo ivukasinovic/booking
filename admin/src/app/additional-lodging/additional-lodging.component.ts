@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {Additional, Tip} from '../models/user';
+import {Router} from '@angular/router';
+import {AuthService} from '../auth.service';
 
 @Component({
   selector: 'app-additional-lodging',
@@ -9,25 +12,59 @@ export class AdditionalLodgingComponent implements OnInit {
 
   niz = [];
 
-  constructor() { }
+  tip: Additional[];
+
+  noviTip: Additional;
+
+  constructor(private authService: AuthService, private router: Router) {
+    this.noviTip = new Additional();
+  }
 
   ngOnInit() {
-    this.niz.push('Parking');
-    this.niz.push('WiFi');
-    this.niz.push('Breakfast');
-    this.niz.push('semi-pansion');
-    this.niz.push('full-pansion');
-    this.niz.push('TV');
-    this.niz.push('MINI kitchn');
-    this.niz.push('private bathroom');
+    // this.niz.push('Parking');
+    // this.niz.push('WiFi');
+    // this.niz.push('Breakfast');
+    // this.niz.push('semi-pansion');
+    // this.niz.push('full-pansion');
+    // this.niz.push('TV');
+    // this.niz.push('MINI kitchn');
+    // this.niz.push('private bathroom');
+    this.authService.getAdditional()
+      .subscribe(
+        (response: Additional[]) => {
+          this.tip = response;
+        });   // err k
+
+
   }
 
-  add(noviAdditional){
-    this.niz.push(noviAdditional);
+  add(noviAdditional: string) {
+    //  this.niz.push(noviAdditional);
+
+    this.noviTip.name = noviAdditional;
+
+    this.authService.addAdditional(this.noviTip)
+      .subscribe((data: Additional) => {
+          alert('Succes ' + data.name + '!');
+          //  this.router.navigate(['/admin']);
+          window.location.reload();
+        },
+        error1 => {
+          alert('Error!');
+        }
+      );
   }
 
-  brisi(br){
-    this.niz.splice(br,1)
+  brisi(br: number) {
+    // this.niz.splice(br,1)
+    this.authService.deleteAdditional(br)
+      .subscribe(response => {
+          alert('Uspesno ste obrisali !!!');
+          window.location.reload();
+        },
+        err => {
+          alert('Niste uspeli obrisati(Doslo je do greske)');
+        });
   }
 
 }

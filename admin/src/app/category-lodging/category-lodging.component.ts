@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-category-lodging',
@@ -12,12 +12,13 @@ export class CategoryLodgingComponent implements OnInit {
 
   checked = false;
 
-  men(){
+  men() {
     this.checked = !this.checked;
 
   }
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
   }

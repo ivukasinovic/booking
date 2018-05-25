@@ -17,7 +17,7 @@ export class LoginComponent implements OnInit {
 
   constructor(private router: Router, private authenticationService: AuthService) {
     const token = localStorage.getItem('token');
-    this.token =  token;
+    this.token = token;
   }
 
   ngOnInit() {
@@ -36,7 +36,7 @@ export class LoginComponent implements OnInit {
             localStorage.setItem('role', tokenPayload.role);
             localStorage.setItem('username', tokenPayload.sub);
             window.location.reload();
-           // this.router.navigate(['/']);
+            // this.router.navigate(['/']);
             this.router.navigate(['/admin']);
           }
         },

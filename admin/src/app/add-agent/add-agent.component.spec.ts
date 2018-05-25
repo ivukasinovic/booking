@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { AddAgentComponent } from './add-agent.component';
+import {AddAgentComponent} from './add-agent.component';
 
 describe('AddAgentComponent', () => {
   let component: AddAgentComponent;
@@ -8,9 +8,9 @@ describe('AddAgentComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AddAgentComponent ]
+      declarations: [AddAgentComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

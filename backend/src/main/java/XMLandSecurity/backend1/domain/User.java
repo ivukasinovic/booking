@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -57,15 +58,15 @@ public class User implements Serializable {
     private boolean activated;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "receiver", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "receiver")                                  //, cascade = CascadeType.ALL
     private List<Message> receviedMessages = new ArrayList<Message>();
 
     @JsonIgnore
-    @OneToMany(mappedBy = "sender", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "sender")     // , cascade = CascadeType.ALL
     private List<Message> sentMessages = new ArrayList<Message>();
 
     @JsonIgnore
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user")
     private List<Reservation> reservations = new ArrayList<Reservation>();
 
     public User() {

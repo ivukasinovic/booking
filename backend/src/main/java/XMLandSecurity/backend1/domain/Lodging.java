@@ -81,6 +81,7 @@ public class Lodging implements Serializable {
     private List<Rating> ratingList = new ArrayList<Rating>();
 
     // ==========
+    @JsonIgnore
     @ManyToMany(mappedBy = "lodgingList", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private List<AdditionalService> additionalServiceList = new ArrayList<AdditionalService>();
     // ==========

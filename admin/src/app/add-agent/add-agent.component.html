@@ -3,27 +3,37 @@
     <h3 class="text-center">Create Agent New Accout</h3>
     <div class="form-group">
       <label for="username">Username</label>
-      <input name="username" [(ngModel)]="user.username" class="form-control" id="username" aria-describedby="usernameHelp" placeholder="Enter username">
+      <input name="username" [(ngModel)]="user.username" class="form-control" id="username"
+             aria-describedby="usernameHelp" placeholder="Enter username">
       <label for="password">Password</label>
       <!-- Minimum eight characters, at least one letter and one number -->
-      <input type="password" required name="password" minlength="10" maxlength="20" pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$" [(ngModel)]="user.passwordHash" class="form-control" id="password" placeholder="Password">
+      <input type="password" required name="password" minlength="10" maxlength="20"
+             pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$" [(ngModel)]="user.passwordHash" class="form-control"
+             id="password" placeholder="Password">
       <label for="email">Email address</label>
-      <input type="email" name="email" [(ngModel)]="user.email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email">
+      <input type="email" name="email" [(ngModel)]="user.email" class="form-control" id="email"
+             aria-describedby="emailHelp" placeholder="Enter email">
       <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
       <br>
       <label for="name">Name</label>
-      <input name="name" [(ngModel)]="user.name" class="form-control" id="name" aria-describedby="nameHelp" placeholder="Enter name">
+      <input name="name" [(ngModel)]="user.name" class="form-control" id="name" aria-describedby="nameHelp"
+             placeholder="Enter name">
       <label for="name">Surname</label>
-      <input name="surname" [(ngModel)]="user.surname" class="form-control" id="surname" aria-describedby="surname" placeholder="Enter surname">
+      <input name="surname" [(ngModel)]="user.surname" class="form-control" id="surname" aria-describedby="surname"
+             placeholder="Enter surname">
 
       <label for="city"> City </label>
-      <input name="city" [(ngModel)]="user.city" class="form-control" id="city" aria-describedby="city" placeholder="Enter city">
+      <input name="city" [(ngModel)]="user.city" class="form-control" id="city" aria-describedby="city"
+             placeholder="Enter city">
 
       <label for="adress"> Adress </label>
-      <input name="adress" [(ngModel)]="user.adress" class="form-control" id="adress" aria-describedby="adress" placeholder="Enter adress">
+      <input name="adress" [(ngModel)]="user.adress" class="form-control" id="adress" aria-describedby="adress"
+             placeholder="Enter adress">
 
-      <label for="number">Business registration number</label>  <!-- Business registration number = user.number se mapira!!!!!!!!!!!!!!! -->
-      <input name="number" [(ngModel)]="user.number" class="form-control" id="number" aria-describedby="number" placeholder="Enter number">
+      <label for="number">Business registration number</label>
+      <!-- Business registration number = user.number se mapira!!!!!!!!!!!!!!! -->
+      <input name="number" [(ngModel)]="user.number" class="form-control" id="number" aria-describedby="number"
+             placeholder="Enter number">
     </div>
 
     <button type="submit" class="btn btn-primary" (click)="register()">Register</button>

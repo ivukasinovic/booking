@@ -57,9 +57,9 @@ INSERT INTO price_list (id,year,date_created, january,february,mart,april,may,ju
 
 
 INSERT INTO comment (id,body,accepted,lodging_id,user_id) VALUES (1,'Samo kvalitetan text',true,1,3 );
-INSERT INTO comment (id,body,accepted,lodging_id,user_id) VALUES (2,'Cao druze, poruka nije namenskaa',false,2,5 );
+INSERT INTO comment (id,body,accepted,lodging_id,user_id) VALUES (2,'Cao druze, poruka nije namenskaa',false,2,4 );
 INSERT INTO comment (id,body,accepted,lodging_id,user_id) VALUES (3,'A komentar je na mestu ,dje je problem objaviteee ,ah !',false,2,5 );
-INSERT INTO comment (id,body,accepted,lodging_id,user_id) VALUES (4,'Pozdrav za smestaj Numanovic',false,1,5 );
+INSERT INTO comment (id,body,accepted,lodging_id,user_id) VALUES (4,'Pozdrav za smestaj Numanovic',false,1,6 );
 
 INSERT INTO message (id,title,body,date_sent,receiver_id,sender_id) VALUES (2,'Naslov za vavek vekova ','Pozdrav ja se zovem Marica i mozemo li se upoznati','2017-02-22 10:42:58',5,4 );
 INSERT INTO message (id,title,body,date_sent,receiver_id,sender_id) VALUES (1,'Odgovor marici ','Cao Marice , nisam tu za vikend cujemo se nekad !!','2017-02-22 11:02:58',4,5 );
@@ -67,7 +67,5 @@ INSERT INTO message (id,title,body,date_sent,receiver_id,sender_id) VALUES (1,'O
 INSERT INTO rating (id,date_created,star,user_id,lodging_id) VALUES (1,'2018-04-22 09:42:58',4,3,2 );
 
 INSERT INTO reservation (id,date_start,date_end,active,visited,lodging_id,user_id) VALUES (1,'2018-04-22 10:42:58','2018-05-22 10:42:58',true,true ,1,3 );
-
-
 
 

@@ -53,8 +53,7 @@ public class LodgingController {
 
     @RequestMapping(
             value = "/{id}",
-            method = RequestMethod.DELETE,
-            consumes = MediaType.APPLICATION_JSON_VALUE
+            method = RequestMethod.DELETE
     )
     public ResponseEntity<Lodging> izbrisi(@PathVariable("id") Long id){
         lodgingService.delete(id);

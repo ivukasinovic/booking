@@ -8,8 +8,8 @@
   <!--<form >-->
   <label></label>
   <!--<input [(ngModel)]="noviTip" type="text"  > <br> <br>-->
-  <input #novi name="novi" type="text"  > <br> <br>
-  <button (click)="add(novi.value)" class="btn btn-success"> Add </button>
+  <input #novi name="novi" type="text"> <br> <br>
+  <button (click)="add(novi.value)" class="btn btn-success"> Add</button>
   <!--</form>-->
 
   <hr>
@@ -17,42 +17,43 @@
   <table>
 
     <!--<tr>-->
-      <!--<td>-->
-        <!--<mat-checkbox> Hotel ! </mat-checkbox>-->
-      <!--</td>-->
-      <!--<td>-->
-        <!--<button (click)="brisi()" class="btn btn-danger" >  Delete </button>-->
-      <!--</td>-->
+    <!--<td>-->
+    <!--<mat-checkbox> Hotel ! </mat-checkbox>-->
+    <!--</td>-->
+    <!--<td>-->
+    <!--<button (click)="brisi()" class="btn btn-danger" >  Delete </button>-->
+    <!--</td>-->
     <!--</tr>-->
 
     <!--<tr>-->
-      <!--<td>-->
-        <!--<mat-checkbox> Bed and breakfast ! </mat-checkbox>-->
-      <!--</td>-->
+    <!--<td>-->
+    <!--<mat-checkbox> Bed and breakfast ! </mat-checkbox>-->
+    <!--</td>-->
 
-      <!--<td>-->
-        <!--<button (click)="brisi()" class="btn btn-danger" >  Delete </button>-->
-      <!--</td>-->
+    <!--<td>-->
+    <!--<button (click)="brisi()" class="btn btn-danger" >  Delete </button>-->
+    <!--</td>-->
     <!--</tr>-->
 
     <!--<tr>-->
-      <!--<td>-->
-        <!--<mat-checkbox> Apartman !  </mat-checkbox>-->
-      <!--</td>-->
-      <!--<td>-->
-        <!--<button (click)="brisi()" class="btn btn-danger" >  Delete </button>-->
-      <!--</td>-->
+    <!--<td>-->
+    <!--<mat-checkbox> Apartman !  </mat-checkbox>-->
+    <!--</td>-->
+    <!--<td>-->
+    <!--<button (click)="brisi()" class="btn btn-danger" >  Delete </button>-->
+    <!--</td>-->
 
     <!--</tr>-->
 
 
-    <tr *ngFor="let n of niz" >
-      <td >
-        <input  type="checkbox"> <b> {{ n }} </b>
+    <tr *ngFor="let n of tip">
+      <td>
+        <input type="checkbox"> <b> {{ n.label }} </b>
       </td>
 
       <td>
-        <button (click)="brisi(niz.indexOf(n))" class="btn btn-danger" >  Delete </button>
+        <!--<button (click)="brisi(niz.indexOf(n))" class="btn btn-danger" >  Delete </button>-->
+        <button (click)="brisi(n.id)" class="btn btn-danger"> Delete</button>
       </td>
 
     </tr>
@@ -60,7 +61,6 @@
   </table>
 
   <!--<mat-checkbox [(ngModel)]="checked"  ngInit="checked=true">Check me!</mat-checkbox>-->
-
 
 
 </div>

@@ -1,12 +1,16 @@
 package XMLandSecurity.backend1.controller;
 
 import XMLandSecurity.backend1.domain.AdditionalService;
+import XMLandSecurity.backend1.domain.Lodging;
 import XMLandSecurity.backend1.service.AdditionalServiceService;
+import XMLandSecurity.backend1.service.LodgingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping(value = "/addtional-service")
@@ -14,6 +18,18 @@ public class AdditionalServiceController {
 
     @Autowired
     private AdditionalServiceService additionalServiceService;
+
+    @Autowired
+    private LodgingService lodgingService;
+
+    @RequestMapping(
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    public ResponseEntity<List<AdditionalService>> getAll() {
+        List<AdditionalService> lista = additionalServiceService.findAll() ; //findOne(user);
+        return new ResponseEntity<>(lista, HttpStatus.OK);     // "200 OK"
+    }
 
 
     @RequestMapping(
@@ -34,9 +50,14 @@ public class AdditionalServiceController {
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public ResponseEntity<AdditionalService> CreateCity (@RequestBody AdditionalService additionalService) {
-        AdditionalService userNew = additionalServiceService.save(additionalService);
-        return new ResponseEntity(userNew, HttpStatus.OK);
+    public ResponseEntity<AdditionalService> napravi (@RequestBody AdditionalService additionalService) {
+       // AdditionalService noviDodati = additionalServiceService.save(additionalService);
+        List<Lodging> lodgings =  lodgingService.findByAdditionalServiceList(1l); // Znaci da dodaje na prvi lodging !!!
+        additionalService.setLodgingList(lodgings);
+
+        // lodgingService.save(noviDodati.getLodgingList(lodgings));
+        additionalServiceService.save(additionalService);
+        return new ResponseEntity(additionalService, HttpStatus.OK);
     }
 
 
@@ -53,8 +74,7 @@ public class AdditionalServiceController {
 
     @RequestMapping(
             value = "/{id}",
-            method = RequestMethod.DELETE,
-            consumes = MediaType.APPLICATION_JSON_VALUE
+            method = RequestMethod.DELETE
     )
     public ResponseEntity<AdditionalService> izbrisi(@PathVariable("id") Long id){
         additionalServiceService.delete(id);

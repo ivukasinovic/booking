@@ -15,7 +15,7 @@ public class CategoryOfLodging implements Serializable {
     @Column(name = "label")
     private String label;
 
-    @Column(name = "name")
+    @Column(name = "name") // nullable =  false
     private String name;
 
     public CategoryOfLodging() {

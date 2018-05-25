@@ -54,11 +54,11 @@ public class CommentController {
 
     @RequestMapping(
             value = "/{id}",
-            method = RequestMethod.DELETE,
-            consumes = MediaType.APPLICATION_JSON_VALUE
+            method = RequestMethod.DELETE
     )
     public ResponseEntity<Comment> izbrisi(@PathVariable("id") Long id){
-        commentService.delete(id);
+        Comment comment = commentService.findOne(id);
+        commentService.delete(comment);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
@@ -66,12 +66,23 @@ public class CommentController {
     @RequestMapping(
             value = "/all-not",
             method = RequestMethod.GET,
-            consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
     public ResponseEntity<List<Comment>> pronadjiSveKojiNisuOdobreni(){
         List<Comment> listaKomentara = commentService.findByAccepted(false);
         return new ResponseEntity(listaKomentara, HttpStatus.OK);
+    }
+
+    @RequestMapping(
+            value = "/prihvati/{id}",
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    public ResponseEntity<Comment> prihvati(@PathVariable("id") Long id) {
+        Comment komentar = commentService.findOne(id) ; //findOne(user);
+        komentar.setAccepted(true);
+        commentService.save(komentar);
+        return new ResponseEntity<>(komentar, HttpStatus.OK);     // "200 OK"
     }
 
 

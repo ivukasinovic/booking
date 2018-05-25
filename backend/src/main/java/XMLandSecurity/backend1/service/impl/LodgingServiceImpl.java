@@ -34,4 +34,16 @@ public class LodgingServiceImpl implements LodgingService {
     public void delete(Long id) {
         lodgingRepository.delete(id);
     }
+
+    @Override
+    public Lodging findByAgent(Long id) {
+        return lodgingRepository.findByAgent(id);
+    }
+
+    @Override
+    public List<Lodging> findByAdditionalServiceList(Long id) {
+        return  lodgingRepository.findByAdditionalServiceList(id);
+    }
+
+
 }
