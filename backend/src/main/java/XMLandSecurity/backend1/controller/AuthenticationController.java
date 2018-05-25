@@ -82,7 +82,7 @@ public class AuthenticationController {
         UserDetails userDetails = this.userDetailsService.loadUserByUsername(authenticationRequest.getUsername());
         User user = userService.findByUsername(userDetails.getUsername());
         if(!user.isActivated()){
-            return null;
+            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
         }
         String token = this.tokenUtils.generateToken(userDetails, device);
 

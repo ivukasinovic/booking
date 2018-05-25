@@ -33,6 +33,7 @@ public class EmailServiceImpl implements EmailService {
     private EncDecSimple encDecSimple;
 
     @Async
+    @Override
     public void sendActivationMail(User user) {
 
         MimeMessage mimeMessage = javaMailSender.createMimeMessage();
@@ -51,15 +52,10 @@ public class EmailServiceImpl implements EmailService {
         }
     }
 
+    @Async
     @Override
     public void sendResetPassword(User user) {
-       // byte[] username = user.getUsername().getBytes();
-      //  byte[] code = encDecSimple.encrypt(username);
-        //System.out.println(code.toString());
 
-        //symetric
-//        String code = new String(Base64.encodeBase64(user.getUsername().getBytes()));
-//        System.out.println("Pre: " + code);
         String encryptedString = EncDecSimple.encrypt(user.getUsername());
         MimeMessage mimeMessage = javaMailSender.createMimeMessage();
         try {

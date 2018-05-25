@@ -33,7 +33,7 @@ public class AdditionalService implements Serializable {
     @JoinTable(
             name = "lodging_additional_service",
             joinColumns = {@JoinColumn(name = "additional_service_id")},
-            inverseJoinColumns = {@JoinColumn(name = "lodging_id")}
+            inverseJoinColumns = {@JoinColumn(name = "lodging_id")})
     @XmlElementWrapper(name="lodgingList", required=true)
     @XmlElement(name="lodging", required=true)
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
