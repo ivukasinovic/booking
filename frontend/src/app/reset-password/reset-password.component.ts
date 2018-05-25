@@ -21,6 +21,10 @@ export class ResetPasswordComponent implements OnInit {
     });
   }
   resetPassword() {
+    if (this.chp.oldPw !== this.chp.newPw) {
+      alert('Passwrods should be same!');
+      return;
+    }
     this.userService.resetPassword(this.code, this.chp)
       .subscribe(respose => {
         alert('Successfully changed password!');

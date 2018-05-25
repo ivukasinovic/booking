@@ -26,8 +26,17 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import javax.crypto.BadPaddingException;
+import javax.crypto.Cipher;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
+import javax.crypto.spec.SecretKeySpec;
 import javax.servlet.http.HttpServletRequest;
+import java.security.InvalidKeyException;
+import java.security.Key;
+import java.security.NoSuchAlgorithmException;
 import java.security.Principal;
+import java.util.Base64;
 import java.util.logging.Logger;
 
 @RestController
@@ -71,6 +80,10 @@ public class AuthenticationController {
 
         // Reload password post-authentication so we can generate token
         UserDetails userDetails = this.userDetailsService.loadUserByUsername(authenticationRequest.getUsername());
+        User user = userService.findByUsername(userDetails.getUsername());
+        if(!user.isActivated()){
+            return null;
+        }
         String token = this.tokenUtils.generateToken(userDetails, device);
 
         return ResponseEntity.ok(new AuthenticationResponse(token));
@@ -158,12 +171,8 @@ public class AuthenticationController {
             method = RequestMethod.POST,
             consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<User> forgotPassword(@PathVariable String code, @RequestBody ChangePasswordDto chp){
-        //symetric
-      //  byte[] username = encDecSimple.decrypt(code.getBytes())
-//
-//        System.out.println("Posle: " + code);
-//        String username = Base64.decodeBase64(code).toString();
-        User user =userService.findByUsername(new String(code));
+        String username = EncDecSimple.decrypt(code);
+        User user =userService.findByUsername(username);
         if(user == null){
             return new ResponseEntity<>(HttpStatus.FORBIDDEN);
         }

@@ -14,56 +14,44 @@ import java.util.Base64;
  */
 @Component
 public class EncDecSimple {
-    public static final String KEY = "KnhdV7lDmL8/ZcaiQyzCeg==";
+    public static final String KEY = "Bar12345Bar12345";
 
-    public byte[] encrypt(byte[] plainText) {
+    public static String encrypt(String text){
+        Key aesKey = new SecretKeySpec(KEY.getBytes(), "AES");
+        Cipher cipher = null;
+        byte[] encrypted = null;
         try {
-            //Kada se definise sifra potrebno je navesti njenu konfiguraciju, sto u ovom slucaju ukljucuje:
-            //	- Algoritam koji se koristi (DES)
-            //	- Rezim rada tog algoritma (ECB)
-            //	- Strategija za popunjavanje poslednjeg bloka (PKCS5Padding)
-            Cipher desCipherEnc = Cipher.getInstance("AES/ECB/PKCS5Padding");
-            //inicijalizacija za sifrovanje,
-            byte[] decodedKey = Base64.getDecoder().decode(KEY);
-            SecretKey key = new SecretKeySpec(decodedKey,0,decodedKey.length,"AES");
-            desCipherEnc.init(Cipher.ENCRYPT_MODE, key);
-
-            //sifrovanje
-            byte[] ciphertext = desCipherEnc.doFinal(plainText);
-            System.out.println(ciphertext);
-            return ciphertext;
-        } catch (InvalidKeyException e) {
-            e.printStackTrace();
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        } catch (NoSuchPaddingException e) {
-            e.printStackTrace();
-        } catch (IllegalStateException e) {
-            e.printStackTrace();
-        } catch (IllegalBlockSizeException e) {
-            e.printStackTrace();
-        } catch (BadPaddingException e) {
+            cipher = Cipher.getInstance("AES");
+            cipher.init(Cipher.ENCRYPT_MODE, aesKey);
+            encrypted = cipher.doFinal(text.getBytes());
+        } catch (NoSuchAlgorithmException | NoSuchPaddingException | BadPaddingException | InvalidKeyException | IllegalBlockSizeException e) {
             e.printStackTrace();
         }
-        return null;
+        Base64.Encoder encoder = Base64.getEncoder();
+        String encryptedString = encoder.encodeToString(encrypted);
+        System.out.println(encryptedString);
+        return  encryptedString;
     }
 
-    public byte[] decrypt(byte[] cipherText) {
+    public static String decrypt(String encText){
+        Key aesKey = new SecretKeySpec(KEY.getBytes(), "AES");
+        Cipher cipher = null;
         try {
-            //algoritam MORA biti isti kao i kod sifrovanja, provider moze da se razlikuje
-            Cipher desCipherDec = Cipher.getInstance("AES/ECB/PKCS5Padding");
-            //inicijalizacija za dekriptovanje
-            byte[] decodedKey = Base64.getDecoder().decode(KEY);
-            Key key = new SecretKeySpec(decodedKey,"AES");
-            desCipherDec.init(Cipher.DECRYPT_MODE, key);
-
-            //desifrovanje
-            System.out.println(cipherText);
-            byte[] plainText = desCipherDec.doFinal(cipherText);
-            return plainText;
-        } catch (InvalidKeyException | IllegalBlockSizeException | BadPaddingException | IllegalStateException | NoSuchPaddingException | NoSuchAlgorithmException e) {
+            cipher = Cipher.getInstance("AES");
+            cipher.init(Cipher.DECRYPT_MODE, aesKey);
+        } catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException e) {
             e.printStackTrace();
         }
-        return null;
+        Base64.Decoder decoder = Base64.getDecoder();
+
+        String decrypted = null;
+        try {
+            decrypted = new String(cipher.doFinal(decoder.decode(encText)));
+        } catch (IllegalBlockSizeException | BadPaddingException e) {
+            e.printStackTrace();
+        }
+        return decrypted;
     }
+
+
 }
