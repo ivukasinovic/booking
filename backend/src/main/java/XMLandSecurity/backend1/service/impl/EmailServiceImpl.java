@@ -35,14 +35,14 @@ public class EmailServiceImpl implements EmailService {
     @Async
     @Override
     public void sendActivationMail(User user) {
-
+        String encryptedString = EncDecSimple.encrypt(user.getUsername());
         MimeMessage mimeMessage = javaMailSender.createMimeMessage();
         try {
             MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, false, "utf-8");
             String htmlMsg = "<h3>Profile activation!</h3><br>"
                     + "<div>Welcome "+user.getUsername()+"  on <b>Booking.com </b></div>"
                     + "<div>Click  <a href ="
-                    + " \"http://localhost:4200/api/activate/"+user.getUsername()+"\">"
+                    + " \"http://localhost:4200/api/activate/"+encryptedString+"\">"
                     + "<u>here</u></a> for activation.</div>";
             mimeMessage.setContent(htmlMsg, "text/html");
             helper.setTo(user.getEmail());

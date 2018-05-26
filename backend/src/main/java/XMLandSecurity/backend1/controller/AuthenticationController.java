@@ -24,6 +24,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.validation.Errors;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.crypto.BadPaddingException;
@@ -32,6 +34,7 @@ import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.spec.SecretKeySpec;
 import javax.servlet.http.HttpServletRequest;
+import javax.swing.*;
 import java.security.InvalidKeyException;
 import java.security.Key;
 import java.security.NoSuchAlgorithmException;
@@ -107,10 +110,17 @@ public class AuthenticationController {
             method = RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE,
             consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<User> register(@RequestBody User user) {
+    public ResponseEntity<?> register(@Validated @RequestBody User user,Errors error) {
         if ((userService.findByUsername(user.getUsername()) != null) || (userService.findByEmail(user.getEmail()) != null)) {
+            JOptionPane.showMessageDialog(null, "Email alredy exist or username exist!", "Email alredy exist or username exis",
+                    JOptionPane.ERROR_MESSAGE);
             return new ResponseEntity<>(HttpStatus.FORBIDDEN);
         }
+
+        if (error.hasErrors()) {
+            return new ResponseEntity<String>(error.getAllErrors().toString(), HttpStatus.BAD_REQUEST);
+        }
+
         user.setRole(Role.USER);
         user.setPasswordHash(new BCryptPasswordEncoder().encode(user.getPasswordHash()));
         user.setActivated(false);
@@ -143,8 +153,13 @@ public class AuthenticationController {
             method = RequestMethod.POST,
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<User> changePassword(@RequestBody ChangePasswordDto chp, Principal principal){
+    public ResponseEntity<?> changePassword(@Validated @RequestBody ChangePasswordDto chp, Principal principal,Errors errors){
         HttpStatus status = HttpStatus.FORBIDDEN;
+
+        if (errors.hasErrors()) {
+            return new ResponseEntity<String>(errors.getAllErrors().toString(), HttpStatus.BAD_REQUEST);
+        }
+
         User user = userService.findByUsername(principal.getName());
         BCryptPasswordEncoder bc = new BCryptPasswordEncoder();
         if(bc.matches(chp.getOldPw(),user.getPasswordHash())){
@@ -186,6 +201,7 @@ public class AuthenticationController {
             value = "/activate/{username}",
             method = RequestMethod.GET)
     public String activateUser(@PathVariable("username") String username ){
+        username = EncDecSimple.decrypt(username);
         User user = userService.findByUsername(username);
         if(user == null){
             return "Error!";

@@ -20,6 +20,7 @@ export class RegistrationComponent implements OnInit {
     this.authService.register(this.user)
       .subscribe((data: User) => {
         alert('Succes registration ' + data.username + '!');
+          this.passwordValueValidator(data.passwordHash);
         this.router.navigate(['/']);
         },
         error1 => {
@@ -27,4 +28,18 @@ export class RegistrationComponent implements OnInit {
         }
       );
   }
+
+  // Both capital letters, small letters, numbers and special characters
+  // /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{6,100})/
+
+  passwordValueValidator(control) {
+    if (control.value !== undefined) {
+      if (!control.value.match(/^(?=.*[0-9])[a-zA-Z0-9!@#$%^&*]{6,100}$/)) {      // broj i slova
+        return { 'invalidPassword': true };
+      } else {
+        // here i need to add check for special characters
+      }
+    }
+  }
+
 }

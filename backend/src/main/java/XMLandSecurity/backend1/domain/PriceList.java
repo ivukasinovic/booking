@@ -10,6 +10,8 @@ import java.time.LocalDateTime;
 import java.util.Date;
 
 import javax.persistence.*;
+import javax.validation.constraints.DecimalMax;
+import javax.validation.constraints.DecimalMin;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -36,50 +38,75 @@ public class PriceList implements Serializable {
     @XmlElement(name="dateCreated")
     private Date dateCreated;
 
+
+    @DecimalMax(value="1000000", inclusive=false)
+    @DecimalMin(value ="1")
     @Column(name = "january", columnDefinition = "Decimal(8,2)")
     @XmlElement(name="january")
     private Double january;
 
+    @DecimalMax(value="1000000", inclusive=false)
+    @DecimalMin(value ="1")
     @Column(name = "february", columnDefinition = "Decimal(8,2)")
     @XmlElement(name="february")
     private Double february;
 
+    @DecimalMax(value="1000000", inclusive=false)
+    @DecimalMin(value ="1")
     @Column(name = "mart", columnDefinition = "Decimal(8,2)")
     @XmlElement(name="mart")
     private Double mart;
 
+    @DecimalMax(value="1000000", inclusive=false)
+    @DecimalMin(value ="1")
     @Column(name = "april", columnDefinition = "Decimal(8,2)")
     @XmlElement(name="april")
     private Double april;
 
+    @DecimalMax(value="1000000", inclusive=false)
+    @DecimalMin(value ="1")
     @Column(name = "may", columnDefinition = "Decimal(8,2)")
     @XmlElement(name="may")
     private Double may;
 
+    @DecimalMax(value="1000000", inclusive=false)
+    @DecimalMin(value ="1")
     @Column(name = "june", columnDefinition = "Decimal(8,2)")
     @XmlElement(name="june")
     private Double june;
 
+    @DecimalMax(value="1000000", inclusive=false)
+    @DecimalMin(value ="1")
     @Column(name = "july", columnDefinition = "Decimal(8,2)")
     @XmlElement(name="july")
     private Double july;
 
+    @DecimalMax(value="1000000", inclusive=false)
+    @DecimalMin(value ="1")
     @Column(name = "august", columnDefinition = "Decimal(8,2)")
     @XmlElement(name="august")
     private Double august;
 
+    @DecimalMax(value="1000000", inclusive=false)
+    @DecimalMin(value ="1")
     @Column(name = "september", columnDefinition = "Decimal(8,2)")
     @XmlElement(name="september")
     private Double september;
 
+    @DecimalMax(value="1000000", inclusive=false)
+    @DecimalMin(value ="1")
     @Column(name = "october", columnDefinition = "Decimal(8,2)")
     @XmlElement(name="october")
     private Double october;
 
+    @DecimalMax(value="1000000", inclusive=false)
+    @DecimalMin(value ="1")
     @Column(name = "november", columnDefinition = "Decimal(8,2)")
     @XmlElement(name="november")
     private Double november;
 
+    @DecimalMax(value="1000000", inclusive=false)
+    @DecimalMin(value ="1")
     @Column(name = "december", columnDefinition = "Decimal(8,2)")
     @XmlElement(name="december")
     private Double december;

@@ -45,4 +45,14 @@ export class LoginComponent implements OnInit {
         }
       );
   }
+
+  passwordValueValidator(control) {
+    if (control.value !== undefined) {
+      if (!control.value.match(/^(?=.*[0-9])[a-zA-Z0-9!@#$%^&*]{6,100}$/)) {
+        return { 'invalidPassword': true };
+      } else {
+        //here i need to add check for special characters
+      }
+    }
+  }
 }

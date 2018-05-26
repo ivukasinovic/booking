@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -26,9 +27,11 @@ public class Comment implements Serializable {
     @XmlElement(name="id", required=true)
     private Long id;
 
+    @NotNull
     @Column(name = "body", nullable = false)
     @XmlElement(name="body", required=true)
     private String body;
+
 
     @Column(name = "accepted", nullable = false, columnDefinition = "boolean default false")
     @XmlElement(name="accepted", required=true)

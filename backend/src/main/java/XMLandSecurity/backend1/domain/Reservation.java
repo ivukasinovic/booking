@@ -9,6 +9,7 @@ import java.time.LocalDateTime;
 import java.util.Date;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -28,10 +29,12 @@ public class Reservation implements Serializable {
     @XmlElement(name="id", required=true)
     private Long id;
 
+    @NotNull
     @Column(name = "date_start",nullable = false,columnDefinition="DATETIME")
     @XmlElement(name="dateStart", required=true)
     private Date dateStart;
 
+    @NotNull
     @Column(name = "date_end",nullable = false,columnDefinition="DATETIME")
     @XmlElement(name="dateEnd", required=true)
     private Date dateEnd;
