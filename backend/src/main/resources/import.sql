@@ -17,6 +17,10 @@ INSERT INTO city (id,name, country_id ) VALUES (1,'Paris',3);
 INSERT INTO city (id,name, country_id ) VALUES (2,'Instambul',1);
 INSERT INTO city (id,name, country_id) VALUES (3,'Hamburg',1);
 
+-- INSERT INTO city (id,name, country_fk) VALUES (1,'Paris','FRA');
+-- INSERT INTO city (id,name, country_fk) VALUES (2,'Instambul','GER');
+-- INSERT INTO city (id,name, country_fk) VALUES (3,'Hamburg','GER');
+
 
 
 INSERT INTO category_of_lodging (id,label,name ) VALUES (1,'5','kategorisana');
@@ -31,34 +35,57 @@ INSERT INTO type_of_lodging (id,label,name ) VALUES (3,'Apartman','Numanovic');
 -- INSERT INTO additional_service (id,parking,wi_fi,breakfast,half_board,full_board,tv,kitchen,private_bathroom ) VALUES (2,TRUE ,TRUE ,TRUE ,TRUE,TRUE ,FALSE,TRUE ,FALSE );
 -- INSERT INTO additional_service (id,parking,wi_fi,breakfast,half_board,full_board,tv,kitchen,private_bathroom ) VALUES (3,TRUE ,FALSE,TRUE ,FALSE,TRUE ,FALSE,TRUE ,FALSE );
 
-INSERT INTO additional_service (id,name) VALUES (1,'parking')
-INSERT INTO additional_service (id,name) VALUES (2,'wi_fi')
-INSERT INTO additional_service (id,name) VALUES (3,'breakfast')
-INSERT INTO additional_service (id,name) VALUES (4,'half_board')
-INSERT INTO additional_service (id,name) VALUES (5,'full_board')
-INSERT INTO additional_service (id,name) VALUES (6,'tv')
-INSERT INTO additional_service (id,name) VALUES (7,'kitchen')
-INSERT INTO additional_service (id,name) VALUES (8 ,'private_bathroom')
+-- INSERT INTO additional_service (id,name) VALUES (1,'parking')
+-- INSERT INTO additional_service (id,name) VALUES (2,'wi_fi')
+-- INSERT INTO additional_service (id,name) VALUES (3,'breakfast')
+-- INSERT INTO additional_service (id,name) VALUES (4,'half_board')
+-- INSERT INTO additional_service (id,name) VALUES (5,'full_board')
+-- INSERT INTO additional_service (id,name) VALUES (6,'tv')
+-- INSERT INTO additional_service (id,name) VALUES (7,'kitchen')
+-- INSERT INTO additional_service (id,name) VALUES (8 ,'private_bathroom')
+
 
 INSERT INTO lodging (id,address,details , image,rating,persons_number,category_id,type_id,city_id,agent_id) VALUES (1,'Bulevar Despota Stefana 7','NOVOO ,nove stvari vise detalja na telefon ..... xD','',4,4 ,1,2,3,2);
 INSERT INTO lodging (id,address,details , image,rating,persons_number,category_id,type_id,city_id,agent_id) VALUES (2,'Bulevar Despota Stefana 35','Starija ali ocuvana garsonjeraa','',3,2,1,1,2,2);
 
-INSERT INTO lodging_additional_service (additional_service_id,lodging_id) VALUES (1,1);
-INSERT INTO lodging_additional_service (additional_service_id,lodging_id) VALUES (3,1);
-INSERT INTO lodging_additional_service (additional_service_id,lodging_id) VALUES (4,1);
-INSERT INTO lodging_additional_service (additional_service_id,lodging_id) VALUES (5,1);
 
-INSERT INTO lodging_additional_service (additional_service_id,lodging_id) VALUES (1,2);
-INSERT INTO lodging_additional_service (additional_service_id,lodging_id) VALUES (2,2);
-INSERT INTO lodging_additional_service (additional_service_id,lodging_id) VALUES (3,2);
-INSERT INTO lodging_additional_service (additional_service_id,lodging_id) VALUES (6,2);
+INSERT INTO additional_service (lodging_id,id) VALUES (1 , 1)
+INSERT INTO additional_service (lodging_id,id) VALUES (1 , 2)
+INSERT INTO additional_service (lodging_id,id) VALUES (1 , 4)
+INSERT INTO additional_service (lodging_id,id) VALUES (1 , 5)
+INSERT INTO additional_service (lodging_id,id) VALUES (1 , 7)
+INSERT INTO additional_service (lodging_id,id) VALUES (1 , 3)
+INSERT INTO additional_service (lodging_id,id) VALUES (1 , 6)
+INSERT INTO additional_service (lodging_id,id) VALUES (1 , 8)
+
+-- INSERT INTO additional_service (id,lodging_id) VALUES (3 , 2)
+-- INSERT INTO additional_service (id,lodging_id) VALUES (6 , 2)
+
+INSERT INTO additional_service_admin (id,name,additional_service_id) VALUES (1 ,'parking', 1)
+INSERT INTO additional_service_admin (id,name,additional_service_id) VALUES (2 ,'wi_fi', 2)
+INSERT INTO additional_service_admin (id,name,additional_service_id) VALUES (3 ,'breakfast', 3)
+INSERT INTO additional_service_admin (id,name,additional_service_id) VALUES (4 ,'half_board', 4)
+INSERT INTO additional_service_admin (id,name,additional_service_id) VALUES (5 ,'full_board', 5)
+INSERT INTO additional_service_admin (id,name,additional_service_id) VALUES (6 ,'tv', 6)
+INSERT INTO additional_service_admin (id,name,additional_service_id) VALUES (7 ,'kitchen', 7)
+INSERT INTO additional_service_admin (id,name,additional_service_id) VALUES (8,'private_bathroom', 8)
+
+
+-- INSERT INTO lodging_additional_service (additional_service_id,lodging_id) VALUES (1,1);
+-- INSERT INTO lodging_additional_service (additional_service_id,lodging_id) VALUES (3,1);
+-- INSERT INTO lodging_additional_service (additional_service_id,lodging_id) VALUES (4,1);
+-- INSERT INTO lodging_additional_service (additional_service_id,lodging_id) VALUES (5,1);
+-- INSERT INTO lodging_additional_service (additional_service_id,lodging_id) VALUES (1,2);
+-- INSERT INTO lodging_additional_service (additional_service_id,lodging_id) VALUES (2,2);
+-- INSERT INTO lodging_additional_service (additional_service_id,lodging_id) VALUES (3,2);
+-- INSERT INTO lodging_additional_service (additional_service_id,lodging_id) VALUES (6,2);
 
 INSERT INTO price_list (id,year,date_created, january,february,mart,april,may,june,july,august,september,october,november,december) VALUES (1,'1994','2007-01-24 19:21:58',12.31,20.00,34.00,39.12,41.19,45.85,49.12,55.95,78.12,67.00,56.00,45.99);
 
 
 INSERT INTO comment (id,body,accepted,lodging_id,user_id) VALUES (1,'Samo kvalitetan text',true,1,3 );
-INSERT INTO comment (id,body,accepted,lodging_id,user_id) VALUES (2,'Cao druze, poruka nije namenskaa',false,2,4 );
-INSERT INTO comment (id,body,accepted,lodging_id,user_id) VALUES (3,'A komentar je na mestu ,dje je problem objaviteee ,ah !',false,2,5 );
+INSERT INTO comment (id,body,accepted,lodging_id,user_id) VALUES (2,'Cao druze, poruka nije namenskaa',false,2,5 );
+INSERT INTO comment (id,body,accepted,lodging_id,user_id) VALUES (3,'A komentar je na mestu ,dje je problem objaviteee ,ah !',false,2,7 );
 INSERT INTO comment (id,body,accepted,lodging_id,user_id) VALUES (4,'Pozdrav za smestaj Numanovic',false,1,6 );
 
 INSERT INTO message (id,title,body,date_sent,receiver_id,sender_id) VALUES (2,'Naslov za vavek vekova ','Pozdrav ja se zovem Marica i mozemo li se upoznati','2017-02-22 10:42:58',5,4 );

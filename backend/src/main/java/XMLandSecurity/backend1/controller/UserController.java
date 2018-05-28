@@ -27,11 +27,11 @@ public class UserController {
 //    @Autowired
 //    private CommentService commentService;
 
-    @Autowired
-    private MessageService messageService;
-
-    @Autowired
-    private ReservationService reservationService;
+//    @Autowired
+//    private MessageService messageService;
+//
+//    @Autowired
+//    private ReservationService reservationService;
 
     @RequestMapping(
             method = RequestMethod.GET,
@@ -113,26 +113,29 @@ public class UserController {
 //            lodgingService.delete(lodging.getId());
 //        }
 
-        if(messageService.findBySender(id) != null) {
-            List<Message> sender = messageService.findBySender(id);
 
-            for(int i=0;i< sender.size();i++){
-                messageService.delete(sender.get(i).getSender().getId());  // posto je i int
-            }
-        }
-        if(messageService.findByReceiver(id) != null) {
-            List<Message> reciver = messageService.findByReceiver(id);
-            for (int i = 0; i < reciver.size(); i++) {
-                messageService.delete(reciver.get(i).getReceiver().getId());  // posto je i int
-            }
-        }
 
-        if(reservationService.findByUser(id) != null) {
-            List<Reservation> reservations = reservationService.findByUser(id);
-            for (int i = 0; i < reservations.size(); i++) {
-                reservationService.delete(reservations.get(i).getUser().getId());  // posto je i int
-            }
-        }
+//        if(messageService.findBySender(id) != null) {
+//            List<Message> sender = messageService.findBySender(id);
+//
+//            for(int i=0;i< sender.size();i++){
+//                messageService.delete(sender.get(i).getSender().getId());  // posto je i int
+//            }
+//        }
+//        if(messageService.findByReceiver(id) != null) {
+//            List<Message> reciver = messageService.findByReceiver(id);
+//            for (int i = 0; i < reciver.size(); i++) {
+//                messageService.delete(reciver.get(i).getReceiver().getId());  // posto je i int
+//            }
+//        }
+//
+//        if(reservationService.findByUser(id) != null) {
+//            List<Reservation> reservations = reservationService.findByUser(id);
+//            for (int i = 0; i < reservations.size(); i++) {
+//                reservationService.delete(reservations.get(i).getUser().getId());  // posto je i int
+//            }
+//        }
+       // User user = userService.findOne(id);
 
         userService.delete(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -161,5 +164,6 @@ public class UserController {
         userService.save(korisnik);
         return new ResponseEntity(korisnik, HttpStatus.OK);     // "200 OK"
     }
+
 
 }

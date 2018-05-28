@@ -118,24 +118,43 @@ public class User implements Serializable {
     @XmlElement(name="reservation", required=false)
     private List<Reservation> reservations = new ArrayList<Reservation>();
 
+    @JsonIgnore
+    @XmlElementWrapper(name="lodgings", required=false)
+    @XmlElement(name="lodgings", required=false)
+    @OneToMany(mappedBy = "agent", cascade = CascadeType.ALL)
+    private List<Lodging> lodgings = new ArrayList<Lodging>();
+
+     @JsonIgnore
+     @XmlElementWrapper(name="ratings", required=false)
+     @XmlElement(name="ratings", required=false)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Rating> ratings = new ArrayList<Rating>();
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @XmlElementWrapper(name="comments", required=true)
+    @XmlElement(name="comments", required=true)
+    private List<Comment> comments = new ArrayList<Comment>();
+
+
     public User() {
     }
 
-    public User(String username, String passwordHash, String name, String surname, String email, String city, String number, Role role, Date lastPasswordReset, boolean activated, List<Message> receviedMessages, List<Message> sentMessages, List<Reservation> reservations) {
-        this.username = username;
-        this.passwordHash = passwordHash;
-        this.name = name;
-        this.surname = surname;
-        this.email = email;
-        this.city = city;
-        this.number = number;
-        this.role = role;
-        this.lastPasswordReset = lastPasswordReset;
-        this.activated = activated;
-        this.receviedMessages = receviedMessages;
-        this.sentMessages = sentMessages;
-        this.reservations = reservations;
-    }
+//    public User(String username, String passwordHash, String name, String surname, String email, String city, String number, Role role, Date lastPasswordReset, boolean activated, List<Message> receviedMessages, List<Message> sentMessages, List<Reservation> reservations) {
+//        this.username = username;
+//        this.passwordHash = passwordHash;
+//        this.name = name;
+//        this.surname = surname;
+//        this.email = email;
+//        this.city = city;
+//        this.number = number;
+//        this.role = role;
+//        this.lastPasswordReset = lastPasswordReset;
+//        this.activated = activated;
+//        this.receviedMessages = receviedMessages;
+//        this.sentMessages = sentMessages;
+//        this.reservations = reservations;
+//    }
 
     public List<Message> getReceviedMessages() {
         return receviedMessages;
@@ -255,5 +274,29 @@ public class User implements Serializable {
 
     public void setAdress(String adress) {
         this.adress = adress;
+    }
+
+    public List<Lodging> getLodgings() {
+        return lodgings;
+    }
+
+    public void setLodgings(List<Lodging> lodgings) {
+        this.lodgings = lodgings;
+    }
+
+    public List<Rating> getRatings() {
+        return ratings;
+    }
+
+    public void setRatings(List<Rating> ratings) {
+        this.ratings = ratings;
+    }
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
     }
 }

@@ -16,6 +16,6 @@ public interface LodgingService {
 
     Lodging findByAgent(Long id);
 
-    List<Lodging> findByAdditionalServiceList(Long id);
+   // List<Lodging> findByAdditionalServiceList(Long id);
 
 }

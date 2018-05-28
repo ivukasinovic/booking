@@ -2,21 +2,27 @@
 <div #mydiv>
   <table border="2" style="..." align="center" class="table">
     <tr>
+      <th>id usera</th>
       <th>Name</th>
       <th>Poruka</th>
       <td></td>
     </tr>
-    <tr *ngFor="let p of komentari">
-      <td> {{ vratiIme(p.user) }}</td>
+
+    <!--<tr *ngIf="p.user != null" >-->
+    <tr   *ngFor="let p of komentari" >
+
+    <!--<td> {{ vratiIme(p.user) }}</td>-->
+      <td> {{ (p.user) }}</td>
+      <td> {{  vratiIme(p.user) }}</td>
       <td>{{p.body}}</td>
-      <div>
+      <!--<div>-->
         <td>
           <button class="btn" (click)="potvrdi(p.id)">Approve</button>
           <button class="btn" (click)="obrisi(p.id)">Delete</button>
 
         </td>
-      </div>
-    </tr>
+      </tr>
 
+    <!--</div>-->
   </table>
 </div>

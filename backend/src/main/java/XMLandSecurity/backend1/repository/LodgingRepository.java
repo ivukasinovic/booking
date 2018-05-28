@@ -10,6 +10,6 @@ public interface LodgingRepository extends JpaRepository<Lodging,Long> {
 
     Lodging findByAgent(Long id);
 
-    List<Lodging> findByAdditionalServiceList(Long id);
+   // List<Lodging> findByAdditionalServiceList(Long id);
 
 }

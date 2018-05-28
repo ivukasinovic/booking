@@ -17,26 +17,23 @@ export class CommentComponent implements OnInit {
   users: User[];
 
   constructor(private authService: AuthService, private router: Router) {
-
-  }
-
-  ngOnInit() {
-
     this.authService.getUsers().subscribe(
       (response: User[]) => {
         this.users = response;
       });
-
     this.authService.allComments().subscribe(
       (response: Comment[]) => {
         this.komentari = response;
       });   // err kad stavim ispise mi gresku
 
+  }
 
+  ngOnInit() {
   }
 
   vratiIme(br: number): string {
-    return this.users[br].name;
+    br = br - 1;
+    return this.users[br].name;    // : Observable<User[]>
   }
 
   obrisi(br: number) {

@@ -40,10 +40,10 @@ public class LodgingServiceImpl implements LodgingService {
         return lodgingRepository.findByAgent(id);
     }
 
-    @Override
-    public List<Lodging> findByAdditionalServiceList(Long id) {
-        return  lodgingRepository.findByAdditionalServiceList(id);
-    }
+//    @Override
+//    public List<Lodging> findByAdditionalServiceList(Long id) {
+//        return  lodgingRepository.findByAdditionalServiceList(id);
+//    }
 
 
 }

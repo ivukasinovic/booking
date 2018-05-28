@@ -14,9 +14,6 @@ export class UsersComponent implements OnInit {
   usersPrim: User[];
 
   constructor(private authService: AuthService, private router: Router) {
-  }
-
-  ngOnInit() {
     this.authService.getUsersSamo().subscribe(
       (response: User[]) => {
         this.users = response;
@@ -26,6 +23,10 @@ export class UsersComponent implements OnInit {
       (response: User[]) => {
         this.usersPrim = response;
       });
+
+  }
+
+  ngOnInit() {
 
 
   }

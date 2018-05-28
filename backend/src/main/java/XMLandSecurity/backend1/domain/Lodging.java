@@ -109,33 +109,22 @@ public class Lodging implements Serializable {
     private List<Rating> ratingList = new ArrayList<Rating>();
 
     // ==========
-    @JsonIgnore
-    @ManyToMany(mappedBy = "lodgingList", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    @XmlElementWrapper(name="additionalServiceList", required=true)
-    @XmlElement(name="additionalService", required=true)
-    private List<AdditionalService> additionalServiceList = new ArrayList<AdditionalService>();
+ //   @JsonIgnore
+//        @ManyToMany(mappedBy = "lodgingList", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+//        @XmlElementWrapper(name="additionalServiceList", required=true)
+//        @XmlElement(name="additionalService", required=true)
+//        private List<AdditionalService> additionalServiceList = new ArrayList<AdditionalService>();
     // ==========
+
+    @OneToMany(mappedBy = "lodging", cascade = CascadeType.ALL)
+    @XmlElementWrapper(name="additionalServices_list", required=true)
+    @XmlElement(name="additionalServices_list", required=true)
+    private List<AdditionalService> additionalServices_list= new ArrayList<AdditionalService>();
 
 
     public Lodging() {
     }
 
-//    public Lodging(String address, String details, String image, Double rating, Integer persons_number, CategoryOfLodging category, TypeOfLodging type, City city, List<PriceList> priceLists, User agent, List<Comment> comments, List<Reservation> reservations, AdditionalService additionalService, List<Rating> ratingList) {
-//        this.address = address;
-//        this.details = details;
-//        this.image = image;
-//        this.rating = rating;
-//        this.persons_number = persons_number;
-//        this.category = category;
-//        this.type = type;
-//        this.city = city;
-//        this.priceLists = priceLists;
-//        this.agent = agent;
-//        this.comments = comments;
-//        this.reservations = reservations;
-//        this.additionalService = additionalService;
-//        this.ratingList = ratingList;
-//    }
 
     public Double getRating() {
         return rating;
@@ -257,12 +246,12 @@ public class Lodging implements Serializable {
         this.persons_number = persons_number;
     }
 
-    public List<AdditionalService> getAdditionalServiceList() {
-        return additionalServiceList;
+    public List<AdditionalService> getAdditionalServices_list() {
+        return additionalServices_list;
     }
 
-    public void setAdditionalServiceList(List<AdditionalService> additionalServiceList) {
-        this.additionalServiceList = additionalServiceList;
+    public void setAdditionalServices_list(List<AdditionalService> additionalServices_list) {
+        this.additionalServices_list = additionalServices_list;
     }
 }
 

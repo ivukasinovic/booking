@@ -76,16 +76,18 @@ export class AuthService {
     return this.http.delete('api/type-lodging/' + id);
   }
 
+  // ====
+
   getAdditional() {
-    return this.http.get('api/addtional-service');
+    return this.http.get('api/addtional-serviceadmin');
   }
 
   addAdditional(tip: Additional) {
-    return this.http.post('api/addtional-service', tip);
+    return this.http.post('api/addtional-serviceadmin', tip);
   }
 
   deleteAdditional(id: number) {
-    return this.http.delete('api/addtional-service/' + id);
+    return this.http.delete('api/addtional-serviceadmin/' + id);
   }
 
   // ====
