@@ -29,7 +29,6 @@ public class EncDecSimple {
         }
         Base64.Encoder encoder = Base64.getEncoder();
         String encryptedString = encoder.encodeToString(encrypted);
-        System.out.println(encryptedString);
         return  encryptedString;
     }
 

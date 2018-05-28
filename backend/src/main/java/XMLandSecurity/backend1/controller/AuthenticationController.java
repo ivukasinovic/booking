@@ -65,9 +65,6 @@ public class AuthenticationController {
     @Autowired
     private EmailService emailService;
 
-    @Autowired
-    private EncDecSimple encDecSimple;
-
 
     @RequestMapping(method = RequestMethod.POST, value = "${route.authentication}")
     public ResponseEntity<?> authenticationRequest(@RequestBody AuthenticationRequest authenticationRequest, Device device) throws AuthenticationException {
