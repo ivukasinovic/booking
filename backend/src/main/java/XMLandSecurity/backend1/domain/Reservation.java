@@ -20,7 +20,7 @@ import javax.xml.bind.annotation.XmlType;
 @Table
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name="reservation")
-@XmlType
+
 public class Reservation implements Serializable {
 
     @Id

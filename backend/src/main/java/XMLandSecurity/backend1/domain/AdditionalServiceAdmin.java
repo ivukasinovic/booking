@@ -13,7 +13,7 @@ import java.io.Serializable;
 @Table
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name="additionalServiceAdmin")
-@XmlType
+
 public class AdditionalServiceAdmin implements Serializable {
 
     @Id

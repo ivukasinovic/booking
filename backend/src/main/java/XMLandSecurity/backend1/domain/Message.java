@@ -19,7 +19,7 @@ import javax.xml.bind.annotation.XmlType;
 @Table
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name="message")
-@XmlType
+
 public class Message implements Serializable {
 
     @Id

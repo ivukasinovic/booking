@@ -31,7 +31,7 @@ import java.util.List;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name="user")
-@XmlType
+
 public class User implements Serializable {
 
     @Id

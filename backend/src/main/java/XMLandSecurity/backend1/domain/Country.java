@@ -17,7 +17,7 @@ import javax.xml.bind.annotation.XmlType;
 @Table
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name="country")
-@XmlType
+
 public class Country implements Serializable {
 
     @Id

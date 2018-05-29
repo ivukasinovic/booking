@@ -18,7 +18,7 @@ import java.io.Serializable;
 @Table
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name="comment")
-@XmlType
+
 public class Comment implements Serializable {
 
     @Id

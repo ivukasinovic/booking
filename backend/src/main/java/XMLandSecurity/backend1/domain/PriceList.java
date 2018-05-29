@@ -21,8 +21,7 @@ import javax.xml.bind.annotation.XmlType;
 @Entity
 @Table
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlRootElement(name="lodging")
-@XmlType
+@XmlRootElement(name="priceList")
 public class PriceList implements Serializable {
 
     @Id
@@ -35,7 +34,7 @@ public class PriceList implements Serializable {
     private String year;
 
     @Column(name = "date_created", nullable = false,columnDefinition="DATETIME")
-    @XmlElement(name="dateCreated")
+    @XmlElement(name="dateCreated", required=true)
     private Date dateCreated;
 
 

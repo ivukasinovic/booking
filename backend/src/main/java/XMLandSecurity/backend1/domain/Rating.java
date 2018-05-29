@@ -21,7 +21,6 @@ import javax.xml.bind.annotation.XmlType;
 @Table
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name="rating")
-@XmlType
 public class Rating implements Serializable {
 
     @Id
