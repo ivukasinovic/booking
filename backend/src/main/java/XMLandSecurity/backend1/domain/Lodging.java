@@ -21,7 +21,7 @@ import java.util.List;
 @Table
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name="lodging")
-@XmlType
+
 public class Lodging implements Serializable {
 
     @Id

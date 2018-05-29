@@ -21,7 +21,7 @@ import java.util.List;
 @Table
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name="additionalService")
-@XmlType
+
 public class AdditionalService implements Serializable {
 
     @Id
