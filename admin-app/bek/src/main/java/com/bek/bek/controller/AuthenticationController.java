@@ -2,25 +2,34 @@ package com.bek.bek.controller;//package bekend.adminpanel.controller;
 
 import com.bek.bek.domain.User;
 import com.bek.bek.model.json.request.AuthenticationRequest;
+import com.bek.bek.model.json.response.AuthenticationResponse;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.http.client.ClientHttpRequestFactory;
+import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.xml.ws.Response;
 import java.io.IOException;
 
 @RestController
 public class AuthenticationController {
 
-    @RequestMapping(method = RequestMethod.POST,value = "/login")
-    public void authenticationRequest(@RequestBody AuthenticationRequest authenticationRequest, HttpServletResponse httpServletResponse) throws IOException {
-        //return  "redirect:/https://localhost:8443/${route.authentication}";
-//        httpServletResponse.setHeader("parameter", authenticationRequest);
-//        httpServletResponse.setHeader("Location","https://localhost:8443/${route.authentication}" );
-         RestTemplate rt = new RestTemplate();
-
-         rt.postForLocation("https://localhost:8443/api/login",authenticationRequest);
-
+    @RequestMapping(
+            method = RequestMethod.POST,
+            value = "/login",
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> authenticationRequest(@RequestBody AuthenticationRequest authenticationRequest){
+        HttpEntity<AuthenticationRequest> request = new HttpEntity<>(authenticationRequest);
+        RestTemplate rt = new RestTemplate();
+        AuthenticationResponse response = rt.postForObject("http://localhost:9000/api/login",request,AuthenticationResponse.class);
+        System.out.println(response.getToken());
+        return ResponseEntity.ok(new AuthenticationResponse(response.getToken()));
     }
 
     @RequestMapping( method = RequestMethod.GET, value = "${route.authentication.refresh}")
