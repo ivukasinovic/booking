@@ -6,6 +6,7 @@ import XMLandSecurity.backend1.service.CityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+
 import java.util.List;
 
 @Service
@@ -34,4 +35,8 @@ public class CityServiceImpl implements CityService {
         cityRepository.delete(id);
     }
 
+    @Override
+    public List<City> search(String name) {
+        return cityRepository.findByNameIgnoreCaseContaining(name);
+    }
 }

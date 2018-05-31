@@ -13,3 +13,34 @@ export class ChangePasssword {
   oldPw: string;
   newPw: string;
 }
+export class CategoryOfLodging {
+  id: number;
+  name: string;
+  label: string;
+}
+export class TypeOfLodging {
+  id: number;
+  label: string;
+  name: string;
+}
+export class Country {
+  id: number;
+  name: string;
+  code: string;
+}
+export class City {
+  id: number;
+  name: string;
+  country: Country;
+}
+export class Lodging {
+  id: number;
+  address: string;
+  details: string;
+  image: string;
+  rating: number;
+  persons_number: number;
+  category: CategoryOfLodging;
+  type: TypeOfLodging;
+  city: City;
+}

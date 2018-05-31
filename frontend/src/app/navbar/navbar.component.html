@@ -3,7 +3,11 @@
     <div class="navbar-header">
       <b><a class="navbar-brand" routerLink="/">Booking</a></b>
     </div>
+
+
+
     <ul class="nav navbar-nav">
+      <li><a routerLink="/search">Search</a></li>
       <li *ngIf="logged == true"><a routerLink="/certificates">Certificates</a></li>
     </ul>
     <ul *ngIf="logged == true" class="nav navbar-nav navbar-right">

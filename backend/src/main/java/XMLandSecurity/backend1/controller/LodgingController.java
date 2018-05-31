@@ -1,5 +1,6 @@
 package XMLandSecurity.backend1.controller;
 
+import XMLandSecurity.backend1.domain.City;
 import XMLandSecurity.backend1.domain.Lodging;
 import XMLandSecurity.backend1.service.LodgingService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +8,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import XMLandSecurity.backend1.service.CityService;
+import java.security.Principal;
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @RequestMapping(value = "/lodging")
@@ -14,6 +19,8 @@ public class LodgingController {
 
     @Autowired
     private LodgingService lodgingService;
+    @Autowired
+    private CityService cityService;
 
 
     @RequestMapping(
@@ -60,4 +67,31 @@ public class LodgingController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
+    @RequestMapping(
+            value = "/getLodgings",
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    public ResponseEntity<List<Lodging>> getLodgings(){
+        List<Lodging> lodgings = lodgingService.findAll();
+        return new ResponseEntity(lodgings, HttpStatus.OK);
+    }
+
+    @RequestMapping(
+            value = "/search/{cityName}",
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> search(@PathVariable("cityName") String cityName){
+        List<Lodging> lodgings = lodgingService.findAll();
+        List<Lodging> retLodgings = new ArrayList<Lodging>();
+        List<City> cities = new ArrayList<City>();
+
+        cities = cityService.search(cityName);
+        for(City ci : cities){
+            lodgings = lodgingService.findByCity(ci);
+            for(Lodging l : lodgings)
+                retLodgings.add(l);
+        }
+        return new ResponseEntity(retLodgings, HttpStatus.OK);
+    }
 }

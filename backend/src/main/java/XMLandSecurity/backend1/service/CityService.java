@@ -14,4 +14,5 @@ public interface CityService {
 
     void delete(Long id);
 
+    List<City> search(String name);
 }
