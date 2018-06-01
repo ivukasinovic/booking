@@ -1,0 +1,20 @@
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <b><a class="navbar-brand" routerLink="/">Booking Agent</a></b>
+    </div>
+    <ul class="nav navbar-nav">
+      <li *ngIf="logged == true"><a routerLink="/certificates">Lodging</a></li>
+    </ul>
+    <ul *ngIf="logged == true" class="nav navbar-nav navbar-right">
+      <li><a routerLink="/profile">Profile</a></li>
+      <li>
+        <p><b>Hi, {{username}}!</b></p>
+        <button class="btn btn-sm btn-warning" (click)="logout()">Logout</button>
+      </li>
+    </ul>
+    <ul *ngIf="logged == false" class="nav navbar-nav navbar-right">
+      <li><a routerLink="/login">Sign in</a></li>
+    </ul>
+  </div>
+</nav>
