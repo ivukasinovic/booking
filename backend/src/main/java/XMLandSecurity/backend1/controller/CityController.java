@@ -62,5 +62,13 @@ public class CityController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-
+    @RequestMapping(
+            value = "/getCities",
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    public ResponseEntity<List<City>> getCities(){
+        List<City> cities = cityService.findAll();
+        return new ResponseEntity(cities, HttpStatus.OK);
+    }
 }

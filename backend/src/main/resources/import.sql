@@ -11,11 +11,12 @@ INSERT INTO user (role, city, email, name, number, password_hash, surname, usern
 INSERT INTO country (id,name,code ) VALUES (1,'Germany','GER');
 INSERT INTO country (id,name,code) VALUES (2,'Irland','IRL');
 INSERT INTO country (id,name,code) VALUES (3,'France','FRA');
-
+INSERT INTO country (id,name,code) VALUES (4,'Turkey','TUR');
 
 INSERT INTO city (id,name, country_id ) VALUES (1,'Paris',3);
-INSERT INTO city (id,name, country_id ) VALUES (2,'Instambul',1);
+INSERT INTO city (id,name, country_id ) VALUES (2,'Istanbul',4);
 INSERT INTO city (id,name, country_id) VALUES (3,'Hamburg',1);
+INSERT INTO city (id,name, country_id) VALUES (4,'Berlin',1);
 
 -- INSERT INTO city (id,name, country_fk) VALUES (1,'Paris','FRA');
 -- INSERT INTO city (id,name, country_fk) VALUES (2,'Instambul','GER');
@@ -25,6 +26,7 @@ INSERT INTO city (id,name, country_id) VALUES (3,'Hamburg',1);
 
 INSERT INTO category_of_lodging (id,label,name ) VALUES (1,'5','kategorisana');
 INSERT INTO category_of_lodging (id,label,name ) VALUES (2,'4','kategorisana');
+
 
 INSERT INTO type_of_lodging (id,label,name ) VALUES (1,'Hotel','Stojkic lux');
 INSERT INTO type_of_lodging (id,label,name ) VALUES (2,'Breakfast and bed','Frans');
@@ -45,8 +47,12 @@ INSERT INTO type_of_lodging (id,label,name ) VALUES (3,'Apartman','Numanovic');
 -- INSERT INTO additional_service (id,name) VALUES (8 ,'private_bathroom')
 
 
-INSERT INTO lodging (id,address,details , image,rating,persons_number,category_id,type_id,city_id,agent_id) VALUES (1,'Bulevar Despota Stefana 7','NOVOO ,nove stvari vise detalja na telefon ..... xD','',4,4 ,1,2,3,2);
+INSERT INTO lodging (id,address,details , image,rating,persons_number,category_id,type_id,city_id,agent_id) VALUES (1,'Bulevar Despota Stefana 7','NOVOO ,nove stvari vise detalja na telefon ..... xD','',4,4 ,1,2,1,2);
 INSERT INTO lodging (id,address,details , image,rating,persons_number,category_id,type_id,city_id,agent_id) VALUES (2,'Bulevar Despota Stefana 35','Starija ali ocuvana garsonjeraa','',3,2,1,1,2,2);
+INSERT INTO lodging (id,address,details , image,rating,persons_number,category_id,type_id,city_id,agent_id) VALUES (3,'Sekspirova 42','Garsonjera','',3,1,1,1,2,2);
+INSERT INTO lodging (id,address,details , image,rating,persons_number,category_id,type_id,city_id,agent_id) VALUES (4,'Tolstojeva 23','Stan, dvosoban','',4,2,1,1,4,2);
+INSERT INTO lodging (id,address,details , image,rating,persons_number,category_id,type_id,city_id,agent_id) VALUES (5,'Andriceva 22','Nesto','',2,3,1,1,3,2);
+
 
 
 INSERT INTO additional_service (lodging_id,id) VALUES (1 , 1)

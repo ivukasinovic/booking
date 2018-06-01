@@ -1,5 +1,6 @@
 package XMLandSecurity.backend1.service.impl;
 
+import XMLandSecurity.backend1.domain.City;
 import XMLandSecurity.backend1.domain.Lodging;
 import XMLandSecurity.backend1.repository.LodgingRepository;
 import XMLandSecurity.backend1.service.LodgingService;
@@ -40,6 +41,14 @@ public class LodgingServiceImpl implements LodgingService {
         return lodgingRepository.findByAgent(id);
     }
 
+    @Override
+    public List<Lodging> findByCityAndPersons_number(String city, Integer personsNbr) {
+        return lodgingRepository.findByCityNameIgnoreCaseContainingAndPersonsNumber(city, personsNbr);
+    }
+    @Override
+    public List<Lodging> findByCityName(String cityName) {
+        return lodgingRepository.findByCityNameIgnoreCaseContaining(cityName);
+    }
 //    @Override
 //    public List<Lodging> findByAdditionalServiceList(Long id) {
 //        return  lodgingRepository.findByAdditionalServiceList(id);

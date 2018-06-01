@@ -1,5 +1,6 @@
 package XMLandSecurity.backend1.service;
 
+import XMLandSecurity.backend1.domain.City;
 import XMLandSecurity.backend1.domain.Lodging;
 
 import java.util.List;
@@ -16,6 +17,9 @@ public interface LodgingService {
 
     Lodging findByAgent(Long id);
 
+    List<Lodging> findByCityAndPersons_number(String city, Integer personsNbr);
+
+    List<Lodging> findByCityName(String cityName);
    // List<Lodging> findByAdditionalServiceList(Long id);
 
 }

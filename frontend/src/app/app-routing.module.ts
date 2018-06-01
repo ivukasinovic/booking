@@ -10,6 +10,7 @@ import {UserProfileComponent} from './user-profile/user-profile.component';
 import {ForgotPasswordComponent} from './forgot-password/forgot-password.component';
 import {ChangePasswordComponent} from './change-password/change-password.component';
 import {ResetPasswordComponent} from './reset-password/reset-password.component';
+import {SearchComponent} from './search/search.component';
 
 const routes: Routes = [
   {path: 'certificates/new-certificate', component: CertificatComponent},
@@ -23,7 +24,8 @@ const routes: Routes = [
   {path: 'change-password', component: ChangePasswordComponent,
     canActivate: [AuthGuardService]},
   {path: 'forgot-password', component: ForgotPasswordComponent},
-  {path: 'reset-password/:id', component: ResetPasswordComponent}
+  {path: 'reset-password/:id', component: ResetPasswordComponent},
+  {path: 'search', component: SearchComponent}
 
 ];
 

@@ -22,6 +22,8 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import {UserService} from './services/user.service';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { SearchComponent } from './search/search.component';
+import {SearchService} from './services/search.service';
 
 @NgModule({
   declarations: [
@@ -36,7 +38,8 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
     UserProfileComponent,
     ForgotPasswordComponent,
     ChangePasswordComponent,
-    ResetPasswordComponent
+    ResetPasswordComponent,
+    SearchComponent
   ],
   imports: [
     BrowserModule,
@@ -53,6 +56,7 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
     AuthGuardService,
     AuthService,
     RoleGuardService,
+    SearchService,
     UserService],
   bootstrap: [AppComponent]
 })
