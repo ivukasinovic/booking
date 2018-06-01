@@ -1,0 +1,53 @@
+<!--<button class="btn">Dodaj prijatelja</button>-->
+
+<div #mydiv>
+
+  <br>
+  <div align="center"><h1> Only ordinaru users </h1></div>
+  <br>
+  <table border="2" style="..." align="center" class="table">
+    <tr>
+      <th>id</th>
+      <th>Username</th>
+      <th>Name</th>
+      <th>Surname</th>
+      <td></td>
+    </tr>
+    <tr *ngFor="let p of users">
+      <td> {{ p.id }}</td>
+      <td> {{ p.username }}</td>
+      <td> {{ p.name }}</td>
+      <td>{{ p.surname }}</td>
+      <div>
+        <td>
+
+          <button class="btn" (click)="activate(p.id)" *ngIf="p.activated == false">Activate</button>
+          <button class="btn" (click)="block(p.id)" *ngIf="p.activated">Block</button>
+          <button class="btn" (click)="obrisii(p.id)">Delete</button>
+
+        </td>
+      </div>
+    </tr>
+
+  </table>
+
+  <!-- nananan !!!!-->
+
+  <div align="center"><h1> Other type of users </h1></div>
+  <br>
+  <table border="2" style="..." align="center" class="table">
+    <tr>
+      <th>Username</th>
+      <th>Name</th>
+      <th>Surname</th>
+      <td></td>
+    </tr>
+    <tr *ngFor="let p of usersPrim">
+      <td *ngIf=" p.role != 'USER'"> {{ p.username }}</td>
+      <td *ngIf=" p.role != 'USER'"> {{ p.name }}</td>
+      <td *ngIf=" p.role != 'USER'">{{ p.surname }}</td>
+    </tr>
+
+  </table>
+
+</div>

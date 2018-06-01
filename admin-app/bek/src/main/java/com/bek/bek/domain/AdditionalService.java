@@ -1,54 +1,28 @@
-package XMLandSecurity.backend1.domain;
+package com.bek.bek.domain;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIdentityReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-
-import javax.persistence.*;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElementWrapper;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity
-@Table
-@XmlAccessorType(XmlAccessType.FIELD)
-@XmlRootElement(name="additionalService")
 
 public class AdditionalService implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    @XmlElement(name="id", required=true)
+
     private Long id;
 
 //    @Column(name = "name")
 //    @XmlElement(name="name", required=true)
 //    private String name;
 
-    @OneToMany(mappedBy = "additionalService", cascade = CascadeType.ALL)
-    @XmlElementWrapper(name="additionalService_list", required=true)
-    @XmlElement(name="city", required=true)
+
     private List<AdditionalServiceAdmin> additionalService_list = new ArrayList<AdditionalServiceAdmin>();
 
 
-    @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-    @JsonIdentityReference(alwaysAsId = true)
-    @JoinColumn(name = "lodging_id", nullable = false)
-    @ManyToOne
-    @XmlElement(name="lodging", required=true)
+
     private Lodging lodging;
 
-    public AdditionalService() {
-    }
+
 //    @JsonIgnore
 //    @JoinTable(
 //            name = "lodging_additional_service",
@@ -60,7 +34,7 @@ public class AdditionalService implements Serializable {
 //    private List<Lodging> lodgingList;
 
 
-    public AdditionalService(int i) {
+    public AdditionalService() {
     }
 
 //
@@ -101,4 +75,5 @@ public class AdditionalService implements Serializable {
     public void setLodging(Lodging lodging) {
         this.lodging = lodging;
     }
+
 }

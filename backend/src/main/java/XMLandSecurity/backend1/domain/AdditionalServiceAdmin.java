@@ -34,6 +34,11 @@ public class AdditionalServiceAdmin implements Serializable {
     private AdditionalService additionalService;
 
 
+    public AdditionalServiceAdmin(String name, AdditionalService additionalService) {
+        this.name = name;
+        this.additionalService = additionalService;
+    }
+
     public AdditionalServiceAdmin() { }
 
     public Long getId() {

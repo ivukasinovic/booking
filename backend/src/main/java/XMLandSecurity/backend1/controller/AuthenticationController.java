@@ -69,7 +69,7 @@ public class AuthenticationController {
     private EncDecSimple encDecSimple;
 
 
-    @RequestMapping(method = RequestMethod.POST, value = "${route.authentication}")
+    @RequestMapping(method = RequestMethod.POST, value = "${route.authentication}")  // /login  ${route.authentication}
     public ResponseEntity<?> authenticationRequest(@RequestBody AuthenticationRequest authenticationRequest, Device device) throws AuthenticationException {
 
         // Perform the authentication
