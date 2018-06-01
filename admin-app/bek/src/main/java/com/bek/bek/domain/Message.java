@@ -10,6 +10,7 @@ public class Message implements Serializable {
 
     private Long id;
 
+
     private String title;
 
 

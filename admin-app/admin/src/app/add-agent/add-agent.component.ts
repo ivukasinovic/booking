@@ -20,9 +20,11 @@ export class AddAgentComponent implements OnInit {
   }
 
   register() {
+    alert("Usloo log in");
     this.authService.registerAgent(this.user)
       .subscribe((data: User) => {
-          alert('Succes registration ' + data.username + '!');
+          // alert('Succes registration ' + data.username + '!');
+          alert('Succes registration ' + this.user.username + ' !!!');
           this.router.navigate(['/admin']);
           window.location.reload();
         },
@@ -31,5 +33,6 @@ export class AddAgentComponent implements OnInit {
         }
       );
   }
+
 
 }

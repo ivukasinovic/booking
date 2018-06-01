@@ -23,7 +23,7 @@ public class TypeOfLodging implements Serializable {
     @XmlElement(name="id", required=true)
     private Long id;
 
-    @Column(name = "label", nullable = false)
+    @Column(name = "label", unique = true, nullable = false)
     @XmlElement(name="label", required=true)
     private String label;
   

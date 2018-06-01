@@ -39,6 +39,7 @@ public class PriceList implements Serializable {
 
     private Double august;
 
+
     private Double september;
 
 

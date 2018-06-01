@@ -47,7 +47,8 @@ public class AdditionalService implements Serializable {
     @XmlElement(name="lodging", required=true)
     private Lodging lodging;
 
-
+    public AdditionalService() {
+    }
 //    @JsonIgnore
 //    @JoinTable(
 //            name = "lodging_additional_service",
@@ -59,7 +60,7 @@ public class AdditionalService implements Serializable {
 //    private List<Lodging> lodgingList;
 
 
-    public AdditionalService() {
+    public AdditionalService(int i) {
     }
 
 //

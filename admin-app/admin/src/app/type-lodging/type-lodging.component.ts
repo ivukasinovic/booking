@@ -60,7 +60,7 @@ export class TypeLodgingComponent implements OnInit {
 
     this.authService.addTypeOfLodging(this.noviTip)
       .subscribe((data: Tip) => {
-          alert('Succes registration ' + data.label + '!');
+          alert('Succes registration ' + this.noviTip.label + '!');
           this.router.navigate(['/admin']);
           window.location.reload();
         },

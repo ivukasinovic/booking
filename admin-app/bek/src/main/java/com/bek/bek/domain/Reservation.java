@@ -10,8 +10,8 @@ public class Reservation implements Serializable {
 
     private Long id;
 
-    private Date dateStart;
 
+    private Date dateStart;
 
     private Date dateEnd;
 

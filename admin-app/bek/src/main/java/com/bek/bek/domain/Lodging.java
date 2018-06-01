@@ -54,7 +54,6 @@ public class Lodging implements Serializable {
 //    private AdditionalService additionalService;
 
 
-
     private List<Rating> ratingList = new ArrayList<Rating>();
 
     // ==========

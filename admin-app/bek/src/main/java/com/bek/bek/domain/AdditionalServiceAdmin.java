@@ -1,7 +1,6 @@
 package com.bek.bek.domain;
 
 
-
 import java.io.Serializable;
 
 

@@ -75,4 +75,5 @@ public class AdditionalService implements Serializable {
     public void setLodging(Lodging lodging) {
         this.lodging = lodging;
     }
+
 }

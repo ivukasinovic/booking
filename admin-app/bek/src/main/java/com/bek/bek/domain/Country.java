@@ -10,19 +10,15 @@ import java.util.List;
 public class Country implements Serializable {
 
 
-
-
     private Long id;
 
-    //
 
     private String name;
 
-    //
 
     private String code;
 
-    //  @XmlElement(required = true)
+
 
     private List<City> cityList = new ArrayList<City>();
 
@@ -33,7 +29,7 @@ public class Country implements Serializable {
         this.code = code;
         this.cityList = cityList;
     }
-    // @XmlElement
+
     public Long getId() {
         return id;
     }
@@ -41,7 +37,7 @@ public class Country implements Serializable {
     public void setId(Long id) {
         this.id = id;
     }
-    //  @XmlElement
+
     public String getName() {
         return name;
     }
@@ -49,7 +45,7 @@ public class Country implements Serializable {
     public void setName(String name) {
         this.name = name;
     }
-    //  @XmlElement
+
     public String getCode() {
         return code;
     }
@@ -57,7 +53,7 @@ public class Country implements Serializable {
     public void setCode(String code) {
         this.code = code;
     }
-    // @XmlElement
+
     public List<City> getCityList() {
         return cityList;
     }

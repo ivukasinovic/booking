@@ -4,7 +4,9 @@ package com.bek.bek.domain;
 import java.io.Serializable;
 import java.util.Date;
 
+
 public class Rating implements Serializable {
+
 
     private Long id;
 

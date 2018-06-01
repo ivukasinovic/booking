@@ -22,7 +22,6 @@ public class Country implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     @Column(name = "id")
     @XmlElement(name="id", required=true)
     private Long id;

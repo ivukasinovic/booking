@@ -6,7 +6,9 @@ import java.util.Date;
 import java.util.List;
 
 
+
 public class User implements Serializable {
+
 
     private Long id;
 
@@ -17,12 +19,10 @@ public class User implements Serializable {
     private String passwordHash;
 
 
-
     private String name;
 
 
     private String surname;
-
 
 
     private String email;
@@ -56,7 +56,9 @@ public class User implements Serializable {
 
     private List<Reservation> reservations = new ArrayList<Reservation>();
 
+
     private List<Lodging> lodgings = new ArrayList<Lodging>();
+
 
     private List<Rating> ratings = new ArrayList<Rating>();
 
