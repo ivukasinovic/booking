@@ -7,12 +7,14 @@
   <br>
   <table border="2" style="..." align="center" class="table">
     <tr>
+      <th>id</th>
       <th>Username</th>
       <th>Name</th>
       <th>Surname</th>
       <td></td>
     </tr>
     <tr *ngFor="let p of users">
+      <td> {{ p.id }}</td>
       <td> {{ p.username }}</td>
       <td> {{ p.name }}</td>
       <td>{{ p.surname }}</td>

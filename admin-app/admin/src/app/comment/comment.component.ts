@@ -17,10 +17,7 @@ export class CommentComponent implements OnInit {
   users: User[];
 
   constructor(private authService: AuthService, private router: Router) {
-    this.authService.getUsers().subscribe(
-      (response: User[]) => {
-        this.users = response;
-      });
+
     this.authService.allComments().subscribe(
       (response: Comment[]) => {
         this.komentari = response;
@@ -29,12 +26,23 @@ export class CommentComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.authService.getUsers().subscribe(
+      (response: User[]) => {
+        this.users = response;
+      });
   }
 
   vratiIme(br: number): string {
     br = br - 1;
-    return this.users[br].name;    // : Observable<User[]>
-  }
+    //this.users[br] = new User();
+
+    if(this.users[br].activated === true) {
+      return this.users[br].name;    // : Observable<User[]>
+    }else {
+      return "n/A";
+    }
+
+    }
 
   obrisi(br: number) {
     console.log('Uslo: brisi ' + ' __ ' + br);

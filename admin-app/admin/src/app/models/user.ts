@@ -10,6 +10,7 @@ export class User {
   role: string;
   passwordHash: string;
   activated: boolean;
+  comments: Comment[];
 }
 
 export class Comment {

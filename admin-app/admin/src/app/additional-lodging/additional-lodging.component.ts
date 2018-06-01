@@ -18,6 +18,12 @@ export class AdditionalLodgingComponent implements OnInit {
 
   constructor(private authService: AuthService, private router: Router) {
     this.noviTip = new Additional();
+
+    this.authService.getAdditional()
+      .subscribe(
+        (response: Additional[]) => {
+          this.tip = response;
+        });   // err k
   }
 
   ngOnInit() {
@@ -29,11 +35,6 @@ export class AdditionalLodgingComponent implements OnInit {
     // this.niz.push('TV');
     // this.niz.push('MINI kitchn');
     // this.niz.push('private bathroom');
-    this.authService.getAdditional()
-      .subscribe(
-        (response: Additional[]) => {
-          this.tip = response;
-        });   // err k
 
 
   }

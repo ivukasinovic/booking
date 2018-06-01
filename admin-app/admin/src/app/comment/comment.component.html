@@ -3,7 +3,7 @@
   <table border="2" style="..." align="center" class="table">
     <tr>
       <th>id usera</th>
-      <th>Name</th>
+      <!--<th>Name</th>-->
       <th>Poruka</th>
       <td></td>
     </tr>
@@ -13,7 +13,7 @@
 
     <!--<td> {{ vratiIme(p.user) }}</td>-->
       <td> {{ (p.user) }}</td>
-      <td> {{  vratiIme(p.user) }}</td>
+      <td *ngIf="p.user.activated" > {{  vratiIme(p.user) }}</td>
       <td>{{p.body}}</td>
       <!--<div>-->
         <td>
