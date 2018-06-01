@@ -11,8 +11,8 @@ export class SearchService {
   allLodgings() {
     return this.http.get('api/lodging/getLodgings');
   }
-  searchByCity(cityName: string) {
-    return this.http.get('api/lodging/search/' + cityName);
+  searchLodging(cityName: string, nbrOfPersons: number) {
+    return this.http.get('api/lodging/search/' + cityName + '/' + nbrOfPersons +'/');
   }
 
   getCities() {

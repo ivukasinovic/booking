@@ -9,7 +9,9 @@ public interface LodgingRepository extends JpaRepository<Lodging,Long> {
 
 
     Lodging findByAgent(Long id);
-    List<Lodging> findByCity(City city);
+    List<Lodging> findByCityNameIgnoreCaseContaining( String cityName);
+    List<Lodging>findByCityNameIgnoreCaseContainingAndPersonsNumber(String name, Integer persons_number);
    // List<Lodging> findByAdditionalServiceList(Long id);
+
 
 }

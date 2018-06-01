@@ -78,20 +78,24 @@ public class LodgingController {
     }
 
     @RequestMapping(
-            value = "/search/{cityName}",
+            value = "/search/{cityName}/{personsNbr}/",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> search(@PathVariable("cityName") String cityName){
+    public ResponseEntity<?> search(@PathVariable("cityName") String cityName,@PathVariable("personsNbr") String personsNbr){
         List<Lodging> lodgings = lodgingService.findAll();
         List<Lodging> retLodgings = new ArrayList<Lodging>();
         List<City> cities = new ArrayList<City>();
-
-        cities = cityService.search(cityName);
-        for(City ci : cities){
-            lodgings = lodgingService.findByCity(ci);
-            for(Lodging l : lodgings)
-                retLodgings.add(l);
+        int broj ;
+        if(cityName.equals("undefined")) {
+            cityName = "";
         }
+        if(personsNbr.equals("undefined")) {
+            retLodgings = lodgingService.findByCityName(cityName);
+        }else {
+            broj = Integer.parseInt(personsNbr);
+            retLodgings = lodgingService.findByCityAndPersons_number(cityName, broj);
+        }
+
         return new ResponseEntity(retLodgings, HttpStatus.OK);
     }
 }

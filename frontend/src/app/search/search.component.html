@@ -4,10 +4,14 @@
       <h3>Search</h3>
       <form>
         <label>City </label>
-        <input [(ngModel)]="searchCity" type="text" class="form-control" name="searchCity"
+        <input [(ngModel)]="searchCity" value="" type="text" class="form-control" name="searchCity"
                placeholder="Enter city ">
         <br>
-        <button class="btn btn-primary" (click)="searchByCity()">Search lodging</button>
+        <label>Number of persons </label>
+        <input [(ngModel)]="searchPersonsNbr" value="" type="number" class="form-control" name="searchCity"
+               placeholder="Number of persons ">
+        <br>
+        <button class="btn btn-primary" (click)="searchLodging()">Search lodging</button>
       </form>
       <br>
   </div>
@@ -17,6 +21,8 @@
       <tr>
         <th>City</th>
         <th>Address</th>
+        <th>Number of persons</th>
+        <th>Raiting</th>
 
 
       </tr>
@@ -28,7 +34,8 @@
         <!--<td> {{ vratiIme(p.user) }}</td>-->
         <td> {{ (p.address) }}</td>
         <!--<div>-->
-
+        <td> {{(p.persons_number)}}</td>
+        <td> {{(p.rating)}}</td>
       </tr>
 
       <!--</div>-->

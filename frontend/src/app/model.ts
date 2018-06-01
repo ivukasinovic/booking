@@ -27,6 +27,7 @@ export class Country {
   id: number;
   name: string;
   code: string;
+  city: City;
 }
 export class City {
   id: number;

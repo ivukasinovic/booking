@@ -47,8 +47,8 @@ public class Lodging implements Serializable {
     private Double rating;
 
     @Column(name = "persons_number", nullable = false)
-    @XmlElement(name="persons_number", required=true)
-    private Integer persons_number;
+    @XmlElement(name="personsNumber", required=true)
+    private Integer personsNumber;
 
     @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
     @JsonIdentityReference(alwaysAsId = true)
@@ -239,11 +239,11 @@ public class Lodging implements Serializable {
     }
 
     public Integer getPersons_number() {
-        return persons_number;
+        return personsNumber;
     }
 
     public void setPersons_number(Integer persons_number) {
-        this.persons_number = persons_number;
+        this.personsNumber = persons_number;
     }
 
     public List<AdditionalService> getAdditionalServices_list() {

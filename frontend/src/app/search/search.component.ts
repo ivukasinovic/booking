@@ -10,7 +10,7 @@ import {Router} from '@angular/router';
 export class SearchComponent implements OnInit {
   lod: Lodging[];
   searchCity: string ;
-  city: City;
+  searchPersonsNbr: number;
   cities: City[];
   cityName: string;
   constructor(private router: Router, private searchService: SearchService) {
@@ -28,8 +28,8 @@ export class SearchComponent implements OnInit {
   ngOnInit() {
   }
 
-  searchByCity() {
-    this.searchService.searchByCity(this.searchCity)
+  searchLodging() {
+    this.searchService.searchLodging(this.searchCity, this.searchPersonsNbr)
       .subscribe(
         (response: Lodging[]) => {
           this.lod = response;
