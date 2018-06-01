@@ -21,7 +21,7 @@ public class AdditionalServiceAdminController {
     )
     public ResponseEntity< Object[]> getAll() {
         RestTemplate rt = new RestTemplate();
-        ResponseEntity<Object[]> responseEntity = rt.getForEntity("http://localhost:9000/api/addtional-serviceadmin", Object[].class);
+        ResponseEntity<Object[]> responseEntity = rt.getForEntity("http://localhost:8080/api/addtional-serviceadmin", Object[].class);
         Object[] objects = responseEntity.getBody();
         return new ResponseEntity<>(objects,HttpStatus.OK);
  }
@@ -32,9 +32,9 @@ public class AdditionalServiceAdminController {
             method = RequestMethod.GET
     )
     public ResponseEntity<?> getAdditional(@PathVariable("id") Long id) {
-       //  return ("redirect:/https://localhost:9000/addtional-serviceadmin/" + id);
+       //  return ("redirect:/https://localhost:8080/addtional-serviceadmin/" + id);
         RestTemplate rt = new RestTemplate();
-        ResponseEntity<Object> responseEntity = rt.getForEntity("http://localhost:9000/api/addtional-serviceadmin/"+id, Object.class,id);
+        ResponseEntity<Object> responseEntity = rt.getForEntity("http://localhost:8080/api/addtional-serviceadmin/"+id, Object.class,id);
         Object object = responseEntity.getBody();
 
 
@@ -50,7 +50,7 @@ public class AdditionalServiceAdminController {
     public ResponseEntity<AdditionalServiceAdmin>  napravi (@RequestBody AdditionalServiceAdmin additionalService) {
         HttpEntity<AdditionalServiceAdmin> request = new HttpEntity<>(additionalService);
         RestTemplate rt = new RestTemplate();
-        AdditionalServiceAdmin response = rt.postForObject("http://localhost:9000/api/addtional-serviceadmin", request, AdditionalServiceAdmin.class);
+        AdditionalServiceAdmin response = rt.postForObject("http://localhost:8080/api/addtional-serviceadmin", request, AdditionalServiceAdmin.class);
 
         return ResponseEntity.ok(new AdditionalServiceAdmin());
     }
@@ -63,7 +63,7 @@ public class AdditionalServiceAdminController {
     public void izbrisi(@PathVariable("id") Long id){
        // return  "redirect:/https://localhost:8443/addtional-serviceadmin" + id;
         RestTemplate rt = new RestTemplate();
-        rt.delete("http://localhost:9000/api/addtional-serviceadmin/"+id);
+        rt.delete("http://localhost:8080/api/addtional-serviceadmin/"+id);
     }
 
 }

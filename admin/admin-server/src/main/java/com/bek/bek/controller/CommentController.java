@@ -19,7 +19,7 @@ public class CommentController {
     )
     public ResponseEntity<?> getUser(@PathVariable("id") Long id) {
         RestTemplate rt = new RestTemplate();
-        ResponseEntity<Object> responseEntity = rt.getForEntity("http://localhost:9000/api/comment/"+id, Object.class,id);
+        ResponseEntity<Object> responseEntity = rt.getForEntity("http://localhost:8080/api/comment/"+id, Object.class,id);
         Object object = responseEntity.getBody();
 
 
@@ -33,7 +33,7 @@ public class CommentController {
     )
     public void CreateCity (@RequestBody Comment comment) {
         RestTemplate rt = new RestTemplate();
-        Comment response = rt.postForObject("http://localhost:9000/api/comment",comment,Comment.class);
+        Comment response = rt.postForObject("http://localhost:8080/api/comment",comment,Comment.class);
     }
 
     @RequestMapping(
@@ -42,7 +42,7 @@ public class CommentController {
     )
     public void izbrisi(@PathVariable("id") Long id){
         RestTemplate rt = new RestTemplate();
-     rt.delete("http://localhost:9000/api/comment/"+id);
+     rt.delete("http://localhost:8080/api/comment/"+id);
 
     }
 
@@ -55,7 +55,7 @@ public class CommentController {
     public ResponseEntity<?> pronadjiSveKojiNisuOdobreni(){
 
         RestTemplate rt = new RestTemplate();
-        ResponseEntity<Object[]> responseEntity = rt.getForEntity("http://localhost:9000/api/comment/all-not", Object[].class);
+        ResponseEntity<Object[]> responseEntity = rt.getForEntity("http://localhost:8080/api/comment/all-not", Object[].class);
         Object[] objects = responseEntity.getBody();
         return new ResponseEntity<>(objects,HttpStatus.OK);
     }
@@ -67,7 +67,7 @@ public class CommentController {
     )
     public ResponseEntity<?> prihvati(@PathVariable("id") Long id) {
         RestTemplate rt = new RestTemplate();
-        ResponseEntity<Object> responseEntity = rt.getForEntity("http://localhost:9000/api/comment/prihvati/"+id, Object.class,id);
+        ResponseEntity<Object> responseEntity = rt.getForEntity("http://localhost:8080/api/comment/prihvati/"+id, Object.class,id);
         Object object = responseEntity.getBody();
 
 

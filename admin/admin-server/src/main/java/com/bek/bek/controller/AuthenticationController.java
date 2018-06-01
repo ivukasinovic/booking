@@ -23,8 +23,7 @@ public class AuthenticationController {
     public ResponseEntity<?> authenticationRequest(@RequestBody AuthenticationRequest authenticationRequest){
         HttpEntity<AuthenticationRequest> request = new HttpEntity<>(authenticationRequest);
         RestTemplate rt = new RestTemplate();
-        AuthenticationResponse response = rt.postForObject("http://localhost:9000/api/login",request,AuthenticationResponse.class);
-        System.out.println(response.getToken());
+        AuthenticationResponse response = rt.postForObject("http://localhost:8080/api/login",request,AuthenticationResponse.class);
         return ResponseEntity.ok(new AuthenticationResponse(response.getToken()));
     }
 
@@ -42,7 +41,7 @@ public class AuthenticationController {
     public  ResponseEntity<?> register(@RequestBody User user) {
         HttpEntity<User> request = new HttpEntity<>(user);
         RestTemplate rt = new RestTemplate();
-        User response = rt.postForObject("http://localhost:9000/api/login",user,User.class );
+        User response = rt.postForObject("http://localhost:8080/api/login",user,User.class );
 
         rt.postForLocation("https://localhost:8443/api/register",response);
         return ResponseEntity.ok(new User());
@@ -54,7 +53,7 @@ public class AuthenticationController {
     public void registerAgent(@RequestBody User user) {
         //return "redirect:https://localhost:8443/registerAgent" + user;
         RestTemplate rt = new RestTemplate();
-       User response = rt.postForObject("http://localhost:9000/api/registerAgent",user,User.class);
+       User response = rt.postForObject("http://localhost:8080/api/registerAgent",user,User.class);
     }
 
 

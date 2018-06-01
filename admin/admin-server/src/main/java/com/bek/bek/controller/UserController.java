@@ -19,7 +19,7 @@ public class UserController {
     public ResponseEntity<?> getAllUsers() {
         // return "redirect:/https://localhost:8443/users";
         RestTemplate rt = new RestTemplate();
-        ResponseEntity<Object[]> responseEntity = rt.getForEntity("http://localhost:9000/api/users", Object[].class);
+        ResponseEntity<Object[]> responseEntity = rt.getForEntity("http://localhost:8080/api/users", Object[].class);
         Object[] objects = responseEntity.getBody();
         return new ResponseEntity<>(objects,HttpStatus.OK);
     }
@@ -31,7 +31,7 @@ public class UserController {
     public ResponseEntity<?> getAllUsuallyUsers() {
     //return "redirect:/https://localhost:8443/users/samo";
         RestTemplate rt = new RestTemplate();
-        ResponseEntity<Object[]> responseEntity = rt.getForEntity("http://localhost:9000/api/users/samo", Object[].class);
+        ResponseEntity<Object[]> responseEntity = rt.getForEntity("http://localhost:8080/api/users/samo", Object[].class);
         Object[] objects = responseEntity.getBody();
         return new ResponseEntity<>(objects,HttpStatus.OK);
     }
@@ -68,7 +68,7 @@ public class UserController {
     public void izbrisi(@PathVariable("id") Long id){
         //return  "https://localhost:8443/users/" + id;
         RestTemplate restTemplate = new RestTemplate();
-        restTemplate.delete ( "http://localhost:9000/api/users/"+id, id );
+        restTemplate.delete ( "http://localhost:8080/api/users/"+id, id );
 
     }
 
@@ -79,7 +79,7 @@ public class UserController {
     public ResponseEntity<?> activate(@PathVariable("id") Long id) {
        // return  "https://localhost:8443/users/activate/" + id;
         RestTemplate rt = new RestTemplate();
-        ResponseEntity<Object> responseEntity = rt.getForEntity("http://localhost:9000/api/users/activate/"+id, Object.class,id);
+        ResponseEntity<Object> responseEntity = rt.getForEntity("http://localhost:8080/api/users/activate/"+id, Object.class,id);
         Object object = responseEntity.getBody();
 
 
@@ -93,7 +93,7 @@ public class UserController {
     public ResponseEntity<?> deactivate(@PathVariable("id") Long id) {
        // return  "https://localhost:8443/users/deactive/" + id;
         RestTemplate rt = new RestTemplate();
-        ResponseEntity<Object> responseEntity = rt.getForEntity("http://localhost:9000/api/users/deactive//"+id, Object.class,id);
+        ResponseEntity<Object> responseEntity = rt.getForEntity("http://localhost:8080/api/users/deactive//"+id, Object.class,id);
         Object object = responseEntity.getBody();
 
 
