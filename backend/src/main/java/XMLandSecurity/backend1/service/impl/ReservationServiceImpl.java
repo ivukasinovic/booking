@@ -1,8 +1,10 @@
 package XMLandSecurity.backend1.service.impl;
 
+import XMLandSecurity.backend1.domain.Lodging;
 import XMLandSecurity.backend1.domain.Reservation;
 import XMLandSecurity.backend1.domain.User;
 import XMLandSecurity.backend1.repository.ReservationRepository;
+import XMLandSecurity.backend1.service.LodgingService;
 import XMLandSecurity.backend1.service.ReservationService;
 import XMLandSecurity.backend1.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,9 @@ public class ReservationServiceImpl implements ReservationService {
 
     @Autowired
     private ReservationRepository reservationRepository;
+
+    @Autowired
+    private LodgingService lodgingService;
 
 
     @Override
@@ -51,7 +56,7 @@ public class ReservationServiceImpl implements ReservationService {
 
     @Override
     public List<Reservation> findByLodging(Long id) {
-       return reservationRepository.findByLodging(id);
+       return reservationRepository.findByLodging(lodgingService.findOne(id));
     }
 
 

@@ -6,11 +6,9 @@ import XMLandSecurity.backend1.service.ReservationService;
 import XMLandSecurity.backend1.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 import java.util.List;
@@ -34,6 +32,7 @@ public class ReservationController {
     public ResponseEntity<List<Reservation>> getReservations() {
         List<Reservation> reservations = reservationService.findAll();
         return new ResponseEntity<List<Reservation>>(reservations, HttpStatus.OK);
+    }
 
     @RequestMapping(
             value = "/{id}",
@@ -44,17 +43,6 @@ public class ReservationController {
         Reservation listaAdminaFanZone = reservationService.findOne(id) ; //findOne(user);
         return new ResponseEntity<>(listaAdminaFanZone, HttpStatus.OK);     // "200 OK"
     }
-
-    @RequestMapping(
-            method = RequestMethod.POST,
-            consumes = MediaType.APPLICATION_JSON_VALUE,
-            produces = MediaType.APPLICATION_JSON_VALUE
-    )
-    public ResponseEntity<Reservation> createReservation (@RequestBody Reservation res) {
-        Reservation userNew = reservationService.save(res);
-        return new ResponseEntity(userNew, HttpStatus.OK);
-    }
-
 
     @RequestMapping(
             value = "/{id}",
