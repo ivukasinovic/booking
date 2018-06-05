@@ -38,11 +38,10 @@ export class SearchComponent implements OnInit {
 
   }
 
-  ngOnInit() {
-  }
+  ngOnInit(){}
 
   searchLodging() {
-    this.searchService.searchLodging(this.searchCity, this.searchPersonsNbr, this.searchSDT,this.searchEDT)
+    this.searchService.searchLodging(this.searchCity, this.searchPersonsNbr, this.searchSDT, this.searchEDT)
       .subscribe(
         (response: Lodging[]) => {
           this.lod = response;
@@ -57,13 +56,13 @@ export class SearchComponent implements OnInit {
   }
 
   getReservationByLodging(br: Lodging) {
-    const arr: Reservation[] = [];
+   /* const arr: Reservation[] = [];
     this.reser.forEach((item, index) => {
       if (item.lodging === br.id ) { // u idem.lodging se nalazi broj iako ga ond prepoznaje kao Lodging
         arr.push(item);
       }
     });
-    return arr;
+    return arr;*/
   }
 
 

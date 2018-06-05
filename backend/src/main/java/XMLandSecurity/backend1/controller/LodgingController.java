@@ -90,8 +90,12 @@ public class LodgingController {
                                     @PathVariable("dateStart") String dateStart,@PathVariable("dateEnd") String dateEnd){
         List<Lodging> lodgings = lodgingService.findAll();
         List<Lodging> retLodgings = new ArrayList<Lodging>();
+        List<Lodging> ret = new ArrayList<Lodging>();
+
         retLodgings= null;
         int broj;
+        System.out.println("\n POCETNI DATUM : " + dateStart +
+                "\n KRAJNJI DATUM" + dateEnd) ;
 
         if(dateStart.equals("undefined") || dateStart.equals("")) {
             dateStart ="1995-09-16" ;
@@ -119,14 +123,21 @@ public class LodgingController {
         }
         if(personsNbr.equals("undefined") || personsNbr.equals("") || personsNbr.equals("null")) {
             retLodgings = lodgingService.findByCityName(cityName,dateS,dateE);
-            System.out.println("\n NA PRAVOM : " + retLodgings.size());
+         //   System.out.println("\n NA PRAVOM : " + retLodgings.size());
 
-
+//Dodaj DATE PRETRAGU KADA JE UNET BROJ
         }else {
             broj = Integer.parseInt(personsNbr);
             retLodgings = lodgingService.findByCityAndPersons_number(cityName, broj);
         }
 
-        return new ResponseEntity(retLodgings, HttpStatus.OK);
+
+        for(Lodging k : retLodgings){
+            if(!ret.contains(k)) {
+                ret.add(k);
+            }
+        }
+        //System.out.println("\n AAA "+ ret.size());
+        return new ResponseEntity(ret, HttpStatus.OK);
     }
 }
