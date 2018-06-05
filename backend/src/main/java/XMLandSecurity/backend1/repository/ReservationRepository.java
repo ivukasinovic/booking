@@ -8,5 +8,5 @@ import java.util.List;
 public interface ReservationRepository extends JpaRepository<Reservation,Long> {
 
     List<Reservation> findByUser(Long id);     // andActive mozda ???!!
-
+    List<Reservation> findByLodging(Long id);
 }

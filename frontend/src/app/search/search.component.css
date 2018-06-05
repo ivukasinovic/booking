@@ -18,3 +18,10 @@
   background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
   background-size: cover;
 }
+#inline{
+  width:100%;
+  height:auto;
+  display:flex;}
+.one,.two{width:50%;
+  height:100px;
+  margin:10px;}

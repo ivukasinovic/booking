@@ -7,6 +7,7 @@ import XMLandSecurity.backend1.service.LodgingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -46,8 +47,8 @@ public class LodgingServiceImpl implements LodgingService {
         return lodgingRepository.findByCityNameIgnoreCaseContainingAndPersonsNumber(city, personsNbr);
     }
     @Override
-    public List<Lodging> findByCityName(String cityName) {
-        return lodgingRepository.findByCityNameIgnoreCaseContaining(cityName);
+    public List<Lodging> findByCityName(String cityName, Date startDate, Date endDate) {
+        return lodgingRepository.findByCityNameIgnoreCaseContainingAndReservationsDateStartBeforeOrReservationsDateStartAfterAndReservationsDateEndBeforeOrReservationsDateEndAfter(cityName,startDate,endDate,startDate,endDate);
     }
 //    @Override
 //    public List<Lodging> findByAdditionalServiceList(Long id) {

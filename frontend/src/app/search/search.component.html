@@ -2,15 +2,30 @@
   <div class="col-md-4">
 
       <h3>Search</h3>
-      <form>
+      <form >
         <label>City </label>
-        <input [(ngModel)]="searchCity" value="" type="text" class="form-control" name="searchCity"
-               placeholder="Enter city ">
+        <input  id ="searchCity" [(ngModel)]="searchCity" value="" type="text" class="form-control" name="searchCity"
+               placeholder="Enter city " >
+
         <br>
         <label>Number of persons </label>
-        <input [(ngModel)]="searchPersonsNbr" value="" type="number" class="form-control" name="searchCity"
-               placeholder="Number of persons ">
+        <input appMyNumberOnly="true" [(ngModel)]="searchPersonsNbr" value="" type="number" class="form-control" name="searchCity"
+               placeholder="Number of persons" min = "1" max = "5" onkeydown="javascript: return (event.keyCode > 47 && event.keyCode < 54 || event.keyCode == 08)" >
+
         <br>
+        <div id="inline">
+          <div class="one">
+            <label>Start date </label>
+            <input name="searchSDT" type="date" [ngModel] ="searchSDT | date:'yyyy-MM-dd'" (ngModelChange)="searchSDT = $event">
+          </div>
+          <div class="two">
+            <label>End date </label>
+            <input name="searchEDT" type="date" [ngModel] ="searchEDT | date:'yyyy-MM-dd'" (ngModelChange)="searchEDT = $event">
+          </div>
+        </div>
+        <br>
+
+
         <button class="btn btn-primary" (click)="searchLodging()">Search lodging</button>
       </form>
       <br>
@@ -23,6 +38,8 @@
         <th>Address</th>
         <th>Number of persons</th>
         <th>Raiting</th>
+        <th>Reservation</th>
+
 
 
       </tr>
@@ -36,10 +53,44 @@
         <!--<div>-->
         <td> {{(p.persons_number)}}</td>
         <td> {{(p.rating)}}</td>
+        <td>
+            <ul  >
+              <!-- <li *ngFor="let r of (getReservationByLodging(p.id)) "> 1 </li>
+              <li *ngFor="let r of reserByLodg"> {{ (getReservationByLodgingStart1(p.id) | date:'yyyy-MM-dd') }} - {{ (getReservationByLodgingEnd(p.id) | date:'yyyy-MM-dd') }}</li>
+               -->
+              <li *ngFor="let r of getReservationByLodging(p) "> {{ (r.dateStart | date:'yyyy-MM-dd') }} - {{ (r.dateEnd | date:'yyyy-MM-dd') }}</li>
+
+            </ul>
+        </td>
+
       </tr>
 
       <!--</div>-->
     </table>
   </div>
+  <div #mydivRezervacija>
+    <table border="2" style="..." align="center" class="table">
+      <tr>
+        <th>Start</th>
+        <th>End</th>
 
+
+
+
+      </tr>
+
+      <!--<tr *ngIf="p.user != null" >-->
+      <tr   *ngFor="let p of reser" >
+        <td>  {{ (p.dateStart | date:'yyyy-MM-dd HH:mm:ss') }}</td>
+
+        <!--<td> {{ vratiIme(p.user) }}</td>-->
+        <td> {{ (p.dateEnd | date:'yyyy-MM-dd HH:mm:ss') }}</td>
+        <!--<div>-->
+
+
+      </tr>
+
+      <!--</div>-->
+    </table>
+  </div>
 </div>
