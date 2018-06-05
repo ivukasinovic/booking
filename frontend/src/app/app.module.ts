@@ -24,6 +24,7 @@ import {UserService} from './services/user.service';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { SearchComponent } from './search/search.component';
 import {SearchService} from './services/search.service';
+import { NumberOnlyDirective } from './number.directive';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import {SearchService} from './services/search.service';
     ForgotPasswordComponent,
     ChangePasswordComponent,
     ResetPasswordComponent,
-    SearchComponent
+    SearchComponent,
+    NumberOnlyDirective
   ],
   imports: [
     BrowserModule,

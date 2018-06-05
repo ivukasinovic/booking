@@ -3,6 +3,7 @@ package XMLandSecurity.backend1.service;
 import XMLandSecurity.backend1.domain.City;
 import XMLandSecurity.backend1.domain.Lodging;
 
+import java.util.Date;
 import java.util.List;
 
 public interface LodgingService {
@@ -19,7 +20,7 @@ public interface LodgingService {
 
     List<Lodging> findByCityAndPersons_number(String city, Integer personsNbr);
 
-    List<Lodging> findByCityName(String cityName);
+    List<Lodging> findByCityName(String cityName, Date startDate, Date endDate);
    // List<Lodging> findByAdditionalServiceList(Long id);
 
 }

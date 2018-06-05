@@ -44,4 +44,15 @@ export class Lodging {
   category: CategoryOfLodging;
   type: TypeOfLodging;
   city: City;
+  reservations: Reservation;
+
+}
+export class Reservation {
+  id: number;
+  dateStart: Date;
+  dateEnd: Date;
+  active: boolean;
+  visited: boolean;
+  lodging: Lodging;
+  user: User;
 }
