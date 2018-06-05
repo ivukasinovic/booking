@@ -29,13 +29,15 @@ public class Reservation implements Serializable {
     @XmlElement(name="id", required=true)
     private Long id;
 
-    @NotNull
-    @Column(name = "date_start",nullable = false,columnDefinition="DATETIME")
+
+    @Column(name = "date_start", nullable = false)
+    @Temporal(TemporalType.DATE)
     @XmlElement(name="dateStart", required=true)
     private Date dateStart;
 
-    @NotNull
-    @Column(name = "date_end",nullable = false,columnDefinition="DATETIME")
+
+    @Column(name = "date_end", nullable = false)
+    @Temporal(TemporalType.DATE)
     @XmlElement(name="dateEnd", required=true)
     private Date dateEnd;
 
@@ -63,6 +65,8 @@ public class Reservation implements Serializable {
 
 
     public Reservation() {
+        active = true;
+        visited = false;
     }
 
     public Reservation(Date dateStart, Date dateEnd, Boolean active, Boolean visited, Lodging lodging, User user) {
