@@ -22,14 +22,8 @@ public class ReservationController {
     @Autowired
     private ReservationService reservationService;
 
-    @Autowired
-    private UserService userService;
-
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity createReservation(@RequestBody Reservation reservation) {
-
-        //  User user = userService.findByUsername(principal.getName());
-        //   reservation.setUser(user);
         if (reservationService.save(reservation) != null)
             return new ResponseEntity(HttpStatus.OK);
 
@@ -40,5 +34,65 @@ public class ReservationController {
     public ResponseEntity<List<Reservation>> getReservations() {
         List<Reservation> reservations = reservationService.findAll();
         return new ResponseEntity<List<Reservation>>(reservations, HttpStatus.OK);
+
+    @RequestMapping(
+            value = "/{id}",
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    public ResponseEntity<Reservation> getReservation (@PathVariable("id") Long id) {
+        Reservation listaAdminaFanZone = reservationService.findOne(id) ; //findOne(user);
+        return new ResponseEntity<>(listaAdminaFanZone, HttpStatus.OK);     // "200 OK"
+    }
+
+    @RequestMapping(
+            method = RequestMethod.POST,
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    public ResponseEntity<Reservation> createReservation (@RequestBody Reservation res) {
+        Reservation userNew = reservationService.save(res);
+        return new ResponseEntity(userNew, HttpStatus.OK);
+    }
+
+
+    @RequestMapping(
+            value = "/{id}",
+            method = RequestMethod.PUT,
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    public ResponseEntity<Reservation> updateReservation (@PathVariable("id") Long id) {
+        Reservation listaAdminaFanZone = reservationService.findOne(id);
+        return new ResponseEntity(listaAdminaFanZone, HttpStatus.OK);     // "200 OK"
+    }
+
+    @RequestMapping(
+            value = "/{id}",
+            method = RequestMethod.DELETE
+    )
+    public ResponseEntity<Reservation> deleteReservation(@PathVariable("id") Long id){
+        reservationService.delete(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @RequestMapping(
+            value = "/getReservations",
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    public ResponseEntity<List<Reservation>> getLodgings(){
+        List<Reservation> reservations = reservationService.findAll();
+        return new ResponseEntity(reservations, HttpStatus.OK);
+    }
+    @RequestMapping(
+            value = "/getReservationByLodging/{idLodg}",
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> search(@PathVariable("idLodg") Long idLodg){
+
+        List<Reservation> reservations = reservationService.findByLodging(idLodg);
+
+        return new ResponseEntity(reservations, HttpStatus.OK);
     }
 }
