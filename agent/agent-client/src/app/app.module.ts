@@ -5,14 +5,15 @@ import { AppRoutingModule } from './app-routing.module';
 import { NavbarComponent } from './navbar/navbar.component';
 import {AuthModule} from './auth/auth.module';
 import {FormsModule} from '@angular/forms';
-import {AuthService} from './auth/auth.service';
-import {HttpClientModule} from '@angular/common/http';
+import { ReservationListComponent } from './reservation-list/reservation-list.component';
+import {LodgingService} from './lodging.service';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    NavbarComponent
+    NavbarComponent,
+    ReservationListComponent
   ],
   imports: [
     BrowserModule,
@@ -21,7 +22,7 @@ import {HttpClientModule} from '@angular/common/http';
     AuthModule,
     FormsModule
   ],
-  providers: [],
+  providers: [LodgingService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

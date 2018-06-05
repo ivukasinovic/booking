@@ -1,0 +1,15 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:tns="http://bookingxml.com/soap-example"
+           targetNamespace="http://techprimers.com/spring-boot-soap-example"
+           elementFormDefault="qualified">
+
+    <xs:import schemaLocation="booking.xsd" namespace="http://bookingxml.com/soap-example"/>
+
+    <xs:element name="setIvanRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="lodging" type="tns:lodging"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

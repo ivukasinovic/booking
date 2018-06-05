@@ -4,6 +4,7 @@
       <b><a class="navbar-brand" routerLink="/">Booking Agent</a></b>
     </div>
     <ul class="nav navbar-nav">
+      <li><a routerLink="/reservations">Reservations</a></li>
       <li *ngIf="logged == true"><a routerLink="/certificates">Lodging</a></li>
     </ul>
     <ul *ngIf="logged == true" class="nav navbar-nav navbar-right">

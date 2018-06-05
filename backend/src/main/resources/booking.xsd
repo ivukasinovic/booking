@@ -1,6 +1,66 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <xs:schema elementFormDefault="qualified" version="1.0" targetNamespace="http://bookingxml.com/soap-example"
-  xmlns:all="http://bookingxml.com/soap-example" xmlns:tns="http://bookingxml.com/soap-example" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+   xmlns:tns="http://bookingxml.com/soap-example" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+    <xs:element name="setCompletedLodgingRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="reservation" type="xs:long"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="setCompletedLodgingResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="status" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="setLodgingRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="lodging" type="tns:lodging"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="setLodgingResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="name" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="setOccupancyRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="lodging" type="xs:long"/>
+                <xs:element name="start" type="xs:dateTime"/>
+                <xs:element name="end" type="xs:dateTime"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="setOccupancyResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="success" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getReservationsRequest">
+    </xs:element>
+
+    <xs:element name="getReservationsResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="reservations" type="tns:reservation" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
 
   <xs:element name="additionalService" type="tns:additionalService"/>
 

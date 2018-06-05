@@ -1,6 +1,10 @@
 package com.project.controller;
 
 import com.project.model.json.AuthenticationRequest;
+import com.project.ws.LodgingService;
+import com.project.ws.LodgingServicePort;
+import com.project.ws.SetCompletedLodgingRequest;
+import com.project.ws.SetCompletedLodgingResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -22,6 +26,13 @@ public class AuthController {
     public ResponseEntity<AuthenticationRequest> authenticationRequest(@RequestBody AuthenticationRequest authenticationRequest) {
         System.out.println(authenticationRequest.getUsername());
         System.out.println(authenticationRequest.getPassword());
+
+        LodgingService objMethod = new LodgingService();
+        LodgingServicePort objPort = objMethod.getLodgingServicePortSoap11();
+        SetCompletedLodgingRequest request = new SetCompletedLodgingRequest();
+        request.setReservation(1L);
+        SetCompletedLodgingResponse response = objPort.setCompletedLodging(request);
+        System.out.println(response);
         return new ResponseEntity<>(authenticationRequest,HttpStatus.OK);
     }
 }
