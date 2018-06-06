@@ -7,13 +7,15 @@ import {AuthModule} from './auth/auth.module';
 import {FormsModule} from '@angular/forms';
 import { ReservationListComponent } from './reservation-list/reservation-list.component';
 import {LodgingService} from './lodging.service';
+import { LodgingNewComponent } from './lodging-new/lodging-new.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
-    ReservationListComponent
+    ReservationListComponent,
+    LodgingNewComponent
   ],
   imports: [
     BrowserModule,

@@ -1,9 +1,7 @@
 package XMLandSecurity.backend1.endpoint;
 
-import XMLandSecurity.backend1.domain.Reservation;
-import XMLandSecurity.backend1.domain.User;
-import XMLandSecurity.backend1.service.ReservationService;
-import XMLandSecurity.backend1.service.UserService;
+import XMLandSecurity.backend1.domain.*;
+import XMLandSecurity.backend1.service.*;
 import XMLandSecurity.backend1.ws.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ws.server.endpoint.annotation.Endpoint;
@@ -25,23 +23,49 @@ public class LodgingEndpoint {
     @Autowired
     private UserService userService;
 
-//    @PayloadRoot(namespace = "http://bookingxml.com/soap-example", localPart = "setLodgingRequest")
-//    @ResponsePayload
-//    public SetLodgingResponse setLodgingRequest(@RequestPayload Lodging lodging){
-//        SetLodgingResponse response = new SetLodgingResponse();
-//        System.out.println(lodging);
-//        response.setName("vratio");
-//        return response;
-//    }
+    @Autowired
+    private TypeOfLodgingService typeOfLodgingService;
+
+    @Autowired
+    private CityService cityService;
+
+    @Autowired
+    private LodgingService lodgingService;
+
+    @Autowired
+    private CategoryOfLodgingService categoryOfLodgingService;
+
+    @Autowired
+    private AdditionalServiceService additionalServiceService;
+
+    @PayloadRoot(namespace = "http://bookingxml.com/soap-example", localPart = "setLodgingRequest")
+    @ResponsePayload
+    public SetLodgingResponse setLodgingRequest(@RequestPayload SetLodgingRequest request){
+        SetLodgingResponse response = new SetLodgingResponse();
+
+        Lodging lodging = new Lodging();
+        lodging.setAgent(userService.findOne(request.getAgent()));
+        lodging.setType(typeOfLodgingService.findOne(request.getType()));
+        lodging.setCity(cityService.findOne(request.getCity()));
+        lodging.setCategory(categoryOfLodgingService.findOne(request.getCategory()));
+        lodging.setAddress(request.getAddress());
+        lodging.setDetails(request.getDetails());
+        lodging.setImage(request.getImage());
+        lodging.setPersons_number(request.getPersonsNumber().intValue());
+        Lodging savedLodging  = lodgingService.save(lodging);
+        response.setName("vratio");
+        return response;
+    }
 
     @PayloadRoot(namespace = "http://bookingxml.com/soap-example", localPart = "setCompletedLodgingRequest")
     @ResponsePayload
     public SetCompletedLodgingResponse setCompletedLodgingRequest(@RequestPayload SetCompletedLodgingRequest request){
         SetCompletedLodgingResponse response = new SetCompletedLodgingResponse();
         Reservation reservation = reservationService.findOne(request.getReservation());
+        reservation.setActive(false);
         reservation.setVisited(true);
-        reservationService.save(reservation);
-        System.out.println(request.getReservation());
+        Reservation res = reservationService.save(reservation);
+        System.out.println(res.getDateEnd());
         response.setStatus("success");
         return response;
     }
@@ -64,13 +88,64 @@ public class LodgingEndpoint {
 
     @PayloadRoot(namespace = "http://bookingxml.com/soap-example", localPart = "getReservationsRequest")
     @ResponsePayload
-    public GetReservationsResponse getReservationsRequest(){
+    public GetReservationsResponse getReservationsRequest(@RequestPayload GetReservationsRequest request){
         GetReservationsResponse response = new GetReservationsResponse();
-        List<Reservation> reservations = reservationService.findAll();
-        for (Reservation res: reservations) {
-            res.setUser(null);
-            res.setLodging(null);
-            response.getReservation().add(res);
+        if(request.getType().equals("all")){
+            List<Reservation> reservations = reservationService.findAll();
+            for (Reservation res: reservations) {
+                User user = new User();
+                user.setUsername(res.getUser().getUsername());
+                res.setUser(user);
+                Lodging lodging = new Lodging();
+                lodging.setId(res.getLodging().getId());
+                res.setLodging(lodging);
+              //  res.setUser(null);
+              //  res.setLodging(null);
+                response.getReservations().add(res);
+            }
+        }
+        return response;
+    }
+
+    @PayloadRoot(namespace = "http://bookingxml.com/soap-example", localPart = "getLodgingCategoriesRequest")
+    @ResponsePayload
+    public GetLodgingCategoriesResponse getLodgingCategoriesRequest(@RequestPayload GetLodgingCategoriesRequest request) {
+        GetLodgingCategoriesResponse response = new GetLodgingCategoriesResponse();
+        List<CategoryOfLodging> categories = categoryOfLodgingService.findAll();
+        for (CategoryOfLodging cat: categories) {
+            response.getTypes().add(cat);
+        }
+        return response;
+    }
+    @PayloadRoot(namespace = "http://bookingxml.com/soap-example", localPart = "getAdditionsRequest")
+    @ResponsePayload
+    public GetAdditionsResponse getAdditionsRequest(@RequestPayload GetAdditionsRequest getAdditionsRequest){
+        GetAdditionsResponse response = new GetAdditionsResponse();
+        List<AdditionalService> additionalServices = additionalServiceService.findAll();
+        for(AdditionalService s : additionalServices){
+            response.getTypes().add(s);
+        }
+        return response;
+    }
+
+    @PayloadRoot(namespace = "http://bookingxml.com/soap-example", localPart = "getCitiesRequest")
+    @ResponsePayload
+    public GetCitiesResponse getCtitiesRequest(@RequestPayload GetCitiesRequest getCitiesRequest){
+        GetCitiesResponse response = new GetCitiesResponse();
+        List<City> cities = cityService.findAll();
+        for(City city: cities){
+            city.setCountry(null);
+            response.getCities().add(city);
+        }
+        return response;
+    }
+    @PayloadRoot(namespace = "http://bookingxml.com/soap-example", localPart = "getLodgingTypesRequest")
+    @ResponsePayload
+    public GetLodgingTypesResponse getLodgingTypesResponse(@RequestPayload GetLodgingTypesRequest getLodgingTypesRequest){
+        GetLodgingTypesResponse response = new GetLodgingTypesResponse();
+        List<TypeOfLodging> types = typeOfLodgingService.findAll();
+        for(TypeOfLodging type: types){
+            response.getTypes().add(type);
         }
         return response;
     }

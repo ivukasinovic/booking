@@ -47,9 +47,9 @@ INSERT INTO type_of_lodging (id,label,name ) VALUES (3,'Apartman','Numanovic');
 -- INSERT INTO additional_service (id,name) VALUES (8 ,'private_bathroom')
 
 
-INSERT INTO lodging (id,address,details , image,rating,persons_number,category_id,type_id,city_id,agent_id) VALUES (1,'Bulevar Despota Stefana 7','NOVOO ,nove stvari vise detalja na telefon ..... xD','',4,4 ,1,2,1,2);
-INSERT INTO lodging (id,address,details , image,rating,persons_number,category_id,type_id,city_id,agent_id) VALUES (2,'Bulevar Despota Stefana 35','Starija ali ocuvana garsonjeraa','',3,2,1,1,2,2);
-INSERT INTO lodging (id,address,details , image,rating,persons_number,category_id,type_id,city_id,agent_id) VALUES (3,'Sekspirova 42','Garsonjera','',3,1,1,1,2,2);
+INSERT INTO lodging (id,address,details , image,rating,persons_number,category_id,type_id,city_id,agent_id) VALUES (1,'Bulevar Despota Stefana 7','NOVOO ,nove stvari vise detalja na telefon ..... xD','',4,2,1,2,1,2);
+INSERT INTO lodging (id,address,details , image,rating,persons_number,category_id,type_id,city_id,agent_id) VALUES (2,'Bulevar Despota Stefana 35','Starija ali ocuvana garsonjeraa','',3,3,1,1,2,2);
+INSERT INTO lodging (id,address,details , image,rating,persons_number,category_id,type_id,city_id,agent_id) VALUES (3,'Sekspirova 42','Garsonjera','',3,4,1,1,2,2);
 INSERT INTO lodging (id,address,details , image,rating,persons_number,category_id,type_id,city_id,agent_id) VALUES (4,'Tolstojeva 23','Stan, dvosoban','',4,2,1,1,4,2);
 INSERT INTO lodging (id,address,details , image,rating,persons_number,category_id,type_id,city_id,agent_id) VALUES (5,'Andriceva 22','Nesto','',2,3,1,1,3,2);
 
@@ -99,11 +99,11 @@ INSERT INTO message (id,title,body,date_sent,receiver_id,sender_id) VALUES (1,'O
 
 INSERT INTO rating (id,date_created,star,user_id,lodging_id) VALUES (1,'2018-04-22 09:42:58',4,3,2 );
 
-INSERT INTO reservation (id,date_start,date_end,active,visited,lodging_id,user_id) VALUES (1,'2018-04-21 10:42:58','2018-05-22 10:42:58',true,true ,1,3 );
-INSERT INTO reservation (id,date_start,date_end,active,visited,lodging_id,user_id) VALUES (2,'2018-05-22 10:42:58','2018-06-22 10:42:58',true,true ,2,4 );
+INSERT INTO reservation (id,date_start,date_end,active,visited,lodging_id,user_id) VALUES (1,'2018-04-21 10:42:58','2018-05-22 10:42:58',true,false ,1,3 );
+INSERT INTO reservation (id,date_start,date_end,active,visited,lodging_id,user_id) VALUES (2,'2018-05-22 10:42:58','2018-06-22 10:42:58',true,false ,2,4 );
 INSERT INTO reservation (id,date_start,date_end,active,visited,lodging_id,user_id) VALUES (3,'2018-06-23 10:42:58','2018-07-22 10:42:58',true,true ,3,5 );
-INSERT INTO reservation (id,date_start,date_end,active,visited,lodging_id,user_id) VALUES (4,'2018-07-24 10:42:58','2018-08-22 10:42:58',true,true ,4,6 );
-INSERT INTO reservation (id,date_start,date_end,active,visited,lodging_id,user_id) VALUES (5,'2018-08-25 10:42:58','2018-09-22 10:42:58',true,true ,1,3 );
-INSERT INTO reservation (id,date_start,date_end,active,visited,lodging_id,user_id) VALUES (6,'2018-09-26 10:42:58','2018-10-22 10:42:58',true,true ,2,4 );
+INSERT INTO reservation (id,date_start,date_end,active,visited,lodging_id,user_id) VALUES (4,'2018-07-24 10:42:58','2018-08-22 10:42:58',true,false ,4,6 );
+INSERT INTO reservation (id,date_start,date_end,active,visited,lodging_id,user_id) VALUES (5,'2018-08-25 10:42:58','2018-09-22 10:42:58',true,false ,1,3 );
+INSERT INTO reservation (id,date_start,date_end,active,visited,lodging_id,user_id) VALUES (6,'2018-09-26 10:42:58','2018-10-22 10:42:58',true,false ,2,4 );
 
 

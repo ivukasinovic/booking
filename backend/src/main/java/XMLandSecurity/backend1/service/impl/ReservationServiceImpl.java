@@ -36,7 +36,6 @@ public class ReservationServiceImpl implements ReservationService {
 
     @Override
     public Reservation save(Reservation reservation) {
-
         return reservationRepository.save(reservation);
     }
 
@@ -63,7 +62,6 @@ public class ReservationServiceImpl implements ReservationService {
     public List<Reservation> findByLodging(Long id) {
        return reservationRepository.findByLodging(lodgingService.findOne(id));
     }
-
 
     @Override
     public List<Reservation> findByUser(Long id) {
