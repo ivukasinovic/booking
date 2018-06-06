@@ -6,7 +6,7 @@ import {AppRoutingModule} from './app-routing.module';
 import {CertificatComponent} from './certificates/certificate-new/certificate-new.component';
 import {CertificatesComponent} from './certificates/certificates.component';
 import {NavbarComponent} from './navbar/navbar.component';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {CertificateDetailsComponent} from './certificates/certificate-details/certificate-details.component';
 import {CertificateListComponent} from './certificates/certificate-list/certificate-list.component';
 import {CertificatesService} from './certificates/certificates.service';
@@ -24,7 +24,6 @@ import {UserService} from './services/user.service';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { SearchComponent } from './search/search.component';
 import {SearchService} from './services/search.service';
-import { NumberOnlyDirective } from './number.directive';
 
 @NgModule({
   declarations: [
@@ -40,15 +39,15 @@ import { NumberOnlyDirective } from './number.directive';
     ForgotPasswordComponent,
     ChangePasswordComponent,
     ResetPasswordComponent,
-    SearchComponent,
-    NumberOnlyDirective
+    SearchComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
+    ReactiveFormsModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [CertificatesService, {
     provide: HTTP_INTERCEPTORS,

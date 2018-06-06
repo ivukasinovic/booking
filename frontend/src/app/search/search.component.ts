@@ -2,12 +2,19 @@ import { Component, OnInit } from '@angular/core';
 import { Lodging, City, Reservation } from '../model';
 import {SearchService} from '../services/search.service';
 import {Router} from '@angular/router';
+import { FormGroup, FormControl, Validators} from '@angular/forms';
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.css']
 })
 export class SearchComponent implements OnInit {
+  searchFormGroup: FormGroup;
+  form = new FormGroup({
+    cityName1: new FormControl('', Validators.compose ([Validators.required])),
+    numberOfPersons1: new FormControl('', Validators.compose ([Validators.required])),
+  });
+
   lod: Lodging[];
   searchCity: string ;
   searchPersonsNbr: number;
@@ -18,6 +25,7 @@ export class SearchComponent implements OnInit {
   idLodg: number;
   searchSDT: Date;
   searchEDT: Date;
+
   constructor(private router: Router, private searchService: SearchService) {
     this.searchService.getReservations().subscribe(
       (response: Reservation[]) => {
@@ -38,8 +46,17 @@ export class SearchComponent implements OnInit {
 
   }
 
-  ngOnInit(){}
+  ngOnInit() { }
 
+  onSubmit = function (lodging) {
+    console.log(lodging);
+    this.searchService.searchLodging(lodging.cityName1, lodging.numberOfPersons1, 'undefined', 'undefined')
+      .subscribe(
+        (response: Lodging[]) => {
+          this.lod = response;
+        }
+      );
+  }
   searchLodging() {
     this.searchService.searchLodging(this.searchCity, this.searchPersonsNbr, this.searchSDT, this.searchEDT)
       .subscribe(

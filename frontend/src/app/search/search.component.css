@@ -25,3 +25,13 @@
 .one,.two{width:50%;
   height:100px;
   margin:10px;}
+input[type='submit']:hover
+
+ {background-color: #b0dcff;}
+
+input[type='submit']:disabled
+
+                    {background-color: #d5d6d6;}
+
+
+

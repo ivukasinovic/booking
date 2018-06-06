@@ -2,17 +2,19 @@
   <div class="col-md-4">
 
       <h3>Search</h3>
-      <form >
+      <form  [formGroup] = "form"
+      (ngSubmit) = "onSubmit(form.value)">
         <label>City </label>
-        <input  id ="searchCity" [(ngModel)]="searchCity" value="" type="text" class="form-control" name="searchCity"
-               placeholder="Enter city " >
+        <input  id ="cityName1"  value="" type="text" class="form-control" name="cityName1"
+               placeholder="Enter city " formControlName="cityName1">
 
         <br>
         <label>Number of persons </label>
-        <input appMyNumberOnly="true" [(ngModel)]="searchPersonsNbr" value="" type="number" class="form-control" name="searchCity"
-               placeholder="Number of persons" min = "1" max = "5" onkeydown="javascript: return (event.keyCode > 47 && event.keyCode < 54 || event.keyCode == 08)" >
+        <input value="" type="number" class="form-control" name="searchCity"
+               formControlName="numberOfPersons1" placeholder="Number of persons" maxlength="4" min = "0" max = "9"  onKeyPress="if(this.value.length==4) return false;" onkeydown="javascript: return (event.keyCode > 47 && event.keyCode < 58 || event.keyCode == 08)" >
 
         <br>
+      <!--[(ngModel)]="searchCity"
         <div id="inline">
           <div class="one">
             <label>Start date </label>
@@ -27,6 +29,8 @@
 
 
         <button class="btn btn-primary" (click)="searchLodging()">Search lodging</button>
+-->
+        <input type = "submit" [disabled]="!form.valid" value ="Search Lodging">
       </form>
       <br>
   </div>
