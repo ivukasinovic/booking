@@ -46,9 +46,10 @@ public class LodgingServiceImpl implements LodgingService {
     public List<Lodging> findByCityAndPersons_number(String city, Integer personsNbr) {
         return lodgingRepository.findByCityNameIgnoreCaseContainingAndPersonsNumber(city, personsNbr);
     }
+
     @Override
-    public List<Lodging> findByCityName(String cityName, Date startDate, Date endDate) {
-        return lodgingRepository.findByCityNameIgnoreCaseContainingAndReservationsDateStartBeforeOrReservationsDateStartAfterAndReservationsDateEndBeforeOrReservationsDateEndAfter(cityName,startDate,endDate,startDate,endDate);
+    public List<Lodging> findByReservationsDateStartBetweenAndReservationsDateEndBetween(Date startDate, Date endDate,Date startDate1, Date endDate1) {
+        return lodgingRepository.findByReservationsDateStartBetweenAndReservationsDateEndBetween(startDate,endDate,startDate1,endDate1);
     }
 //    @Override
 //    public List<Lodging> findByAdditionalServiceList(Long id) {

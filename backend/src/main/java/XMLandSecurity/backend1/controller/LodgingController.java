@@ -88,10 +88,9 @@ public class LodgingController {
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> search(@PathVariable("cityName") String cityName,@PathVariable("personsNbr") String personsNbr,
                                     @PathVariable("dateStart") String dateStart,@PathVariable("dateEnd") String dateEnd){
-        List<Lodging> lodgings = lodgingService.findAll();
+        List<Lodging> reservatedLodgings = new ArrayList<Lodging>();
         List<Lodging> retLodgings = new ArrayList<Lodging>();
         List<Lodging> ret = new ArrayList<Lodging>();
-
         retLodgings= null;
         int broj;
         System.out.println("\n POCETNI DATUM : " + dateStart +
@@ -99,13 +98,10 @@ public class LodgingController {
 
         if(dateStart.equals("undefined") || dateStart.equals("")) {
             dateStart ="1995-09-16" ;
-
         }
         if(dateEnd.equals("undefined") || dateEnd.equals("")) {
             dateEnd ="1995-09-16";
         }
-
-        //konvertovanje datuma iz string u Date format
         DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         Date dateS = null,dateE = null;
         try {
@@ -114,29 +110,39 @@ public class LodgingController {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-
-        System.out.println("\n POCETNI DATUM : " + dateS +
-                "\n KRAJNJI DATUM" + dateE) ;
-
         if(cityName.equals("undefined") || cityName.equals("null")) {
             cityName = "";
         }
         if(personsNbr.equals("undefined") || personsNbr.equals("") || personsNbr.equals("null")) {
-            retLodgings = lodgingService.findByCityName(cityName,dateS,dateE);
-         //   System.out.println("\n NA PRAVOM : " + retLodgings.size());
-
-//Dodaj DATE PRETRAGU KADA JE UNET BROJ
+            //ne bi trebalo nikad da udje
+            retLodgings = lodgingService.findAll();
         }else {
+            System.out.println("\n NA PRAVOM : " );
             broj = Integer.parseInt(personsNbr);
+            reservatedLodgings = lodgingService.findByReservationsDateStartBetweenAndReservationsDateEndBetween(dateS,dateE,dateS,dateE);
             retLodgings = lodgingService.findByCityAndPersons_number(cityName, broj);
+            //1 2  3   // 2 4
+            int flag = 0;
+            for(Lodging rl : retLodgings ){
+                for(Lodging rll : reservatedLodgings ) {
+                    if (rl.getId() == rll.getId()) {
+                        //ako je isti on mi ne treba
+                        flag = 1;
+                    }
+                }
+                if(flag ==0){
+                    System.out.println("\nDodajem smestaj :" + rl.getId());
+                    ret.add(rl);
+
+                }
+            }
         }
-
-
+/*
         for(Lodging k : retLodgings){
             if(!ret.contains(k)) {
                 ret.add(k);
             }
-        }
+        }*/
         //System.out.println("\n AAA "+ ret.size());
         return new ResponseEntity(ret, HttpStatus.OK);
     }
