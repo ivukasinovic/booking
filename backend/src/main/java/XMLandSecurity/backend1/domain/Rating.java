@@ -29,7 +29,8 @@ public class Rating implements Serializable {
     @XmlElement(name="id", required=true)
     private Long id;
 
-    @Column(name = "date_created", nullable = false,columnDefinition="DATETIME")
+    @Column(name = "date_created", nullable = false)
+    @Temporal(TemporalType.DATE)
     @XmlElement(name="dateCreated", required=true)
     private Date dateCreated;
 

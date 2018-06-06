@@ -18,4 +18,8 @@ export class UserService {
     const url = 'api/reset-password/' + code;
     return this.http.post( url, chp);
   }
+
+  getReservationsOfLoggedUser() {
+    return this.http.get('api/users/reservations');
+  }
 }

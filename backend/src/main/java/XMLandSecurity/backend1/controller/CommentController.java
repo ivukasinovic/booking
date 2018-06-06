@@ -22,12 +22,10 @@ public class CommentController {
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public ResponseEntity<Comment> getUser(@PathVariable("id") Long id) {
-        Comment listaAdminaFanZone = commentService.findOne(id) ; //findOne(user);
-        return new ResponseEntity<>(listaAdminaFanZone, HttpStatus.OK);     // "200 OK"
+    public ResponseEntity<Comment> getComment(@PathVariable("id") Long id) {
+        Comment comment = commentService.findOne(id);
+        return new ResponseEntity<>(comment, HttpStatus.OK);
     }
-
-    // ===
 
 
     @RequestMapping(
@@ -49,7 +47,7 @@ public class CommentController {
     )
     public ResponseEntity<Comment> updateUsers (@PathVariable("id") Long id) {
         Comment listaAdminaFanZone = commentService.findOne(id);
-        return new ResponseEntity(listaAdminaFanZone, HttpStatus.OK);     // "200 OK"
+        return new ResponseEntity(listaAdminaFanZone, HttpStatus.OK);
     }
 
     @RequestMapping(

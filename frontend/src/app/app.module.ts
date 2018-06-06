@@ -24,7 +24,10 @@ import {UserService} from './services/user.service';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { SearchComponent } from './search/search.component';
 import {SearchService} from './services/search.service';
+import { NumberOnlyDirective } from './number.directive';
+import {ReserveService} from './services/reserve.service';
 import {BsDatepickerModule} from 'ngx-bootstrap/datepicker';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -59,7 +62,8 @@ import {BsDatepickerModule} from 'ngx-bootstrap/datepicker';
     AuthService,
     RoleGuardService,
     SearchService,
-    UserService],
+    UserService,
+    ReserveService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

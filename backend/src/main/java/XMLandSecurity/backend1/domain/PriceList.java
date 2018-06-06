@@ -33,7 +33,8 @@ public class PriceList implements Serializable {
     @XmlElement(name="year", required=true)
     private String year;
 
-    @Column(name = "date_created", nullable = false,columnDefinition="DATETIME")
+    @Column(name = "date_created", nullable = false)
+    @Temporal(TemporalType.DATE)
     @XmlElement(name="dateCreated", required=true)
     private Date dateCreated;
 

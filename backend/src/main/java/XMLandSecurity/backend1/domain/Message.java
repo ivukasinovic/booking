@@ -36,7 +36,8 @@ public class Message implements Serializable {
     @XmlElement(name="body", required=true)
     private String body;
 
-    @Column(name = "date_sent", nullable = false,columnDefinition="DATETIME")
+    @Column(name = "date_sent", nullable = false)
+    @Temporal(TemporalType.DATE)
     @XmlElement(name="dateSent", required=true)
     private Date dateSent;
 
