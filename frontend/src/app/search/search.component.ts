@@ -14,7 +14,8 @@ export class SearchComponent implements OnInit {
     cityName1: new FormControl('', Validators.compose ([Validators.required])),
     numberOfPersons1: new FormControl('', Validators.compose ([Validators.required])),
     searchSDT: new FormControl('2018-06-06'),
-    searchEDT: new FormControl('2018-06-06')
+    searchEDT: new FormControl('2018-06-06'),
+    typeOfLodging: new FormControl('')
   });
   lod: Lodging[];
   searchCity: string ;
