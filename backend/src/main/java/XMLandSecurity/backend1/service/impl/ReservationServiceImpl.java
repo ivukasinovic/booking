@@ -36,15 +36,6 @@ public class ReservationServiceImpl implements ReservationService {
 
     @Override
     public Reservation save(Reservation reservation) {
-
-        final Date early = reservation.getDateStart();
-        final Date late = reservation.getDateEnd();
-
-        for (Reservation temp : reservationRepository.findByLodging(reservation.getLodging())) {
-            if (!(early.after(temp.getDateEnd()) || late.before(temp.getDateStart())))
-                return null;
-        }
-
         return reservationRepository.save(reservation);
     }
 
@@ -59,9 +50,4 @@ public class ReservationServiceImpl implements ReservationService {
        return reservationRepository.findByLodging(lodgingService.findOne(id));
     }
 
-
-//    @Override
-//    public List<Reservation> findByUser(Long id) {
-//        return reservationRepository.findByUser(id);
-//    }
 }

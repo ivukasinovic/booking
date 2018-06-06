@@ -52,6 +52,7 @@ public class Reservation implements Serializable {
     @XmlElement(name="lodging", required=true)
     private Lodging lodging;
 
+
     @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
     @JsonIdentityReference(alwaysAsId = true)
     @ManyToOne

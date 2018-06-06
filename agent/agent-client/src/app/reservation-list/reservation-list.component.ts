@@ -14,8 +14,13 @@ export class ReservationListComponent implements OnInit {
   ngOnInit() {
       this.lodgingService.getReservations()
         .subscribe((response: Reservation[])  => {
-            console.log(response);
+            this.reservations = response;
         });
+  }
+  setCompleted(id: number) {
+    this.lodgingService.setCompleted(id)
+      .subscribe();
+    location.reload();
   }
 
 }

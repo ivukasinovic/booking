@@ -1,0 +1,51 @@
+<div class="container">
+  <div class="col-md-6">
+    <div class="form-group">
+      <label for="agent">Agent:</label>
+      <input type="text" [ngModel]="lodging.agent" class="form-control" id="agent">
+    </div>
+    <div class="form-group">
+      <label for="city">City:</label>
+      <input type="text" [ngModel]="lodging.city" class="form-control" id="city">
+    </div>
+    <div class="form-group">
+      <label for="address">Address:</label>
+      <input type="text" [ngModel]="lodging.address" class="form-control" id="address">
+    </div>
+    <div class="form-group">
+      <label for="details">Details:</label>
+      <input type="text" [ngModel]="lodging.details" class="form-control" id="details">
+    </div>
+    <div class="form-group">
+      <label for="image">Image:</label>
+      <input type="text" [ngModel]="lodging.image" class="form-control" id="image">
+    </div>
+    <div class="form-group">
+      <label for="personsNumber">Number of persons:</label>
+      <input type="text" [ngModel]="lodging.personsNumber" class="form-control" id="personsNumber">
+    </div>
+    <div class="form-group">
+      <label for="category">Category:</label>
+      <select class="form-control" id="category">
+        <option>1</option>
+        <option>2</option>
+        <option>3</option>
+        <option>4</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="category">Type of lodging:</label>
+      <select class="form-control" id="type">
+        <option>1</option>
+        <option>2</option>
+        <option>3</option>
+        <option>4</option>
+      </select>
+    </div>
+
+    <button class="btn btn-primary" (click)="createLodging()">Create</button>
+  </div>
+
+
+
+</div>

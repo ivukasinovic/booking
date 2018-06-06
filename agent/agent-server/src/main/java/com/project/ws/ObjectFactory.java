@@ -54,6 +54,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link Lodging }
+     * 
+     */
+    public Lodging createLodging() {
+        return new Lodging();
+    }
+
+    /**
      * Create an instance of {@link AdditionalService }
      * 
      */
@@ -70,22 +78,6 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link Lodging }
-     * 
-     */
-    public Lodging createLodging() {
-        return new Lodging();
-    }
-
-    /**
-     * Create an instance of {@link SetCompletedLodgingResponse }
-     * 
-     */
-    public SetCompletedLodgingResponse createSetCompletedLodgingResponse() {
-        return new SetCompletedLodgingResponse();
-    }
-
-    /**
      * Create an instance of {@link TypeOfLodging }
      * 
      */
@@ -94,11 +86,19 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link SetOccupancyResponse }
+     * Create an instance of {@link GetLodgingCategoriesResponse }
      * 
      */
-    public SetOccupancyResponse createSetOccupancyResponse() {
-        return new SetOccupancyResponse();
+    public GetLodgingCategoriesResponse createGetLodgingCategoriesResponse() {
+        return new GetLodgingCategoriesResponse();
+    }
+
+    /**
+     * Create an instance of {@link CategoryOfLodging }
+     * 
+     */
+    public CategoryOfLodging createCategoryOfLodging() {
+        return new CategoryOfLodging();
     }
 
     /**
@@ -110,6 +110,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link GetCitiesRequest }
+     * 
+     */
+    public GetCitiesRequest createGetCitiesRequest() {
+        return new GetCitiesRequest();
+    }
+
+    /**
      * Create an instance of {@link Rating }
      * 
      */
@@ -118,27 +126,19 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link SetLodgingRequest }
+     * Create an instance of {@link GetLodgingTypesRequest }
      * 
      */
-    public SetLodgingRequest createSetLodgingRequest() {
-        return new SetLodgingRequest();
+    public GetLodgingTypesRequest createGetLodgingTypesRequest() {
+        return new GetLodgingTypesRequest();
     }
 
     /**
-     * Create an instance of {@link SetLodgingResponse }
+     * Create an instance of {@link GetCitiesResponse }
      * 
      */
-    public SetLodgingResponse createSetLodgingResponse() {
-        return new SetLodgingResponse();
-    }
-
-    /**
-     * Create an instance of {@link Message }
-     * 
-     */
-    public Message createMessage() {
-        return new Message();
+    public GetCitiesResponse createGetCitiesResponse() {
+        return new GetCitiesResponse();
     }
 
     /**
@@ -147,14 +147,6 @@ public class ObjectFactory {
      */
     public PriceList createPriceList() {
         return new PriceList();
-    }
-
-    /**
-     * Create an instance of {@link SetOccupancyRequest }
-     * 
-     */
-    public SetOccupancyRequest createSetOccupancyRequest() {
-        return new SetOccupancyRequest();
     }
 
     /**
@@ -182,6 +174,86 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link GetLodgingCategoriesRequest }
+     * 
+     */
+    public GetLodgingCategoriesRequest createGetLodgingCategoriesRequest() {
+        return new GetLodgingCategoriesRequest();
+    }
+
+    /**
+     * Create an instance of {@link GetAdditionsResponse }
+     * 
+     */
+    public GetAdditionsResponse createGetAdditionsResponse() {
+        return new GetAdditionsResponse();
+    }
+
+    /**
+     * Create an instance of {@link GetAdditionsRequest }
+     * 
+     */
+    public GetAdditionsRequest createGetAdditionsRequest() {
+        return new GetAdditionsRequest();
+    }
+
+    /**
+     * Create an instance of {@link SetCompletedLodgingResponse }
+     * 
+     */
+    public SetCompletedLodgingResponse createSetCompletedLodgingResponse() {
+        return new SetCompletedLodgingResponse();
+    }
+
+    /**
+     * Create an instance of {@link SetOccupancyResponse }
+     * 
+     */
+    public SetOccupancyResponse createSetOccupancyResponse() {
+        return new SetOccupancyResponse();
+    }
+
+    /**
+     * Create an instance of {@link SetLodgingRequest }
+     * 
+     */
+    public SetLodgingRequest createSetLodgingRequest() {
+        return new SetLodgingRequest();
+    }
+
+    /**
+     * Create an instance of {@link SetLodgingResponse }
+     * 
+     */
+    public SetLodgingResponse createSetLodgingResponse() {
+        return new SetLodgingResponse();
+    }
+
+    /**
+     * Create an instance of {@link Message }
+     * 
+     */
+    public Message createMessage() {
+        return new Message();
+    }
+
+    /**
+     * Create an instance of {@link SetOccupancyRequest }
+     * 
+     */
+    public SetOccupancyRequest createSetOccupancyRequest() {
+        return new SetOccupancyRequest();
+    }
+
+    /**
+     * Create an instance of {@link GetReservationsResponse }
+     * 
+     */
+    public GetReservationsResponse createGetReservationsResponse() {
+        return new GetReservationsResponse();
+    }
+
+    /**
      * Create an instance of {@link Comment }
      * 
      */
@@ -190,11 +262,19 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link CategoryOfLodging }
+     * Create an instance of {@link GetReservationsRequest }
      * 
      */
-    public CategoryOfLodging createCategoryOfLodging() {
-        return new CategoryOfLodging();
+    public GetReservationsRequest createGetReservationsRequest() {
+        return new GetReservationsRequest();
+    }
+
+    /**
+     * Create an instance of {@link GetLodgingTypesResponse }
+     * 
+     */
+    public GetLodgingTypesResponse createGetLodgingTypesResponse() {
+        return new GetLodgingTypesResponse();
     }
 
     /**
@@ -246,22 +326,6 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link AdditionalService.AdditionalServiceList }
-     * 
-     */
-    public AdditionalService.AdditionalServiceList createAdditionalServiceAdditionalServiceList() {
-        return new AdditionalService.AdditionalServiceList();
-    }
-
-    /**
-     * Create an instance of {@link Country.CityList }
-     * 
-     */
-    public Country.CityList createCountryCityList() {
-        return new Country.CityList();
-    }
-
-    /**
      * Create an instance of {@link Lodging.PriceLists }
      * 
      */
@@ -299,6 +363,22 @@ public class ObjectFactory {
      */
     public Lodging.AdditionalServicesList createLodgingAdditionalServicesList() {
         return new Lodging.AdditionalServicesList();
+    }
+
+    /**
+     * Create an instance of {@link AdditionalService.AdditionalServiceList }
+     * 
+     */
+    public AdditionalService.AdditionalServiceList createAdditionalServiceAdditionalServiceList() {
+        return new AdditionalService.AdditionalServiceList();
+    }
+
+    /**
+     * Create an instance of {@link Country.CityList }
+     * 
+     */
+    public Country.CityList createCountryCityList() {
+        return new Country.CityList();
     }
 
     /**

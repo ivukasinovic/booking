@@ -1,3 +1,23 @@
-<p>
-  reservation-list works!
-</p>
+<div class="container">
+  <h3>Reservations</h3>
+  <div class="col-md-9"
+    href="#"
+    class="list-group-item clearfix"
+    *ngFor="let reservation of reservations">
+    <div class="pull-left">
+      <h4 class="list-group-item-heading"><b>{{ reservation.id }}</b></h4>
+      <p class="list-group-item-text">Start date: {{ reservation.dateStart  | date }}</p>
+      <p class="list-group-item-text">Start date: {{ reservation.dateEnd  | date }}</p>
+      <i>
+        <small>User: {{reservation.user.username}}<b></b></small><br>
+        <small>Lodging: {{reservation.lodging.id}}<b></b></small>
+      </i>
+    </div>
+    <span class="pull-right">
+        <button *ngIf="!reservation.visited" type="button" class="btn btn-warning"
+                 (click)="setCompleted(reservation.id)"
+                 [attr.aria-expanded]="!isCollapsed" aria-controls="collapseExample">Complete</button>
+      </span>
+  </div>
+</div>
+
