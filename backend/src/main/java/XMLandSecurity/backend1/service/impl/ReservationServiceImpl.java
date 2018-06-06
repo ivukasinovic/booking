@@ -37,20 +37,25 @@ public class ReservationServiceImpl implements ReservationService {
     @Override
     public Reservation save(Reservation reservation) {
 
-        final Date early = reservation.getDateStart();
-        final Date late = reservation.getDateEnd();
-
-        for (Reservation temp : reservationRepository.findByLodging(reservation.getLodging())) {
-            if (!(early.after(temp.getDateEnd()) || late.before(temp.getDateStart())))
-                return null;
-        }
-
         return reservationRepository.save(reservation);
     }
 
     @Override
     public void delete(Long id) {
         reservationRepository.delete(id);
+    }
+
+    @Override
+    public boolean checkIfOverlapingDate(Reservation reservation) {
+
+        Date early = reservation.getDateStart();
+        Date late = reservation.getDateEnd();
+
+        for (Reservation temp : reservationRepository.findByLodging(reservation.getLodging())) {
+            if (!(early.after(temp.getDateEnd()) || late.before(temp.getDateStart())))
+                return true;
+        }
+        return false;
     }
 
 
@@ -60,8 +65,8 @@ public class ReservationServiceImpl implements ReservationService {
     }
 
 
-//    @Override
-//    public List<Reservation> findByUser(Long id) {
-//        return reservationRepository.findByUser(id);
-//    }
+    @Override
+    public List<Reservation> findByUser(Long id) {
+        return reservationRepository.findByUser(id);
+    }
 }

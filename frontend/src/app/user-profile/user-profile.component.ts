@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {Lodging, Reservation} from '../model';
+import {UserService} from '../services/user.service';
+import {ReserveService} from "../services/reserve.service";
 
 @Component({
   selector: 'app-user-profile',
@@ -7,9 +10,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserProfileComponent implements OnInit {
 
-  constructor() { }
+  reservations: Reservation[] = [];
+
+  constructor( private userService: UserService, private reserveService: ReserveService) {
+    this.userService.getReservationsOfLoggedUser().subscribe(
+      (response: Reservation[]) => {
+        this.reservations = response;
+      });
+  }
 
   ngOnInit() {
+  }
+
+  cancelRes(id: string){
+    this.reserveService.cancel(id).subscribe();
   }
 
 }

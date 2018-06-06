@@ -2,5 +2,34 @@
   <div class="col-md-4">
     <a routerLink="../change-password" class="btn btn-primary">Change password</a>
   </div>
+
+<div>My reservations:
+  <table border="2" style="..." align="center" class="table">
+    <tr>
+      <th>City</th>
+      <th>From</th>
+      <th>To</th>
+
+      <th></th>
+
+
+
+    </tr>
+
+    <!--<tr *ngIf="p.user != null" >-->
+    <tr   *ngFor="let res of reservations" >
+      <td></td>
+
+      <td> {{res.dateStart}}</td>
+      <td>{{res.dateEnd}} </td>
+      <td><button  class="btn btn-primary" (click)="cancelRes(res.id)">Cancel</button> </td>
+
+    </tr>
+
+
+  </table>
+</div>
+
+
 </div>
 

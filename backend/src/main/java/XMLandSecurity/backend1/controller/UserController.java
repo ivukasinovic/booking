@@ -11,6 +11,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -117,6 +118,20 @@ public class UserController {
         korisnik.setActivated(false);
         userService.save(korisnik);
         return new ResponseEntity(korisnik, HttpStatus.OK);     // "200 OK"
+    }
+
+
+    @RequestMapping(
+            value = "/reservations",
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Reservation> getReservations(Principal principal) {
+
+        User loggedUser = userService.findByUsername(principal.getName());
+
+        List<Reservation> reservations = loggedUser.getReservations();
+
+        return new ResponseEntity(reservations, HttpStatus.OK);
     }
 
 

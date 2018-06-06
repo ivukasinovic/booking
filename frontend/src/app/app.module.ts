@@ -25,6 +25,7 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
 import { SearchComponent } from './search/search.component';
 import {SearchService} from './services/search.service';
 import { NumberOnlyDirective } from './number.directive';
+import {ReserveService} from './services/reserve.service';
 
 @NgModule({
   declarations: [
@@ -59,7 +60,8 @@ import { NumberOnlyDirective } from './number.directive';
     AuthService,
     RoleGuardService,
     SearchService,
-    UserService],
+    UserService,
+    ReserveService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
