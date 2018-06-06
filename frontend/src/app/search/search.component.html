@@ -5,32 +5,22 @@
       <form  [formGroup] = "form"
       (ngSubmit) = "onSubmit(form.value)">
         <label>City </label>
-        <input  id ="cityName1"  value="" type="text" class="form-control" name="cityName1"
+        <input class="form-control" id ="cityName1"  value="" type="text" class="form-control" name="cityName1"
                placeholder="Enter city " formControlName="cityName1">
 
         <br>
-        <label>Number of persons </label>
-        <input value="" type="number" class="form-control" name="searchCity"
+        <label >Number of persons </label>
+        <input class="form-control" value="" type="number" class="form-control" name="searchCity"
                formControlName="numberOfPersons1" placeholder="Number of persons" maxlength="4" min = "0" max = "9"  onKeyPress="if(this.value.length==4) return false;" onkeydown="javascript: return (event.keyCode > 47 && event.keyCode < 58 || event.keyCode == 08)" >
-
         <br>
-      <!--[(ngModel)]="searchCity"
-        <div id="inline">
-          <div class="one">
-            <label>Start date </label>
-            <input name="searchSDT" type="date" [ngModel] ="searchSDT | date:'yyyy-MM-dd'" (ngModelChange)="searchSDT = $event">
-          </div>
-          <div class="two">
-            <label>End date </label>
-            <input name="searchEDT" type="date" [ngModel] ="searchEDT | date:'yyyy-MM-dd'" (ngModelChange)="searchEDT = $event">
-          </div>
-        </div>
+        <label>Start date </label>
+        <input class="form-control" required="required"  name="searchSDT"  formControlName="searchSDT"  type="date"  (ngModelChange)="searchSDT = $event">
+        <br>
+        <label>End date </label>
+        <input class="form-control"  required="required"  name="searchEDT" type="date" formControlName="searchEDT" (ngModelChange)="searchEDT = $event">
         <br>
 
-
-        <button class="btn btn-primary" (click)="searchLodging()">Search lodging</button>
--->
-        <input type = "submit" [disabled]="!form.valid" value ="Search Lodging">
+        <input class="form-control" type = "submit" [disabled]="!form.valid" value ="Search Lodging">
       </form>
       <br>
   </div>
@@ -58,13 +48,7 @@
         <td> {{(p.persons_number)}}</td>
         <td> {{(p.rating)}}</td>
         <td>
-            <ul  >
-              <!-- <li *ngFor="let r of (getReservationByLodging(p.id)) "> 1 </li>
-              <li *ngFor="let r of reserByLodg"> {{ (getReservationByLodgingStart1(p.id) | date:'yyyy-MM-dd') }} - {{ (getReservationByLodgingEnd(p.id) | date:'yyyy-MM-dd') }}</li>
-               -->
-              <li *ngFor="let r of getReservationByLodging(p) "> {{ (r.dateStart | date:'yyyy-MM-dd') }} - {{ (r.dateEnd | date:'yyyy-MM-dd') }}</li>
-
-            </ul>
+          <button class="btn btn-primary" (click)="reserve( p.id)">Reserve</button>
         </td>
 
       </tr>
@@ -72,29 +56,5 @@
       <!--</div>-->
     </table>
   </div>
-  <div #mydivRezervacija>
-    <table border="2" style="..." align="center" class="table">
-      <tr>
-        <th>Start</th>
-        <th>End</th>
 
-
-
-
-      </tr>
-
-      <!--<tr *ngIf="p.user != null" >-->
-      <tr   *ngFor="let p of reser" >
-        <td>  {{ (p.dateStart | date:'yyyy-MM-dd HH:mm:ss') }}</td>
-
-        <!--<td> {{ vratiIme(p.user) }}</td>-->
-        <td> {{ (p.dateEnd | date:'yyyy-MM-dd HH:mm:ss') }}</td>
-        <!--<div>-->
-
-
-      </tr>
-
-      <!--</div>-->
-    </table>
-  </div>
 </div>

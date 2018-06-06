@@ -24,7 +24,7 @@ import {UserService} from './services/user.service';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { SearchComponent } from './search/search.component';
 import {SearchService} from './services/search.service';
-
+import {BsDatepickerModule} from 'ngx-bootstrap/datepicker';
 @NgModule({
   declarations: [
     AppComponent,
@@ -48,6 +48,7 @@ import {SearchService} from './services/search.service';
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule,
+    BsDatepickerModule.forRoot()
   ],
   providers: [CertificatesService, {
     provide: HTTP_INTERCEPTORS,

@@ -47,9 +47,9 @@ INSERT INTO type_of_lodging (id,label,name ) VALUES (3,'Apartman','Numanovic');
 -- INSERT INTO additional_service (id,name) VALUES (8 ,'private_bathroom')
 
 
-INSERT INTO lodging (id,address,details , image,rating,persons_number,category_id,type_id,city_id,agent_id) VALUES (1,'Bulevar Despota Stefana 7','NOVOO ,nove stvari vise detalja na telefon ..... xD','',4,4 ,1,2,1,2);
-INSERT INTO lodging (id,address,details , image,rating,persons_number,category_id,type_id,city_id,agent_id) VALUES (2,'Bulevar Despota Stefana 35','Starija ali ocuvana garsonjeraa','',3,2,1,1,2,2);
-INSERT INTO lodging (id,address,details , image,rating,persons_number,category_id,type_id,city_id,agent_id) VALUES (3,'Sekspirova 42','Garsonjera','',3,1,1,1,2,2);
+INSERT INTO lodging (id,address,details , image,rating,persons_number,category_id,type_id,city_id,agent_id) VALUES (1,'Bulevar Despota Stefana 7','NOVOO ,nove stvari vise detalja na telefon ..... xD','',4,2,1,2,1,2);
+INSERT INTO lodging (id,address,details , image,rating,persons_number,category_id,type_id,city_id,agent_id) VALUES (2,'Bulevar Despota Stefana 35','Starija ali ocuvana garsonjeraa','',3,3,1,1,2,2);
+INSERT INTO lodging (id,address,details , image,rating,persons_number,category_id,type_id,city_id,agent_id) VALUES (3,'Sekspirova 42','Garsonjera','',3,4,1,1,2,2);
 INSERT INTO lodging (id,address,details , image,rating,persons_number,category_id,type_id,city_id,agent_id) VALUES (4,'Tolstojeva 23','Stan, dvosoban','',4,2,1,1,4,2);
 INSERT INTO lodging (id,address,details , image,rating,persons_number,category_id,type_id,city_id,agent_id) VALUES (5,'Andriceva 22','Nesto','',2,3,1,1,3,2);
 

@@ -11,10 +11,11 @@ public interface LodgingRepository extends JpaRepository<Lodging,Long> {
 
 
     Lodging findByAgent(Long id);
-    List<Lodging> findByCityNameIgnoreCaseContainingAndReservationsDateStartBeforeOrReservationsDateStartAfterAndReservationsDateEndBeforeOrReservationsDateEndAfter(String cityName, Date startDate, Date endDate ,Date startDate1, Date endDate1);
+
     List<Lodging>findByCityNameIgnoreCaseContainingAndPersonsNumber(String name, Integer persons_number);
+
+    List<Lodging> findByReservationsDateStartBetweenAndReservationsDateEndBetween(Date dateStart,Date dateEnd,Date dateStart1,Date dateEnd1);
+
    // List<Lodging> findByAdditionalServiceList(Long id);
 
-  //ako se  datum pocetni iz baze nalazi izmedju dva datuma koja korisnik salje onda NE PRIKAZUJ taj smestaj
-    //isto za krajnji datum
 }
