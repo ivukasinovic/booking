@@ -28,63 +28,63 @@ INSERT INTO category_of_lodging (id,label,name ) VALUES (1,'5','kategorisana');
 INSERT INTO category_of_lodging (id,label,name ) VALUES (2,'4','kategorisana');
 
 
-INSERT INTO type_of_lodging (id,label,name ) VALUES (1,'Hotel','Stojkic lux');
-INSERT INTO type_of_lodging (id,label,name ) VALUES (2,'Breakfast and bed','Frans');
-INSERT INTO type_of_lodging (id,label,name ) VALUES (3,'Apartman','Numanovic');
+INSERT INTO type_of_lodging (id,label ) VALUES (1,'Hotel');
+INSERT INTO type_of_lodging (id,label) VALUES (2,'Breakfast and bed');
+INSERT INTO type_of_lodging (id,label ) VALUES (3,'Apartman');
 
 
 -- INSERT INTO additional_service (id,parking,wi_fi,breakfast,half_board,full_board,tv,kitchen,private_bathroom ) VALUES (1,TRUE ,FALSE,TRUE ,FALSE,TRUE ,FALSE,TRUE ,FALSE );
 -- INSERT INTO additional_service (id,parking,wi_fi,breakfast,half_board,full_board,tv,kitchen,private_bathroom ) VALUES (2,TRUE ,TRUE ,TRUE ,TRUE,TRUE ,FALSE,TRUE ,FALSE );
 -- INSERT INTO additional_service (id,parking,wi_fi,breakfast,half_board,full_board,tv,kitchen,private_bathroom ) VALUES (3,TRUE ,FALSE,TRUE ,FALSE,TRUE ,FALSE,TRUE ,FALSE );
 
--- INSERT INTO additional_service (id,name) VALUES (1,'parking')
--- INSERT INTO additional_service (id,name) VALUES (2,'wi_fi')
--- INSERT INTO additional_service (id,name) VALUES (3,'breakfast')
--- INSERT INTO additional_service (id,name) VALUES (4,'half_board')
--- INSERT INTO additional_service (id,name) VALUES (5,'full_board')
--- INSERT INTO additional_service (id,name) VALUES (6,'tv')
--- INSERT INTO additional_service (id,name) VALUES (7,'kitchen')
--- INSERT INTO additional_service (id,name) VALUES (8 ,'private_bathroom')
+INSERT INTO additional_service (id,name) VALUES (1,'parking')
+INSERT INTO additional_service (id,name) VALUES (2,'wi_fi')
+INSERT INTO additional_service (id,name) VALUES (3,'breakfast')
+INSERT INTO additional_service (id,name) VALUES (4,'half_board')
+INSERT INTO additional_service (id,name) VALUES (5,'full_board')
+INSERT INTO additional_service (id,name) VALUES (6,'tv')
+INSERT INTO additional_service (id,name) VALUES (7,'kitchen')
+INSERT INTO additional_service (id,name) VALUES (8 ,'private_bathroom')
 
 
-INSERT INTO lodging (id,address,details , image,rating,persons_number,category_id,type_id,city_id,agent_id) VALUES (1,'Bulevar Despota Stefana 7','NOVOO ,nove stvari vise detalja na telefon ..... xD','',4,2,1,2,1,2);
-INSERT INTO lodging (id,address,details , image,rating,persons_number,category_id,type_id,city_id,agent_id) VALUES (2,'Bulevar Despota Stefana 35','Starija ali ocuvana garsonjeraa','',3,3,1,1,2,2);
-INSERT INTO lodging (id,address,details , image,rating,persons_number,category_id,type_id,city_id,agent_id) VALUES (3,'Sekspirova 42','Garsonjera','',3,4,1,1,2,2);
+INSERT INTO lodging (id,address,details , image,rating,persons_number,category_id,type_id,city_id,agent_id) VALUES (1,'Bulevar Despota Stefana 7','NOVOO ,nove stvari vise detalja na telefon ..... xD','',4,4 ,1,2,1,2);
+INSERT INTO lodging (id,address,details , image,rating,persons_number,category_id,type_id,city_id,agent_id) VALUES (2,'Bulevar Despota Stefana 35','Starija ali ocuvana garsonjeraa','',3,2,1,1,2,2);
+INSERT INTO lodging (id,address,details , image,rating,persons_number,category_id,type_id,city_id,agent_id) VALUES (3,'Sekspirova 42','Garsonjera','',3,1,1,1,2,2);
 INSERT INTO lodging (id,address,details , image,rating,persons_number,category_id,type_id,city_id,agent_id) VALUES (4,'Tolstojeva 23','Stan, dvosoban','',4,2,1,1,4,2);
 INSERT INTO lodging (id,address,details , image,rating,persons_number,category_id,type_id,city_id,agent_id) VALUES (5,'Andriceva 22','Nesto','',2,3,1,1,3,2);
 
 
 
-INSERT INTO additional_service (lodging_id,id) VALUES (1 , 1)
-INSERT INTO additional_service (lodging_id,id) VALUES (1 , 2)
-INSERT INTO additional_service (lodging_id,id) VALUES (1 , 4)
-INSERT INTO additional_service (lodging_id,id) VALUES (1 , 5)
-INSERT INTO additional_service (lodging_id,id) VALUES (1 , 7)
-INSERT INTO additional_service (lodging_id,id) VALUES (1 , 3)
-INSERT INTO additional_service (lodging_id,id) VALUES (1 , 6)
-INSERT INTO additional_service (lodging_id,id) VALUES (1 , 8)
+-- INSERT INTO additional_service (lodging_id,id) VALUES (1 , 1)
+-- INSERT INTO additional_service (lodging_id,id) VALUES (1 , 2)
+-- INSERT INTO additional_service (lodging_id,id) VALUES (1 , 4)
+-- INSERT INTO additional_service (lodging_id,id) VALUES (1 , 5)
+-- INSERT INTO additional_service (lodging_id,id) VALUES (1 , 7)
+-- INSERT INTO additional_service (lodging_id,id) VALUES (1 , 3)
+-- INSERT INTO additional_service (lodging_id,id) VALUES (1 , 6)
+-- INSERT INTO additional_service (lodging_id,id) VALUES (1 , 8)
 
 -- INSERT INTO additional_service (id,lodging_id) VALUES (3 , 2)
 -- INSERT INTO additional_service (id,lodging_id) VALUES (6 , 2)
 
-INSERT INTO additional_service_admin (id,name,additional_service_id) VALUES (1 ,'parking', 1)
-INSERT INTO additional_service_admin (id,name,additional_service_id) VALUES (2 ,'wi_fi', 2)
-INSERT INTO additional_service_admin (id,name,additional_service_id) VALUES (3 ,'breakfast', 3)
-INSERT INTO additional_service_admin (id,name,additional_service_id) VALUES (4 ,'half_board', 4)
-INSERT INTO additional_service_admin (id,name,additional_service_id) VALUES (5 ,'full_board', 5)
-INSERT INTO additional_service_admin (id,name,additional_service_id) VALUES (6 ,'tv', 6)
-INSERT INTO additional_service_admin (id,name,additional_service_id) VALUES (7 ,'kitchen', 7)
-INSERT INTO additional_service_admin (id,name,additional_service_id) VALUES (8,'private_bathroom', 8)
+-- INSERT INTO additional_service_admin (id,name,additional_service_id) VALUES (1 ,'parking', 1)
+-- INSERT INTO additional_service_admin (id,name,additional_service_id) VALUES (2 ,'wi_fi', 2)
+-- INSERT INTO additional_service_admin (id,name,additional_service_id) VALUES (3 ,'breakfast', 3)
+-- INSERT INTO additional_service_admin (id,name,additional_service_id) VALUES (4 ,'half_board', 4)
+-- INSERT INTO additional_service_admin (id,name,additional_service_id) VALUES (5 ,'full_board', 5)
+-- INSERT INTO additional_service_admin (id,name,additional_service_id) VALUES (6 ,'tv', 6)
+-- INSERT INTO additional_service_admin (id,name,additional_service_id) VALUES (7 ,'kitchen', 7)
+-- INSERT INTO additional_service_admin (id,name,additional_service_id) VALUES (8,'private_bathroom', 8)
 
 
--- INSERT INTO lodging_additional_service (additional_service_id,lodging_id) VALUES (1,1);
--- INSERT INTO lodging_additional_service (additional_service_id,lodging_id) VALUES (3,1);
--- INSERT INTO lodging_additional_service (additional_service_id,lodging_id) VALUES (4,1);
--- INSERT INTO lodging_additional_service (additional_service_id,lodging_id) VALUES (5,1);
--- INSERT INTO lodging_additional_service (additional_service_id,lodging_id) VALUES (1,2);
--- INSERT INTO lodging_additional_service (additional_service_id,lodging_id) VALUES (2,2);
--- INSERT INTO lodging_additional_service (additional_service_id,lodging_id) VALUES (3,2);
--- INSERT INTO lodging_additional_service (additional_service_id,lodging_id) VALUES (6,2);
+INSERT INTO lodging_additional_service (additional_service_id,lodging_id) VALUES (1,1);
+INSERT INTO lodging_additional_service (additional_service_id,lodging_id) VALUES (3,1);
+INSERT INTO lodging_additional_service (additional_service_id,lodging_id) VALUES (4,1);
+INSERT INTO lodging_additional_service (additional_service_id,lodging_id) VALUES (5,1);
+INSERT INTO lodging_additional_service (additional_service_id,lodging_id) VALUES (1,2);
+INSERT INTO lodging_additional_service (additional_service_id,lodging_id) VALUES (2,2);
+INSERT INTO lodging_additional_service (additional_service_id,lodging_id) VALUES (3,2);
+INSERT INTO lodging_additional_service (additional_service_id,lodging_id) VALUES (6,2);
 
 INSERT INTO price_list (id,year,date_created, january,february,mart,april,may,june,july,august,september,october,november,december) VALUES (1,'1994','2007-01-24 19:21:58',12.31,20.00,34.00,39.12,41.19,45.85,49.12,55.95,78.12,67.00,56.00,45.99);
 
@@ -99,11 +99,11 @@ INSERT INTO message (id,title,body,date_sent,receiver_id,sender_id) VALUES (1,'O
 
 INSERT INTO rating (id,date_created,star,user_id,lodging_id) VALUES (1,'2018-04-22 09:42:58',4,3,2 );
 
-INSERT INTO reservation (id,date_start,date_end,active,visited,lodging_id,user_id) VALUES (1,'2018-04-21 10:42:58','2018-05-22 10:42:58',true,false ,1,3 );
-INSERT INTO reservation (id,date_start,date_end,active,visited,lodging_id,user_id) VALUES (2,'2018-05-22 10:42:58','2018-06-22 10:42:58',true,false ,2,4 );
+INSERT INTO reservation (id,date_start,date_end,active,visited,lodging_id,user_id) VALUES (1,'2018-04-21 10:42:58','2018-05-22 10:42:58',true,true ,1,3 );
+INSERT INTO reservation (id,date_start,date_end,active,visited,lodging_id,user_id) VALUES (2,'2018-05-22 10:42:58','2018-06-22 10:42:58',true,true ,2,4 );
 INSERT INTO reservation (id,date_start,date_end,active,visited,lodging_id,user_id) VALUES (3,'2018-06-23 10:42:58','2018-07-22 10:42:58',true,true ,3,5 );
-INSERT INTO reservation (id,date_start,date_end,active,visited,lodging_id,user_id) VALUES (4,'2018-07-24 10:42:58','2018-08-22 10:42:58',true,false ,4,6 );
-INSERT INTO reservation (id,date_start,date_end,active,visited,lodging_id,user_id) VALUES (5,'2018-08-25 10:42:58','2018-09-22 10:42:58',true,false ,1,3 );
-INSERT INTO reservation (id,date_start,date_end,active,visited,lodging_id,user_id) VALUES (6,'2018-09-26 10:42:58','2018-10-22 10:42:58',true,false ,2,4 );
+INSERT INTO reservation (id,date_start,date_end,active,visited,lodging_id,user_id) VALUES (4,'2018-07-24 10:42:58','2018-08-22 10:42:58',true,true ,4,6 );
+INSERT INTO reservation (id,date_start,date_end,active,visited,lodging_id,user_id) VALUES (5,'2018-08-25 10:42:58','2018-09-22 10:42:58',true,true ,1,3 );
+INSERT INTO reservation (id,date_start,date_end,active,visited,lodging_id,user_id) VALUES (6,'2018-09-26 10:42:58','2018-10-22 10:42:58',true,true ,2,4 );
 
 

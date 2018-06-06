@@ -26,18 +26,10 @@ public class TypeOfLodging implements Serializable {
     @Column(name = "label", unique = true, nullable = false)
     @XmlElement(name="label", required=true)
     private String label;
-  
-    @XmlElement(name="name", required=true)
-    @Column(name = "name", nullable = true)     // po pravilu false ali zbog Admina true, trebala bi nova klasa a ova bez ovog atributa da ostane za sifrarnik !!!
-    private String name;
 
     public TypeOfLodging() {
     }
 
-    public TypeOfLodging(String label, String name, List<Lodging> lodgingList) {
-        this.label = label;
-        this.name = name;
-    }
 
     public Long getId() {
         return id;
@@ -53,14 +45,6 @@ public class TypeOfLodging implements Serializable {
 
     public void setLabel(String label) {
         this.label = label;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
 }

@@ -96,11 +96,6 @@ public class Lodging implements Serializable {
     @XmlElement(name="reservation", required=true)
     private List<Reservation> reservations = new ArrayList<Reservation>();
 
-//    @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-//    @JsonIdentityReference(alwaysAsId = true)
-//    @ManyToOne
-//    @JoinColumn(name = "additional_service_id", nullable = false)
-//    private AdditionalService additionalService;
 
 
     @OneToMany(mappedBy = "lodging", cascade = CascadeType.ALL)
@@ -109,17 +104,12 @@ public class Lodging implements Serializable {
     private List<Rating> ratingList = new ArrayList<Rating>();
 
     // ==========
- //   @JsonIgnore
-//        @ManyToMany(mappedBy = "lodgingList", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-//        @XmlElementWrapper(name="additionalServiceList", required=true)
-//        @XmlElement(name="additionalService", required=true)
-//        private List<AdditionalService> additionalServiceList = new ArrayList<AdditionalService>();
+    @JsonIgnore
+    @ManyToMany(mappedBy = "lodgingList", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @XmlElementWrapper(name="additionalServiceList", required=true)
+    @XmlElement(name="additionalService", required=true)
+    private List<AdditionalService> additionalServiceList = new ArrayList<AdditionalService>();
     // ==========
-
-    @OneToMany(mappedBy = "lodging", cascade = CascadeType.ALL)
-    @XmlElementWrapper(name="additionalServices_list", required=true)
-    @XmlElement(name="additionalServices_list", required=true)
-    private List<AdditionalService> additionalServices_list= new ArrayList<AdditionalService>();
 
 
     public Lodging() {
@@ -246,12 +236,12 @@ public class Lodging implements Serializable {
         this.personsNumber = persons_number;
     }
 
-    public List<AdditionalService> getAdditionalServices_list() {
-        return additionalServices_list;
-    }
-
-    public void setAdditionalServices_list(List<AdditionalService> additionalServices_list) {
-        this.additionalServices_list = additionalServices_list;
-    }
+//    public List<AdditionalService> getAdditionalServices_list() {
+//        return additionalServices_list;
+//    }
+//
+//    public void setAdditionalServices_list(List<AdditionalService> additionalServices_list) {
+//        this.additionalServices_list = additionalServices_list;
+//    }
 }
 
