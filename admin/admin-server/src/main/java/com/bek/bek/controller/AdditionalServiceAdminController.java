@@ -1,6 +1,6 @@
 package com.bek.bek.controller;
 
-import com.bek.bek.domain.AdditionalServiceAdmin;
+import com.bek.bek.domain.AdditionalService;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -21,7 +21,7 @@ public class AdditionalServiceAdminController {
     )
     public ResponseEntity< Object[]> getAll() {
         RestTemplate rt = new RestTemplate();
-        ResponseEntity<Object[]> responseEntity = rt.getForEntity("http://localhost:8080/api/addtional-serviceadmin", Object[].class);
+        ResponseEntity<Object[]> responseEntity = rt.getForEntity("http://localhost:8080/api/addtional-service", Object[].class);
         Object[] objects = responseEntity.getBody();
         return new ResponseEntity<>(objects,HttpStatus.OK);
  }
@@ -34,7 +34,7 @@ public class AdditionalServiceAdminController {
     public ResponseEntity<?> getAdditional(@PathVariable("id") Long id) {
        //  return ("redirect:/https://localhost:8080/addtional-serviceadmin/" + id);
         RestTemplate rt = new RestTemplate();
-        ResponseEntity<Object> responseEntity = rt.getForEntity("http://localhost:8080/api/addtional-serviceadmin/"+id, Object.class,id);
+        ResponseEntity<Object> responseEntity = rt.getForEntity("http://localhost:8080/api/addtional-service/"+id, Object.class,id);
         Object object = responseEntity.getBody();
 
 
@@ -47,12 +47,12 @@ public class AdditionalServiceAdminController {
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public ResponseEntity<AdditionalServiceAdmin>  napravi (@RequestBody AdditionalServiceAdmin additionalService) {
-        HttpEntity<AdditionalServiceAdmin> request = new HttpEntity<>(additionalService);
+    public ResponseEntity<AdditionalService>  napravi (@RequestBody AdditionalService additionalService) {
+        HttpEntity<AdditionalService> request = new HttpEntity<>(additionalService);
         RestTemplate rt = new RestTemplate();
-        AdditionalServiceAdmin response = rt.postForObject("http://localhost:8080/api/addtional-serviceadmin", request, AdditionalServiceAdmin.class);
+        AdditionalService response = rt.postForObject("http://localhost:8080/api/addtional-service", request, AdditionalService.class);
 
-        return ResponseEntity.ok(new AdditionalServiceAdmin());
+        return ResponseEntity.ok(new AdditionalService());
     }
 
 
@@ -63,7 +63,7 @@ public class AdditionalServiceAdminController {
     public void izbrisi(@PathVariable("id") Long id){
        // return  "redirect:/https://localhost:8443/addtional-serviceadmin" + id;
         RestTemplate rt = new RestTemplate();
-        rt.delete("http://localhost:8080/api/addtional-serviceadmin/"+id);
+        rt.delete("http://localhost:8080/api/addtional-service/"+id);
     }
 
 }

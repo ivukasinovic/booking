@@ -47,7 +47,7 @@ export class AdditionalLodgingComponent implements OnInit {
     this.authService.addAdditional(this.noviTip)
       .subscribe((data: Additional) => {
           // alert('Succes ' + data.name + '!');
-          alert('Succes ' + this.noviTip.id + '!');
+          alert('Succes ' + this.noviTip.name + '!');
           //  this.router.navigate(['/admin']);
           window.location.reload();
         },
