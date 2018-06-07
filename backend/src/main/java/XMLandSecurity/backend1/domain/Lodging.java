@@ -30,6 +30,10 @@ public class Lodging implements Serializable {
     @XmlElement(name="id", required=true)
     private Long id;
 
+    @Column(name = "title", nullable = false)
+    @XmlElement(name="title", required=true)
+    private String title;
+
     @Column(name = "address", nullable = false)
     @XmlElement(name="address", required=true)
     private String address;
@@ -258,5 +262,13 @@ public class Lodging implements Serializable {
 //    public void setAdditionalServices_list(List<AdditionalService> additionalServices_list) {
 //        this.additionalServices_list = additionalServices_list;
 //    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
 }
 
