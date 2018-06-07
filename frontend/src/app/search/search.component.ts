@@ -15,7 +15,7 @@ export class SearchComponent implements OnInit {
     numberOfPersons1: new FormControl('', Validators.compose ([Validators.required])),
     searchSDT: new FormControl('2018-06-06'),
     searchEDT: new FormControl('2018-06-06'),
-    typeOfLodging: new FormControl('')
+    typeOfLodging: new FormControl('undefined')
   });
   lod: Lodging[];
   searchCity: string ;
@@ -52,7 +52,8 @@ export class SearchComponent implements OnInit {
 
   onSubmit = function (lodging) {
     console.log(lodging);
-    this.searchService.searchLodging(lodging.cityName1, lodging.numberOfPersons1, lodging.searchSDT, lodging.searchEDT)
+    this.searchService.searchLodging(lodging.cityName1, lodging.numberOfPersons1, lodging.searchSDT,
+      lodging.searchEDT, lodging.typeOfLodging)
       .subscribe(
         (response: Lodging[]) => {
           this.lod = response;

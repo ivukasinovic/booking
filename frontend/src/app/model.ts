@@ -21,7 +21,6 @@ export class CategoryOfLodging {
 export class TypeOfLodging {
   id: number;
   label: string;
-  name: string;
 }
 export class Country {
   id: number;

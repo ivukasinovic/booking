@@ -83,19 +83,17 @@ public class LodgingController {
     }
 
     @RequestMapping(
-            value = "/search/{cityName}/{personsNbr}/{dateStart}/{dateEnd}/",
+            value = "/search/{cityName}/{personsNbr}/{dateStart}/{dateEnd}/{typeLodging}/",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> search(@PathVariable("cityName") String cityName,@PathVariable("personsNbr") String personsNbr,
-                                    @PathVariable("dateStart") String dateStart,@PathVariable("dateEnd") String dateEnd){
+                                    @PathVariable("dateStart") String dateStart,
+                                    @PathVariable("dateEnd") String dateEnd,@PathVariable("typeLodging") String typeLodging){
         List<Lodging> reservatedLodgings = new ArrayList<Lodging>();
         List<Lodging> retLodgings = new ArrayList<Lodging>();
         List<Lodging> ret = new ArrayList<Lodging>();
-        retLodgings= null;
+        System.out.println("\n typeLodging " + typeLodging);
         int broj;
-        System.out.println("\n POCETNI DATUM : " + dateStart +
-                "\n KRAJNJI DATUM" + dateEnd) ;
-
         if(dateStart.equals("undefined") || dateStart.equals("")) {
             dateStart ="1995-09-16" ;
         }
@@ -110,6 +108,10 @@ public class LodgingController {
         } catch (ParseException e) {
             e.printStackTrace();
         }
+        if(typeLodging.equals("undefined") || typeLodging.equals("null")) {
+            typeLodging = "";
+        }
+
         if(cityName.equals("undefined") || cityName.equals("null")) {
             cityName = "";
         }
@@ -117,10 +119,10 @@ public class LodgingController {
             //ne bi trebalo nikad da udje
             retLodgings = lodgingService.findAll();
         }else {
-            System.out.println("\n NA PRAVOM : " );
+            System.out.println("\n Search ... " );
             broj = Integer.parseInt(personsNbr);
             reservatedLodgings = lodgingService.findByReservationsDateStartBetweenAndReservationsDateEndBetween(dateS,dateE,dateS,dateE);
-            retLodgings = lodgingService.findByCityAndPersons_number(cityName, broj);
+            retLodgings = lodgingService.findByCityAndPersons_number(cityName, broj,typeLodging);
             //1 2  3   // 2 4
             int flag = 0;
             for(Lodging rl : retLodgings ){
@@ -131,19 +133,12 @@ public class LodgingController {
                     }
                 }
                 if(flag ==0){
-                    System.out.println("\nDodajem smestaj :" + rl.getId());
                     ret.add(rl);
 
                 }
             }
         }
-/*
-        for(Lodging k : retLodgings){
-            if(!ret.contains(k)) {
-                ret.add(k);
-            }
-        }*/
-        //System.out.println("\n AAA "+ ret.size());
+
         return new ResponseEntity(ret, HttpStatus.OK);
     }
 }

@@ -42,80 +42,80 @@ public class PriceList implements Serializable {
     @DecimalMax(value="1000000", inclusive=false)
     @DecimalMin(value ="1")
     @Column(name = "january", columnDefinition = "Decimal(8,2)")
-    @XmlElement(name="january")
+    @XmlElement(name="january", required=true)
     private Double january;
 
     @DecimalMax(value="1000000", inclusive=false)
     @DecimalMin(value ="1")
     @Column(name = "february", columnDefinition = "Decimal(8,2)")
-    @XmlElement(name="february")
+    @XmlElement(name="february", required=true)
     private Double february;
 
     @DecimalMax(value="1000000", inclusive=false)
     @DecimalMin(value ="1")
     @Column(name = "mart", columnDefinition = "Decimal(8,2)")
-    @XmlElement(name="mart")
+    @XmlElement(name="mart", required=true)
     private Double mart;
 
     @DecimalMax(value="1000000", inclusive=false)
     @DecimalMin(value ="1")
     @Column(name = "april", columnDefinition = "Decimal(8,2)")
-    @XmlElement(name="april")
+    @XmlElement(name="april", required=true)
     private Double april;
 
     @DecimalMax(value="1000000", inclusive=false)
     @DecimalMin(value ="1")
     @Column(name = "may", columnDefinition = "Decimal(8,2)")
-    @XmlElement(name="may")
+    @XmlElement(name="may", required=true)
     private Double may;
 
     @DecimalMax(value="1000000", inclusive=false)
     @DecimalMin(value ="1")
     @Column(name = "june", columnDefinition = "Decimal(8,2)")
-    @XmlElement(name="june")
+    @XmlElement(name="june", required=true)
     private Double june;
 
     @DecimalMax(value="1000000", inclusive=false)
     @DecimalMin(value ="1")
     @Column(name = "july", columnDefinition = "Decimal(8,2)")
-    @XmlElement(name="july")
+    @XmlElement(name="july", required=true)
     private Double july;
 
     @DecimalMax(value="1000000", inclusive=false)
     @DecimalMin(value ="1")
     @Column(name = "august", columnDefinition = "Decimal(8,2)")
-    @XmlElement(name="august")
+    @XmlElement(name="august", required=true)
     private Double august;
 
     @DecimalMax(value="1000000", inclusive=false)
     @DecimalMin(value ="1")
     @Column(name = "september", columnDefinition = "Decimal(8,2)")
-    @XmlElement(name="september")
+    @XmlElement(name="september", required=true)
     private Double september;
 
     @DecimalMax(value="1000000", inclusive=false)
     @DecimalMin(value ="1")
     @Column(name = "october", columnDefinition = "Decimal(8,2)")
-    @XmlElement(name="october")
+    @XmlElement(name="october", required=true)
     private Double october;
 
     @DecimalMax(value="1000000", inclusive=false)
     @DecimalMin(value ="1")
     @Column(name = "november", columnDefinition = "Decimal(8,2)")
-    @XmlElement(name="november")
+    @XmlElement(name="november", required=true)
     private Double november;
 
     @DecimalMax(value="1000000", inclusive=false)
     @DecimalMin(value ="1")
     @Column(name = "december", columnDefinition = "Decimal(8,2)")
-    @XmlElement(name="december")
+    @XmlElement(name="december", required=true)
     private Double december;
 
     @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
     @JsonIdentityReference(alwaysAsId = true)
     @ManyToOne
     @JoinColumn(name = "lodging_id")
-    @XmlElement(name="lodging")
+    @XmlElement(name="lodging", required=true)
     private Lodging lodging;
 
     public PriceList() {

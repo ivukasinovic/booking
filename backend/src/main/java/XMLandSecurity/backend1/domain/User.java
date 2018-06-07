@@ -120,20 +120,20 @@ public class User implements Serializable {
 
     @JsonIgnore
     @XmlElementWrapper(name="lodgings", required=false)
-    @XmlElement(name="lodgings", required=false)
+    @XmlElement(name="lodging", required=false)
     @OneToMany(mappedBy = "agent", cascade = CascadeType.ALL)
     private List<Lodging> lodgings = new ArrayList<Lodging>();
 
-     @JsonIgnore
-     @XmlElementWrapper(name="ratings", required=false)
-     @XmlElement(name="ratings", required=false)
+    @JsonIgnore
+    @XmlElementWrapper(name="ratings", required=false)
+    @XmlElement(name="rating", required=false)
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Rating> ratings = new ArrayList<Rating>();
 
     @JsonIgnore
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     @XmlElementWrapper(name="comments", required=true)
-    @XmlElement(name="comments", required=true)
+    @XmlElement(name="comment", required=true)
     private List<Comment> comments = new ArrayList<Comment>();
 
 
