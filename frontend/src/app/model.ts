@@ -55,3 +55,7 @@ export class Reservation {
   lodging: Lodging;
   user: User;
 }
+export class AditionalServices {
+  id: number;
+  name: string;
+}

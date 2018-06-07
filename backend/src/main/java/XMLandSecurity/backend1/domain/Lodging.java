@@ -236,7 +236,22 @@ public class Lodging implements Serializable {
         this.personsNumber = persons_number;
     }
 
-//    public List<AdditionalService> getAdditionalServices_list() {
+    public Integer getPersonsNumber() {
+        return personsNumber;
+    }
+
+    public void setPersonsNumber(Integer personsNumber) {
+        this.personsNumber = personsNumber;
+    }
+
+    public List<AdditionalService> getAdditionalServiceList() {
+        return additionalServiceList;
+    }
+
+    public void setAdditionalServiceList(List<AdditionalService> additionalServiceList) {
+        this.additionalServiceList = additionalServiceList;
+    }
+    //    public List<AdditionalService> getAdditionalServices_list() {
 //        return additionalServices_list;
 //    }
 //

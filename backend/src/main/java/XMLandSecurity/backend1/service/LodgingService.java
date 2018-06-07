@@ -1,5 +1,6 @@
 package XMLandSecurity.backend1.service;
 
+import XMLandSecurity.backend1.domain.AdditionalService;
 import XMLandSecurity.backend1.domain.City;
 import XMLandSecurity.backend1.domain.Lodging;
 
@@ -18,7 +19,7 @@ public interface LodgingService {
 
     Lodging findByAgent(Long id);
 
-    List<Lodging> findByCityAndPersons_number(String city, Integer personsNbr,String typeLodging);
+    List<Lodging> findByCityAndPersons_number(String city, Integer personsNbr, String typeLodging, Iterable<AdditionalService> as);
 
 
    // List<Lodging> findByAdditionalServiceList(Long id);

@@ -1,5 +1,6 @@
 package XMLandSecurity.backend1.service.impl;
 
+import XMLandSecurity.backend1.domain.AdditionalService;
 import XMLandSecurity.backend1.domain.City;
 import XMLandSecurity.backend1.domain.Lodging;
 import XMLandSecurity.backend1.repository.LodgingRepository;
@@ -43,8 +44,8 @@ public class LodgingServiceImpl implements LodgingService {
     }
 
     @Override
-    public List<Lodging> findByCityAndPersons_number(String city, Integer personsNbr, String typeLodging) {
-        return lodgingRepository.findByCityNameIgnoreCaseContainingAndPersonsNumberAndTypeLabelIgnoreCaseContaining(city, personsNbr, typeLodging);
+    public List<Lodging> findByCityAndPersons_number(String city, Integer personsNbr, String typeLodging, Iterable<AdditionalService> as) {
+        return lodgingRepository.findByCityNameIgnoreCaseContainingAndPersonsNumberAndTypeLabelIgnoreCaseContainingAndAdditionalServiceListContaining(city, personsNbr, typeLodging, as);
     }
 
     @Override
