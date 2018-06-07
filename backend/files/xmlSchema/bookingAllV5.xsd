@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<xs:schema elementFormDefault="qualified" version="1.0" targetNamespace="http://bookingxml.com/soap-example"
-  xmlns:all="http://bookingxml.com/soap-example" xmlns:tns="http://bookingxml.com/soap-example" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:schema elementFormDefault="qualified" version="1.0"
+  targetNamespace="http://bookingxml.com/soap-example"
+  xmlns:all="http://bookingxml.com/soap-example" xmlns:tns="http://bookingxml.com/soap-example"
+  xmlns:xs="http://www.w3.org/2001/XMLSchema">
 
   <xs:element name="additionalService" type="tns:additionalService"/>
-
-  <xs:element name="additionalServiceAdmin" type="tns:additionalServiceAdmin"/>
 
   <xs:element name="categoryOfLodging" type="tns:categoryOfLodging"/>
 
@@ -34,14 +34,26 @@
       <xs:element name="address">
         <xs:simpleType>
           <xs:restriction base="xs:string">
-            <xs:maxLength value="150"/>
+            <xs:maxLength value="200"/>
           </xs:restriction>
         </xs:simpleType>
       </xs:element>
-      <xs:element name="details" type="xs:string"/>
+      <xs:element name="details">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:maxLength value="250"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
       <xs:element name="image" type="xs:string"/>
       <xs:element name="rating" type="xs:double"/>
-      <xs:element name="persons_number" type="xs:int"/>
+      <xs:element name="personsNumber">
+        <xs:simpleType>
+          <xs:restriction base="xs:int">
+            <xs:maxExclusive value="100"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
       <xs:element name="category" type="tns:categoryOfLodging"/>
       <xs:element name="type" type="tns:typeOfLodging"/>
       <xs:element ref="tns:city"/>
@@ -53,10 +65,10 @@
         </xs:complexType>
       </xs:element>
       <xs:element name="agent" type="tns:user"/>
-      <xs:element name="comments" minOccurs="1">
+      <xs:element name="comments">
         <xs:complexType>
           <xs:sequence>
-            <xs:element ref="tns:comment" maxOccurs="unbounded" minOccurs="1"/>
+            <xs:element ref="tns:comment" maxOccurs="unbounded"/>
           </xs:sequence>
         </xs:complexType>
       </xs:element>
@@ -74,11 +86,10 @@
           </xs:sequence>
         </xs:complexType>
       </xs:element>
-      <xs:element name="additionalServices_list">
+      <xs:element name="additionalServiceList">
         <xs:complexType>
           <xs:sequence>
-            <xs:element name="additionalServices_list" type="tns:additionalService"
-              maxOccurs="unbounded"/>
+            <xs:element ref="tns:additionalService" maxOccurs="unbounded"/>
           </xs:sequence>
         </xs:complexType>
       </xs:element>
@@ -88,11 +99,17 @@
   <xs:complexType name="categoryOfLodging">
     <xs:sequence>
       <xs:element name="id" type="xs:long"/>
-      <xs:element name="label" type="xs:string"/>
+      <xs:element name="label">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:maxLength value="50"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
       <xs:element name="name">
         <xs:simpleType>
           <xs:restriction base="xs:string">
-            <xs:maxLength value="30"/>
+            <xs:maxLength value="50"/>
           </xs:restriction>
         </xs:simpleType>
       </xs:element>
@@ -102,12 +119,10 @@
   <xs:complexType name="typeOfLodging">
     <xs:sequence>
       <xs:element name="id" type="xs:long"/>
-      <xs:element name="label" type="xs:string"/>
-      <xs:element name="name">
+      <xs:element name="label">
         <xs:simpleType>
           <xs:restriction base="xs:string">
-            <xs:maxLength value="30"/>
-            <xs:minLength value="1"/>
+            <xs:maxLength value="50"/>
           </xs:restriction>
         </xs:simpleType>
       </xs:element>
@@ -120,8 +135,7 @@
       <xs:element name="name">
         <xs:simpleType>
           <xs:restriction base="xs:string">
-            <xs:maxLength value="30"/>
-            <xs:minLength value="2"/>
+            <xs:maxLength value="50"/>
           </xs:restriction>
         </xs:simpleType>
       </xs:element>
@@ -135,12 +149,19 @@
       <xs:element name="name">
         <xs:simpleType>
           <xs:restriction base="xs:string">
-            <xs:maxLength value="30"/>
-            <xs:minLength value="2"/>
+            <xs:maxLength value="50"/>
+            <xs:minLength value="1"/>
           </xs:restriction>
         </xs:simpleType>
       </xs:element>
-      <xs:element name="code" type="xs:string"/>
+      <xs:element name="code">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:maxLength value="10"/>
+            <xs:minLength value="1"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
       <xs:element name="cityList">
         <xs:complexType>
           <xs:sequence>
@@ -158,108 +179,109 @@
         <xs:simpleType>
           <xs:restriction base="xs:string">
             <xs:maxLength value="5"/>
-            <xs:minLength value="3"/>
+            <xs:minLength value="1"/>
           </xs:restriction>
         </xs:simpleType>
       </xs:element>
       <xs:element name="dateCreated" type="xs:dateTime"/>
-      <xs:element name="january" minOccurs="0">
+      <xs:element name="january">
         <xs:simpleType>
           <xs:restriction base="xs:double">
-            <xs:minExclusive value="0"/>
             <xs:maxExclusive value="32"/>
+            <xs:minExclusive value="0"/>
           </xs:restriction>
         </xs:simpleType>
       </xs:element>
-      <xs:element name="february" minOccurs="0">
+      <xs:element name="february">
         <xs:simpleType>
           <xs:restriction base="xs:double">
+            <xs:maxExclusive value="30"/>
             <xs:minExclusive value="0"/>
-            <xs:maxExclusive value="29"/>
           </xs:restriction>
         </xs:simpleType>
       </xs:element>
-      <xs:element name="mart" minOccurs="0">
+      <xs:element name="mart">
         <xs:simpleType>
           <xs:restriction base="xs:double">
-            <xs:minExclusive value="0"/>
             <xs:maxExclusive value="32"/>
+            <xs:minExclusive value="0"/>
           </xs:restriction>
         </xs:simpleType>
       </xs:element>
-      <xs:element name="april" minOccurs="0">
+      <xs:element name="april">
         <xs:simpleType>
           <xs:restriction base="xs:double">
-            <xs:minExclusive value="0"/>
             <xs:maxExclusive value="31"/>
+            <xs:minExclusive value="0"/>
           </xs:restriction>
         </xs:simpleType>
       </xs:element>
-      <xs:element name="may" minOccurs="0">
+      <xs:element name="may">
         <xs:simpleType>
           <xs:restriction base="xs:double">
-            <xs:minExclusive value="0"/>
+            <xs:whiteSpace value="collapse"/>
             <xs:maxExclusive value="32"/>
+            <xs:minExclusive value="0"/>
           </xs:restriction>
         </xs:simpleType>
       </xs:element>
-      <xs:element name="june" minOccurs="0">
+      <xs:element name="june">
         <xs:simpleType>
           <xs:restriction base="xs:double">
-            <xs:minExclusive value="0"/>
-            <xs:maxExclusive value="32"/>
-          </xs:restriction>
-        </xs:simpleType>
-      </xs:element>
-      <xs:element name="july" minOccurs="0">
-        <xs:simpleType>
-          <xs:restriction base="xs:double">
-            <xs:minExclusive value="0"/>
-            <xs:maxExclusive value="32"/>
-          </xs:restriction>
-        </xs:simpleType>
-      </xs:element>
-      <xs:element name="august" minOccurs="0">
-        <xs:simpleType>
-          <xs:restriction base="xs:double">
-            <xs:minExclusive value="0"/>
-            <xs:maxExclusive value="32"/>
-          </xs:restriction>
-        </xs:simpleType>
-      </xs:element>
-      <xs:element name="september" minOccurs="0">
-        <xs:simpleType>
-          <xs:restriction base="xs:double">
-            <xs:minExclusive value="0"/>
             <xs:maxExclusive value="31"/>
+            <xs:minExclusive value="0"/>
           </xs:restriction>
         </xs:simpleType>
       </xs:element>
-      <xs:element name="october" minOccurs="0">
+      <xs:element name="july">
         <xs:simpleType>
           <xs:restriction base="xs:double">
-            <xs:minExclusive value="0"/>
             <xs:maxExclusive value="32"/>
+            <xs:minExclusive value="0"/>
           </xs:restriction>
         </xs:simpleType>
       </xs:element>
-      <xs:element name="november" minOccurs="0">
+      <xs:element name="august">
         <xs:simpleType>
           <xs:restriction base="xs:double">
+            <xs:maxExclusive value="32"/>
             <xs:minExclusive value="0"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="september">
+        <xs:simpleType>
+          <xs:restriction base="xs:double">
             <xs:maxExclusive value="31"/>
+            <xs:minExclusive value="0"/>
           </xs:restriction>
         </xs:simpleType>
       </xs:element>
-      <xs:element name="december" minOccurs="0">
+      <xs:element name="october">
         <xs:simpleType>
           <xs:restriction base="xs:double">
-            <xs:minExclusive value="0"/>
             <xs:maxExclusive value="32"/>
+            <xs:minExclusive value="0"/>
           </xs:restriction>
         </xs:simpleType>
       </xs:element>
-      <xs:element ref="tns:lodging" minOccurs="0"/>
+      <xs:element name="november">
+        <xs:simpleType>
+          <xs:restriction base="xs:double">
+            <xs:maxExclusive value="31"/>
+            <xs:minExclusive value="0"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="december">
+        <xs:simpleType>
+          <xs:restriction base="xs:double">
+            <xs:maxExclusive value="32"/>
+            <xs:minExclusive value="0"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element ref="tns:lodging"/>
     </xs:sequence>
   </xs:complexType>
 
@@ -269,8 +291,8 @@
       <xs:element name="username">
         <xs:simpleType>
           <xs:restriction base="xs:string">
+            <xs:maxLength value="50"/>
             <xs:minLength value="1"/>
-            <xs:maxLength value="30"/>
           </xs:restriction>
         </xs:simpleType>
       </xs:element>
@@ -278,48 +300,36 @@
       <xs:element name="name">
         <xs:simpleType>
           <xs:restriction base="xs:string">
-            <xs:minLength value="1"/>
-            <xs:maxLength value="30"/>
+            <xs:maxLength value="50"/>
           </xs:restriction>
         </xs:simpleType>
       </xs:element>
       <xs:element name="surname">
         <xs:simpleType>
           <xs:restriction base="xs:string">
-            <xs:minLength value="1"/>
-            <xs:maxLength value="30"/>
+            <xs:maxLength value="50"/>
           </xs:restriction>
         </xs:simpleType>
       </xs:element>
       <xs:element name="email">
         <xs:simpleType>
           <xs:restriction base="xs:string">
-            <xs:minLength value="3"/>
             <xs:maxLength value="50"/>
           </xs:restriction>
         </xs:simpleType>
       </xs:element>
-      <xs:element name="city">
-        <xs:simpleType>
-          <xs:restriction base="xs:string">
-            <xs:maxLength value="30"/>
-            <xs:minLength value="2"/>
-          </xs:restriction>
-        </xs:simpleType>
-      </xs:element>
+      <xs:element name="city" type="xs:string"/>
       <xs:element name="adress" minOccurs="0">
         <xs:simpleType>
           <xs:restriction base="xs:string">
-            <xs:minLength value="1"/>
-            <xs:maxLength value="150"/>
+            <xs:maxLength value="100"/>
           </xs:restriction>
         </xs:simpleType>
       </xs:element>
       <xs:element name="number">
         <xs:simpleType>
           <xs:restriction base="xs:string">
-            <xs:minLength value="4"/>
-            <xs:maxLength value="12"/>
+            <xs:maxLength value="15"/>
           </xs:restriction>
         </xs:simpleType>
       </xs:element>
@@ -350,21 +360,21 @@
       <xs:element name="lodgings" minOccurs="0">
         <xs:complexType>
           <xs:sequence>
-            <xs:element name="lodgings" type="tns:lodging" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element ref="tns:lodging" minOccurs="0" maxOccurs="unbounded"/>
           </xs:sequence>
         </xs:complexType>
       </xs:element>
       <xs:element name="ratings" minOccurs="0">
         <xs:complexType>
           <xs:sequence>
-            <xs:element name="ratings" type="tns:rating" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element ref="tns:rating" minOccurs="0" maxOccurs="unbounded"/>
           </xs:sequence>
         </xs:complexType>
       </xs:element>
       <xs:element name="comments">
         <xs:complexType>
           <xs:sequence>
-            <xs:element name="comments" type="tns:comment" maxOccurs="unbounded"/>
+            <xs:element ref="tns:comment" maxOccurs="unbounded"/>
           </xs:sequence>
         </xs:complexType>
       </xs:element>
@@ -377,16 +387,14 @@
       <xs:element name="title">
         <xs:simpleType>
           <xs:restriction base="xs:string">
-            <xs:minLength value="0"/>
-            <xs:maxLength value="25"/>
+            <xs:maxLength value="50"/>
           </xs:restriction>
         </xs:simpleType>
       </xs:element>
       <xs:element name="body">
         <xs:simpleType>
           <xs:restriction base="xs:string">
-            <xs:minLength value="1"/>
-            <xs:maxLength value="250"/>
+            <xs:maxLength value="200"/>
           </xs:restriction>
         </xs:simpleType>
       </xs:element>
@@ -424,7 +432,7 @@
       <xs:element name="body">
         <xs:simpleType>
           <xs:restriction base="xs:string">
-            <xs:maxLength value="250"/>
+            <xs:maxLength value="200"/>
           </xs:restriction>
         </xs:simpleType>
       </xs:element>
@@ -437,22 +445,20 @@
   <xs:complexType name="additionalService">
     <xs:sequence>
       <xs:element name="id" type="xs:long"/>
-      <xs:element name="additionalService_list">
+      <xs:element name="name">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:maxLength value="50"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="lodgingList">
         <xs:complexType>
           <xs:sequence>
-            <xs:element name="city" type="tns:additionalServiceAdmin" maxOccurs="unbounded"/>
+            <xs:element ref="tns:lodging" maxOccurs="unbounded"/>
           </xs:sequence>
         </xs:complexType>
       </xs:element>
-      <xs:element ref="tns:lodging"/>
-    </xs:sequence>
-  </xs:complexType>
-
-  <xs:complexType name="additionalServiceAdmin">
-    <xs:sequence>
-      <xs:element name="id" type="xs:long"/>
-      <xs:element name="name" type="xs:string"/>
-      <xs:element ref="tns:additionalService"/>
     </xs:sequence>
   </xs:complexType>
 

@@ -3,7 +3,7 @@
 
       <h3>Search</h3>
       <form  [formGroup] = "form"
-      (ngSubmit) = "onSubmit(form.value)">
+      (ngSubmit) = "onSubmit(form.value, aditionServices)">
         <label>City </label>
         <input class="form-control" id ="cityName1"  value="" type="text" class="form-control" name="cityName1"
                placeholder="Enter city " formControlName="cityName1">
@@ -27,6 +27,17 @@
           <option value="BedAndBreakfast">Bed and breakfast </option>
           <option value="Apartman">Apartman </option>
         </select>
+        <br>
+
+
+        <div   *ngFor="let a of aditionServices " >
+          <div>
+            <label>{{ (a.name) }}</label>
+            <input class="form-control" name={{a.id}}   id={{a.id}}  type="checkbox"  (change)="vrati(a.id)">
+            <p id="text" style="display:none">Checkbox is CHECKED!</p>
+          </div>
+        </div>
+
         <br>
         <input class="form-control" type = "submit" [disabled]="!form.valid" value ="Search Lodging">
 

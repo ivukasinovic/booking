@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Router} from '@angular/router';
-import {Lodging} from '../model';
+import {Lodging, TypeOfLodging, AditionalServices} from '../model';
 
 @Injectable()
 export class SearchService {
@@ -11,8 +11,13 @@ export class SearchService {
   allLodgings() {
     return this.http.get('api/lodging/getLodgings');
   }
-  searchLodging(cityName: string, nbrOfPersons: number, dateStart: Date, dateEnd: Date) {
-    return this.http.get('api/lodging/search/' + cityName + '/' + nbrOfPersons + '/' + dateStart + '/' + dateEnd + '/');
+  searchLodging(cityName: string, nbrOfPersons: number, dateStart: Date, dateEnd: Date, typeOfLodging: string, as: AditionalServices) {
+    return this.http.post('api/lodging/search/' + cityName + '/' + nbrOfPersons +
+      '/' + dateStart + '/' + dateEnd + '/' + typeOfLodging + '/', as );
+  }
+
+  getAllAditionalServices() {
+    return this.http.get('api/addtional-service');
   }
 
   getCities() {
@@ -20,10 +25,8 @@ export class SearchService {
   }
 
   getReservations() {
-    return this.http.get('api/reservation/getReservations');
+    return this.http.get('api/reservations');
   }
 
-  getReservationByLodging(idLodg: number) {
-    return this.http.get('api/reservation/getReservationByLodging/' + idLodg );
-  }
+
 }

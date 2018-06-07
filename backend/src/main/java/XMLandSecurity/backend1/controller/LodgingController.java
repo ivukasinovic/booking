@@ -1,7 +1,9 @@
 package XMLandSecurity.backend1.controller;
 
+import XMLandSecurity.backend1.domain.AdditionalService;
 import XMLandSecurity.backend1.domain.City;
 import XMLandSecurity.backend1.domain.Lodging;
+import XMLandSecurity.backend1.service.AdditionalServiceService;
 import XMLandSecurity.backend1.service.LodgingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -26,7 +28,8 @@ public class LodgingController {
     private LodgingService lodgingService;
     @Autowired
     private CityService cityService;
-
+    @Autowired
+    private AdditionalServiceService additionalServiceService;
 
     @RequestMapping(
             value = "/{id}",
@@ -83,18 +86,29 @@ public class LodgingController {
     }
 
     @RequestMapping(
-            value = "/search/{cityName}/{personsNbr}/{dateStart}/{dateEnd}/",
-            method = RequestMethod.GET,
-            produces = MediaType.APPLICATION_JSON_VALUE)
+            value = "/search/{cityName}/{personsNbr}/{dateStart}/{dateEnd}/{typeLodging}/",
+            method = RequestMethod.POST,
+            produces = MediaType.APPLICATION_JSON_VALUE,
+            consumes = MediaType.APPLICATION_JSON_VALUE
+    )
     public ResponseEntity<?> search(@PathVariable("cityName") String cityName,@PathVariable("personsNbr") String personsNbr,
-                                    @PathVariable("dateStart") String dateStart,@PathVariable("dateEnd") String dateEnd){
+                                    @PathVariable("dateStart") String dateStart,
+                                    @PathVariable("dateEnd") String dateEnd,@PathVariable("typeLodging") String typeLodging,
+                                    @RequestBody ArrayList<Long> checkedArray){
         List<Lodging> reservatedLodgings = new ArrayList<Lodging>();
         List<Lodging> retLodgings = new ArrayList<Lodging>();
         List<Lodging> ret = new ArrayList<Lodging>();
-        retLodgings= null;
+        List<AdditionalService> aditionalS = new ArrayList<AdditionalService>();
+
+        for(Long l : checkedArray) {
+            aditionalS.add(additionalServiceService.findOne(l));
+
+        }
+        for(AdditionalService l : aditionalS) {
+            System.out.println("\n as  : " + l.getName() );
+
+        }
         int broj;
-        System.out.println("\n POCETNI DATUM : " + dateStart +
-                "\n KRAJNJI DATUM" + dateEnd) ;
 
         if(dateStart.equals("undefined") || dateStart.equals("")) {
             dateStart ="1995-09-16" ;
@@ -110,19 +124,23 @@ public class LodgingController {
         } catch (ParseException e) {
             e.printStackTrace();
         }
+        if(typeLodging.equals("undefined") || typeLodging.equals("null")) {
+            typeLodging = "";
+        }
         if(cityName.equals("undefined") || cityName.equals("null")) {
             cityName = "";
         }
+
         if(personsNbr.equals("undefined") || personsNbr.equals("") || personsNbr.equals("null")) {
             //ne bi trebalo nikad da udje
             retLodgings = lodgingService.findAll();
         }else {
-            System.out.println("\n NA PRAVOM : " );
+            System.out.println("\n Search ... " );
             broj = Integer.parseInt(personsNbr);
             reservatedLodgings = lodgingService.findByReservationsDateStartBetweenAndReservationsDateEndBetween(dateS,dateE,dateS,dateE);
-            retLodgings = lodgingService.findByCityAndPersons_number(cityName, broj);
+            retLodgings = lodgingService.findByCityAndPersons_number(cityName, broj,typeLodging, aditionalS);
             //1 2  3   // 2 4
-            int flag = 0;
+            int flag = 0;//petlja za proveravanje koji smestaji su dozvoljeni zbog termina rezervacija
             for(Lodging rl : retLodgings ){
                 for(Lodging rll : reservatedLodgings ) {
                     if (rl.getId() == rll.getId()) {
@@ -131,19 +149,12 @@ public class LodgingController {
                     }
                 }
                 if(flag ==0){
-                    System.out.println("\nDodajem smestaj :" + rl.getId());
                     ret.add(rl);
 
                 }
             }
         }
-/*
-        for(Lodging k : retLodgings){
-            if(!ret.contains(k)) {
-                ret.add(k);
-            }
-        }*/
-        //System.out.println("\n AAA "+ ret.size());
+
         return new ResponseEntity(ret, HttpStatus.OK);
     }
 }

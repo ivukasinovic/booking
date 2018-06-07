@@ -21,7 +21,6 @@ export class CategoryOfLodging {
 export class TypeOfLodging {
   id: number;
   label: string;
-  name: string;
 }
 export class Country {
   id: number;
@@ -55,4 +54,8 @@ export class Reservation {
   visited: boolean;
   lodging: Lodging;
   user: User;
+}
+export class AditionalServices {
+  id: number;
+  name: string;
 }
