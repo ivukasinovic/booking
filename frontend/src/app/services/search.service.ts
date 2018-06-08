@@ -20,6 +20,10 @@ export class SearchService {
     return this.http.get('api/addtional-service');
   }
 
+  getAllTypeOfLodging(){
+    return this.http.get('api/type-lodging');
+  }
+
   getCities() {
     return this.http.get('api/city/getCities');
   }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {Lodging, City, Reservation, AditionalServices} from '../model';
+import {Lodging, City, Reservation, AditionalServices, TypeOfLodging} from '../model';
 import {SearchService} from '../services/search.service';
 import {Router} from '@angular/router';
 import {FormGroup, FormControl, Validators, AbstractControl} from '@angular/forms';
@@ -11,10 +11,14 @@ import {FormGroup, FormControl, Validators, AbstractControl} from '@angular/form
 export class SearchComponent implements OnInit {
   searchFormGroup: FormGroup;
   adition: AditionalServices;
-
+  typeLod: TypeOfLodging [];
   nizCekiranih: number[];
   cekiraniSlanje: number[];
   aditionServices: AditionalServices [];
+  lod: Lodging[];
+  res: Reservation;
+  cities: City[];
+  reser: Reservation[];
   form = new FormGroup({
     cityName1: new FormControl('', Validators.compose ([Validators.required])),
     numberOfPersons1: new FormControl('', Validators.compose ([Validators.required])),
@@ -24,10 +28,7 @@ export class SearchComponent implements OnInit {
 
 
   });
-  lod: Lodging[];
-  res: Reservation;
-  cities: City[];
-  reser: Reservation[];
+
   constructor(private router: Router, private searchService: SearchService) {
     this.nizCekiranih = [];
     this.cekiraniSlanje = [];
@@ -52,8 +53,11 @@ export class SearchComponent implements OnInit {
 
   ngOnInit() {
     this.searchService.getAllAditionalServices().subscribe((response: AditionalServices[]) => {
-      console.log('Prosao init');
       this.aditionServices = response;
+    });
+
+    this.searchService.getAllTypeOfLodging().subscribe((response: TypeOfLodging[]) => {
+      this.typeLod = response;
     });
   }
   onSubmit = function (lodging, aditionS) {

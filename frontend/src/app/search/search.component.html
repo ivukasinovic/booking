@@ -22,19 +22,19 @@
 
         <label>Type of lodging </label>
         <br>
-        <select class="form-control" name = "typeOfLodging" formControlName="typeOfLodging">
-          <option value="Hotel">Hotel </option>
-          <option value="BedAndBreakfast">Bed and breakfast </option>
-          <option value="Apartman">Apartman </option>
+        <select   class="form-control" name = "typeOfLodging" formControlName="typeOfLodging">
+
+          <option *ngFor="let tl of typeLod" value={{tl.label}}>{{tl.label}} </option>
+
         </select>
         <br>
 
 
-        <div   *ngFor="let a of aditionServices " >
+        <div     *ngFor="let a of aditionServices " >
           <div>
             <label>{{ (a.name) }}</label>
-            <input class="form-control" name={{a.id}}   id={{a.id}}  type="checkbox"  (change)="vrati(a.id)">
-            <p id="text" style="display:none">Checkbox is CHECKED!</p>
+              <input class="form-control" name={{a.id}}   id={{a.id}}  type="checkbox"  (change)="vrati(a.id)">
+
           </div>
         </div>
 
