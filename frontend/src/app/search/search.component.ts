@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {Lodging, City, Reservation, AditionalServices, TypeOfLodging} from '../model';
+import {Lodging, City, Reservation, AditionalServices, TypeOfLodging, PriceList} from '../model';
 import {SearchService} from '../services/search.service';
 import {Router} from '@angular/router';
 import {FormGroup, FormControl, Validators, AbstractControl} from '@angular/forms';
@@ -19,6 +19,8 @@ export class SearchComponent implements OnInit {
   res: Reservation;
   cities: City[];
   reser: Reservation[];
+  priceList: PriceList[];
+  priceListLodging: PriceList[];
   form = new FormGroup({
     cityName1: new FormControl('', Validators.compose ([Validators.required])),
     numberOfPersons1: new FormControl('', Validators.compose ([Validators.required])),
@@ -33,6 +35,7 @@ export class SearchComponent implements OnInit {
     this.nizCekiranih = [];
     this.cekiraniSlanje = [];
     this.res = new Reservation();
+    this.priceList = [];
     this.searchService.getReservations().subscribe(
       (response: Reservation[]) => {
 
@@ -59,27 +62,14 @@ export class SearchComponent implements OnInit {
     this.searchService.getAllTypeOfLodging().subscribe((response: TypeOfLodging[]) => {
       this.typeLod = response;
     });
+    this.searchService.getAllPriceList().subscribe((response: PriceList[]) => {
+      this.priceList = response;
+    });
   }
   onSubmit = function (lodging, aditionS) {
     console.log(lodging);
     console.log(aditionS);
-/*
-    for (let i = 0 ; i < this.nizCekiranih.length ; i++ ) {
-      let pom = 0;
-      for (let k = 0 ; k < this.nizCekiranih.length ; k++ ) {
-        console.log('Cek [i]' + this.nizCekiranih[i]  + ' i Cek[k]' +  this.nizCekiranih[k] );
-        if (this.nizCekiranih[i] === this.nizCekiranih[k]) {
-          pom = pom + 1;
-          console.log('nasao');
-        }
-      }
-      console.log('pom za ' + pom + ' zza' + this.nizCekiranih[i] );
-      if (pom % 2 === 1) {
-        console.log('Ubacujem za slanje ' + this.nizCekiranih[i]   );
-        this.cekiraniSlanje.push(this.nizCekiranih[i]);
-      }
-    }
-    */
+
     console.log('Cekiran niz ' + this.nizCekiranih);
     console.log('Cekiran Slanje' + this.cekiraniSlanje);
     this.searchService.searchLodging(lodging.cityName1, lodging.numberOfPersons1, lodging.searchSDT,
@@ -90,6 +80,45 @@ export class SearchComponent implements OnInit {
         }
       );
   };
+  getPriceListByLodging(lodId: number): string {
+    this.priceListLodging = [];
+    for (let i = 0 ; i < this.priceList.length ; i++ ) {
+      if (this.priceList[i].lodging === lodId) {
+       // console.log('OOOOOOOO 22' + this.form.value.searchSDT.toString().slice(0, -6) + ' i ' + this.priceList[i].year +
+         // 'mmesec' + this.form.value.searchSDT.toString().slice(5, -3));
+        console.log(this.priceList[i]);
+        if (this.priceList[i].year === this.form.value.searchSDT.toString().slice(0, -6)) { // uzmem  godinu
+          if (this.form.value.searchSDT.toString().slice(5, -3) === '01') {
+            return this.priceList[i].january.toString();
+          } else if (this.form.value.searchSDT.toString().slice(5, -3) === '02') {
+            return this.priceList[i].february.toString();
+          } else if (this.form.value.searchSDT.toString().slice(5, -3) === '03') {
+            return this.priceList[i].mart.toString();
+          } else if (this.form.value.searchSDT.toString().slice(5, -3) === '04') {
+            return this.priceList[i].april.toString();
+          } else if (this.form.value.searchSDT.toString().slice(5, -3) === '05') {
+            return this.priceList[i].may.toString();
+          } else if (this.form.value.searchSDT.toString().slice(5, -3) === '06') {
+            return this.priceList[i].june.toString();
+          } else if (this.form.value.searchSDT.toString().slice(5, -3) === '07') {
+            return this.priceList[i].july.toString();
+          } else if (this.form.value.searchSDT.toString().slice(5, -3) === '08') {
+            return this.priceList[i].august.toString();
+          } else if (this.form.value.searchSDT.toString().slice(5, -3) === '09') {
+            return this.priceList[i].september.toString();
+          } else if (this.form.value.searchSDT.toString().slice(5, -3) === '10') {
+            return this.priceList[i].october.toString();
+          } else if (this.form.value.searchSDT.toString().slice(5, -3) === '11') {
+            return this.priceList[i].november.toString();
+          } else if (this.form.value.searchSDT.toString().slice(5, -3) === '12') {
+            return this.priceList[i].december.toString();
+          } else {
+            return 'No price yet'; }
+        } else { return 'No price yet'; }
+      }
+    }
+    return 'No price yet';
+  }
 
   getCityName(br: number): string {
     br = br - 1;
@@ -117,5 +146,10 @@ export class SearchComponent implements OnInit {
       }
     }
 
+  }
+
+  sortByPrice(priceLod: Lodging[]){
+
+   // var sortedArray: number[] = numericArray.sort((n1,n2) => n1 - n2);
   }
 }

@@ -20,7 +20,7 @@ export class SearchService {
     return this.http.get('api/addtional-service');
   }
 
-  getAllTypeOfLodging(){
+  getAllTypeOfLodging() {
     return this.http.get('api/type-lodging');
   }
 
@@ -32,5 +32,16 @@ export class SearchService {
     return this.http.get('api/reservations');
   }
 
+  getAllPriceList() {
+    return this.http.get('api/priceList/getPriceLists');
+  }
+
+  getPriceListByLodgingId(lodgId: number) {
+    return this.http.get('api/priceList/' + lodgId + '/' );
+}
+
+  sortByPrice(priceLod: Lodging[]){
+
+  }
 
 }

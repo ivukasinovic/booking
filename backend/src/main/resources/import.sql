@@ -49,7 +49,7 @@ INSERT INTO additional_service (id,name) VALUES (8 ,'private_bathroom')
 
 INSERT INTO lodging (id,address,details , image,rating,persons_number,category_id,type_id,city_id,agent_id,title) VALUES (1,'Bulevar Despota Stefana 7','NOVOO ,nove stvari vise detalja na telefon ..... xD','',4,4 ,1,2,1,2,'Dekijev luksuz');
 INSERT INTO lodging (id,address,details , image,rating,persons_number,category_id,type_id,city_id,agent_id,title) VALUES (2,'Bulevar Despota Stefana 35','Starija ali ocuvana garsonjeraa','',3,2,1,1,2,2,'Dekijeve sobe');
-INSERT INTO lodging (id,address,details , image,rating,persons_number,category_id,type_id,city_id,agent_id,title) VALUES (3,'Sekspirova 42','Garsonjera','',3,1,1,1,2,2),'Dekijeve odaje');
+INSERT INTO lodging (id,address,details , image,rating,persons_number,category_id,type_id,city_id,agent_id,title) VALUES (3,'Sekspirova 42','Garsonjera','',3,1,1,1,2,2,'Dekijeve odaje');
 INSERT INTO lodging (id,address,details , image,rating,persons_number,category_id,type_id,city_id,agent_id,title) VALUES (4,'Tolstojeva 23','Stan, dvosoban','',4,1,1,1,4,2,'Dekijev hotel');
 INSERT INTO lodging (id,address,details , image,rating,persons_number,category_id,type_id,city_id,agent_id,title) VALUES (5,'Andriceva 22','Nesto','',2,1,1,1,3,2,'Dekijev mediteranos');
 INSERT INTO lodging (id,address,details , image,rating,persons_number,category_id,type_id,city_id,agent_id,title) VALUES (6,'Bulevar Oslobodjenja 7','NOVOO ,nove stvari vise detalja na telefon ..... xD','',4,4 ,1,2,1,2,'Vila Deki');
@@ -92,7 +92,16 @@ INSERT INTO lodging_additional_service (additional_service_id,lodging_id) VALUES
 INSERT INTO lodging_additional_service (additional_service_id,lodging_id) VALUES (3,2);
 INSERT INTO lodging_additional_service (additional_service_id,lodging_id) VALUES (6,2);
 
-INSERT INTO price_list (id,year,date_created, january,february,mart,april,may,june,july,august,september,october,november,december) VALUES (1,'1994','2007-01-24 19:21:58',12.31,20.00,34.00,39.12,41.19,45.85,49.12,55.95,78.12,67.00,56.00,45.99);
+INSERT INTO price_list (id,year,date_created, january,february,mart,april,may,june,july,august,september,october,november,december,lodging_id) VALUES (1,'2018','2007-01-24 19:21:58',1.31,20.00,34.00,39.12,41.19,145.85,49.12,55.95,78.12,67.00,56.00,45.99,1);
+INSERT INTO price_list (id,year,date_created, january,february,mart,april,may,june,july,august,september,october,november,december,lodging_id) VALUES (2,'2018','2008-01-24 19:21:58',2.31,20.00,34.00,39.12,41.19,245.85,49.12,55.95,78.12,67.00,56.00,45.99,2);
+INSERT INTO price_list (id,year,date_created, january,february,mart,april,may,june,july,august,september,october,november,december,lodging_id) VALUES (3,'2018','2009-01-24 19:21:58',3.31,20.00,34.00,39.12,41.19,345.85,49.12,55.95,78.12,67.00,56.00,45.99,3);
+INSERT INTO price_list (id,year,date_created, january,february,mart,april,may,june,july,august,september,october,november,december,lodging_id) VALUES (4,'2018','2000-01-24 19:21:58',4.31,20.00,34.00,39.12,41.19,445.85,49.12,55.95,78.12,67.00,56.00,45.99,4);
+INSERT INTO price_list (id,year,date_created, january,february,mart,april,may,june,july,august,september,october,november,december,lodging_id) VALUES (5,'2018','2010-01-24 19:21:58',5.31,20.00,34.00,39.12,41.19,545.85,49.12,55.95,78.12,67.00,56.00,45.99,5);
+INSERT INTO price_list (id,year,date_created, january,february,mart,april,may,june,july,august,september,october,november,december,lodging_id) VALUES (6,'2018','2007-01-24 19:21:58',6.31,20.00,34.00,39.12,41.19,645.85,49.12,55.95,78.12,67.00,56.00,45.99,6);
+INSERT INTO price_list (id,year,date_created, january,february,mart,april,may,june,july,august,september,october,november,december,lodging_id) VALUES (7,'2018','2008-01-24 19:21:58',7.31,20.00,34.00,39.12,41.19,745.85,49.12,55.95,78.12,67.00,56.00,45.99,7);
+INSERT INTO price_list (id,year,date_created, january,february,mart,april,may,june,july,august,september,october,november,december,lodging_id) VALUES (8,'2018','2009-01-24 19:21:58',8.31,20.00,34.00,39.12,41.19,845.85,49.12,55.95,78.12,67.00,56.00,45.99,8);
+INSERT INTO price_list (id,year,date_created, january,february,mart,april,may,june,july,august,september,october,november,december,lodging_id) VALUES (9,'2018','2000-01-24 19:21:58',9.31,20.00,34.00,39.12,41.19,945.85,49.12,55.95,78.12,67.00,56.00,45.99,9);
+INSERT INTO price_list (id,year,date_created, january,february,mart,april,may,june,july,august,september,october,november,december,lodging_id) VALUES (10,'2017','2010-01-24 19:21:58',10.31,20.00,34.00,39.12,41.19,1045.85,49.12,55.95,78.12,67.00,56.00,45.99,7);
 
 
 INSERT INTO comment (id,body,accepted,lodging_id,user_id) VALUES (1,'Samo kvalitetan text',true,1,3 );

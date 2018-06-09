@@ -51,14 +51,15 @@
         <th>City</th>
         <th>Address</th>
         <th>Number of persons</th>
-        <th>Raiting</th>
+        <th>Price</th>
+        <th>Details</th>
+        <th>Image</th>
         <th>Reservation</th>
-
-
 
       </tr>
 
       <!--<tr *ngIf="p.user != null" >-->
+
       <tr   *ngFor="let p of lod" >
         <td>  {{  getCityName(p.city) }}</td>
 
@@ -66,15 +67,20 @@
         <td> {{ (p.address) }}</td>
         <!--<div>-->
         <td> {{(p.persons_number)}}</td>
-        <td> {{(p.rating)}}</td>
-        <td>
-          <button class="btn btn-primary" (click)="reserve( p.id)">Reserve</button>
+        <td>{{getPriceListByLodging(p.id)}}</td>
+        <td> {{(p.details)}}</td>
+        <td> {{(p.image)}}</td>
+        <td >
+          <button class="btn btn-primary" (click)="reserve(p.id)">Reserve</button>
         </td>
 
       </tr>
 
       <!--</div>-->
     </table>
+    <br>
+
+    <br>
   </div>
 
 </div>
