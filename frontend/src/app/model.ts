@@ -47,7 +47,7 @@ export class Lodging {
 
 }
 export class Reservation {
-  id: number;
+  id: string;
   dateStart: Date;
   dateEnd: Date;
   active: boolean;

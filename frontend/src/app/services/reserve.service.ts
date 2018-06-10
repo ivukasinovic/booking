@@ -16,5 +16,8 @@ export class ReserveService {
     return this.http.get('api/reservations/cancel/' + id);
   }
 
+  getLodging(id: string) {
+    return this.http.get('api/lodgings/' + id);
+  }
 
 }
