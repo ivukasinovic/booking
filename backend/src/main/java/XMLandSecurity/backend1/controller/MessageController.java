@@ -10,6 +10,9 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
+import java.util.Date;
+
 @RestController
 @RequestMapping(value = "/messages")
 public class MessageController {
@@ -39,11 +42,12 @@ public class MessageController {
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public ResponseEntity<Message> sendMessage(@RequestBody Message message, @PathVariable("idRec") Long idRec) {
-        //TODO  User loggedUser = userService.findByUsername(principal.getName());
-        message.setSender(userService.findOne(3l));
+    public ResponseEntity<Message> sendMessage(@RequestBody Message message, @PathVariable("idRec") Long idRec, Principal principal) {
+        User loggedUser = userService.findByUsername(principal.getName());
+        message.setSender(loggedUser);
         User receiver = userService.findOne(idRec);
         message.setReceiver(receiver);
+        message.setDateSent(new Date());
         Message messageNew = messageService.save(message);
         return new ResponseEntity(messageNew, HttpStatus.OK);
     }

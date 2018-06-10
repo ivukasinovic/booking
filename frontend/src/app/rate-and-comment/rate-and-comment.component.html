@@ -1,3 +1,18 @@
-<p>
-  rate-and-comment works!
-</p>
+<div class="container">
+  <h3>Visited lodgings</h3>
+  <div class="col-md-9" *ngFor="let lodging of lodgins">
+      <h4 class="list-group-item-heading"><b>{{lodging.address}}</b></h4>
+
+  <form>
+    <label>Rate (1-10) : </label>
+    <input [(ngModel)]="rating.star" type="number"  name="rating"
+           placeholder="Enter your rating(1-10)">
+    <br/>
+    <label>Comment: </label>
+    <input [(ngModel)]="com.body" type="text"  name="body"
+           placeholder="Enter your comment">
+    <br/>
+    <button class="btn btn-warning" (click)="comment(lodging.id)">Send</button>
+  </form>
+  </div>
+</div>

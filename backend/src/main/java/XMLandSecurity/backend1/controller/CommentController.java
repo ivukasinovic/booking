@@ -1,13 +1,18 @@
 package XMLandSecurity.backend1.controller;
 
 import XMLandSecurity.backend1.domain.Comment;
+import XMLandSecurity.backend1.domain.Lodging;
+import XMLandSecurity.backend1.domain.User;
 import XMLandSecurity.backend1.service.CommentService;
+import XMLandSecurity.backend1.service.LodgingService;
+import XMLandSecurity.backend1.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.List;
 
 @RestController
@@ -16,6 +21,12 @@ public class CommentController {
 
     @Autowired
     private CommentService commentService;
+
+    @Autowired
+    private UserService userService;
+
+    @Autowired
+    private LodgingService lodgingService;
 
     @RequestMapping(
             value = "/{id}",
@@ -29,13 +40,19 @@ public class CommentController {
 
 
     @RequestMapping(
+            value = "/{idLod}",
             method = RequestMethod.POST,
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public ResponseEntity<Comment> CreateCity (@RequestBody Comment comment) {
-        Comment userNew = commentService.save(comment);
-        return new ResponseEntity(userNew, HttpStatus.OK);
+    public ResponseEntity<Comment> createComment(@PathVariable("idLod") Long idLod, @RequestBody Comment comment, Principal principal) {
+        User loggedUser = userService.findByUsername(principal.getName());
+        comment.setUser(loggedUser);
+        Lodging lodging = lodgingService.findOne(idLod);
+        comment.setLodging(lodging);
+
+        Comment commentNew = commentService.save(comment);
+        return new ResponseEntity(commentNew, HttpStatus.OK);
     }
 
 
@@ -45,16 +62,16 @@ public class CommentController {
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public ResponseEntity<Comment> updateUsers (@PathVariable("id") Long id) {
-        Comment listaAdminaFanZone = commentService.findOne(id);
-        return new ResponseEntity(listaAdminaFanZone, HttpStatus.OK);
+    public ResponseEntity<Comment> updateComments(@PathVariable("id") Long id) {
+        Comment comment = commentService.findOne(id);
+        return new ResponseEntity(comment, HttpStatus.OK);
     }
 
     @RequestMapping(
             value = "/{id}",
             method = RequestMethod.DELETE
     )
-    public ResponseEntity<Comment> izbrisi(@PathVariable("id") Long id){
+    public ResponseEntity<Comment> deleteComment(@PathVariable("id") Long id) {
         Comment comment = commentService.findOne(id);
         commentService.delete(comment);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);

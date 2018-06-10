@@ -24,4 +24,5 @@ public interface LodgingService {
 
    // List<Lodging> findByAdditionalServiceList(Long id);
     List<Lodging>findByReservationsDateStartBetweenAndReservationsDateEndBetween( Date startDate, Date endDate,Date startDate1, Date endDate1);
+
 }

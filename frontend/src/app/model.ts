@@ -43,7 +43,7 @@ export class Lodging {
   category: CategoryOfLodging;
   type: TypeOfLodging;
   city: City;
-  reservations: Reservation;
+  agent: User;
 
 }
 export class Reservation {
@@ -58,4 +58,18 @@ export class Reservation {
 export class AditionalServices {
   id: number;
   name: string;
+}
+
+export class Message {
+  id: number;
+  body: string;
+  title: string;
+}
+
+export class Comment {
+  body: string;
+}
+
+export class  Rating {
+  star: number;
 }

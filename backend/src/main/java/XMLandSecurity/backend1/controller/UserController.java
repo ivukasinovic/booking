@@ -134,5 +134,23 @@ public class UserController {
         return new ResponseEntity(reservations, HttpStatus.OK);
     }
 
+    @RequestMapping(
+            value = "/visited",
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Lodging> getVisited(Principal principal) {
+
+        User loggedUser = userService.findByUsername(principal.getName());
+
+        List<Reservation> reservations = loggedUser.getReservations();
+        List<Lodging> lodgings = new ArrayList<>();
+
+        for (Reservation reservation : reservations) {
+            if (reservation.getVisited() == true) {
+                lodgings.add(reservation.getLodging());
+            }
+        }
+        return new ResponseEntity(lodgings, HttpStatus.OK);
+    }
 
 }

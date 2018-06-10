@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ReserveService} from '../services/reserve.service';
 import {UserService} from '../services/user.service';
 import {Lodging, Reservation} from '../model';
-import {forEach} from '@angular/router/src/utils/collection';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-my-reservations',
@@ -12,33 +12,37 @@ import {forEach} from '@angular/router/src/utils/collection';
 export class MyReservationsComponent implements OnInit {
 
   reservations: Reservation[] = [];
-  lod: Lodging;
+  _ref: any;
+  constructor( private userService: UserService, private reserveService: ReserveService, private router: Router) {}
 
-  constructor( private userService: UserService, private reserveService: ReserveService) {
+  ngOnInit() {
     this.userService.getReservationsOfLoggedUser().subscribe(
       (response: Reservation[]) => {
         this.reservations = response;
+        this.reservations.forEach(element => {
+          console.log('smjestaj ' + element.lodging);
+         this.reserveService.getLodging(element.lodging).subscribe(
+           (resp: Lodging) => {
+             element.lodging = resp;
+           }
+         );
+        });
+
       });
 
-   /* this.reservations.forEach(element => {
-    console.log('smjestaj jee' + element.lodging);
-    });*/
-  }
-
-  ngOnInit() {
 
   }
 
 
   cancelRes(id: string) {
     this.reserveService.cancel(id).subscribe();
+  document.getElementById('id').remove();
   }
 
-  getLodging(id: string) {
-   this.reserveService.getLodging(id).subscribe(
-     (response: Lodging) => {
-       this.lod = response;
-     });
+  sendMessage(id: string) {
+    localStorage.setItem('res-id', id);
+      this.router.navigateByUrl('/send-message');
   }
+
 
 }
