@@ -13,6 +13,9 @@ import {FormGroup, FormControl, Validators, AbstractControl} from '@angular/form
 
 export class SearchComponent implements OnInit {
   searchFormGroup: FormGroup;
+  clickedPrice: boolean;
+  clickedCategory: boolean;
+  clickedRating: boolean;
   typeLod: TypeOfLodging [];
   catLod: CategoryOfLodging[];
   nizCekiranih: number[];
@@ -37,6 +40,9 @@ export class SearchComponent implements OnInit {
 
 
 constructor(private router: Router, private searchService: SearchService) {
+    this.clickedPrice = false;
+    this.clickedCategory = false;
+    this.clickedRating = false;
     this.listLodId = [];
     this.nizCekiranih = [];
     this.cekiraniSlanje = [];
@@ -176,22 +182,35 @@ getPriceListByLodging(lodId: number): string {
           const priceStrJ = (this.getPriceListByLodging(priceLod[j].id));
           let priceNumbI = 0;
           let priceNumbJ = 0;
-          if ( priceStrI === 'No price yet') {
+          if (priceStrI === 'No price yet') {
             priceNumbI = 0;
           } else {
             priceNumbI = +priceStrI;
           }
-          if ( priceStrJ === 'No price yet') {
+          if (priceStrJ === 'No price yet') {
             priceNumbJ = 0;
           } else {
             priceNumbJ = +priceStrJ;
           }
-          if (priceNumbJ > priceNumbI) {
-            const pom = priceLod[j];
-            priceLod[j] = priceLod[ j + 1 ];
-            priceLod[j + 1] = pom;
+          if (!this.clickedPrice) {
+            if (priceNumbJ > priceNumbI) {
+              const pom = priceLod[j];
+              priceLod[j] = priceLod[j + 1];
+              priceLod[j + 1] = pom;
+            }
+          } else {
+            if (priceNumbJ < priceNumbI) {
+              const pom = priceLod[j];
+              priceLod[j] = priceLod[j + 1];
+              priceLod[j + 1] = pom;
+            }
           }
         }
+    }
+    if (this.clickedPrice) {
+      this.clickedPrice = false;
+    } else {
+      this.clickedPrice = true;
     }
     this.lod = priceLod;
   }
@@ -214,14 +233,50 @@ getPriceListByLodging(lodId: number): string {
         } else {
           priceNumbJ = +priceStrJ;
         }
-        if (priceNumbJ < priceNumbI) {
-          const pom = priceLod[j];
-          priceLod[j] = priceLod[ j + 1 ];
-          priceLod[j + 1] = pom;
+        if (!this.clickedCategory) {
+          if (priceNumbJ < priceNumbI) {
+            const pom = priceLod[j];
+            priceLod[j] = priceLod[j + 1];
+            priceLod[j + 1] = pom;
+          }
+        } else {
+          if (priceNumbJ > priceNumbI) {
+            const pom = priceLod[j];
+            priceLod[j] = priceLod[j + 1];
+            priceLod[j + 1] = pom;
+          }
         }
       }
     }
+    if (this.clickedCategory) {
+      this.clickedCategory = false;
+    } else {
+      this.clickedCategory = true;
+    }
     this.lod = priceLod;
   }
+
+
+  sortByRating(priceLod: Lodging[]) {
+    priceLod = this.lod;
+    if (!this.clickedRating) {
+      this.lod = priceLod.sort(this.algoritamCeneSort);
+    } else {
+      this.lod = priceLod.sort(this.algoritamCeneSort2);
+    }
+    if (this.clickedRating) {
+      this.clickedRating = false;
+    } else {
+      this.clickedRating = true;
+    }
+  }
+
+  algoritamCeneSort(l1: Lodging, l2: Lodging) {
+      return (l2.rating) - (l1.rating);
+  }
+  algoritamCeneSort2(l1: Lodging, l2: Lodging) {
+    return (l1.rating) - (l2.rating);
+}
+
 }
 
