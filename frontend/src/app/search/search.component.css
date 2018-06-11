@@ -26,12 +26,15 @@
   height:100px;
   margin:10px;}
 input[type='submit']:hover
-
  {background-color: #b0dcff;}
 
 input[type='submit']:disabled
+ {background-color: #d5d6d6;}
 
-                    {background-color: #d5d6d6;}
+tr:nth-child(even) {
+  background-color: #f2f2f2
+}
+
 
 
 

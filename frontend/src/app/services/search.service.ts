@@ -11,13 +11,17 @@ export class SearchService {
   allLodgings() {
     return this.http.get('api/lodging/getLodgings');
   }
-  searchLodging(cityName: string, nbrOfPersons: number, dateStart: Date, dateEnd: Date, typeOfLodging: string, as: AditionalServices) {
+  searchLodging(cityName: string, nbrOfPersons: number, dateStart: Date, dateEnd: Date, typeOfLodging: string, catOfLodging: string, as: AditionalServices) {
     return this.http.post('api/lodging/search/' + cityName + '/' + nbrOfPersons +
-      '/' + dateStart + '/' + dateEnd + '/' + typeOfLodging + '/', as );
+      '/' + dateStart + '/' + dateEnd + '/' + typeOfLodging + '/' + '/' + catOfLodging + '/', as );
   }
 
   getAllAditionalServices() {
     return this.http.get('api/addtional-service');
+  }
+
+  getAllTypeOfLodging() {
+    return this.http.get('api/type-lodging');
   }
 
   getCities() {
@@ -28,5 +32,14 @@ export class SearchService {
     return this.http.get('api/reservations');
   }
 
+  getAllPriceList() {
+    return this.http.get('api/priceList/getPriceLists');
+  }
 
+  getPriceListByLodgingId(lodgId: number) {
+    return this.http.get('api/priceList/' + lodgId + '/' );
+}
+  getAllCategoryOfLodging() {
+    return this.http.get('api/category-lodging');
+  }
 }

@@ -44,8 +44,8 @@ public class LodgingServiceImpl implements LodgingService {
     }
 
     @Override
-    public List<Lodging> findByCityAndPersons_number(String city, Integer personsNbr, String typeLodging, Iterable<AdditionalService> as) {
-        return lodgingRepository.findByCityNameIgnoreCaseContainingAndPersonsNumberAndTypeLabelIgnoreCaseContainingAndAdditionalServiceListContaining(city, personsNbr, typeLodging, as);
+    public List<Lodging> findByCityAndPersons_number(String city, Integer personsNbr, String typeLodging, String catLodging) {
+        return lodgingRepository.findByCityNameIgnoreCaseContainingAndPersonsNumberAndTypeLabelIgnoreCaseContainingAndCategoryLabelIgnoreCaseContaining(city, personsNbr, typeLodging, catLodging);
     }
 
     @Override

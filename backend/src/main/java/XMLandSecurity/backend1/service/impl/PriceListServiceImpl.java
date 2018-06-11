@@ -34,4 +34,13 @@ public class PriceListServiceImpl implements PriceListService {
     public void delete(Long id) {
         priceListRepository.delete(id);
     }
+
+    @Override
+    public List<PriceList> findByLodging( Long id) {
+        return priceListRepository.findByLodging(id);
+    }
+
+
+
+
 }
