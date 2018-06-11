@@ -48,6 +48,7 @@ public class LodgingEndpoint {
         lodging.setType(typeOfLodgingService.findOne(request.getType()));
         lodging.setCity(cityService.findOne(request.getCity()));
         lodging.setCategory(categoryOfLodgingService.findOne(request.getCategory()));
+        lodging.setTitle(request.getTitle());
         lodging.setAddress(request.getAddress());
         lodging.setDetails(request.getDetails());
         lodging.setImage(request.getImage());
@@ -123,6 +124,7 @@ public class LodgingEndpoint {
         GetAdditionsResponse response = new GetAdditionsResponse();
         List<AdditionalService> additionalServices = additionalServiceService.findAll();
         for(AdditionalService s : additionalServices){
+            s.setLodgingList(null);
             response.getTypes().add(s);
         }
         return response;

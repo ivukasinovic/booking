@@ -1,12 +1,30 @@
 <div class="container">
   <div class="col-md-6">
     <div class="form-group">
+      <label for="agent">Title:</label>
+      <input type="text" [ngModel]="lodging.title" class="form-control" id="title">
+    </div>
+    <div class="form-group">
       <label for="agent">Agent:</label>
       <input type="text" [ngModel]="lodging.agent" class="form-control" id="agent">
     </div>
-    <div class="form-group">
-      <label for="city">City:</label>
-      <input type="text" [ngModel]="lodging.city" class="form-control" id="city">
+    <div class="form-group form-inline">
+      <label>City: </label>&nbsp;
+      <select class="form-control" name="city" [(ngModel)]="lodging.city">
+        <option *ngFor="let city of cities" value="{{city.id}}">{{city.name}}</option>
+      </select>
+    </div>
+    <div class="form-group form-inline">
+      <label>Category: </label>&nbsp;
+      <select class="form-control" name="category" [(ngModel)]="lodging.category">
+        <option *ngFor="let category of categories" value="{{category.label}}">{{category.name}}</option>
+      </select>
+    </div>
+    <div class="form-group form-inline">
+      <label>Type: </label>&nbsp;
+      <select class="form-control" name="type" [(ngModel)]="lodging.type">
+        <option *ngFor="let type of types" value="{{type.id}}">{{type.label}}</option>
+      </select>
     </div>
     <div class="form-group">
       <label for="address">Address:</label>
@@ -24,23 +42,11 @@
       <label for="personsNumber">Number of persons:</label>
       <input type="text" [ngModel]="lodging.personsNumber" class="form-control" id="personsNumber">
     </div>
-    <div class="form-group">
-      <label for="category">Category:</label>
-      <select class="form-control" id="category">
-        <option>1</option>
-        <option>2</option>
-        <option>3</option>
-        <option>4</option>
-      </select>
-    </div>
-    <div class="form-group">
-      <label for="category">Type of lodging:</label>
-      <select class="form-control" id="type">
-        <option>1</option>
-        <option>2</option>
-        <option>3</option>
-        <option>4</option>
-      </select>
+    <div class="form-check">
+      <div>
+        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+        <label class="form-check-label" for="exampleCheck1">Check me out</label>
+      </div>
     </div>
 
     <button class="btn btn-primary" (click)="createLodging()">Create</button>

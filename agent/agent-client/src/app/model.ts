@@ -20,6 +20,7 @@ export class User {
 }
 export class Lodging {
   id: number;
+  title: string;
   agent: number;
   name: string;
   city: string;
@@ -31,5 +32,9 @@ export class Lodging {
   rating: number;
   personsNumber: number;
   additionServices: string[] = null;
+}
+export class City {
+  id: number;
+  name: string;
 }
 

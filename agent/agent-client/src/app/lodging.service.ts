@@ -15,4 +15,13 @@ export class LodgingService {
     const adr = '/api/reservations/completed/' + id;
     return this.http.get(adr);
   }
+  getCities() {
+    return this.http.get('api/lodgings/cities');
+  }
+  getCategories() {
+    return this.http.get('api/lodgings/categories');
+  }
+  getTypes() {
+    return this.http.get('api/lodgings/types');
+  }
 }
