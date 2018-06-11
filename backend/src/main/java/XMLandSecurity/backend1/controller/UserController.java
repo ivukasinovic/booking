@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.security.Principal;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(value = "/users")
@@ -130,7 +132,13 @@ public class UserController {
         User loggedUser = userService.findByUsername(principal.getName());
 
         List<Reservation> reservations = loggedUser.getReservations();
-
+        Date today = new Date();
+        //ako je istekla rezervacija da se ne moze otkazati
+        for(Reservation reservation : reservations){
+            if(reservation.getDateStart().before(today) && reservation.getActive() == true){
+                reservation.setActive(false);
+            }
+        }
         return new ResponseEntity(reservations, HttpStatus.OK);
     }
 

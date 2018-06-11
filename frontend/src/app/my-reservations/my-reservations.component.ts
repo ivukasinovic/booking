@@ -20,7 +20,6 @@ export class MyReservationsComponent implements OnInit {
       (response: Reservation[]) => {
         this.reservations = response;
         this.reservations.forEach(element => {
-          console.log('smjestaj ' + element.lodging);
          this.reserveService.getLodging(element.lodging).subscribe(
            (resp: Lodging) => {
              element.lodging = resp;
@@ -35,8 +34,10 @@ export class MyReservationsComponent implements OnInit {
 
 
   cancelRes(id: string) {
-    this.reserveService.cancel(id).subscribe();
-  document.getElementById('id').remove();
+    this.reserveService.cancel(id).subscribe((res: Response) => {
+       document.getElementById(id).remove();
+    });
+
   }
 
   sendMessage(id: string) {

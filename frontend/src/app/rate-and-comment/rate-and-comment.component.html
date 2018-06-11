@@ -1,18 +1,30 @@
 <div class="container">
   <h3>Visited lodgings</h3>
-  <div class="col-md-9" *ngFor="let lodging of lodgins">
-      <h4 class="list-group-item-heading"><b>{{lodging.address}}</b></h4>
 
-  <form>
-    <label>Rate (1-10) : </label>
-    <input [(ngModel)]="rating.star" type="number"  name="rating"
-           placeholder="Enter your rating(1-10)">
-    <br/>
-    <label>Comment: </label>
-    <input [(ngModel)]="com.body" type="text"  name="body"
-           placeholder="Enter your comment">
-    <br/>
-    <button class="btn btn-warning" (click)="comment(lodging.id)">Send</button>
-  </form>
+  <div class="container" *ngFor="let lodging of lodgins">
+    <div class="card">
+
+      <br/> <br/>
+         <h4 class="list-group-item-heading"><b>{{lodging.address}}</b></h4>
+
+        <button class="btn btn-warning"  (click)="setCollapse(lodging.id)" > Comment and rate</button>
+
+        <form *ngIf="isCollapsed(lodging.id)">
+          <label for="rating">Rate (1-10): </label>
+          <br/>
+          <input [(ngModel)]="rating.star" type="number" id="rating" name="rating"
+                 placeholder="Enter your rating(1-10)">
+          <br/>
+          <br/>
+          <label >Comment:   </label>
+          <br/>
+          <textarea [(ngModel)]="com.body" type="text"  name="body"
+                    placeholder="Enter your comment"></textarea>
+          <br/>
+          <button class="btn btn-warning" (click)="comment(lodging.id)">Send</button>
+        </form>
+
+    </div>
   </div>
 </div>
+
