@@ -20,15 +20,15 @@
         <input class="form-control"  required="required"  name="searchEDT" type="date" formControlName="searchEDT" (ngModelChange)="searchEDT = $event">
         <br>
 
-        <label>Type of lodging </label>
+        <label>Type</label>
         <br>
-        <select   class="form-control" name = "typeOfLodging" formControlName="typeOfLodging">
+        <select   class="form-control" name = "typeOfLodging" formControlName="typeOfLodging" >
 
           <option *ngFor="let tl of typeLod" value={{tl.label}}>{{tl.label}} </option>
 
         </select>
         <br>
-        <label>Category of lodging </label>
+        <label>Category</label>
         <br>
         <select   class="form-control" name = "categoryOfLodging" formControlName="categoryOfLodging">
 
@@ -36,14 +36,19 @@
 
         </select>
         <br>
+        <details>
+          <summary  class="form-control" ><b>Additional services </b></summary>
+          <br>
         <div     *ngFor="let a of aditionServices " >
           <div>
-            <label>{{ (a.name) }}</label>
+
+
+              <label>{{ (a.name) }}</label>
               <input class="form-control" name={{a.id}}   id={{a.id}}  type="checkbox"  (change)="vrati(a.id)">
 
           </div>
         </div>
-
+      </details>
         <br>
         <input class="form-control" type = "submit" [disabled]="!form.valid" value ="Search Lodging">
 
