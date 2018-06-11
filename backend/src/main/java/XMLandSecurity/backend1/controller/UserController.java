@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.security.Principal;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(value = "/users")
@@ -130,9 +132,33 @@ public class UserController {
         User loggedUser = userService.findByUsername(principal.getName());
 
         List<Reservation> reservations = loggedUser.getReservations();
-
+        Date today = new Date();
+        //ako je istekla rezervacija da se ne moze otkazati
+        for(Reservation reservation : reservations){
+            if(reservation.getDateStart().before(today) && reservation.getActive() == true){
+                reservation.setActive(false);
+            }
+        }
         return new ResponseEntity(reservations, HttpStatus.OK);
     }
 
+    @RequestMapping(
+            value = "/visited",
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Lodging> getVisited(Principal principal) {
+
+        User loggedUser = userService.findByUsername(principal.getName());
+
+        List<Reservation> reservations = loggedUser.getReservations();
+        List<Lodging> lodgings = new ArrayList<>();
+
+        for (Reservation reservation : reservations) {
+            if (reservation.getVisited() == true) {
+                lodgings.add(reservation.getLodging());
+            }
+        }
+        return new ResponseEntity(lodgings, HttpStatus.OK);
+    }
 
 }

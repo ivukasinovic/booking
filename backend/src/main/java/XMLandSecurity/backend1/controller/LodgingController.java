@@ -1,16 +1,13 @@
 package XMLandSecurity.backend1.controller;
 
-import XMLandSecurity.backend1.domain.AdditionalService;
-import XMLandSecurity.backend1.domain.City;
-import XMLandSecurity.backend1.domain.Lodging;
-import XMLandSecurity.backend1.service.AdditionalServiceService;
-import XMLandSecurity.backend1.service.LodgingService;
+import XMLandSecurity.backend1.domain.*;
+import XMLandSecurity.backend1.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import XMLandSecurity.backend1.service.CityService;
+
 import java.security.Principal;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -31,14 +28,20 @@ public class LodgingController {
     @Autowired
     private AdditionalServiceService additionalServiceService;
 
+    @Autowired
+    private ReservationService reservationService;
+
+    @Autowired
+    private UserService userService;
+
     @RequestMapping(
             value = "/{id}",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public ResponseEntity<Lodging> getUser (@PathVariable("id") Long id) {
-        Lodging listaAdminaFanZone = lodgingService.findOne(id) ; //findOne(user);
-        return new ResponseEntity<>(listaAdminaFanZone, HttpStatus.OK);     // "200 OK"
+    public ResponseEntity<Lodging> getLodging(@PathVariable("id") Long id) {
+        Lodging lodging = lodgingService.findOne(id); //findOne(user);
+        return new ResponseEntity<>(lodging, HttpStatus.OK);     // "200 OK"
     }
 
     // ===
@@ -49,9 +52,9 @@ public class LodgingController {
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public ResponseEntity<Lodging> CreateCity (@RequestBody Lodging country) {
-        Lodging userNew = lodgingService.save(country);
-        return new ResponseEntity(userNew, HttpStatus.OK);
+    public ResponseEntity<Lodging> createLodging(@RequestBody Lodging lodging) {
+        Lodging lodgingNew = lodgingService.save(lodging);
+        return new ResponseEntity(lodgingNew, HttpStatus.OK);
     }
 
 
@@ -61,9 +64,9 @@ public class LodgingController {
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public ResponseEntity<Lodging> updateUsers (@PathVariable("id") Long id) {
-        Lodging listaAdminaFanZone = lodgingService.findOne(id);
-        return new ResponseEntity(listaAdminaFanZone, HttpStatus.OK);     // "200 OK"
+    public ResponseEntity<Lodging> updateLodging(@PathVariable("id") Long id) {
+        Lodging lodging = lodgingService.findOne(id);
+        return new ResponseEntity(lodging, HttpStatus.OK);     // "200 OK"
     }
 
     @RequestMapping(

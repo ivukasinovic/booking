@@ -52,6 +52,7 @@ public class Comment implements Serializable {
     private User user;
 
     public Comment() {
+        this.accepted = false;
     }
 
     public Comment(String body, Boolean accepted, Lodging lodging, User user) {

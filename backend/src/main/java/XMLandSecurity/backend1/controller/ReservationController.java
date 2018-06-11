@@ -63,7 +63,7 @@ public class ReservationController {
         Reservation resToCancel = reservationService.findOne(id);
         User loggedUser = userService.findByUsername(principal.getName());
 
-        if (resToCancel.getUser().getId() == loggedUser.getId()) {
+        if (resToCancel.getUser().getId() == loggedUser.getId() && resToCancel.getActive() == true) {
             reservationService.delete(id);
             return new ResponseEntity(HttpStatus.OK);
         }

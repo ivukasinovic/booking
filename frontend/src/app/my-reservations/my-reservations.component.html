@@ -1,0 +1,18 @@
+<div class="container">
+  <h3>My reservations</h3>
+
+  <div class="col-md-9" class="list-group-item clearfix" *ngFor="let reservation of reservations">
+
+    <div class="pull-center" id="{{reservation.id}}">
+      <h4 class="list-group-item-heading"><b>{{ reservation.lodging.address }}</b></h4>
+      <p class="list-group-item-text">Start date: {{ reservation.dateStart  | date }}</p>
+      <p class="list-group-item-text">Start date: {{ reservation.dateEnd  | date }}</p>
+
+      <span class="pull-right">
+        <button *ngIf="reservation.active" type="button" class="btn btn-warning" (click)="cancelRes(reservation.id)">Cancel</button>
+        <button type="button" class="btn btn-warning" (click)="sendMessage(reservation.lodging.agent)">Send message</button>
+      </span>
+    </div>
+
+  </div>
+</div>

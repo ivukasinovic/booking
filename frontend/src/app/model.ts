@@ -43,11 +43,11 @@ export class Lodging {
   category: string;
   type: TypeOfLodging;
   city: City;
-  reservations: Reservation;
+  agent: User;
 
 }
 export class Reservation {
-  id: number;
+  id: string;
   dateStart: Date;
   dateEnd: Date;
   active: boolean;
@@ -58,6 +58,19 @@ export class Reservation {
 export class AditionalServices {
   id: number;
   name: string;
+}
+export class Message {
+  id: number;
+  body: string;
+  title: string;
+}
+
+export class Comment {
+  body: string;
+}
+
+export class  Rating {
+  star: number;
 }
 export class PriceList {
   id: number;

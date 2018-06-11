@@ -11,6 +11,8 @@ import {ForgotPasswordComponent} from './forgot-password/forgot-password.compone
 import {ChangePasswordComponent} from './change-password/change-password.component';
 import {ResetPasswordComponent} from './reset-password/reset-password.component';
 import {SearchComponent} from './search/search.component';
+import {SendMessageComponent} from './send-message/send-message.component';
+import {RateAndCommentComponent} from './rate-and-comment/rate-and-comment.component';
 
 const routes: Routes = [
   {path: 'certificates/new-certificate', component: CertificatComponent},
@@ -25,7 +27,9 @@ const routes: Routes = [
     canActivate: [AuthGuardService]},
   {path: 'forgot-password', component: ForgotPasswordComponent},
   {path: 'reset-password/:id', component: ResetPasswordComponent},
-  {path: 'search', component: SearchComponent}
+  {path: 'search', component: SearchComponent},
+  {path: 'send-message', component: SendMessageComponent},
+  {path: 'rate-and-comment', component: RateAndCommentComponent}
 
 ];
 

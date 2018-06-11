@@ -27,6 +27,9 @@ import {SearchService} from './services/search.service';
 
 import {ReserveService} from './services/reserve.service';
 import {BsDatepickerModule} from 'ngx-bootstrap/datepicker';
+import { MyReservationsComponent } from './my-reservations/my-reservations.component';
+import { RateAndCommentComponent } from './rate-and-comment/rate-and-comment.component';
+import { SendMessageComponent } from './send-message/send-message.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +45,10 @@ import {BsDatepickerModule} from 'ngx-bootstrap/datepicker';
     ForgotPasswordComponent,
     ChangePasswordComponent,
     ResetPasswordComponent,
-    SearchComponent
+    SearchComponent,
+    MyReservationsComponent,
+    RateAndCommentComponent,
+    SendMessageComponent
   ],
   imports: [
     BrowserModule,
