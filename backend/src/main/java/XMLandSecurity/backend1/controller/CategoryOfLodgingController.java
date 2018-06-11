@@ -1,12 +1,15 @@
 package XMLandSecurity.backend1.controller;
 
 import XMLandSecurity.backend1.domain.CategoryOfLodging;
+import XMLandSecurity.backend1.domain.TypeOfLodging;
 import XMLandSecurity.backend1.service.CategoryOfLodgingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping(value = "/category-lodging")
@@ -15,6 +18,14 @@ public class CategoryOfLodgingController {
     @Autowired
     private CategoryOfLodgingService categoryOfLodgingService;
 
+    @RequestMapping(
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    public ResponseEntity<List<CategoryOfLodging>> getAll() {
+        List<CategoryOfLodging> listaAdminaFanZone = categoryOfLodgingService.findAll() ; //findOne(user);
+        return new ResponseEntity<>(listaAdminaFanZone, HttpStatus.OK);     // "200 OK"
+    }
 
     @RequestMapping(
             value = "/{id}",

@@ -40,7 +40,7 @@ export class Lodging {
   image: string;
   rating: number;
   persons_number: number;
-  category: CategoryOfLodging;
+  category: string;
   type: TypeOfLodging;
   city: City;
   reservations: Reservation;
@@ -58,4 +58,22 @@ export class Reservation {
 export class AditionalServices {
   id: number;
   name: string;
+}
+export class PriceList {
+  id: number;
+  year: string;
+  dateCreated: Date;
+  january: number;
+  february: number;
+  mart: number;
+  april: number;
+  may: number;
+  june: number;
+  july: number;
+  august: number;
+  september: number;
+  october: number;
+  november: number;
+  december: number;
+  lodging: number; // zbog prikaza id u bazi
 }
