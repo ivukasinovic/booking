@@ -3,6 +3,8 @@ import {Lodging, City, Reservation, AditionalServices, TypeOfLodging, PriceList,
 import {SearchService} from '../services/search.service';
 import {Router} from '@angular/router';
 import {FormGroup, FormControl, Validators, AbstractControl} from '@angular/forms';
+import {ReserveService} from '../services/reserve.service';
+import {AuthService} from '../services/auth.service';
 
 @Component({
   selector: 'app-search',
@@ -29,8 +31,8 @@ export class SearchComponent implements OnInit {
   priceList: PriceList[];
   lodSort: Lodging[];
   form = new FormGroup({
-    cityName1: new FormControl('', Validators.compose ([Validators.required])),
-    numberOfPersons1: new FormControl('', Validators.compose ([Validators.required])),
+    cityName1: new FormControl('', Validators.compose([Validators.required])),
+    numberOfPersons1: new FormControl('', Validators.compose([Validators.required])),
     searchSDT: new FormControl('2018-06-06'),
     searchEDT: new FormControl('2018-06-06'),
     typeOfLodging: new FormControl('undefined'),
@@ -38,8 +40,8 @@ export class SearchComponent implements OnInit {
   });
 
 
-
-constructor(private router: Router, private searchService: SearchService) {
+  constructor(private router: Router, private searchService: SearchService, private reservationService: ReserveService,
+              private authService: AuthService) {
     this.clickedPrice = false;
     this.clickedCategory = false;
     this.clickedRating = false;
@@ -62,6 +64,7 @@ constructor(private router: Router, private searchService: SearchService) {
       });   // err kad stavim ispise
 
   }
+
   ngOnInit() {
     this.searchService.getAllAditionalServices().subscribe((response: AditionalServices[]) => {
       this.aditionServices = response;
@@ -75,13 +78,14 @@ constructor(private router: Router, private searchService: SearchService) {
     });
     this.searchService.getAllCategoryOfLodging().subscribe((response: CategoryOfLodging[]) => {
       this.catLod = response;
-      for (let i = 0 ; i < this.catLod.length ; i++ ) {
-        if (this.catLod[i].label === '0' ) {
+      for (let i = 0; i < this.catLod.length; i++) {
+        if (this.catLod[i].label === '0') {
           this.catLod[i].label = 'uncategorized';
         }
       }
     });
   }
+
   onSubmit = function (lodging, aditionS) {
     this.searchService.searchLodging(lodging.cityName1, lodging.numberOfPersons1, lodging.searchSDT,
       lodging.searchEDT, lodging.typeOfLodging, lodging.categoryOfLodging, this.nizCekiranih)
@@ -93,9 +97,8 @@ constructor(private router: Router, private searchService: SearchService) {
   };
 
 
-
-getPriceListByLodging(lodId: number): string {
-    for (let i = 0 ; i < this.priceList.length ; i++ ) {
+  getPriceListByLodging(lodId: number): string {
+    for (let i = 0; i < this.priceList.length; i++) {
       if (this.priceList[i].lodging === lodId) {
         if (this.priceList[i].year === this.form.value.searchSDT.toString().slice(0, -6)) { // uzmem  godinu
           if (this.form.value.searchSDT.toString().slice(5, -3) === '01') {
@@ -123,8 +126,11 @@ getPriceListByLodging(lodId: number): string {
           } else if (this.form.value.searchSDT.toString().slice(5, -3) === '12') {
             return this.priceList[i].december.toString();
           } else {
-            return 'No price yet'; }
-        } else { return 'No price yet'; }
+            return 'No price yet';
+          }
+        } else {
+          return 'No price yet';
+        }
       }
     }
     return 'No price yet';
@@ -132,16 +138,16 @@ getPriceListByLodging(lodId: number): string {
 
   getCityName(br: number): string {
     br = br - 1;
-   // alert(br);
+    // alert(br);
     return this.cities[br].name;    // : Observable<User[]>
   }
 
 
   getCategoryLabel(id: string): string {
 
-    for (let i = 0; i < this.catLod.length ; i++ ) {
+    for (let i = 0; i < this.catLod.length; i++) {
       if (this.catLod[i].id === +id) {
-        if (this.catLod[i].label === '0' ) {
+        if (this.catLod[i].label === '0') {
           return 'uncategorized';
         }
         return this.catLod[i].label;
@@ -154,16 +160,16 @@ getPriceListByLodging(lodId: number): string {
   vrati(id: number) {
     const text = document.getElementById('text');
     console.log('check');
-    const element: HTMLInputElement =  <HTMLInputElement>document.getElementById(id.toString());
+    const element: HTMLInputElement = <HTMLInputElement>document.getElementById(id.toString());
     const isChecked = element.checked;
     if (element.checked === true) {
-    //  text.style.display = 'block';
+      //  text.style.display = 'block';
 
       this.nizCekiranih.push(id);
 
     } else {
-        for (let i = 0 ; i < this.nizCekiranih.length ; i++ ) {
-        if (this.nizCekiranih[i] === id ) {
+      for (let i = 0; i < this.nizCekiranih.length; i++) {
+        if (this.nizCekiranih[i] === id) {
           console.log('brisem iz liste ' + id + ' na poziciji ' + i);
           this.nizCekiranih.splice(i, 1);
           console.log('duzina liste ' + this.nizCekiranih.length);
@@ -175,37 +181,37 @@ getPriceListByLodging(lodId: number): string {
 
   sortByPrice2(priceLod: Lodging[]) { // nema potrebe prosledjivati
 
-    for (let i = 0 ; i < priceLod.length - 1  ; i++ ) {
+    for (let i = 0; i < priceLod.length - 1; i++) {
 
-        for (let j = 0; j < priceLod.length - i - 1  ; j++) {
-          const priceStrI = (this.getPriceListByLodging(priceLod[j + 1].id)); // stavljamo cene u listu na osnovu pretrazenih smestaja
-          const priceStrJ = (this.getPriceListByLodging(priceLod[j].id));
-          let priceNumbI = 0;
-          let priceNumbJ = 0;
-          if (priceStrI === 'No price yet') {
-            priceNumbI = 0;
-          } else {
-            priceNumbI = +priceStrI;
+      for (let j = 0; j < priceLod.length - i - 1; j++) {
+        const priceStrI = (this.getPriceListByLodging(priceLod[j + 1].id)); // stavljamo cene u listu na osnovu pretrazenih smestaja
+        const priceStrJ = (this.getPriceListByLodging(priceLod[j].id));
+        let priceNumbI = 0;
+        let priceNumbJ = 0;
+        if (priceStrI === 'No price yet') {
+          priceNumbI = 0;
+        } else {
+          priceNumbI = +priceStrI;
+        }
+        if (priceStrJ === 'No price yet') {
+          priceNumbJ = 0;
+        } else {
+          priceNumbJ = +priceStrJ;
+        }
+        if (!this.clickedPrice) {
+          if (priceNumbJ > priceNumbI) {
+            const pom = priceLod[j];
+            priceLod[j] = priceLod[j + 1];
+            priceLod[j + 1] = pom;
           }
-          if (priceStrJ === 'No price yet') {
-            priceNumbJ = 0;
-          } else {
-            priceNumbJ = +priceStrJ;
-          }
-          if (!this.clickedPrice) {
-            if (priceNumbJ > priceNumbI) {
-              const pom = priceLod[j];
-              priceLod[j] = priceLod[j + 1];
-              priceLod[j + 1] = pom;
-            }
-          } else {
-            if (priceNumbJ < priceNumbI) {
-              const pom = priceLod[j];
-              priceLod[j] = priceLod[j + 1];
-              priceLod[j + 1] = pom;
-            }
+        } else {
+          if (priceNumbJ < priceNumbI) {
+            const pom = priceLod[j];
+            priceLod[j] = priceLod[j + 1];
+            priceLod[j + 1] = pom;
           }
         }
+      }
     }
     if (this.clickedPrice) {
       this.clickedPrice = false;
@@ -216,19 +222,19 @@ getPriceListByLodging(lodId: number): string {
   }
 
   sortByCategory(priceLod: Lodging[]) {
-    for (let i = 0 ; i < priceLod.length - 1  ; i++ ) {
+    for (let i = 0; i < priceLod.length - 1; i++) {
 
-      for (let j = 0; j < priceLod.length - i - 1  ; j++) {
+      for (let j = 0; j < priceLod.length - i - 1; j++) {
         const priceStrI = this.getCategoryLabel(priceLod[j + 1].category); // stavljamo cene u listu na osnovu pretrazenih smestaja
         const priceStrJ = (this.getCategoryLabel(priceLod[j].category));
         let priceNumbI = 0;
         let priceNumbJ = 0;
-        if ( priceStrI === 'uncategorized') {
+        if (priceStrI === 'uncategorized') {
           priceNumbI = 0;
         } else {
           priceNumbI = +priceStrI;
         }
-        if ( priceStrJ === 'uncategorized') {
+        if (priceStrJ === 'uncategorized') {
           priceNumbJ = 0;
         } else {
           priceNumbJ = +priceStrJ;
@@ -272,11 +278,21 @@ getPriceListByLodging(lodId: number): string {
   }
 
   algoritamCeneSort(l1: Lodging, l2: Lodging) {
-      return (l2.rating) - (l1.rating);
+    return (l2.rating) - (l1.rating);
   }
+
   algoritamCeneSort2(l1: Lodging, l2: Lodging) {
     return (l1.rating) - (l2.rating);
-}
+  }
 
+  reserve(id: string) {
+    if (this.authService.isAuthenticated()) {
+      this.res.dateStart = this.form.value.searchSDT;
+      this.res.dateEnd = this.form.value.searchEDT;
+      this.reservationService.reserve(this.res, id).subscribe();
+    } else {
+      this.router.navigateByUrl('/login');
+    }
+  }
 }
 
