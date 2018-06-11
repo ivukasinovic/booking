@@ -86,14 +86,14 @@ public class LodgingController {
     }
 
     @RequestMapping(
-            value = "/search/{cityName}/{personsNbr}/{dateStart}/{dateEnd}/{typeLodging}/",
+            value = "/search/{cityName}/{personsNbr}/{dateStart}/{dateEnd}/{typeLodging}/{catLodging}/",
             method = RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE,
             consumes = MediaType.APPLICATION_JSON_VALUE
     )
     public ResponseEntity<?> search(@PathVariable("cityName") String cityName,@PathVariable("personsNbr") String personsNbr,
-                                    @PathVariable("dateStart") String dateStart,
-                                    @PathVariable("dateEnd") String dateEnd,@PathVariable("typeLodging") String typeLodging,
+                                    @PathVariable("dateStart") String dateStart, @PathVariable("dateEnd") String dateEnd,
+                                    @PathVariable("typeLodging") String typeLodging, @PathVariable("catLodging") String catLodging,
                                     @RequestBody ArrayList<Long> checkedArray){
         List<Lodging> reservatedLodgings = new ArrayList<Lodging>();
         List<Lodging> retLodgings = new ArrayList<Lodging>();
@@ -103,10 +103,6 @@ public class LodgingController {
         List<Lodging> retLodDate = new ArrayList<Lodging>();
         for(Long l : checkedArray) {
             aditionalS.add(additionalServiceService.findOne(l));
-
-        }
-        for(AdditionalService l : aditionalS) {
-            System.out.println("\n as  : " + l.getName() );
 
         }
         int broj;
@@ -128,18 +124,24 @@ public class LodgingController {
         if(typeLodging.equals("undefined") || typeLodging.equals("null")) {
             typeLodging = "";
         }
+        if(catLodging.equals("undefined") || catLodging.equals("null")) {
+            catLodging = "";
+        }else if(catLodging.equals("uncategorized") ){
+            catLodging= "0";
+        }
         if(cityName.equals("undefined") || cityName.equals("null")) {
             cityName = "";
         }
 
         if(personsNbr.equals("undefined") || personsNbr.equals("") || personsNbr.equals("null")) {
             //ne bi trebalo nikad da udje
+            System.out.println("error serach...");
             retLodgings = lodgingService.findAll();
         }else {
             System.out.println("\n Search ... " );
             broj = Integer.parseInt(personsNbr);
             reservatedLodgings = lodgingService.findByReservationsDateStartBetweenAndReservationsDateEndBetween(dateS,dateE,dateS,dateE);
-            retLodgings = lodgingService.findByCityAndPersons_number(cityName, broj,typeLodging);
+            retLodgings = lodgingService.findByCityAndPersons_number(cityName, broj,typeLodging, catLodging);
 
 
             int flag = 0;//petlja za proveravanje koji smestaji su dozvoljeni zbog termina rezervacija
@@ -180,8 +182,9 @@ public class LodgingController {
         if(aditionalS.size() ==0){
             ret = retLodDate;
         }
-        System.out.println("\naaa" + ret.size());
+
 //promeni vrednost liste za nazad
         return new ResponseEntity(ret, HttpStatus.OK);
     }
+
 }

@@ -1,18 +1,22 @@
 import { Component, OnInit } from '@angular/core';
-import {Lodging, City, Reservation, AditionalServices, TypeOfLodging, PriceList} from '../model';
+import {Lodging, City, Reservation, AditionalServices, TypeOfLodging, PriceList, CategoryOfLodging} from '../model';
 import {SearchService} from '../services/search.service';
 import {Router} from '@angular/router';
 import {FormGroup, FormControl, Validators, AbstractControl} from '@angular/forms';
+
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.css']
 })
+
+
 export class SearchComponent implements OnInit {
   searchFormGroup: FormGroup;
-  adition: AditionalServices;
   typeLod: TypeOfLodging [];
+  catLod: CategoryOfLodging[];
   nizCekiranih: number[];
+  listLodId: number[];
   cekiraniSlanje: number[];
   aditionServices: AditionalServices [];
   lod: Lodging[];
@@ -20,21 +24,25 @@ export class SearchComponent implements OnInit {
   cities: City[];
   reser: Reservation[];
   priceList: PriceList[];
-  priceListLodging: PriceList[];
+  lodSort: Lodging[];
   form = new FormGroup({
     cityName1: new FormControl('', Validators.compose ([Validators.required])),
     numberOfPersons1: new FormControl('', Validators.compose ([Validators.required])),
     searchSDT: new FormControl('2018-06-06'),
     searchEDT: new FormControl('2018-06-06'),
     typeOfLodging: new FormControl('undefined'),
-
-
+    categoryOfLodging: new FormControl('undefined')
   });
 
-  constructor(private router: Router, private searchService: SearchService) {
+
+
+constructor(private router: Router, private searchService: SearchService) {
+    this.listLodId = [];
     this.nizCekiranih = [];
     this.cekiraniSlanje = [];
     this.res = new Reservation();
+    this.lodSort = [];
+    this.lod = [];
     this.priceList = [];
     this.searchService.getReservations().subscribe(
       (response: Reservation[]) => {
@@ -46,14 +54,8 @@ export class SearchComponent implements OnInit {
 
         this.cities = response;
       });   // err kad stavim ispise
-    /*
-    this.searchService.allLodgings().subscribe(
-      (response: Lodging[]) => {
-        this.lod = response;
-      });
-*/
-  }
 
+  }
   ngOnInit() {
     this.searchService.getAllAditionalServices().subscribe((response: AditionalServices[]) => {
       this.aditionServices = response;
@@ -65,28 +67,30 @@ export class SearchComponent implements OnInit {
     this.searchService.getAllPriceList().subscribe((response: PriceList[]) => {
       this.priceList = response;
     });
+    this.searchService.getAllCategoryOfLodging().subscribe((response: CategoryOfLodging[]) => {
+      this.catLod = response;
+      for (let i = 0 ; i < this.catLod.length ; i++ ) {
+        if (this.catLod[i].label === '0' ) {
+          this.catLod[i].label = 'uncategorized';
+        }
+      }
+    });
   }
   onSubmit = function (lodging, aditionS) {
-    console.log(lodging);
-    console.log(aditionS);
-
-    console.log('Cekiran niz ' + this.nizCekiranih);
-    console.log('Cekiran Slanje' + this.cekiraniSlanje);
     this.searchService.searchLodging(lodging.cityName1, lodging.numberOfPersons1, lodging.searchSDT,
-      lodging.searchEDT, lodging.typeOfLodging, this.nizCekiranih)
+      lodging.searchEDT, lodging.typeOfLodging, lodging.categoryOfLodging, this.nizCekiranih)
       .subscribe(
         (response: Lodging[]) => {
           this.lod = response;
         }
       );
   };
-  getPriceListByLodging(lodId: number): string {
-    this.priceListLodging = [];
+
+
+
+getPriceListByLodging(lodId: number): string {
     for (let i = 0 ; i < this.priceList.length ; i++ ) {
       if (this.priceList[i].lodging === lodId) {
-       // console.log('OOOOOOOO 22' + this.form.value.searchSDT.toString().slice(0, -6) + ' i ' + this.priceList[i].year +
-         // 'mmesec' + this.form.value.searchSDT.toString().slice(5, -3));
-        console.log(this.priceList[i]);
         if (this.priceList[i].year === this.form.value.searchSDT.toString().slice(0, -6)) { // uzmem  godinu
           if (this.form.value.searchSDT.toString().slice(5, -3) === '01') {
             return this.priceList[i].january.toString();
@@ -126,6 +130,21 @@ export class SearchComponent implements OnInit {
     return this.cities[br].name;    // : Observable<User[]>
   }
 
+
+  getCategoryLabel(id: string): string {
+
+    for (let i = 0; i < this.catLod.length ; i++ ) {
+      if (this.catLod[i].id === +id) {
+        if (this.catLod[i].label === '0' ) {
+          return 'uncategorized';
+        }
+        return this.catLod[i].label;
+      }
+    }
+
+    return 'error';
+  }
+
   vrati(id: number) {
     const text = document.getElementById('text');
     console.log('check');
@@ -148,8 +167,61 @@ export class SearchComponent implements OnInit {
 
   }
 
-  sortByPrice(priceLod: Lodging[]){
+  sortByPrice2(priceLod: Lodging[]) { // nema potrebe prosledjivati
 
-   // var sortedArray: number[] = numericArray.sort((n1,n2) => n1 - n2);
+    for (let i = 0 ; i < priceLod.length - 1  ; i++ ) {
+
+        for (let j = 0; j < priceLod.length - i - 1  ; j++) {
+          const priceStrI = (this.getPriceListByLodging(priceLod[j + 1].id)); // stavljamo cene u listu na osnovu pretrazenih smestaja
+          const priceStrJ = (this.getPriceListByLodging(priceLod[j].id));
+          let priceNumbI = 0;
+          let priceNumbJ = 0;
+          if ( priceStrI === 'No price yet') {
+            priceNumbI = 0;
+          } else {
+            priceNumbI = +priceStrI;
+          }
+          if ( priceStrJ === 'No price yet') {
+            priceNumbJ = 0;
+          } else {
+            priceNumbJ = +priceStrJ;
+          }
+          if (priceNumbJ > priceNumbI) {
+            const pom = priceLod[j];
+            priceLod[j] = priceLod[ j + 1 ];
+            priceLod[j + 1] = pom;
+          }
+        }
+    }
+    this.lod = priceLod;
+  }
+
+  sortByCategory(priceLod: Lodging[]) {
+    for (let i = 0 ; i < priceLod.length - 1  ; i++ ) {
+
+      for (let j = 0; j < priceLod.length - i - 1  ; j++) {
+        const priceStrI = this.getCategoryLabel(priceLod[j + 1].category); // stavljamo cene u listu na osnovu pretrazenih smestaja
+        const priceStrJ = (this.getCategoryLabel(priceLod[j].category));
+        let priceNumbI = 0;
+        let priceNumbJ = 0;
+        if ( priceStrI === 'uncategorized') {
+          priceNumbI = 0;
+        } else {
+          priceNumbI = +priceStrI;
+        }
+        if ( priceStrJ === 'uncategorized') {
+          priceNumbJ = 0;
+        } else {
+          priceNumbJ = +priceStrJ;
+        }
+        if (priceNumbJ < priceNumbI) {
+          const pom = priceLod[j];
+          priceLod[j] = priceLod[ j + 1 ];
+          priceLod[j + 1] = pom;
+        }
+      }
+    }
+    this.lod = priceLod;
   }
 }
+

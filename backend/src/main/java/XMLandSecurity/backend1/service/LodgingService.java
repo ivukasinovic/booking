@@ -19,7 +19,7 @@ public interface LodgingService {
 
     Lodging findByAgent(Long id);
 
-    List<Lodging> findByCityAndPersons_number(String city, Integer personsNbr, String typeLodging);
+    List<Lodging> findByCityAndPersons_number(String city, Integer personsNbr, String typeLodging, String catLodging);
 
 
    // List<Lodging> findByAdditionalServiceList(Long id);

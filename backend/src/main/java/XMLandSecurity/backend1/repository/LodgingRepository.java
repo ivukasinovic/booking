@@ -14,7 +14,7 @@ public interface LodgingRepository extends JpaRepository<Lodging,Long> {
 
     Lodging findByAgent(Long id);
 
-    List<Lodging>findByCityNameIgnoreCaseContainingAndPersonsNumberAndTypeLabelIgnoreCaseContaining(String name, Integer persons_number, String typeLodging);
+    List<Lodging>findByCityNameIgnoreCaseContainingAndPersonsNumberAndTypeLabelIgnoreCaseContainingAndCategoryLabelIgnoreCaseContaining(String name, Integer persons_number, String typeLodging, String catLodging);
 
     List<Lodging> findByReservationsDateStartBetweenAndReservationsDateEndBetween(Date dateStart,Date dateEnd,Date dateStart1,Date dateEnd1);
 

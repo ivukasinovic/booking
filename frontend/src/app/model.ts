@@ -40,7 +40,7 @@ export class Lodging {
   image: string;
   rating: number;
   persons_number: number;
-  category: CategoryOfLodging;
+  category: string;
   type: TypeOfLodging;
   city: City;
   reservations: Reservation;

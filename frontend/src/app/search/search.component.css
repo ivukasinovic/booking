@@ -31,6 +31,9 @@ input[type='submit']:hover
 input[type='submit']:disabled
  {background-color: #d5d6d6;}
 
+tr:nth-child(even) {
+  background-color: #f2f2f2
+}
 
 
 
