@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {Router} from '@angular/router';
 import {HttpClient} from '@angular/common/http';
-import {AditionalServices, Lodging, Reservation} from './model';
+import {AditionalServices, Lodging, Message, Reservation} from './model';
 
 @Injectable()
 export class LodgingService {
@@ -33,5 +33,8 @@ export class LodgingService {
   }
   getMessages() {
     return this.http.get('api/reservations/messages');
+  }
+  reply(message: Message) {
+    return this.http.post('api/reservations/reply', message);
   }
 }

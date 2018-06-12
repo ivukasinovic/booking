@@ -108,13 +108,15 @@ dateValidationStart(control) {
   if ((+control.value.slice(0, -6)) < (+today.getFullYear())) {// ako je  godina uneta < manja od danasnje - ne moze
     return {'searchSDT': false};
   }
-  if ( (+control.value.slice(0, -6)) === (+today.getFullYear())) {
-     console.log(control.value.slice(5, -3) + '  i  ' + (today.getMonth() + 1));
-      if ( +control.value.slice(5, -3) <  (+(today.getMonth() + 1))) {// da li je u istoj godini mesec uneti manji od danasnjeg - ne moze
-        console.log('mesec nije dobar');
-        return {'searchSDT': false};
-      }
+  if ((+control.value.slice(0, -6)) === (+today.getFullYear())) {
+    console.log(control.value.slice(5, -3) + '  i  ' + (today.getMonth() + 1));
+    if (+control.value.slice(5, -3) < (+(today.getMonth() + 1))) {// da li je u istoj godini mesec uneti manji od danasnjeg - ne moze
+      console.log('mesec nije dobar');
+      return {'searchSDT': false};
+    }
   }
+}
+
 getTodaysDate(): string {
   const today = new Date();
   const dd = today.getDate();

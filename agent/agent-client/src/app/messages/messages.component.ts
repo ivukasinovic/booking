@@ -22,7 +22,8 @@ export class MessagesComponent implements OnInit {
         this.messages = response;
       });
   }
-  reply(sender: string) {
+  reply(message: string) {
+    console.log(message);
     alert('Not working yet!');
   }
 
