@@ -18,12 +18,10 @@ import javax.xml.bind.annotation.XmlType;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
  *         &lt;element name="id" type="{http://www.w3.org/2001/XMLSchema}long"/>
- *         &lt;element name="label" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *         &lt;element name="name">
+ *         &lt;element name="label">
  *           &lt;simpleType>
  *             &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
- *               &lt;maxLength value="30"/>
- *               &lt;minLength value="1"/>
+ *               &lt;maxLength value="50"/>
  *             &lt;/restriction>
  *           &lt;/simpleType>
  *         &lt;/element>
@@ -38,16 +36,13 @@ import javax.xml.bind.annotation.XmlType;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "typeOfLodging", propOrder = {
     "id",
-    "label",
-    "name"
+    "label"
 })
 public class TypeOfLodging {
 
     protected long id;
     @XmlElement(required = true)
     protected String label;
-    @XmlElement(required = true)
-    protected String name;
 
     /**
      * Gets the value of the id property.
@@ -87,30 +82,6 @@ public class TypeOfLodging {
      */
     public void setLabel(String value) {
         this.label = value;
-    }
-
-    /**
-     * Gets the value of the name property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getName() {
-        return name;
-    }
-
-    /**
-     * Sets the value of the name property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setName(String value) {
-        this.name = value;
     }
 
 }

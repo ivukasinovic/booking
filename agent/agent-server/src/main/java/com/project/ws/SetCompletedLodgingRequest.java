@@ -3,6 +3,7 @@ package com.project.ws;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
@@ -17,7 +18,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="reservation" type="{http://www.w3.org/2001/XMLSchema}long"/>
+ *         &lt;element name="reservation" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -33,21 +34,30 @@ import javax.xml.bind.annotation.XmlType;
 @XmlRootElement(name = "setCompletedLodgingRequest")
 public class SetCompletedLodgingRequest {
 
-    protected long reservation;
+    @XmlElement(required = true)
+    protected String reservation;
 
     /**
      * Gets the value of the reservation property.
      * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
-    public long getReservation() {
+    public String getReservation() {
         return reservation;
     }
 
     /**
      * Sets the value of the reservation property.
      * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
      */
-    public void setReservation(long value) {
+    public void setReservation(String value) {
         this.reservation = value;
     }
 

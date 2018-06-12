@@ -10,13 +10,11 @@ public interface MessageService {
 
     List<Message> findAll();
 
+    List<Message> findByReceiver_Id(Long id);
+
     Message findOne(Long id);
 
     Message save(Message message);
 
     void delete(Long id);
-
-//    List<Message> findBySender(Long id);
-//    List<Message> findByReceiver(Long id);
-
 }

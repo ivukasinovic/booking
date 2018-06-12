@@ -2,11 +2,11 @@
   <div class="col-md-6">
     <div class="form-group">
       <label for="agent">Title:</label>
-      <input type="text" [ngModel]="lodging.title" class="form-control" id="title">
+      <input type="text" [(ngModel)]="lodging.title" class="form-control" id="title">
     </div>
     <div class="form-group">
       <label for="agent">Agent:</label>
-      <input type="text" [ngModel]="lodging.agent" class="form-control" id="agent">
+      <input type="text" [(ngModel)]="lodging.agent" class="form-control" id="agent">
     </div>
     <div class="form-group form-inline">
       <label>City: </label>&nbsp;
@@ -17,7 +17,7 @@
     <div class="form-group form-inline">
       <label>Category: </label>&nbsp;
       <select class="form-control" name="category" [(ngModel)]="lodging.category">
-        <option *ngFor="let category of categories" value="{{category.label}}">{{category.name}}</option>
+        <option *ngFor="let category of categories" value="{{category.label}}">{{category.label}}</option>
       </select>
     </div>
     <div class="form-group form-inline">
@@ -28,26 +28,34 @@
     </div>
     <div class="form-group">
       <label for="address">Address:</label>
-      <input type="text" [ngModel]="lodging.address" class="form-control" id="address">
+      <input type="text" [(ngModel)]="lodging.address" class="form-control" id="address">
     </div>
     <div class="form-group">
       <label for="details">Details:</label>
-      <input type="text" [ngModel]="lodging.details" class="form-control" id="details">
+      <input type="text" [(ngModel)]="lodging.details" class="form-control" id="details">
     </div>
     <div class="form-group">
       <label for="image">Image:</label>
-      <input type="text" [ngModel]="lodging.image" class="form-control" id="image">
+      <input type="text" [(ngModel)]="lodging.image" class="form-control" id="image">
     </div>
     <div class="form-group">
       <label for="personsNumber">Number of persons:</label>
-      <input type="text" [ngModel]="lodging.personsNumber" class="form-control" id="personsNumber">
+      <input type="text" [(ngModel)]="lodging.personsNumber" class="form-control" id="personsNumber">
     </div>
-    <div class="form-check">
-      <div>
-        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-        <label class="form-check-label" for="exampleCheck1">Check me out</label>
+
+    <details>
+      <summary  class="form-control" ><b>Additional services </b></summary>
+      <br>
+      <div     *ngFor="let a of aditionServices " >
+        <div>
+
+
+          <label>{{ (a.name) }}</label>
+          <input class="form-control" name={{a.id}}   id={{a.id}}  type="checkbox"  (change)="vrati(a.id)">
+
+        </div>
       </div>
-    </div>
+    </details>
 
     <button class="btn btn-primary" (click)="createLodging()">Create</button>
   </div>

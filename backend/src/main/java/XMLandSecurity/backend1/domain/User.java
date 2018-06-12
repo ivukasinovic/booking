@@ -1,23 +1,17 @@
 package XMLandSecurity.backend1.domain;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIdentityReference;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-import org.hibernate.annotations.Type;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.intellij.lang.annotations.RegExp;
-
 import javax.persistence.*;
-import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -139,22 +133,6 @@ public class User implements Serializable {
 
     public User() {
     }
-
-//    public User(String username, String passwordHash, String name, String surname, String email, String city, String number, Role role, Date lastPasswordReset, boolean activated, List<Message> receviedMessages, List<Message> sentMessages, List<Reservation> reservations) {
-//        this.username = username;
-//        this.passwordHash = passwordHash;
-//        this.name = name;
-//        this.surname = surname;
-//        this.email = email;
-//        this.city = city;
-//        this.number = number;
-//        this.role = role;
-//        this.lastPasswordReset = lastPasswordReset;
-//        this.activated = activated;
-//        this.receviedMessages = receviedMessages;
-//        this.sentMessages = sentMessages;
-//        this.reservations = reservations;
-//    }
 
     public List<Message> getReceviedMessages() {
         return receviedMessages;

@@ -23,16 +23,14 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *         &lt;element name="title">
  *           &lt;simpleType>
  *             &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
- *               &lt;minLength value="0"/>
- *               &lt;maxLength value="25"/>
+ *               &lt;maxLength value="50"/>
  *             &lt;/restriction>
  *           &lt;/simpleType>
  *         &lt;/element>
  *         &lt;element name="body">
  *           &lt;simpleType>
  *             &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
- *               &lt;minLength value="1"/>
- *               &lt;maxLength value="250"/>
+ *               &lt;maxLength value="200"/>
  *             &lt;/restriction>
  *           &lt;/simpleType>
  *         &lt;/element>

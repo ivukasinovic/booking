@@ -44,7 +44,7 @@ public class AdditionalService implements Serializable {
             inverseJoinColumns = {@JoinColumn(name = "lodging_id")})
     @XmlElementWrapper(name="lodgingList", required=true)
     @XmlElement(name="lodging", required=true)
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
     private List<Lodging> lodgingList;
 
 
