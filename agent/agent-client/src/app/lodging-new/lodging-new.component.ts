@@ -33,7 +33,14 @@ export class LodgingNewComponent implements OnInit {
   createLodging() {
     this.lodging.additionService = this.nizCekiranih;
     this.lodgingService.createLodging(this.lodging)
-      .subscribe();
+      .subscribe(() => {
+        alert('Success');
+        location.reload();
+      },
+        error1 => {
+        alert('Error, try again!');
+        location.reload();
+        });
   }
   getCities() {
     this.lodgingService.getCities()

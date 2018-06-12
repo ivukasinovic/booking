@@ -22,9 +22,16 @@ export class MessagesComponent implements OnInit {
         this.messages = response;
       });
   }
-  reply(message: string) {
-    console.log(message);
-    alert('Not working yet!');
+  reply(message: string, messageOrg: Message) {
+    messageOrg.body = message;
+    this.lodgingService.reply(messageOrg)
+      .subscribe((response: Message) => {
+        alert('Success');
+        location.reload();
+      },
+        error1 => {
+        alert('Eroor, try again!');
+        });
   }
 
 }

@@ -19,7 +19,7 @@
       <label>Body:</label>
       <input type="text" class="form-control" #msg/>
       <button  type="button" class="btn btn-primary"
-               (click)="reply(msg.value)"
+               (click)="reply(msg.value, message)"
                [attr.aria-expanded]="!isCollapsed" aria-controls="collapseExample">Reply</button>
     </details>
   </div>

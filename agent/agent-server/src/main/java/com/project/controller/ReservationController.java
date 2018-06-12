@@ -6,6 +6,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.print.attribute.standard.Media;
 import java.util.List;
 
 /**
@@ -48,5 +49,18 @@ public class ReservationController {
         GetMessagesResponse response = objPort.getMessages(request);
         List<MessageRes> messageRes = response.getMessageRes();
         return new ResponseEntity<>(messageRes, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/reply",
+                    produces = MediaType.APPLICATION_JSON_VALUE,
+                    consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<MessageRes> reply(@RequestBody MessageRes messageRes){
+        LodgingService objMethod = new LodgingService();
+        LodgingServicePort objPort = objMethod.getLodgingServicePortSoap11();
+        SetMessagesRequest request = new SetMessagesRequest();
+        request.setMessageRes(messageRes);
+        SetMessagesResponse response = objPort.setMessages(request);
+        MessageRes msg = response.getMessageRes();
+        return new ResponseEntity<>(msg, HttpStatus.CREATED);
     }
 }

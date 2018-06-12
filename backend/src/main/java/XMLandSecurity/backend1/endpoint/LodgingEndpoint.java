@@ -9,6 +9,7 @@ import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
 import org.springframework.ws.server.endpoint.annotation.RequestPayload;
 import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -82,6 +83,23 @@ public class LodgingEndpoint {
             response.getMessageRes().add(messageRes);
         }
         return response;
+    }
+    @PayloadRoot(namespace = "http://bookingxml.com/soap-example", localPart = "setMessagesRequest")
+    @ResponsePayload
+    public SetMessagesResponse setMessagesResponse(@RequestPayload SetMessagesRequest request){
+        SetMessagesResponse response = new SetMessagesResponse();
+        Message message = new Message();
+        message.setDateSent(new Date());
+        User sender = userService.findByUsername(request.getMessageRes().getReceiver());
+        User receiver = userService.findByUsername(request.getMessageRes().getSender());
+        message.setSender(sender);
+        message.setReceiver(receiver);
+        message.setBody(request.getMessageRes().getBody());
+        message.setTitle(request.getMessageRes().getTitle());
+        messageService.save(message);
+        response.setMessageRes(request.getMessageRes());
+
+        return  response;
     }
 
     @PayloadRoot(namespace = "http://bookingxml.com/soap-example", localPart = "setCompletedLodgingRequest")

@@ -150,6 +150,22 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link SetMessagesRequest }
+     * 
+     */
+    public SetMessagesRequest createSetMessagesRequest() {
+        return new SetMessagesRequest();
+    }
+
+    /**
+     * Create an instance of {@link MessageRes }
+     * 
+     */
+    public MessageRes createMessageRes() {
+        return new MessageRes();
+    }
+
+    /**
      * Create an instance of {@link SetCompletedLodgingRequest }
      * 
      */
@@ -190,14 +206,6 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link MessageRes }
-     * 
-     */
-    public MessageRes createMessageRes() {
-        return new MessageRes();
-    }
-
-    /**
      * Create an instance of {@link SetCompletedLodgingResponse }
      * 
      */
@@ -235,6 +243,14 @@ public class ObjectFactory {
      */
     public Message createMessage() {
         return new Message();
+    }
+
+    /**
+     * Create an instance of {@link SetMessagesResponse }
+     * 
+     */
+    public SetMessagesResponse createSetMessagesResponse() {
+        return new SetMessagesResponse();
     }
 
     /**

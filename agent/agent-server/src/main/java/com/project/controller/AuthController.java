@@ -1,10 +1,6 @@
 package com.project.controller;
 
 import com.project.model.json.AuthenticationRequest;
-import com.project.ws.LodgingService;
-import com.project.ws.LodgingServicePort;
-import com.project.ws.SetCompletedLodgingRequest;
-import com.project.ws.SetCompletedLodgingResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
