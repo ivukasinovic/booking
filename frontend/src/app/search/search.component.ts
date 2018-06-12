@@ -3,6 +3,7 @@ import {Lodging, City, Reservation, AditionalServices, TypeOfLodging, PriceList,
 import {SearchService} from '../services/search.service';
 import {Router} from '@angular/router';
 import {FormGroup, FormControl, Validators, AbstractControl} from '@angular/forms';
+import {concat} from 'rxjs/operators';
 
 @Component({
   selector: 'app-search',
@@ -31,12 +32,12 @@ export class SearchComponent implements OnInit {
   form = new FormGroup({
     cityName1: new FormControl('', Validators.compose ([Validators.required])),
     numberOfPersons1: new FormControl('', Validators.compose ([Validators.required])),
-    searchSDT: new FormControl('2018-06-06'),
-    searchEDT: new FormControl('2018-06-06'),
+    searchSDT: new FormControl(this.getTodaysDate(), Validators.compose ([Validators.maxLength(10), this.dateValidationStart]) ),
+    searchEDT: new FormControl(this.getTodaysDate(), Validators.compose ([Validators.maxLength(10),
+      this.dateValidationStart]) ), // god-mes-dan
     typeOfLodging: new FormControl('undefined'),
     categoryOfLodging: new FormControl('undefined')
   });
-
 
 
 constructor(private router: Router, private searchService: SearchService) {
@@ -83,6 +84,7 @@ constructor(private router: Router, private searchService: SearchService) {
     });
   }
   onSubmit = function (lodging, aditionS) {
+  if (lodging.searchSDT <= lodging.searchEDT) {
     this.searchService.searchLodging(lodging.cityName1, lodging.numberOfPersons1, lodging.searchSDT,
       lodging.searchEDT, lodging.typeOfLodging, lodging.categoryOfLodging, this.nizCekiranih)
       .subscribe(
@@ -90,9 +92,42 @@ constructor(private router: Router, private searchService: SearchService) {
           this.lod = response;
         }
       );
+  } else {
+    alert('Strat date must be lower than the end date !');
+  }
   };
 
+dateValidationStart(control) {
+  const today = new Date();
+  const startD = new Date(control.value);
+  if ((+control.value.slice(0, -6)) < (+today.getFullYear())) {// ako je  godina uneta < manja od danasnje - ne moze
+    return {'searchSDT': false};
+  }
+  if ( (+control.value.slice(0, -6)) === (+today.getFullYear())) {
+     console.log(control.value.slice(5, -3) + '  i  ' + (today.getMonth() + 1));
+      if ( +control.value.slice(5, -3) <  (+(today.getMonth() + 1))) {// da li je u istoj godini mesec uneti manji od danasnjeg - ne moze
+        console.log('mesec nije dobar');
+        return {'searchSDT': false};
+      }
+  }
 
+}
+getTodaysDate(): string {
+  const today = new Date();
+  const dd = today.getDate();
+  const mm = today.getMonth() + 1; // January is 0!
+  const yyyy = today.getFullYear();
+  let pd = dd.toString();
+  let pm = mm.toString();
+  if ( dd < 10 ) {
+    pd = '0' + dd;
+  }
+  if (mm < 10) {
+    pm = '0' + mm ;
+  }
+  const todayStr = yyyy + '-' + pm + '-' + pd ;
+  return todayStr;
+}
 
 getPriceListByLodging(lodId: number): string {
     for (let i = 0 ; i < this.priceList.length ; i++ ) {
