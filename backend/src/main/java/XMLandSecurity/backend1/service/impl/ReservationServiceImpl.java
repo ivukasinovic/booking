@@ -45,12 +45,9 @@ public class ReservationServiceImpl implements ReservationService {
     }
 
     @Override
-    public boolean checkIfOverlapingDate(Reservation reservation) {
+    public boolean checkIfOverlapingDate(Long lodging_id, Date early, Date late ) {
 
-        Date early = reservation.getDateStart();
-        Date late = reservation.getDateEnd();
-
-        for (Reservation temp : reservationRepository.findByLodging(reservation.getLodging())) {
+        for (Reservation temp : reservationRepository.findByLodgingId(lodging_id) ) {
             if (!(early.after(temp.getDateEnd()) || late.before(temp.getDateStart())))
                 return true;
         }

@@ -1,0 +1,21 @@
+<div class="container">
+  <form [formGroup] = "form" ngOn>
+  <label for="sel">Lodging:</label>
+  <select required="required"  class="form-control" id="sel" [ngModel]="lodging_help.id"   formControlName="lodging_id">
+      <option *ngFor="let lodging of lodgings" value="{{lodging.id}}">{{lodging.title}}, {{lodging.address}}</option>
+  </select>
+    <br>
+    <label>Start date * </label>
+    <input class="form-control" required="required" [ngModel]="res.dateStart" name="searchSDT"  formControlName="searchSDT"  type="date"  (ngModelChange)="resetAvaliable()">
+    <br>
+    <label>End date *</label>
+    <input class="form-control"  required="required"  [ngModel]="res.dateEnd" name="searchEDT" type="date" formControlName="searchEDT" (ngModelChange)="resetAvaliable()">
+    <br>
+    <span class="pull-right">
+      <button class="btn" (click)="checkAvaliability(form.value)">Check avalibility</button>
+      <button class="btn" (click)="onSubmit(form.value)" [disabled]="!avaliable">Reserve</button>
+    </span>
+  </form>
+
+
+</div>

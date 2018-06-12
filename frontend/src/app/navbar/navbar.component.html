@@ -7,20 +7,21 @@
 
 
     <ul class="nav navbar-nav">
-      <li><a routerLink="/search">Search</a></li>
+      <li class="active" ><a routerLink="/search">Search</a></li>
       <li *ngIf="logged == true"><a routerLink="/certificates">Certificates</a></li>
       <li *ngIf="logged == true"><a routerLink="/rate-and-comment">Rate and comment</a></li>
+      <li *ngIf="logged == true"><a routerLink="/make-reservation">Make reservation</a></li>
     </ul>
     <ul *ngIf="logged == true" class="nav navbar-nav navbar-right">
+      <li> Hi, {{username}}!</li>
       <li><a routerLink="/profile">Profile</a></li>
       <li>
-        <p><b>Hi, {{username}}!</b></p>
-        <button class="btn btn-sm btn-warning" (click)="logout()">Logout</button>
+        <button class="btn btn-link glyphicon glyphicon-log-out" (click)="logout()">Logout</button>
       </li>
     </ul>
     <ul *ngIf="logged == false" class="nav navbar-nav navbar-right">
-      <li><a routerLink="/login">Sign in</a></li>
-      <li><a routerLink="/registration">Join</a></li>
+      <li><a routerLink="/login" class="glyphicon glyphicon-log-in"> Sign in</a></li>
+      <li><a routerLink="/registration"  class="glyphicon glyphicon-user"> Join</a></li>
     </ul>
   </div>
 </nav>

@@ -2,6 +2,7 @@ package XMLandSecurity.backend1.service;
 
 import XMLandSecurity.backend1.domain.Reservation;
 
+import java.util.Date;
 import java.util.List;
 
 public interface ReservationService {
@@ -14,7 +15,7 @@ public interface ReservationService {
 
     void delete(Long id);
 
-    boolean checkIfOverlapingDate(Reservation reservation);
+    boolean checkIfOverlapingDate(Long lodging_id, Date early, Date late) ;
     List<Reservation> findByLodging(Long id);
 
     List<Reservation> findByUser(Long id);

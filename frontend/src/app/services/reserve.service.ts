@@ -34,4 +34,8 @@ export class ReserveService {
   postRating(rating: Rating, id: string) {
     return this.http.post('api/ratings/' + id, rating);
   }
+
+  checkAvaliability(id: number, dateStart: Date, dateEnd: Date) {
+    return this.http.get('/api/reservations/check/' + id + '/' + dateStart + '/' + dateEnd);
+  }
 }

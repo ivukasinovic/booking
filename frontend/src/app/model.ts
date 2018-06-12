@@ -35,6 +35,7 @@ export class City {
 }
 export class Lodging {
   id: number;
+  title: string;
   address: string;
   details: string;
   image: string;

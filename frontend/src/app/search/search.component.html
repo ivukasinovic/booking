@@ -1,104 +1,84 @@
 <div class="container">
-  <div class="col-md-4">
-
-      <h3>Search</h3>
-      <form  [formGroup] = "form"
+<div>
+      <h4>Search for accommodations</h4>
+      <form class="form-inline" [formGroup] = "form"
       (ngSubmit) = "onSubmit(form.value, aditionServices)">
+        <div class="form-group">
         <label>City * </label>
-        <input class="form-control" id ="cityName1"  value="" type="text" class="form-control" name="cityName1"
+        <input class="form-control" id ="cityName1"  value="" type="text" name="cityName1"
                placeholder="Enter city " formControlName="cityName1">
-
-        <br>
-        <label >Number of persons * </label>
-        <input class="form-control" value="" type="number" class="form-control" name="searchCity"
+        </div>
+        <div class="form-group">
+        <label >  Number of persons * </label>
+        <input class="form-control" value="" type="number" name="searchCity"
                formControlName="numberOfPersons1" placeholder="Number of persons" maxlength="4" min = "0" max = "9"  onKeyPress="if(this.value.length==4) return false;" onkeydown="javascript: return (event.keyCode > 47 && event.keyCode < 58 || event.keyCode == 08)" >
-        <br>
-        <label>Start date (mm/dd/yyyy) * </label>
-        <input class="form-control" required="required"  name="searchSDT"  formControlName="searchSDT"  type="date"  (ngModelChange)="searchSDT = $event">
-        <br>
-        <label>End date (mm/dd/yyyy) *</label>
-        <input class="form-control"  data-date-format="dd/MM/yyyy" required="required"  name="searchEDT" type="date" formControlName="searchEDT" (ngModelChange)="searchEDT = $event">
-        <br>
+        </div>
 
-        <label>Type</label>
-        <br>
+        <div class="form-group">
+        <label>  Start date * </label>
+        <input class="form-control" required="required"  name="searchSDT"  formControlName="searchSDT"  type="date"  (ngModelChange)="searchSDT = $event">
+        </div>
+        <div class="form-group">
+        <label>  End date *</label>
+        <input class="form-control"  required="required"  name="searchEDT" type="date" formControlName="searchEDT" (ngModelChange)="searchEDT = $event">
+        </div>
+        <div class="form-group">
+        <label>  Type</label>
+        </div>
+        <div class="form-group">
         <select   class="form-control" name = "typeOfLodging" formControlName="typeOfLodging" >
 
           <option *ngFor="let tl of typeLod" value={{tl.label}}>{{tl.label}} </option>
 
         </select>
-        <br>
-        <label>Category</label>
-        <br>
-        <select   class="form-control" name = "categoryOfLodging" formControlName="categoryOfLodging">
-
-          <option *ngFor="let cl of catLod"  value={{cl.label}}>{{cl.label}} </option>
-
-        </select>
-        <br>
-        <details>
-          <summary  class="form-control" ><b>Additional services </b></summary>
-          <br>
-        <div     *ngFor="let a of aditionServices " >
-          <div>
-
-
-              <label>{{ (a.name) }}</label>
-              <input class="form-control" name={{a.id}}   id={{a.id}}  type="checkbox"  (change)="vrati(a.id)">
-
-          </div>
         </div>
-      </details>
-        <br>
+        <div class="form-group">
+        <label>  Category</label>
+        <select   class="form-control" name = "categoryOfLodging" formControlName="categoryOfLodging">
+          <option *ngFor="let cl of catLod"  value={{cl.label}}>{{cl.label}} </option>
+        </select>
+        </div>
+        <br/>
+
+        <div class="form-group">
+          <details>
+            <summary><b>  Additional services </b></summary>
+            <br>
+            <div     *ngFor="let a of aditionServices " >
+              <div>
+                  <label class="pull-left">{{ (a.name) }}</label>
+                  <input class="form-control pull-right" name={{a.id}}   id={{a.id}}  type="checkbox"  (change)="vrati(a.id)">
+
+              </div>
+            </div>
+        </details>
+        </div>
+        <br/>
+        <div class="form-group">
         <input class="form-control" type = "submit" [disabled]="!form.valid" value ="Search Lodging">
+        </div>
 
       </form>
       <br>
   </div>
+<div *ngIf="lod.length>0">
+  <div  *ngFor="let lodging of lod">
+      <br/>
+      <div class="card bg-info text-white p5"  >
+          <img src="{{(lodging.image)}}" class="img-fluid" alt="No image">
 
+             <h4>{{lodging.title}}</h4>
+            <br/><b>Adress: </b>  {{ (lodging.address) }},{{  getCityName(lodging.city) }}
+            <br/><b>Number of persons: </b>{{(lodging.persons_number)}}
+            <br/><b>Price: </b>{{getPriceListByLodging(lodging.id)}}
+            <br/><b>Category: </b> {{getCategoryLabel(lodging.category)}}
+            <br/><b>Rating: </b>{{(lodging.rating)}}
+            <br/><b>Details: </b> {{(lodging.details)}}
+            <br/><button class="btn-link" (click)="reserve(lodging.id)"><h3>Reserve now</h3></button>
 
-  <div #mydiv>
-    <table border="2" style="..." align="center" class="table">
-      <tr>
-        <th>City</th>
-        <th>Address</th>
-        <th>Number of persons</th>
-        <th><a  (click)="sortByPrice2(lod)" >Price</a></th>
-        <th><a (click)="sortByCategory(lod)">Category</a></th>
-        <th><a (click)="sortByRating(lod)">Rating</a></th>
-        <th>Details</th>
-        <th>Image</th>
-        <th>Reservation</th>
-
-      </tr>
-
-      <!--<tr *ngIf="p.user != null" >-->
-
-      <tr   *ngFor="let p of lod" >
-        <td>  {{  getCityName(p.city) }}</td>
-
-        <!--<td> {{ vratiIme(p.user) }}</td>-->
-        <td> {{ (p.address) }}</td>
-        <!--<div>-->
-        <td> {{(p.persons_number)}}</td>
-        <td>{{getPriceListByLodging(p.id)}}</td>
-        <td> {{getCategoryLabel(p.category)}}</td>
-        <td> {{(p.rating)}}</td>
-        <td> {{(p.details)}}</td>
-        <td> {{(p.image)}}</td>
-        <td >
-          <button class="btn btn-primary" (click)="reserve(p.id)">Reserve</button>
-        </td>
-
-      </tr>
-
-      <!--</div>-->
-    </table>
-    <br>
-
-  </div>
-
-
+      </div>
+    </div>
   <br>
 
+</div>
 </div>

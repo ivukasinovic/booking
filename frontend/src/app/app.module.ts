@@ -30,6 +30,7 @@ import {BsDatepickerModule} from 'ngx-bootstrap/datepicker';
 import { MyReservationsComponent } from './my-reservations/my-reservations.component';
 import { RateAndCommentComponent } from './rate-and-comment/rate-and-comment.component';
 import { SendMessageComponent } from './send-message/send-message.component';
+import { MakeReservationComponent } from './make-reservation/make-reservation.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { SendMessageComponent } from './send-message/send-message.component';
     SearchComponent,
     MyReservationsComponent,
     RateAndCommentComponent,
-    SendMessageComponent
+    SendMessageComponent,
+    MakeReservationComponent
   ],
   imports: [
     BrowserModule,

@@ -37,18 +37,17 @@ INSERT INTO additional_service (id,name) VALUES (6,'tv')
 INSERT INTO additional_service (id,name) VALUES (7,'kitchen')
 INSERT INTO additional_service (id,name) VALUES (8 ,'private_bathroom')
 
+INSERT INTO lodging (id,address,details , image,rating,persons_number,category_id,type_id,city_id,agent_id,title) VALUES (1,'Bulevar Despota Stefana 7','NOVOO ,nove stvari vise detalja na telefon ..... xD','https://goo.gl/rjfPwB',4,4 ,0,2,1,2,'Dekijev luksuz');
+INSERT INTO lodging (id,address,details , image,rating,persons_number,category_id,type_id,city_id,agent_id,title) VALUES (2,'Bulevar Despota Stefana 35','Starija ali ocuvana garsonjeraa','https://goo.gl/3U3VUf',3,2,0,1,2,2,'Dekijeve sobe');
+INSERT INTO lodging (id,address,details , image,rating,persons_number,category_id,type_id,city_id,agent_id,title) VALUES (3,'Sekspirova 42','Garsonjera','https://goo.gl/aVheug',3,1,1,1,2,2,'Dekijeve odaje');
+INSERT INTO lodging (id,address,details , image,rating,persons_number,category_id,type_id,city_id,agent_id,title) VALUES (4,'Tolstojeva 23','Stan, dvosoban','https://goo.gl/p5sR4g',4,1,2,1,4,2,'Dekijev hotel');
+INSERT INTO lodging (id,address,details , image,rating,persons_number,category_id,type_id,city_id,agent_id,title) VALUES (5,'Andriceva 22','Nesto','https://goo.gl/DvL6Ac',2,1,5,1,3,2,'Dekijev mediteranos');
 
-INSERT INTO lodging (id,address,details , image,rating,persons_number,category_id,type_id,city_id,agent_id,title) VALUES (1,'Bulevar Despota Stefana 7','NOVOO ,nove stvari vise detalja na telefon xD','',4,4 ,6,2,1,2,'Dekijev luksuz');
-INSERT INTO lodging (id,address,details , image,rating,persons_number,category_id,type_id,city_id,agent_id,title) VALUES (2,'Bulevar Despota Stefana 35','Starija ali ocuvana garsonjeraa','',3,2,6,1,2,2,'Dekijeve sobe');
-INSERT INTO lodging (id,address,details , image,rating,persons_number,category_id,type_id,city_id,agent_id,title) VALUES (3,'Sekspirova 42','Garsonjera','',3,1,1,1,2,2,'Dekijeve odaje');
-INSERT INTO lodging (id,address,details , image,rating,persons_number,category_id,type_id,city_id,agent_id,title) VALUES (4,'Tolstojeva 23','Stan, dvosoban','',4,1,2,1,4,2,'Dekijev hotel');
-INSERT INTO lodging (id,address,details , image,rating,persons_number,category_id,type_id,city_id,agent_id,title) VALUES (5,'Andriceva 22','Nesto','',2,1,5,1,3,2,'Dekijev mediteranos');
-
-INSERT INTO lodging (id,address,details , image,rating,persons_number,category_id,type_id,city_id,agent_id,title) VALUES (6,'Bulevar Oslobodjenja 7','NOVOO ,nove stvari vise detalja na telefon ..... xD','',4,4 ,1,2,1,2,'Vila Deki');
-INSERT INTO lodging (id,address,details , image,rating,persons_number,category_id,type_id,city_id,agent_id,title) VALUES (7,'Bulevar Oslobodjenja 163','Starija ali ocuvana garsonjeraa','',3,2,5,1,2,2,'Deki Harizma');
-INSERT INTO lodging (id,address,details , image,rating,persons_number,category_id,type_id,city_id,agent_id,title) VALUES (8,'Karadjaordjeva 25','Garsonjera','',3,1,4,1,2,2,'Deki Aqua');
-INSERT INTO lodging (id,address,details , image,rating,persons_number,category_id,type_id,city_id,agent_id,title) VALUES (9,'Karadjaordjeva 17','Stan, dvosoban','',4,2,2,1,4,2,'Deki Apartments');
-INSERT INTO lodging (id,address,details , image,rating,persons_number,category_id,type_id,city_id,agent_id,title) VALUES (10,'Branka Radicevica 12','Nesto','',2,3,3,1,3,2,'Deki Ludila');
+INSERT INTO lodging (id,address,details , image,rating,persons_number,category_id,type_id,city_id,agent_id,title) VALUES (6,'Bulevar Oslobodjenja 7','NOVOO ,nove stvari vise detalja na telefon ..... xD','https://goo.gl/M8cxGj',4,4 ,1,2,1,2,'Vila Deki');
+INSERT INTO lodging (id,address,details , image,rating,persons_number,category_id,type_id,city_id,agent_id,title) VALUES (7,'Bulevar Oslobodjenja 163','Starija ali ocuvana garsonjeraa','https://goo.gl/fZAobN',3,2,5,1,2,2,'Deki Harizma');
+INSERT INTO lodging (id,address,details , image,rating,persons_number,category_id,type_id,city_id,agent_id,title) VALUES (8,'Karadjaordjeva 25','Garsonjera','https://goo.gl/gLeY6y',3,1,4,1,2,2,'Deki Aqua');
+INSERT INTO lodging (id,address,details , image,rating,persons_number,category_id,type_id,city_id,agent_id,title) VALUES (9,'Karadjaordjeva 17','Stan, dvosoban','https://goo.gl/fZAobN',4,2,2,1,4,2,'Deki Apartments');
+INSERT INTO lodging (id,address,details , image,rating,persons_number,category_id,type_id,city_id,agent_id,title) VALUES (10,'Branka Radicevica 12','Nesto','https://goo.gl/KCSMVt',2,3,3,1,3,2,'Deki Ludila');
 
 INSERT INTO lodging_additional_service (additional_service_id,lodging_id) VALUES (1,1);
 INSERT INTO lodging_additional_service (additional_service_id,lodging_id) VALUES (3,1);
