@@ -23,12 +23,19 @@ import javax.xml.bind.annotation.XmlType;
  *         &lt;element name="name">
  *           &lt;simpleType>
  *             &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
- *               &lt;maxLength value="30"/>
- *               &lt;minLength value="2"/>
+ *               &lt;maxLength value="50"/>
+ *               &lt;minLength value="1"/>
  *             &lt;/restriction>
  *           &lt;/simpleType>
  *         &lt;/element>
- *         &lt;element name="code" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         &lt;element name="code">
+ *           &lt;simpleType>
+ *             &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
+ *               &lt;maxLength value="10"/>
+ *               &lt;minLength value="1"/>
+ *             &lt;/restriction>
+ *           &lt;/simpleType>
+ *         &lt;/element>
  *         &lt;element name="cityList">
  *           &lt;complexType>
  *             &lt;complexContent>

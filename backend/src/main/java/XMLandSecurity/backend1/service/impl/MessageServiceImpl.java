@@ -20,6 +20,11 @@ public class MessageServiceImpl implements MessageService {
     }
 
     @Override
+    public List<Message> findByReceiver_Id(Long id) {
+        return messageRepository.findByReceiver_Id(id);
+    }
+
+    @Override
     public Message findOne(Long id) {
         return messageRepository.findOne(id);
     }
@@ -34,14 +39,5 @@ public class MessageServiceImpl implements MessageService {
         messageRepository.delete(id);
     }
 
-//    @Override
-//    public List<Message> findBySender(Long id) {
-//        return messageRepository.findBySender(id);
-//    }
-//
-//    @Override
-//    public List<Message> findByReceiver(Long id) {
-//        return messageRepository.findByReceiver(id);
-//    }
 
 }

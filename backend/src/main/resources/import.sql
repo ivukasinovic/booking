@@ -37,7 +37,6 @@ INSERT INTO additional_service (id,name) VALUES (6,'tv')
 INSERT INTO additional_service (id,name) VALUES (7,'kitchen')
 INSERT INTO additional_service (id,name) VALUES (8 ,'private_bathroom')
 
-
 INSERT INTO lodging (id,address,details , image,rating,persons_number,category_id,type_id,city_id,agent_id,title) VALUES (1,'Bulevar Despota Stefana 7','NOVOO ,nove stvari vise detalja na telefon ..... xD','https://goo.gl/rjfPwB',4,4 ,0,2,1,2,'Dekijev luksuz');
 INSERT INTO lodging (id,address,details , image,rating,persons_number,category_id,type_id,city_id,agent_id,title) VALUES (2,'Bulevar Despota Stefana 35','Starija ali ocuvana garsonjeraa','https://goo.gl/3U3VUf',3,2,0,1,2,2,'Dekijeve sobe');
 INSERT INTO lodging (id,address,details , image,rating,persons_number,category_id,type_id,city_id,agent_id,title) VALUES (3,'Sekspirova 42','Garsonjera','https://goo.gl/aVheug',3,1,1,1,2,2,'Dekijeve odaje');

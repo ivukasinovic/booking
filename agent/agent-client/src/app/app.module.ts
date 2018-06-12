@@ -8,6 +8,7 @@ import {FormsModule} from '@angular/forms';
 import { ReservationListComponent } from './reservation-list/reservation-list.component';
 import {LodgingService} from './lodging.service';
 import { LodgingNewComponent } from './lodging-new/lodging-new.component';
+import { MessagesComponent } from './messages/messages.component';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { LodgingNewComponent } from './lodging-new/lodging-new.component';
     AppComponent,
     NavbarComponent,
     ReservationListComponent,
-    LodgingNewComponent
+    LodgingNewComponent,
+    MessagesComponent
   ],
   imports: [
     BrowserModule,

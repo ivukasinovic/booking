@@ -8,7 +8,7 @@ import org.springframework.ws.server.endpoint.annotation.Endpoint;
 import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
 import org.springframework.ws.server.endpoint.annotation.RequestPayload;
 import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
-import java.util.Date;
+
 import java.util.List;
 
 /**
@@ -38,6 +38,9 @@ public class LodgingEndpoint {
     @Autowired
     private AdditionalServiceService additionalServiceService;
 
+    @Autowired
+    private MessageService messageService;
+
     @PayloadRoot(namespace = "http://bookingxml.com/soap-example", localPart = "setLodgingRequest")
     @ResponsePayload
     public SetLodgingResponse setLodgingRequest(@RequestPayload SetLodgingRequest request){
@@ -53,8 +56,31 @@ public class LodgingEndpoint {
         lodging.setDetails(request.getDetails());
         lodging.setImage(request.getImage());
         lodging.setPersons_number(request.getPersonsNumber().intValue());
+
         Lodging savedLodging  = lodgingService.save(lodging);
+        for(String ads: request.getAdditionService()){
+            AdditionalService additionalService = additionalServiceService.findOne(Long.valueOf(ads));
+            additionalService.getLodgingList().add(savedLodging);
+            additionalServiceService.save(additionalService);
+        }
         response.setName("vratio");
+        return response;
+    }
+    @PayloadRoot(namespace = "http://bookingxml.com/soap-example", localPart = "getMessagesRequest")
+    @ResponsePayload
+    public GetMessagesResponse getMessagesResponse(@RequestPayload GetMessagesRequest request){
+        GetMessagesResponse response = new GetMessagesResponse();
+        //Hardkodovan agent (2)
+        List<Message> messages = messageService.findByReceiver_Id(4L);
+        for (Message msg: messages) {
+            MessageRes messageRes = new MessageRes();
+            messageRes.setTitle(msg.getTitle());
+            messageRes.setBody(msg.getBody());
+            messageRes.setId(msg.getId());
+            messageRes.setSender(msg.getSender().getUsername());
+            messageRes.setReceiver(msg.getReceiver().getUsername());
+            response.getMessageRes().add(messageRes);
+        }
         return response;
     }
 

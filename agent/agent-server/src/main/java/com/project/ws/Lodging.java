@@ -23,14 +23,27 @@ import javax.xml.bind.annotation.XmlType;
  *         &lt;element name="address">
  *           &lt;simpleType>
  *             &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
- *               &lt;maxLength value="150"/>
+ *               &lt;maxLength value="200"/>
  *             &lt;/restriction>
  *           &lt;/simpleType>
  *         &lt;/element>
- *         &lt;element name="details" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         &lt;element name="details">
+ *           &lt;simpleType>
+ *             &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
+ *               &lt;maxLength value="250"/>
+ *             &lt;/restriction>
+ *           &lt;/simpleType>
+ *         &lt;/element>
+ *         &lt;element name="title" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         &lt;element name="image" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         &lt;element name="rating" type="{http://www.w3.org/2001/XMLSchema}double"/>
- *         &lt;element name="persons_number" type="{http://www.w3.org/2001/XMLSchema}int"/>
+ *         &lt;element name="personsNumber">
+ *           &lt;simpleType>
+ *             &lt;restriction base="{http://www.w3.org/2001/XMLSchema}int">
+ *               &lt;maxExclusive value="100"/>
+ *             &lt;/restriction>
+ *           &lt;/simpleType>
+ *         &lt;/element>
  *         &lt;element name="category" type="{http://bookingxml.com/soap-example}categoryOfLodging"/>
  *         &lt;element name="type" type="{http://bookingxml.com/soap-example}typeOfLodging"/>
  *         &lt;element ref="{http://bookingxml.com/soap-example}city"/>
@@ -79,12 +92,12 @@ import javax.xml.bind.annotation.XmlType;
  *             &lt;/complexContent>
  *           &lt;/complexType>
  *         &lt;/element>
- *         &lt;element name="additionalServices_list">
+ *         &lt;element name="additionalServiceList">
  *           &lt;complexType>
  *             &lt;complexContent>
  *               &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *                 &lt;sequence>
- *                   &lt;element name="additionalServices_list" type="{http://bookingxml.com/soap-example}additionalService" maxOccurs="unbounded"/>
+ *                   &lt;element ref="{http://bookingxml.com/soap-example}additionalService" maxOccurs="unbounded"/>
  *                 &lt;/sequence>
  *               &lt;/restriction>
  *             &lt;/complexContent>
@@ -103,6 +116,7 @@ import javax.xml.bind.annotation.XmlType;
     "id",
     "address",
     "details",
+    "title",
     "image",
     "rating",
     "personsNumber",
@@ -114,7 +128,7 @@ import javax.xml.bind.annotation.XmlType;
     "comments",
     "reservations",
     "ratingList",
-    "additionalServicesList"
+    "additionalServiceList"
 })
 public class Lodging {
 
@@ -124,9 +138,10 @@ public class Lodging {
     @XmlElement(required = true)
     protected String details;
     @XmlElement(required = true)
+    protected String title;
+    @XmlElement(required = true)
     protected String image;
     protected double rating;
-    @XmlElement(name = "persons_number")
     protected int personsNumber;
     @XmlElement(required = true)
     protected CategoryOfLodging category;
@@ -144,8 +159,8 @@ public class Lodging {
     protected Reservations reservations;
     @XmlElement(required = true)
     protected RatingList ratingList;
-    @XmlElement(name = "additionalServices_list", required = true)
-    protected AdditionalServicesList additionalServicesList;
+    @XmlElement(required = true)
+    protected AdditionalServiceList additionalServiceList;
 
     /**
      * Gets the value of the id property.
@@ -209,6 +224,30 @@ public class Lodging {
      */
     public void setDetails(String value) {
         this.details = value;
+    }
+
+    /**
+     * Gets the value of the title property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getTitle() {
+        return title;
+    }
+
+    /**
+     * Sets the value of the title property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setTitle(String value) {
+        this.title = value;
     }
 
     /**
@@ -460,27 +499,27 @@ public class Lodging {
     }
 
     /**
-     * Gets the value of the additionalServicesList property.
+     * Gets the value of the additionalServiceList property.
      * 
      * @return
      *     possible object is
-     *     {@link AdditionalServicesList }
+     *     {@link AdditionalServiceList }
      *     
      */
-    public AdditionalServicesList getAdditionalServicesList() {
-        return additionalServicesList;
+    public AdditionalServiceList getAdditionalServiceList() {
+        return additionalServiceList;
     }
 
     /**
-     * Sets the value of the additionalServicesList property.
+     * Sets the value of the additionalServiceList property.
      * 
      * @param value
      *     allowed object is
-     *     {@link AdditionalServicesList }
+     *     {@link AdditionalServiceList }
      *     
      */
-    public void setAdditionalServicesList(AdditionalServicesList value) {
-        this.additionalServicesList = value;
+    public void setAdditionalServiceList(AdditionalServiceList value) {
+        this.additionalServiceList = value;
     }
 
 
@@ -494,7 +533,7 @@ public class Lodging {
      *   &lt;complexContent>
      *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
      *       &lt;sequence>
-     *         &lt;element name="additionalServices_list" type="{http://bookingxml.com/soap-example}additionalService" maxOccurs="unbounded"/>
+     *         &lt;element ref="{http://bookingxml.com/soap-example}additionalService" maxOccurs="unbounded"/>
      *       &lt;/sequence>
      *     &lt;/restriction>
      *   &lt;/complexContent>
@@ -505,26 +544,26 @@ public class Lodging {
      */
     @XmlAccessorType(XmlAccessType.FIELD)
     @XmlType(name = "", propOrder = {
-        "additionalServicesList"
+        "additionalService"
     })
-    public static class AdditionalServicesList {
+    public static class AdditionalServiceList {
 
-        @XmlElement(name = "additionalServices_list", required = true)
-        protected List<AdditionalService> additionalServicesList;
+        @XmlElement(required = true)
+        protected List<AdditionalService> additionalService;
 
         /**
-         * Gets the value of the additionalServicesList property.
+         * Gets the value of the additionalService property.
          * 
          * <p>
          * This accessor method returns a reference to the live list,
          * not a snapshot. Therefore any modification you make to the
          * returned list will be present inside the JAXB object.
-         * This is why there is not a <CODE>set</CODE> method for the additionalServicesList property.
+         * This is why there is not a <CODE>set</CODE> method for the additionalService property.
          * 
          * <p>
          * For example, to add a new item, do as follows:
          * <pre>
-         *    getAdditionalServicesList().add(newItem);
+         *    getAdditionalService().add(newItem);
          * </pre>
          * 
          * 
@@ -534,11 +573,11 @@ public class Lodging {
          * 
          * 
          */
-        public List<AdditionalService> getAdditionalServicesList() {
-            if (additionalServicesList == null) {
-                additionalServicesList = new ArrayList<AdditionalService>();
+        public List<AdditionalService> getAdditionalService() {
+            if (additionalService == null) {
+                additionalService = new ArrayList<AdditionalService>();
             }
-            return this.additionalServicesList;
+            return this.additionalService;
         }
 
     }

@@ -24,15 +24,7 @@ public class AuthController {
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<AuthenticationRequest> authenticationRequest(@RequestBody AuthenticationRequest authenticationRequest) {
-        System.out.println(authenticationRequest.getUsername());
-        System.out.println(authenticationRequest.getPassword());
 
-        LodgingService objMethod = new LodgingService();
-        LodgingServicePort objPort = objMethod.getLodgingServicePortSoap11();
-        SetCompletedLodgingRequest request = new SetCompletedLodgingRequest();
-        request.setReservation(1L);
-        SetCompletedLodgingResponse response = objPort.setCompletedLodging(request);
-        System.out.println(response);
         return new ResponseEntity<>(authenticationRequest,HttpStatus.OK);
     }
 }

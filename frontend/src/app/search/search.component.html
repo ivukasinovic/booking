@@ -61,44 +61,6 @@
       </form>
       <br>
   </div>
-
-<!--
-  <div #mydiv>
-    <table border="2" style="..." align="center" class="table">
-      <tr>
-        <th>City</th>
-        <th>Address</th>
-        <th>Number of persons</th>
-        <th><a  (click)="sortByPrice2(lod)" >Price</a></th>
-        <th><a (click)="sortByCategory(lod)">Category</a></th>
-        <th><a (click)="sortByRating(lod)">Rating</a></th>
-        <th>Details</th>
-        <th>Image</th>
-        <th>Reservation</th>
-
-      </tr>
-
-      <tr   *ngFor="let p of lod" >
-        <td>  {{  getCityName(p.city) }}</td>
-        <td> {{ (p.address) }}</td>
-        <td> {{(p.persons_number)}}</td>
-        <td>{{getPriceListByLodging(p.id)}}</td>
-        <td> {{getCategoryLabel(p.category)}}</td>
-        <td> {{(p.rating)}}</td>
-        <td> {{(p.details)}}</td>
-        <td> {{(p.image)}}</td>
-        <td >
-          <button class="btn btn-primary" (click)="reserve(p.id)">Reserve</button>
-        </td>
-
-      </tr>
-
-
-    </table>
-    <br>
-
-  </div>
--->
 <div *ngIf="lod.length>0">
   <div  *ngFor="let lodging of lod">
       <br/>

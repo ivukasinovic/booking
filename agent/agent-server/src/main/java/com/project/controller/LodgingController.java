@@ -4,10 +4,12 @@ import com.project.ws.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.print.attribute.standard.Media;
 import java.util.List;
 
 
@@ -67,5 +69,17 @@ public class LodgingController {
         GetLodgingTypesResponse response = objPort.getLodgingTypes(request);
         List<TypeOfLodging> types = response.getTypes();
         return new ResponseEntity<>(types, HttpStatus.OK);
+    }
+
+    @RequestMapping(method = RequestMethod.POST,
+            produces = MediaType.APPLICATION_JSON_VALUE,
+            consumes = MediaType.APPLICATION_JSON_VALUE
+    )
+    public ResponseEntity<?> postLodging(@RequestBody SetLodgingRequest request){
+        LodgingService objMethod = new LodgingService();
+        LodgingServicePort objPort = objMethod.getLodgingServicePortSoap11();
+        SetLodgingResponse response = objPort.setLodging(request);
+        System.out.println(response);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 }

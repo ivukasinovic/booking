@@ -32,9 +32,21 @@ public class ReservationController {
         LodgingService objMethod = new LodgingService();
         LodgingServicePort objPort = objMethod.getLodgingServicePortSoap11();
         SetCompletedLodgingRequest request = new SetCompletedLodgingRequest();
-        request.setReservation(id);
+        request.setReservation(id.toString());
         SetCompletedLodgingResponse response = objPort.setCompletedLodging(request);
         String resp = response.getStatus();
         return new ResponseEntity<>(resp, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/messages",
+                    produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<MessageRes>> getMessages(){
+        LodgingService objMethod = new LodgingService();
+        LodgingServicePort objPort = objMethod.getLodgingServicePortSoap11();
+        GetMessagesRequest request = new GetMessagesRequest();
+        request.setResponse("all");
+        GetMessagesResponse response = objPort.getMessages(request);
+        List<MessageRes> messageRes = response.getMessageRes();
+        return new ResponseEntity<>(messageRes, HttpStatus.OK);
     }
 }

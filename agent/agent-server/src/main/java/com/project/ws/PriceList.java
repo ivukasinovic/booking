@@ -24,108 +24,109 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *           &lt;simpleType>
  *             &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
  *               &lt;maxLength value="5"/>
- *               &lt;minLength value="3"/>
+ *               &lt;minLength value="1"/>
  *             &lt;/restriction>
  *           &lt;/simpleType>
  *         &lt;/element>
  *         &lt;element name="dateCreated" type="{http://www.w3.org/2001/XMLSchema}dateTime"/>
- *         &lt;element name="january" minOccurs="0">
+ *         &lt;element name="january">
  *           &lt;simpleType>
  *             &lt;restriction base="{http://www.w3.org/2001/XMLSchema}double">
- *               &lt;minExclusive value="0"/>
  *               &lt;maxExclusive value="32"/>
+ *               &lt;minExclusive value="0"/>
  *             &lt;/restriction>
  *           &lt;/simpleType>
  *         &lt;/element>
- *         &lt;element name="february" minOccurs="0">
+ *         &lt;element name="february">
  *           &lt;simpleType>
  *             &lt;restriction base="{http://www.w3.org/2001/XMLSchema}double">
+ *               &lt;maxExclusive value="30"/>
  *               &lt;minExclusive value="0"/>
- *               &lt;maxExclusive value="29"/>
  *             &lt;/restriction>
  *           &lt;/simpleType>
  *         &lt;/element>
- *         &lt;element name="mart" minOccurs="0">
+ *         &lt;element name="mart">
  *           &lt;simpleType>
  *             &lt;restriction base="{http://www.w3.org/2001/XMLSchema}double">
- *               &lt;minExclusive value="0"/>
  *               &lt;maxExclusive value="32"/>
+ *               &lt;minExclusive value="0"/>
  *             &lt;/restriction>
  *           &lt;/simpleType>
  *         &lt;/element>
- *         &lt;element name="april" minOccurs="0">
+ *         &lt;element name="april">
  *           &lt;simpleType>
  *             &lt;restriction base="{http://www.w3.org/2001/XMLSchema}double">
- *               &lt;minExclusive value="0"/>
  *               &lt;maxExclusive value="31"/>
+ *               &lt;minExclusive value="0"/>
  *             &lt;/restriction>
  *           &lt;/simpleType>
  *         &lt;/element>
- *         &lt;element name="may" minOccurs="0">
+ *         &lt;element name="may">
  *           &lt;simpleType>
  *             &lt;restriction base="{http://www.w3.org/2001/XMLSchema}double">
- *               &lt;minExclusive value="0"/>
+ *               &lt;whiteSpace value="collapse"/>
  *               &lt;maxExclusive value="32"/>
+ *               &lt;minExclusive value="0"/>
  *             &lt;/restriction>
  *           &lt;/simpleType>
  *         &lt;/element>
- *         &lt;element name="june" minOccurs="0">
+ *         &lt;element name="june">
  *           &lt;simpleType>
  *             &lt;restriction base="{http://www.w3.org/2001/XMLSchema}double">
- *               &lt;minExclusive value="0"/>
- *               &lt;maxExclusive value="32"/>
- *             &lt;/restriction>
- *           &lt;/simpleType>
- *         &lt;/element>
- *         &lt;element name="july" minOccurs="0">
- *           &lt;simpleType>
- *             &lt;restriction base="{http://www.w3.org/2001/XMLSchema}double">
- *               &lt;minExclusive value="0"/>
- *               &lt;maxExclusive value="32"/>
- *             &lt;/restriction>
- *           &lt;/simpleType>
- *         &lt;/element>
- *         &lt;element name="august" minOccurs="0">
- *           &lt;simpleType>
- *             &lt;restriction base="{http://www.w3.org/2001/XMLSchema}double">
- *               &lt;minExclusive value="0"/>
- *               &lt;maxExclusive value="32"/>
- *             &lt;/restriction>
- *           &lt;/simpleType>
- *         &lt;/element>
- *         &lt;element name="september" minOccurs="0">
- *           &lt;simpleType>
- *             &lt;restriction base="{http://www.w3.org/2001/XMLSchema}double">
- *               &lt;minExclusive value="0"/>
  *               &lt;maxExclusive value="31"/>
+ *               &lt;minExclusive value="0"/>
  *             &lt;/restriction>
  *           &lt;/simpleType>
  *         &lt;/element>
- *         &lt;element name="october" minOccurs="0">
+ *         &lt;element name="july">
  *           &lt;simpleType>
  *             &lt;restriction base="{http://www.w3.org/2001/XMLSchema}double">
- *               &lt;minExclusive value="0"/>
  *               &lt;maxExclusive value="32"/>
+ *               &lt;minExclusive value="0"/>
  *             &lt;/restriction>
  *           &lt;/simpleType>
  *         &lt;/element>
- *         &lt;element name="november" minOccurs="0">
+ *         &lt;element name="august">
  *           &lt;simpleType>
  *             &lt;restriction base="{http://www.w3.org/2001/XMLSchema}double">
+ *               &lt;maxExclusive value="32"/>
  *               &lt;minExclusive value="0"/>
+ *             &lt;/restriction>
+ *           &lt;/simpleType>
+ *         &lt;/element>
+ *         &lt;element name="september">
+ *           &lt;simpleType>
+ *             &lt;restriction base="{http://www.w3.org/2001/XMLSchema}double">
  *               &lt;maxExclusive value="31"/>
+ *               &lt;minExclusive value="0"/>
  *             &lt;/restriction>
  *           &lt;/simpleType>
  *         &lt;/element>
- *         &lt;element name="december" minOccurs="0">
+ *         &lt;element name="october">
  *           &lt;simpleType>
  *             &lt;restriction base="{http://www.w3.org/2001/XMLSchema}double">
- *               &lt;minExclusive value="0"/>
  *               &lt;maxExclusive value="32"/>
+ *               &lt;minExclusive value="0"/>
  *             &lt;/restriction>
  *           &lt;/simpleType>
  *         &lt;/element>
- *         &lt;element ref="{http://bookingxml.com/soap-example}lodging" minOccurs="0"/>
+ *         &lt;element name="november">
+ *           &lt;simpleType>
+ *             &lt;restriction base="{http://www.w3.org/2001/XMLSchema}double">
+ *               &lt;maxExclusive value="31"/>
+ *               &lt;minExclusive value="0"/>
+ *             &lt;/restriction>
+ *           &lt;/simpleType>
+ *         &lt;/element>
+ *         &lt;element name="december">
+ *           &lt;simpleType>
+ *             &lt;restriction base="{http://www.w3.org/2001/XMLSchema}double">
+ *               &lt;maxExclusive value="32"/>
+ *               &lt;minExclusive value="0"/>
+ *             &lt;/restriction>
+ *           &lt;/simpleType>
+ *         &lt;/element>
+ *         &lt;element ref="{http://bookingxml.com/soap-example}lodging"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -161,18 +162,19 @@ public class PriceList {
     @XmlElement(required = true)
     @XmlSchemaType(name = "dateTime")
     protected XMLGregorianCalendar dateCreated;
-    protected Double january;
-    protected Double february;
-    protected Double mart;
-    protected Double april;
-    protected Double may;
-    protected Double june;
-    protected Double july;
-    protected Double august;
-    protected Double september;
-    protected Double october;
-    protected Double november;
-    protected Double december;
+    protected double january;
+    protected double february;
+    protected double mart;
+    protected double april;
+    protected double may;
+    protected double june;
+    protected double july;
+    protected double august;
+    protected double september;
+    protected double october;
+    protected double november;
+    protected double december;
+    @XmlElement(required = true)
     protected Lodging lodging;
 
     /**
@@ -242,288 +244,192 @@ public class PriceList {
     /**
      * Gets the value of the january property.
      * 
-     * @return
-     *     possible object is
-     *     {@link Double }
-     *     
      */
-    public Double getJanuary() {
+    public double getJanuary() {
         return january;
     }
 
     /**
      * Sets the value of the january property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link Double }
-     *     
      */
-    public void setJanuary(Double value) {
+    public void setJanuary(double value) {
         this.january = value;
     }
 
     /**
      * Gets the value of the february property.
      * 
-     * @return
-     *     possible object is
-     *     {@link Double }
-     *     
      */
-    public Double getFebruary() {
+    public double getFebruary() {
         return february;
     }
 
     /**
      * Sets the value of the february property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link Double }
-     *     
      */
-    public void setFebruary(Double value) {
+    public void setFebruary(double value) {
         this.february = value;
     }
 
     /**
      * Gets the value of the mart property.
      * 
-     * @return
-     *     possible object is
-     *     {@link Double }
-     *     
      */
-    public Double getMart() {
+    public double getMart() {
         return mart;
     }
 
     /**
      * Sets the value of the mart property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link Double }
-     *     
      */
-    public void setMart(Double value) {
+    public void setMart(double value) {
         this.mart = value;
     }
 
     /**
      * Gets the value of the april property.
      * 
-     * @return
-     *     possible object is
-     *     {@link Double }
-     *     
      */
-    public Double getApril() {
+    public double getApril() {
         return april;
     }
 
     /**
      * Sets the value of the april property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link Double }
-     *     
      */
-    public void setApril(Double value) {
+    public void setApril(double value) {
         this.april = value;
     }
 
     /**
      * Gets the value of the may property.
      * 
-     * @return
-     *     possible object is
-     *     {@link Double }
-     *     
      */
-    public Double getMay() {
+    public double getMay() {
         return may;
     }
 
     /**
      * Sets the value of the may property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link Double }
-     *     
      */
-    public void setMay(Double value) {
+    public void setMay(double value) {
         this.may = value;
     }
 
     /**
      * Gets the value of the june property.
      * 
-     * @return
-     *     possible object is
-     *     {@link Double }
-     *     
      */
-    public Double getJune() {
+    public double getJune() {
         return june;
     }
 
     /**
      * Sets the value of the june property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link Double }
-     *     
      */
-    public void setJune(Double value) {
+    public void setJune(double value) {
         this.june = value;
     }
 
     /**
      * Gets the value of the july property.
      * 
-     * @return
-     *     possible object is
-     *     {@link Double }
-     *     
      */
-    public Double getJuly() {
+    public double getJuly() {
         return july;
     }
 
     /**
      * Sets the value of the july property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link Double }
-     *     
      */
-    public void setJuly(Double value) {
+    public void setJuly(double value) {
         this.july = value;
     }
 
     /**
      * Gets the value of the august property.
      * 
-     * @return
-     *     possible object is
-     *     {@link Double }
-     *     
      */
-    public Double getAugust() {
+    public double getAugust() {
         return august;
     }
 
     /**
      * Sets the value of the august property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link Double }
-     *     
      */
-    public void setAugust(Double value) {
+    public void setAugust(double value) {
         this.august = value;
     }
 
     /**
      * Gets the value of the september property.
      * 
-     * @return
-     *     possible object is
-     *     {@link Double }
-     *     
      */
-    public Double getSeptember() {
+    public double getSeptember() {
         return september;
     }
 
     /**
      * Sets the value of the september property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link Double }
-     *     
      */
-    public void setSeptember(Double value) {
+    public void setSeptember(double value) {
         this.september = value;
     }
 
     /**
      * Gets the value of the october property.
      * 
-     * @return
-     *     possible object is
-     *     {@link Double }
-     *     
      */
-    public Double getOctober() {
+    public double getOctober() {
         return october;
     }
 
     /**
      * Sets the value of the october property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link Double }
-     *     
      */
-    public void setOctober(Double value) {
+    public void setOctober(double value) {
         this.october = value;
     }
 
     /**
      * Gets the value of the november property.
      * 
-     * @return
-     *     possible object is
-     *     {@link Double }
-     *     
      */
-    public Double getNovember() {
+    public double getNovember() {
         return november;
     }
 
     /**
      * Sets the value of the november property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link Double }
-     *     
      */
-    public void setNovember(Double value) {
+    public void setNovember(double value) {
         this.november = value;
     }
 
     /**
      * Gets the value of the december property.
      * 
-     * @return
-     *     possible object is
-     *     {@link Double }
-     *     
      */
-    public Double getDecember() {
+    public double getDecember() {
         return december;
     }
 
     /**
      * Sets the value of the december property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link Double }
-     *     
      */
-    public void setDecember(Double value) {
+    public void setDecember(double value) {
         this.december = value;
     }
 
