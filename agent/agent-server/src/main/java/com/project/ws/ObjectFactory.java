@@ -27,12 +27,12 @@ public class ObjectFactory {
     private final static QName _City_QNAME = new QName("http://bookingxml.com/soap-example", "city");
     private final static QName _TypeOfLodging_QNAME = new QName("http://bookingxml.com/soap-example", "typeOfLodging");
     private final static QName _Country_QNAME = new QName("http://bookingxml.com/soap-example", "country");
+    private final static QName _MessageRes_QNAME = new QName("http://bookingxml.com/soap-example", "messageRes");
     private final static QName _Lodging_QNAME = new QName("http://bookingxml.com/soap-example", "lodging");
     private final static QName _PriceList_QNAME = new QName("http://bookingxml.com/soap-example", "priceList");
     private final static QName _AdditionalService_QNAME = new QName("http://bookingxml.com/soap-example", "additionalService");
     private final static QName _Message_QNAME = new QName("http://bookingxml.com/soap-example", "message");
     private final static QName _Rating_QNAME = new QName("http://bookingxml.com/soap-example", "rating");
-    private final static QName _AdditionalServiceAdmin_QNAME = new QName("http://bookingxml.com/soap-example", "additionalServiceAdmin");
     private final static QName _CategoryOfLodging_QNAME = new QName("http://bookingxml.com/soap-example", "categoryOfLodging");
     private final static QName _User_QNAME = new QName("http://bookingxml.com/soap-example", "user");
     private final static QName _Comment_QNAME = new QName("http://bookingxml.com/soap-example", "comment");
@@ -158,14 +158,6 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link AdditionalServiceAdmin }
-     * 
-     */
-    public AdditionalServiceAdmin createAdditionalServiceAdmin() {
-        return new AdditionalServiceAdmin();
-    }
-
-    /**
      * Create an instance of {@link Reservation }
      * 
      */
@@ -195,6 +187,14 @@ public class ObjectFactory {
      */
     public GetAdditionsRequest createGetAdditionsRequest() {
         return new GetAdditionsRequest();
+    }
+
+    /**
+     * Create an instance of {@link MessageRes }
+     * 
+     */
+    public MessageRes createMessageRes() {
+        return new MessageRes();
     }
 
     /**
@@ -246,6 +246,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link GetMessagesRequest }
+     * 
+     */
+    public GetMessagesRequest createGetMessagesRequest() {
+        return new GetMessagesRequest();
+    }
+
+    /**
      * Create an instance of {@link GetReservationsResponse }
      * 
      */
@@ -267,6 +275,14 @@ public class ObjectFactory {
      */
     public GetReservationsRequest createGetReservationsRequest() {
         return new GetReservationsRequest();
+    }
+
+    /**
+     * Create an instance of {@link GetMessagesResponse }
+     * 
+     */
+    public GetMessagesResponse createGetMessagesResponse() {
+        return new GetMessagesResponse();
     }
 
     /**
@@ -358,19 +374,19 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link Lodging.AdditionalServicesList }
+     * Create an instance of {@link Lodging.AdditionalServiceList }
      * 
      */
-    public Lodging.AdditionalServicesList createLodgingAdditionalServicesList() {
-        return new Lodging.AdditionalServicesList();
+    public Lodging.AdditionalServiceList createLodgingAdditionalServiceList() {
+        return new Lodging.AdditionalServiceList();
     }
 
     /**
-     * Create an instance of {@link AdditionalService.AdditionalServiceList }
+     * Create an instance of {@link AdditionalService.LodgingList }
      * 
      */
-    public AdditionalService.AdditionalServiceList createAdditionalServiceAdditionalServiceList() {
-        return new AdditionalService.AdditionalServiceList();
+    public AdditionalService.LodgingList createAdditionalServiceLodgingList() {
+        return new AdditionalService.LodgingList();
     }
 
     /**
@@ -406,6 +422,15 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://bookingxml.com/soap-example", name = "country")
     public JAXBElement<Country> createCountry(Country value) {
         return new JAXBElement<Country>(_Country_QNAME, Country.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link MessageRes }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://bookingxml.com/soap-example", name = "messageRes")
+    public JAXBElement<MessageRes> createMessageRes(MessageRes value) {
+        return new JAXBElement<MessageRes>(_MessageRes_QNAME, MessageRes.class, null, value);
     }
 
     /**
@@ -451,15 +476,6 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://bookingxml.com/soap-example", name = "rating")
     public JAXBElement<Rating> createRating(Rating value) {
         return new JAXBElement<Rating>(_Rating_QNAME, Rating.class, null, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link AdditionalServiceAdmin }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://bookingxml.com/soap-example", name = "additionalServiceAdmin")
-    public JAXBElement<AdditionalServiceAdmin> createAdditionalServiceAdmin(AdditionalServiceAdmin value) {
-        return new JAXBElement<AdditionalServiceAdmin>(_AdditionalServiceAdmin_QNAME, AdditionalServiceAdmin.class, null, value);
     }
 
     /**

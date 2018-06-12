@@ -23,10 +23,6 @@ public class AdditionalService implements Serializable {
     @XmlElement(name="id", required=true)
     private Long id;
 
-//    @Column(name = "name")
-//    @XmlElement(name="name", required=true)
-//    private String name;
-
     @OneToMany(mappedBy = "additionalService", cascade = CascadeType.ALL)
     @XmlElementWrapper(name="additionalService_list", required=true)
     @XmlElement(name="city", required=true)
@@ -41,26 +37,9 @@ public class AdditionalService implements Serializable {
     private Lodging lodging;
 
 
-//    @JsonIgnore
-//    @JoinTable(
-//            name = "lodging_additional_service",
-//            joinColumns = {@JoinColumn(name = "additional_service_id")},
-//            inverseJoinColumns = {@JoinColumn(name = "lodging_id")})
-//    @XmlElementWrapper(name="lodgingList", required=true)
-//    @XmlElement(name="lodging", required=true)
-//    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-//    private List<Lodging> lodgingList;
-
-
     public AdditionalService() {
     }
 
-//
-//    public AdditionalService(Long id, String name, List<Lodging> lodgingList) {
-//        this.id = id;
-//        this.name = name;
-//        this.lodgingList = lodgingList;
-//    }
 
     public Long getId() {
         return id;
@@ -70,13 +49,7 @@ public class AdditionalService implements Serializable {
         this.id = id;
     }
 
-//    public String getName() {
-//        return name;
-//    }
-//
-//    public void setName(String name) {
-//        this.name = name;
-//    }
+
 
     public List<AdditionalServiceAdmin> getAdditionalService_list() {
         return additionalService_list;

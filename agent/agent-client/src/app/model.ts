@@ -31,10 +31,24 @@ export class Lodging {
   image: string;
   rating: number;
   personsNumber: number;
-  additionServices: string[] = null;
+  additionService: number[] = null;
 }
 export class City {
   id: number;
   name: string;
+}
+
+export class AditionalServices {
+  id: number;
+  name: string;
+}
+
+export class Message {
+  id: number;
+  title: string;
+  body: string;
+  dateTime: Date;
+  sender: string;
+  receiver: string;
 }
 

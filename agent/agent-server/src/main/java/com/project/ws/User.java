@@ -25,8 +25,8 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *         &lt;element name="username">
  *           &lt;simpleType>
  *             &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
+ *               &lt;maxLength value="50"/>
  *               &lt;minLength value="1"/>
- *               &lt;maxLength value="30"/>
  *             &lt;/restriction>
  *           &lt;/simpleType>
  *         &lt;/element>
@@ -34,48 +34,36 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *         &lt;element name="name">
  *           &lt;simpleType>
  *             &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
- *               &lt;minLength value="1"/>
- *               &lt;maxLength value="30"/>
+ *               &lt;maxLength value="50"/>
  *             &lt;/restriction>
  *           &lt;/simpleType>
  *         &lt;/element>
  *         &lt;element name="surname">
  *           &lt;simpleType>
  *             &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
- *               &lt;minLength value="1"/>
- *               &lt;maxLength value="30"/>
+ *               &lt;maxLength value="50"/>
  *             &lt;/restriction>
  *           &lt;/simpleType>
  *         &lt;/element>
  *         &lt;element name="email">
  *           &lt;simpleType>
  *             &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
- *               &lt;minLength value="3"/>
  *               &lt;maxLength value="50"/>
  *             &lt;/restriction>
  *           &lt;/simpleType>
  *         &lt;/element>
- *         &lt;element name="city">
- *           &lt;simpleType>
- *             &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
- *               &lt;maxLength value="30"/>
- *               &lt;minLength value="2"/>
- *             &lt;/restriction>
- *           &lt;/simpleType>
- *         &lt;/element>
+ *         &lt;element name="city" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         &lt;element name="adress" minOccurs="0">
  *           &lt;simpleType>
  *             &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
- *               &lt;minLength value="1"/>
- *               &lt;maxLength value="150"/>
+ *               &lt;maxLength value="100"/>
  *             &lt;/restriction>
  *           &lt;/simpleType>
  *         &lt;/element>
  *         &lt;element name="number">
  *           &lt;simpleType>
  *             &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
- *               &lt;minLength value="4"/>
- *               &lt;maxLength value="12"/>
+ *               &lt;maxLength value="15"/>
  *             &lt;/restriction>
  *           &lt;/simpleType>
  *         &lt;/element>
@@ -120,7 +108,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *             &lt;complexContent>
  *               &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *                 &lt;sequence>
- *                   &lt;element name="lodgings" type="{http://bookingxml.com/soap-example}lodging" maxOccurs="unbounded" minOccurs="0"/>
+ *                   &lt;element ref="{http://bookingxml.com/soap-example}lodging" maxOccurs="unbounded" minOccurs="0"/>
  *                 &lt;/sequence>
  *               &lt;/restriction>
  *             &lt;/complexContent>
@@ -131,7 +119,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *             &lt;complexContent>
  *               &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *                 &lt;sequence>
- *                   &lt;element name="ratings" type="{http://bookingxml.com/soap-example}rating" maxOccurs="unbounded" minOccurs="0"/>
+ *                   &lt;element ref="{http://bookingxml.com/soap-example}rating" maxOccurs="unbounded" minOccurs="0"/>
  *                 &lt;/sequence>
  *               &lt;/restriction>
  *             &lt;/complexContent>
@@ -142,7 +130,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *             &lt;complexContent>
  *               &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *                 &lt;sequence>
- *                   &lt;element name="comments" type="{http://bookingxml.com/soap-example}comment" maxOccurs="unbounded"/>
+ *                   &lt;element ref="{http://bookingxml.com/soap-example}comment" maxOccurs="unbounded"/>
  *                 &lt;/sequence>
  *               &lt;/restriction>
  *             &lt;/complexContent>
@@ -636,7 +624,7 @@ public class User {
      *   &lt;complexContent>
      *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
      *       &lt;sequence>
-     *         &lt;element name="comments" type="{http://bookingxml.com/soap-example}comment" maxOccurs="unbounded"/>
+     *         &lt;element ref="{http://bookingxml.com/soap-example}comment" maxOccurs="unbounded"/>
      *       &lt;/sequence>
      *     &lt;/restriction>
      *   &lt;/complexContent>
@@ -647,26 +635,26 @@ public class User {
      */
     @XmlAccessorType(XmlAccessType.FIELD)
     @XmlType(name = "", propOrder = {
-        "comments"
+        "comment"
     })
     public static class Comments {
 
         @XmlElement(required = true)
-        protected List<Comment> comments;
+        protected List<Comment> comment;
 
         /**
-         * Gets the value of the comments property.
+         * Gets the value of the comment property.
          * 
          * <p>
          * This accessor method returns a reference to the live list,
          * not a snapshot. Therefore any modification you make to the
          * returned list will be present inside the JAXB object.
-         * This is why there is not a <CODE>set</CODE> method for the comments property.
+         * This is why there is not a <CODE>set</CODE> method for the comment property.
          * 
          * <p>
          * For example, to add a new item, do as follows:
          * <pre>
-         *    getComments().add(newItem);
+         *    getComment().add(newItem);
          * </pre>
          * 
          * 
@@ -676,11 +664,11 @@ public class User {
          * 
          * 
          */
-        public List<Comment> getComments() {
-            if (comments == null) {
-                comments = new ArrayList<Comment>();
+        public List<Comment> getComment() {
+            if (comment == null) {
+                comment = new ArrayList<Comment>();
             }
-            return this.comments;
+            return this.comment;
         }
 
     }
@@ -696,7 +684,7 @@ public class User {
      *   &lt;complexContent>
      *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
      *       &lt;sequence>
-     *         &lt;element name="lodgings" type="{http://bookingxml.com/soap-example}lodging" maxOccurs="unbounded" minOccurs="0"/>
+     *         &lt;element ref="{http://bookingxml.com/soap-example}lodging" maxOccurs="unbounded" minOccurs="0"/>
      *       &lt;/sequence>
      *     &lt;/restriction>
      *   &lt;/complexContent>
@@ -707,25 +695,25 @@ public class User {
      */
     @XmlAccessorType(XmlAccessType.FIELD)
     @XmlType(name = "", propOrder = {
-        "lodgings"
+        "lodging"
     })
     public static class Lodgings {
 
-        protected List<Lodging> lodgings;
+        protected List<Lodging> lodging;
 
         /**
-         * Gets the value of the lodgings property.
+         * Gets the value of the lodging property.
          * 
          * <p>
          * This accessor method returns a reference to the live list,
          * not a snapshot. Therefore any modification you make to the
          * returned list will be present inside the JAXB object.
-         * This is why there is not a <CODE>set</CODE> method for the lodgings property.
+         * This is why there is not a <CODE>set</CODE> method for the lodging property.
          * 
          * <p>
          * For example, to add a new item, do as follows:
          * <pre>
-         *    getLodgings().add(newItem);
+         *    getLodging().add(newItem);
          * </pre>
          * 
          * 
@@ -735,11 +723,11 @@ public class User {
          * 
          * 
          */
-        public List<Lodging> getLodgings() {
-            if (lodgings == null) {
-                lodgings = new ArrayList<Lodging>();
+        public List<Lodging> getLodging() {
+            if (lodging == null) {
+                lodging = new ArrayList<Lodging>();
             }
-            return this.lodgings;
+            return this.lodging;
         }
 
     }
@@ -755,7 +743,7 @@ public class User {
      *   &lt;complexContent>
      *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
      *       &lt;sequence>
-     *         &lt;element name="ratings" type="{http://bookingxml.com/soap-example}rating" maxOccurs="unbounded" minOccurs="0"/>
+     *         &lt;element ref="{http://bookingxml.com/soap-example}rating" maxOccurs="unbounded" minOccurs="0"/>
      *       &lt;/sequence>
      *     &lt;/restriction>
      *   &lt;/complexContent>
@@ -766,25 +754,25 @@ public class User {
      */
     @XmlAccessorType(XmlAccessType.FIELD)
     @XmlType(name = "", propOrder = {
-        "ratings"
+        "rating"
     })
     public static class Ratings {
 
-        protected List<Rating> ratings;
+        protected List<Rating> rating;
 
         /**
-         * Gets the value of the ratings property.
+         * Gets the value of the rating property.
          * 
          * <p>
          * This accessor method returns a reference to the live list,
          * not a snapshot. Therefore any modification you make to the
          * returned list will be present inside the JAXB object.
-         * This is why there is not a <CODE>set</CODE> method for the ratings property.
+         * This is why there is not a <CODE>set</CODE> method for the rating property.
          * 
          * <p>
          * For example, to add a new item, do as follows:
          * <pre>
-         *    getRatings().add(newItem);
+         *    getRating().add(newItem);
          * </pre>
          * 
          * 
@@ -794,11 +782,11 @@ public class User {
          * 
          * 
          */
-        public List<Rating> getRatings() {
-            if (ratings == null) {
-                ratings = new ArrayList<Rating>();
+        public List<Rating> getRating() {
+            if (rating == null) {
+                rating = new ArrayList<Rating>();
             }
-            return this.ratings;
+            return this.rating;
         }
 
     }

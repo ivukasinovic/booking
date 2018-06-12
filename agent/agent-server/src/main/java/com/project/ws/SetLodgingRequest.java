@@ -22,6 +22,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
+ *         &lt;element name="title" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         &lt;element name="agent" type="{http://www.w3.org/2001/XMLSchema}long"/>
  *         &lt;element name="city" type="{http://www.w3.org/2001/XMLSchema}long"/>
  *         &lt;element name="address" type="{http://www.w3.org/2001/XMLSchema}string"/>
@@ -41,6 +42,7 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
+    "title",
     "agent",
     "city",
     "address",
@@ -54,6 +56,8 @@ import javax.xml.bind.annotation.XmlType;
 @XmlRootElement(name = "setLodgingRequest")
 public class SetLodgingRequest {
 
+    @XmlElement(required = true)
+    protected String title;
     protected long agent;
     protected long city;
     @XmlElement(required = true)
@@ -68,6 +72,30 @@ public class SetLodgingRequest {
     @XmlSchemaType(name = "positiveInteger")
     protected BigInteger personsNumber;
     protected List<String> additionService;
+
+    /**
+     * Gets the value of the title property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getTitle() {
+        return title;
+    }
+
+    /**
+     * Sets the value of the title property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setTitle(String value) {
+        this.title = value;
+    }
 
     /**
      * Gets the value of the agent property.

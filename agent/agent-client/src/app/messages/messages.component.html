@@ -1,0 +1,22 @@
+<div class="container">
+  <h3>Reservations</h3>
+  <div class="col-md-9"
+       href="#"
+       class="list-group-item clearfix"
+       *ngFor="let message of messages">
+    <div class="pull-left">
+      <h4 class="list-group-item-heading"><b>{{ message.id }}</b></h4>
+      <p class="list-group-item-text">Subject: {{ message.title}}</p>
+      <p class="list-group-item-text">Body: {{ message.body}}</p>
+      <i>
+        <small>Sender: {{message.sender}}<b></b></small><br>
+        <small>Lodging: {{message.dateTime}}<b></b></small>
+      </i>
+    </div>
+    <span class="pull-right">
+        <button  type="button" class="btn btn-primary"
+                (click)="reply(message.sender)"
+                [attr.aria-expanded]="!isCollapsed" aria-controls="collapseExample">Reply</button>
+      </span>
+  </div>
+</div>
