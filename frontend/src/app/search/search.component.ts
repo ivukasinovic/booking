@@ -287,9 +287,10 @@ export class SearchComponent implements OnInit {
 
   reserve(id: string) {
     if (this.authService.isAuthenticated()) {
+
       this.res.dateStart = this.form.value.searchSDT;
       this.res.dateEnd = this.form.value.searchEDT;
-      this.reservationService.reserve(this.res, id).subscribe();
+      this.router.navigateByUrl('/make-reservation/' + id + '/' + this.res.dateStart + '/' + this.res.dateEnd);
     } else {
       this.router.navigateByUrl('/login');
     }

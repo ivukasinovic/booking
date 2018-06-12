@@ -31,6 +31,7 @@ const routes: Routes = [
   {path: 'search', component: SearchComponent},
   {path: 'send-message', component: SendMessageComponent},
   {path: 'rate-and-comment', component: RateAndCommentComponent},
+  {path: 'make-reservation/:id/:dateS/:dateE', component: MakeReservationComponent},
   {path: 'make-reservation', component: MakeReservationComponent}
 ];
 

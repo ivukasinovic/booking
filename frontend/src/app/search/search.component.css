@@ -35,6 +35,38 @@ tr:nth-child(even) {
   background-color: #f2f2f2
 }
 
+.alert {
+  width: 200px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.alert.alert-info {
+  color: #607D8B;
+}
+
+.alert.alert-error {
+  color: red;
+}
+
+.img-fluid {
+  max-width: 100%;
+  height: auto;
+}
+
+.help-block {
+  width: 200px;
+  color: white;
+  background-color: gray;
+}
+
+.form-control {
+  width: 200px;
+  margin-bottom: 10px;
+}
+
+
+
 
 
 
