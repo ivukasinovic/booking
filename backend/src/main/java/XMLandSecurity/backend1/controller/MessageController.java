@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 import java.util.Date;
+import java.util.List;
 
 @RestController
 @RequestMapping(value = "/messages")
@@ -31,6 +32,28 @@ public class MessageController {
     public ResponseEntity<Message> getMessage(@PathVariable("id") Long id) {
         Message message = messageService.findOne(id);
         return new ResponseEntity<>(message, HttpStatus.OK);
+    }
+
+    @RequestMapping(
+            value = "/received",
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    public ResponseEntity<List<Message>> getReceivedMessageOfLoggedUser(Principal principal) {
+        User loggedUser = userService.findByUsername(principal.getName());
+        List<Message> messages = messageService.findByReceiver_Id(loggedUser.getId());
+        return new ResponseEntity<>(messages, HttpStatus.OK);
+    }
+
+    @RequestMapping(
+            value = "/sent",
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    public ResponseEntity<List<Message>> getSendMessageOfLoggedUser(Principal principal) {
+        User loggedUser = userService.findByUsername(principal.getName());
+        List<Message> messages = messageService.findBySender_Id(loggedUser.getId());
+        return new ResponseEntity<>(messages, HttpStatus.OK);
     }
 
 
@@ -73,5 +96,6 @@ public class MessageController {
         messageService.delete(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+
 
 }

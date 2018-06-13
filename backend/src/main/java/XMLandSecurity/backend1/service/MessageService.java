@@ -12,6 +12,8 @@ public interface MessageService {
 
     List<Message> findByReceiver_Id(Long id);
 
+    List<Message> findBySender_Id(Long id);
+
     Message findOne(Long id);
 
     Message save(Message message);

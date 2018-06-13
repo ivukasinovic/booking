@@ -31,6 +31,8 @@ import { MyReservationsComponent } from './my-reservations/my-reservations.compo
 import { RateAndCommentComponent } from './rate-and-comment/rate-and-comment.component';
 import { SendMessageComponent } from './send-message/send-message.component';
 import { MakeReservationComponent } from './make-reservation/make-reservation.component';
+import { UserInfoComponent } from './user-info/user-info.component';
+import { MyMessagesComponent } from './my-messages/my-messages.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +52,9 @@ import { MakeReservationComponent } from './make-reservation/make-reservation.co
     MyReservationsComponent,
     RateAndCommentComponent,
     SendMessageComponent,
-    MakeReservationComponent
+    MakeReservationComponent,
+    UserInfoComponent,
+    MyMessagesComponent
   ],
   imports: [
     BrowserModule,

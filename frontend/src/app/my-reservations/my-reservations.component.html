@@ -1,12 +1,17 @@
 <div class="container">
-  <h3>My reservations</h3>
+  <h3><b><i>My reservations</i></b></h3>
 
   <div class="col-md-9" class="list-group-item clearfix" *ngFor="let reservation of reservations">
 
     <div class="pull-center" id="{{reservation.id}}">
-      <h4 class="list-group-item-heading"><b>{{ reservation.lodging.address }}</b></h4>
-      <p class="list-group-item-text">Start date: {{ reservation.dateStart  | date }}</p>
-      <p class="list-group-item-text">Start date: {{ reservation.dateEnd  | date }}</p>
+      <h4  class="list-group-item-heading">{{reservation.lodging.title}}</h4>
+      <img src="{{(reservation.lodging.image)}}" class="img-fluid" alt="No image">
+      <br/><b>Address: </b>  {{ reservation.lodging.address }}
+      <br/><b>Rating: </b>{{reservation.lodging.rating}}
+      <br/><b>Details: </b> {{reservation.lodging.details}}
+
+      <p class="list-group-item-text"><b>Start date:</b> {{ reservation.dateStart  | date }}</p>
+      <p class="list-group-item-text"><b>End date:</b> {{ reservation.dateEnd  | date }}</p>
 
       <span class="pull-right">
         <button *ngIf="reservation.active" type="button" class="btn btn-warning" (click)="cancelRes(reservation.id)">Cancel</button>

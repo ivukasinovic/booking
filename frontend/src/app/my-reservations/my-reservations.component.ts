@@ -36,6 +36,7 @@ export class MyReservationsComponent implements OnInit {
   cancelRes(id: string) {
     this.reserveService.cancel(id).subscribe((res: Response) => {
        document.getElementById(id).remove();
+       alert('Your reservation has been cancelled.');
     });
 
   }

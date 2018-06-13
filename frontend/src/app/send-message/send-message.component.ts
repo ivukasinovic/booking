@@ -21,8 +21,11 @@ export class SendMessageComponent implements OnInit {
 
   sendMessage2() {
     this.id = localStorage.getItem('res-id');
-    this.reserveService.sendMsg(this.id, this.msg).subscribe();
-    this.router.navigateByUrl('/profile');
+    this.reserveService.sendMsg(this.id, this.msg).subscribe((resp: Response) => {
+      alert('Your message has been sent.');
+      this.router.navigateByUrl('/profile');
+    });
+
   }
 
 }

@@ -15,6 +15,7 @@
       <button class="btn" (click)="checkAvaliability(form.value)">Check avalibility</button>
       <button class="btn" (click)="onSubmit(form.value)" [disabled]="!avaliable">Reserve</button>
     </span>
+    <div *ngIf="error" class="alert alert-error">{{error}}</div>
   </form>
 
 

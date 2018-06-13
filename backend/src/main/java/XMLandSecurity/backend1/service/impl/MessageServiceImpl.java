@@ -25,6 +25,11 @@ public class MessageServiceImpl implements MessageService {
     }
 
     @Override
+    public List<Message> findBySender_Id(Long id) {
+        return messageRepository.findBySender_Id(id);
+    }
+
+    @Override
     public Message findOne(Long id) {
         return messageRepository.findOne(id);
     }

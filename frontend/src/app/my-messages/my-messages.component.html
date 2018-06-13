@@ -1,0 +1,20 @@
+<div class="container">
+
+  <ul class="nav nav-tabs">
+    <li><a data-toggle="tab"  (click)="setTab(0)">Sent messages</a></li>
+    <li><a data-toggle="tab"  (click)="setTab(1)"> Received messages</a></li>
+  </ul>
+
+  <div *ngIf="isSet(0)">
+    <div  *ngFor="let message of sent">
+      <p class="card bg-info">{{message.body}}</p>
+    </div>
+  </div>
+
+  <div *ngIf="isSet(1)">
+    <div *ngFor="let message of received">
+      <p class="card bg-info">{{message.body}}</p>
+    </div>
+  </div>
+
+</div>
