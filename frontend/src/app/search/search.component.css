@@ -65,8 +65,43 @@ tr:nth-child(even) {
   margin-bottom: 10px;
 }
 
+.sort-bar {
+  
+}
+
+ul {
+  margin : 0px;
+  padding: 0px;
+  list-style: none;
 
 
+}
 
+ul li {
 
+  float : right;
+  width: 200px;
+  height: 40px;
+  opacity: .8;
+  line-height: 40px;
+  font-size: 15px;
+  background-color: #b0dcff;
+  text-align: center;
 
+}
+
+ul li a{
+  text-decoration: none;
+  display: block;
+  color: black;
+}
+ul li a:hover {
+background-color: #b6ffe5;
+}
+ul li ul li{
+  display: none;
+}
+
+ul li:hover ul li{
+  display: block;
+}

@@ -109,10 +109,16 @@ dateValidationStart(control) {
     return {'searchSDT': false};
   }
   if ((+control.value.slice(0, -6)) === (+today.getFullYear())) {
-    console.log(control.value.slice(5, -3) + '  i  ' + (today.getMonth() + 1));
+   // console.log(control.value.slice(5, -3) + '  i  ' + (today.getMonth() + 1));
     if (+control.value.slice(5, -3) < (+(today.getMonth() + 1))) {// da li je u istoj godini mesec uneti manji od danasnjeg - ne moze
       console.log('mesec nije dobar');
       return {'searchSDT': false};
+    }
+    if (+control.value.slice(5, -3) === (+(today.getMonth() + 1))) {// ako je mesec isti proveri dan
+      if (+control.value.slice(8, 10) < (+(today.getDate()))) {
+      console.log('dan nije dobar');
+      return {'searchSDT': false};
+      }
     }
   }
 }
@@ -216,7 +222,7 @@ getPriceListByLodging(lodId: number): string {
 
   }
 
-  sortByPrice2(priceLod: Lodging[]) { // nema potrebe prosledjivati
+  sortByPrice2(priceLod: Lodging[], asc: boolean) { // nema potrebe prosledjivati
 
     for (let i = 0; i < priceLod.length - 1; i++) {
 
@@ -235,7 +241,7 @@ getPriceListByLodging(lodId: number): string {
         } else {
           priceNumbJ = +priceStrJ;
         }
-        if (!this.clickedPrice) {
+        if (asc) {
           if (priceNumbJ > priceNumbI) {
             const pom = priceLod[j];
             priceLod[j] = priceLod[j + 1];
@@ -258,7 +264,7 @@ getPriceListByLodging(lodId: number): string {
     this.lod = priceLod;
   }
 
-  sortByCategory(priceLod: Lodging[]) {
+  sortByCategory(priceLod: Lodging[], asc: boolean) {
     for (let i = 0; i < priceLod.length - 1; i++) {
 
       for (let j = 0; j < priceLod.length - i - 1; j++) {
@@ -276,7 +282,7 @@ getPriceListByLodging(lodId: number): string {
         } else {
           priceNumbJ = +priceStrJ;
         }
-        if (!this.clickedCategory) {
+        if (asc) {
           if (priceNumbJ < priceNumbI) {
             const pom = priceLod[j];
             priceLod[j] = priceLod[j + 1];
@@ -300,9 +306,9 @@ getPriceListByLodging(lodId: number): string {
   }
 
 
-  sortByRating(priceLod: Lodging[]) {
+  sortByRating(priceLod: Lodging[], asc: boolean) {
     priceLod = this.lod;
-    if (!this.clickedRating) {
+    if (asc) {
       this.lod = priceLod.sort(this.algoritamCeneSort);
     } else {
       this.lod = priceLod.sort(this.algoritamCeneSort2);
