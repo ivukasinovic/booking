@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {Router} from '@angular/router';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 import {AditionalServices, Lodging, Message, Reservation} from './model';
 
 @Injectable()
@@ -36,5 +36,15 @@ export class LodgingService {
   }
   reply(message: Message) {
     return this.http.post('api/reservations/reply', message);
+  }
+  // reserve(reservation: Reservation) {
+  //   return this.http.post('api/reservations', reservation);
+  // }
+  reserve(reservation: Reservation) {
+    let params = new HttpParams();
+    params = params.append('id', reservation.id.toString())
+    params = params.append('dateStart', reservation.dateStart.toString())
+    params = params.append('dateEnd', reservation.dateEnd.toString())
+    return this.http.get('api/reservations/occupancy', {params: params });
   }
 }

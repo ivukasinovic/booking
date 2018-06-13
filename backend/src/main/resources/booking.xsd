@@ -167,8 +167,8 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element name="lodging" type="xs:long"/>
-        <xs:element name="start" type="xs:dateTime"/>
-        <xs:element name="end" type="xs:dateTime"/>
+        <xs:element name="start" type="xs:string"/>
+        <xs:element name="end" type="xs:string"/>
       </xs:sequence>
     </xs:complexType>
   </xs:element>

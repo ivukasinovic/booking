@@ -5,9 +5,7 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
-import javax.xml.datatype.XMLGregorianCalendar;
 
 
 /**
@@ -21,8 +19,8 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
  *         &lt;element name="lodging" type="{http://www.w3.org/2001/XMLSchema}long"/>
- *         &lt;element name="start" type="{http://www.w3.org/2001/XMLSchema}dateTime"/>
- *         &lt;element name="end" type="{http://www.w3.org/2001/XMLSchema}dateTime"/>
+ *         &lt;element name="start" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         &lt;element name="end" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -42,11 +40,9 @@ public class SetOccupancyRequest {
 
     protected long lodging;
     @XmlElement(required = true)
-    @XmlSchemaType(name = "dateTime")
-    protected XMLGregorianCalendar start;
+    protected String start;
     @XmlElement(required = true)
-    @XmlSchemaType(name = "dateTime")
-    protected XMLGregorianCalendar end;
+    protected String end;
 
     /**
      * Gets the value of the lodging property.
@@ -69,10 +65,10 @@ public class SetOccupancyRequest {
      * 
      * @return
      *     possible object is
-     *     {@link XMLGregorianCalendar }
+     *     {@link String }
      *     
      */
-    public XMLGregorianCalendar getStart() {
+    public String getStart() {
         return start;
     }
 
@@ -81,10 +77,10 @@ public class SetOccupancyRequest {
      * 
      * @param value
      *     allowed object is
-     *     {@link XMLGregorianCalendar }
+     *     {@link String }
      *     
      */
-    public void setStart(XMLGregorianCalendar value) {
+    public void setStart(String value) {
         this.start = value;
     }
 
@@ -93,10 +89,10 @@ public class SetOccupancyRequest {
      * 
      * @return
      *     possible object is
-     *     {@link XMLGregorianCalendar }
+     *     {@link String }
      *     
      */
-    public XMLGregorianCalendar getEnd() {
+    public String getEnd() {
         return end;
     }
 
@@ -105,10 +101,10 @@ public class SetOccupancyRequest {
      * 
      * @param value
      *     allowed object is
-     *     {@link XMLGregorianCalendar }
+     *     {@link String }
      *     
      */
-    public void setEnd(XMLGregorianCalendar value) {
+    public void setEnd(String value) {
         this.end = value;
     }
 

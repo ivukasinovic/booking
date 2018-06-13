@@ -9,6 +9,9 @@ import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
 import org.springframework.ws.server.endpoint.annotation.RequestPayload;
 import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -122,10 +125,18 @@ public class LodgingEndpoint {
         //HARDKOD
         User agent = userService.findOne(2L);
         reservation.setUser(agent);
-        reservation.setDateStart(request.getStart().toGregorianCalendar().getTime());
-        reservation.setDateEnd(request.getEnd().toGregorianCalendar().getTime());
+        DateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        String dateStart = request.getStart() + " 00:00:00";
+        String dateEnd = request.getEnd() + " 00:00:00";
+        try {
+            reservation.setDateStart(format.parse(dateStart));
+            reservation.setDateEnd(format.parse(dateEnd));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
         reservation.setVisited(false);
         reservation.setActive(true);
+        reservation.setLodging(lodgingService.findOne(request.getLodging()));
         reservationService.save(reservation);
         response.setSuccess("success");
         return response;

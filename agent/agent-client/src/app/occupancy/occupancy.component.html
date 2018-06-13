@@ -1,0 +1,12 @@
+<div class="container">
+  <div class="form-group form-inline">
+    <label for="lodging">Lodging ID: </label>
+    <input type="text" [(ngModel)]="reservation.id" class="form-control" id="lodging">&nbsp;
+    <label for="dateStart">Start date: </label>
+    <input type="text" [(ngModel)]="reservation.dateStart" class="form-control" id="dateStart">&nbsp;
+    <label for="dateEnd">End date: </label>
+    <input type="text" [(ngModel)]="reservation.dateEnd" class="form-control" id="dateEnd">&nbsp;
+  </div>
+  <p> Date format : (yyyy-mm-dd)</p>
+  <button class="btn btn-success" (click)="reserve()">Reserve</button>
+</div>

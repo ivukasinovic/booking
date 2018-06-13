@@ -9,6 +9,7 @@ import { ReservationListComponent } from './reservation-list/reservation-list.co
 import {LodgingService} from './lodging.service';
 import { LodgingNewComponent } from './lodging-new/lodging-new.component';
 import { MessagesComponent } from './messages/messages.component';
+import { OccupancyComponent } from './occupancy/occupancy.component';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { MessagesComponent } from './messages/messages.component';
     NavbarComponent,
     ReservationListComponent,
     LodgingNewComponent,
-    MessagesComponent
+    MessagesComponent,
+    OccupancyComponent
   ],
   imports: [
     BrowserModule,
