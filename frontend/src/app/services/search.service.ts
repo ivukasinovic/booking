@@ -11,8 +11,9 @@ export class SearchService {
   allLodgings() {
     return this.http.get('api/lodging/getLodgings');
   }
-  searchLodging(cityName: string, nbrOfPersons: number, dateStart: Date, dateEnd: Date, typeOfLodging: string, catOfLodging: string, as: AditionalServices) {
-    return this.http.post('api/lodging/search/' + cityName + '/' + nbrOfPersons +
+  searchLodging(cityName: string, nbrOfPersons: number, dateStart: Date, dateEnd: Date,
+                typeOfLodging: string, catOfLodging: string, as: AditionalServices) {
+    return this.http.post('api/search/searchLodging/' + cityName + '/' + nbrOfPersons +
       '/' + dateStart + '/' + dateEnd + '/' + typeOfLodging + '/' + '/' + catOfLodging + '/', as );
   }
 

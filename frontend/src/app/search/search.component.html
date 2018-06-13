@@ -61,6 +61,30 @@
       </form>
       <br>
   </div>
+  <div data-block-id="sort_bar" class = "sort-bar">
+    <ul>
+      <li id="Price"><a>Price</a>
+        <ul>
+          <li><a (click)="sortByPrice2(lod,true)">Ascending</a></li>
+          <li><a (click)="sortByPrice2(lod,false)">Descending</a></li>
+        </ul>
+      </li>
+      <li id="Rating" ><a>Rating</a>
+        <ul>
+          <li><a (click)="sortByRating(lod,false)" >Ascending</a></li>
+          <li><a (click)="sortByRating(lod,true)" >Descending</a></li>
+        </ul>
+      </li>
+      <li id="Category" ><a>Category</a>
+        <ul>
+          <li><a (click)="sortByCategory(lod,false)">Ascending</a></li>
+          <li><a (click)="sortByCategory(lod,true)">Descending</a></li>
+        </ul>
+      </li>
+    </ul>
+
+  </div>
+  <br>
 <div *ngIf="lod.length>0">
   <div  *ngFor="let lodging of lod">
       <br/>
