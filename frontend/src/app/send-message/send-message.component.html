@@ -2,14 +2,14 @@
 </div>
 <div class="col-md-4 col-md-offset-2">
   <h3>Send message</h3>
-  <form>
+  <form name="form"  (ngSubmit)="f.form.valid && sendMessage2()"  #f="ngForm" novalidate>
     <label>Title: </label>
-    <input [(ngModel)]="msg.title" type="text" class="form-control" name="title"
+    <input required="required" [(ngModel)]="msg.title" type="text" class="form-control" name="title"
            placeholder="Enter title">
     <label>Text of your message: </label>
-    <input [(ngModel)]="msg.body" type="text" class="form-control" name="body"
-           placeholder="Enter your text">
-    <br>
-    <button class="btn btn-warning" (click)="sendMessage2()">Send</button>
+    <textarea required="required" [(ngModel)]="msg.body" type="text" class="form-control" name="body"
+              placeholder="Enter your text"></textarea>
+    <br/>
+  <input type="submit" value="Send" class="btn btn-warning">
   </form>
 </div>

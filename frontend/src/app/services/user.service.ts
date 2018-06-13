@@ -22,4 +22,12 @@ export class UserService {
   getReservationsOfLoggedUser() {
     return this.http.get('api/users/reservations');
   }
+
+  getReceivedMessages() {
+    return this.http.get('api/messages/received');
+  }
+
+  getSentMessages() {
+    return this.http.get('api/messages/sent');
+  }
 }

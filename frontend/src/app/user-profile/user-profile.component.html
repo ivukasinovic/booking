@@ -1,17 +1,24 @@
 <div class="container">
 
   <ul class="nav nav-tabs">
-    <li><a data-toggle="tab" (click)="setTab(0)">My reservations</a></li>
-    <li><a data-toggle="tab"  (click)="setTab(1)" >Change paasword</a></li>
+    <li><a data-toggle="tab" (click)="setTab(0)">My info</a></li>
+    <li><a data-toggle="tab" (click)="setTab(1)">My reservations</a></li>
+    <li><a data-toggle="tab"  (click)="setTab(3)" >My messages</a></li>
+    <li><a data-toggle="tab"  (click)="setTab(2)" >Change paasword</a></li>
   </ul>
 
-
   <div *ngIf="isSet(0)">
+    <app-user-info></app-user-info>
+  </div>
+  <div *ngIf="isSet(1)">
     <app-my-reservations></app-my-reservations>
   </div>
 
-  <div *ngIf="isSet(1)">
+  <div *ngIf="isSet(2)">
     <app-change-password></app-change-password>
+  </div>
+  <div *ngIf="isSet(3)">
+    <app-my-messages></app-my-messages>
   </div>
 
 </div>

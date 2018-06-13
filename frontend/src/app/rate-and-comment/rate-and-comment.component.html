@@ -3,9 +3,16 @@
 
   <div class="container" *ngFor="let lodging of lodgins">
     <div class="card">
+      <br/>
+      <div class="card bg-info text-white p5"  >
+        <img src="{{(lodging.image)}}" class="img-fluid" alt="No image">
 
-      <br/> <br/>
-         <h4 class="list-group-item-heading"><b>{{lodging.address}}</b></h4>
+        <h4>{{lodging.title}}</h4>
+        <br/><b>Adress: </b>  {{ (lodging.address) }}
+        <br/><b>Rating: </b>{{(lodging.rating)}}
+        <br/><b>Details: </b> {{(lodging.details)}}
+      </div>
+
 
         <button class="btn btn-warning"  (click)="setCollapse(lodging.id)" > Comment and rate</button>
 
