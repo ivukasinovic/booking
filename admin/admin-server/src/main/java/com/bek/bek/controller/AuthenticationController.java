@@ -16,6 +16,9 @@ import java.io.IOException;
 @RestController
 public class AuthenticationController {
 
+
+    private final String port = "https://localhost:8443";
+
     @RequestMapping(
             method = RequestMethod.POST,
             value = "/login",
@@ -23,7 +26,7 @@ public class AuthenticationController {
     public ResponseEntity<?> authenticationRequest(@RequestBody AuthenticationRequest authenticationRequest){
         HttpEntity<AuthenticationRequest> request = new HttpEntity<>(authenticationRequest);
         RestTemplate rt = new RestTemplate();
-        AuthenticationResponse response = rt.postForObject("http://localhost:8080/api/login",request,AuthenticationResponse.class);
+        AuthenticationResponse response = rt.postForObject(port + "/api/login",request,AuthenticationResponse.class);
         return ResponseEntity.ok(new AuthenticationResponse(response.getToken()));
     }
 
@@ -31,7 +34,7 @@ public class AuthenticationController {
     public void authenticationRequestRefresh(HttpServletResponse httpServletResponse,HttpServletRequest request) throws IOException {
         RestTemplate rt = new RestTemplate();
 
-        httpServletResponse.sendRedirect("https://localhost:8443/refresh}");
+        httpServletResponse.sendRedirect(port + "/refresh}");
 
     }
 
@@ -41,9 +44,9 @@ public class AuthenticationController {
     public  ResponseEntity<?> register(@RequestBody User user) {
         HttpEntity<User> request = new HttpEntity<>(user);
         RestTemplate rt = new RestTemplate();
-        User response = rt.postForObject("http://localhost:8080/api/login",user,User.class );
+        User response = rt.postForObject(port + "/api/login",user,User.class );
 
-        rt.postForLocation("https://localhost:8443/api/register",response);
+        rt.postForLocation(port + "/api/register",response);
         return ResponseEntity.ok(new User());
     }
 
@@ -53,7 +56,7 @@ public class AuthenticationController {
     public void registerAgent(@RequestBody User user) {
         //return "redirect:https://localhost:8443/registerAgent" + user;
         RestTemplate rt = new RestTemplate();
-       User response = rt.postForObject("http://localhost:8080/api/registerAgent",user,User.class);
+       User response = rt.postForObject(port + "/api/registerAgent",user,User.class);
     }
 
 

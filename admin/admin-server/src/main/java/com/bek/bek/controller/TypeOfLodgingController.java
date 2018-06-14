@@ -12,6 +12,7 @@ import org.springframework.web.client.RestTemplate;
 @RequestMapping(value = "/type-lodging")
 public class TypeOfLodgingController {
 
+    private final String port = "https://localhost:8443";
 
     @RequestMapping(
             method = RequestMethod.GET,
@@ -19,7 +20,7 @@ public class TypeOfLodgingController {
     )
     public ResponseEntity<?> getAll() {
         RestTemplate rt = new RestTemplate();
-        ResponseEntity<Object[]> responseEntity = rt.getForEntity("http://localhost:8080/api/type-lodging", Object[].class);
+        ResponseEntity<Object[]> responseEntity = rt.getForEntity(port + "/api/type-lodging", Object[].class);
         Object[] objects = responseEntity.getBody();
         return new ResponseEntity<>(objects,HttpStatus.OK);
     }
@@ -31,7 +32,7 @@ public class TypeOfLodgingController {
     )
     public ResponseEntity<?> getUser(@PathVariable("id") Long id) {
         RestTemplate rt = new RestTemplate();
-        ResponseEntity<Object> responseEntity = rt.getForEntity("http://localhost:8080/api/type-lodging/"+id, Object.class,id);
+        ResponseEntity<Object> responseEntity = rt.getForEntity(port + "/api/type-lodging/"+id, Object.class,id);
         Object object = responseEntity.getBody();
 
 
@@ -46,7 +47,7 @@ public class TypeOfLodgingController {
     public ResponseEntity<TypeOfLodging> CreateCity (@RequestBody TypeOfLodging categoryOfLodging) {
         HttpEntity<TypeOfLodging> request = new HttpEntity<>(categoryOfLodging);
         RestTemplate rt = new RestTemplate();
-        TypeOfLodging response = rt.postForObject("http://localhost:8080/api/type-lodging",categoryOfLodging,TypeOfLodging.class );
+        TypeOfLodging response = rt.postForObject(port + "/api/type-lodging",categoryOfLodging,TypeOfLodging.class );
 
         return ResponseEntity.ok(new TypeOfLodging());
     }
@@ -59,7 +60,7 @@ public class TypeOfLodgingController {
     public void izbrisi(@PathVariable("id") Long id){
 
         RestTemplate restTemplate = new RestTemplate();
-        restTemplate.delete ( "http://localhost:8080/api/type-lodging/"+id, id );
+        restTemplate.delete ( port + "/api/type-lodging/"+id);
     }
 
 }
