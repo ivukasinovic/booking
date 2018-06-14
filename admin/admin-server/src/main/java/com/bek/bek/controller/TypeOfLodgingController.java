@@ -59,9 +59,6 @@ public class TypeOfLodgingController {
     )
     public void izbrisi(@PathVariable("id") Long id){
 
-//        RestTemplate restTemplate = new RestTemplate();
-//        restTemplate.delete ( port + "/api/type-lodging/"+id );
-
         RestTemplate rt = new RestTemplate();
         rt.delete(port + "/api/type-lodging/" + id);
     }
