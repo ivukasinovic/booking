@@ -14,6 +14,7 @@ import org.springframework.web.client.RestTemplate;
 @RequestMapping(value = "/addtional-serviceadmin")
 public class AdditionalServiceAdminController {
 
+    private final String port = "https://localhost:8443";
 
     @RequestMapping(
             method = RequestMethod.GET,
@@ -21,7 +22,7 @@ public class AdditionalServiceAdminController {
     )
     public ResponseEntity< Object[]> getAll() {
         RestTemplate rt = new RestTemplate();
-        ResponseEntity<Object[]> responseEntity = rt.getForEntity("http://localhost:8080/api/addtional-service", Object[].class);
+        ResponseEntity<Object[]> responseEntity = rt.getForEntity(port + "/api/addtional-service", Object[].class);
         Object[] objects = responseEntity.getBody();
         return new ResponseEntity<>(objects,HttpStatus.OK);
  }
@@ -34,7 +35,7 @@ public class AdditionalServiceAdminController {
     public ResponseEntity<?> getAdditional(@PathVariable("id") Long id) {
        //  return ("redirect:/https://localhost:8080/addtional-serviceadmin/" + id);
         RestTemplate rt = new RestTemplate();
-        ResponseEntity<Object> responseEntity = rt.getForEntity("http://localhost:8080/api/addtional-service/"+id, Object.class,id);
+        ResponseEntity<Object> responseEntity = rt.getForEntity(port + "/api/addtional-service/"+id, Object.class,id);
         Object object = responseEntity.getBody();
 
 
@@ -50,7 +51,7 @@ public class AdditionalServiceAdminController {
     public ResponseEntity<AdditionalService>  napravi (@RequestBody AdditionalService additionalService) {
         HttpEntity<AdditionalService> request = new HttpEntity<>(additionalService);
         RestTemplate rt = new RestTemplate();
-        AdditionalService response = rt.postForObject("http://localhost:8080/api/addtional-service", request, AdditionalService.class);
+        AdditionalService response = rt.postForObject(port + "/api/addtional-service", request, AdditionalService.class);
 
         return ResponseEntity.ok(new AdditionalService());
     }
@@ -63,7 +64,7 @@ public class AdditionalServiceAdminController {
     public void izbrisi(@PathVariable("id") Long id){
        // return  "redirect:/https://localhost:8443/addtional-serviceadmin" + id;
         RestTemplate rt = new RestTemplate();
-        rt.delete("http://localhost:8080/api/addtional-service/"+id);
+        rt.delete(port + "/api/addtional-service/"+id);
     }
 
 }
