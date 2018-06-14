@@ -16,6 +16,8 @@ public class AdditionalServiceAdminController {
 
     private final String port = "https://localhost:8443";
 
+    private final String port = "https://localhost:8443";
+
     @RequestMapping(
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE
