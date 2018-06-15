@@ -26,6 +26,7 @@ public class AdditionalServiceController {
     )
     public ResponseEntity<List<AdditionalService>> getAll() {
         List<AdditionalService> lista = additionalServiceService.findAll() ; //findOne(user);
+
         return new ResponseEntity<>(lista, HttpStatus.OK);     // "200 OK"
     }
 
