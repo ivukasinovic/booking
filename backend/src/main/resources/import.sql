@@ -73,6 +73,8 @@ INSERT INTO comment (id,body,accepted,lodging_id,user_id) VALUES (1,'Samo kvalit
 INSERT INTO comment (id,body,accepted,lodging_id,user_id) VALUES (2,'Cao druze, poruka nije namenskaa',false,2,5 );
 INSERT INTO comment (id,body,accepted,lodging_id,user_id) VALUES (3,'A komentar je na mestu ,dje je problem objaviteee ,ah !',false,2,7 );
 INSERT INTO comment (id,body,accepted,lodging_id,user_id) VALUES (4,'Pozdrav za smestaj Numanovic',false,1,6 );
+INSERT INTO comment (id,body,accepted,lodging_id,user_id) VALUES (5,'Odlicno!',true, 1, 5);
+INSERT INTO comment (id,body,accepted,lodging_id,user_id) VALUES (6,'Lep smestaj.',true, 1, 6);
 
 INSERT INTO message (id,title,body,date_sent,receiver_id,sender_id) VALUES (2,'Naslov za vavek vekova ','Pozdrav ja se zovem Marica i mozemo li se upoznati','2017-02-22 10:42:58',5,4 );
 INSERT INTO message (id,title,body,date_sent,receiver_id,sender_id) VALUES (1,'Odgovor marici ','Cao Marice , nisam tu za vikend cujemo se nekad !!','2017-02-22 11:02:58',4,5 );

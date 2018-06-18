@@ -43,4 +43,12 @@ export class SearchService {
   getAllCategoryOfLodging() {
     return this.http.get('api/category-lodging');
   }
+
+  getAllComment() {
+    return this.http.get('api/comment/all-yes');
+  }
+
+  getAllUsers() {
+    return this.http.get('api/users');
+  }
 }

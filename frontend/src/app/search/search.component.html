@@ -101,6 +101,17 @@
             <br/><button class="btn-link" (click)="reserve(lodging.id)"><h3>Reserve now</h3></button>
 
       </div>
+    <div>
+      <details>
+        <summary  class="form-control"><b> Comments </b></summary>
+        <br>
+          <div  *ngFor="let c of getCommentForLod(lodging.id)" >
+            <br>
+            <label >{{getUserName(c.user)}} :</label>
+            <label  class="form-control"> {{c.body}}</label>
+          </div>
+      </details>
+    </div>
     </div>
   <br>
 

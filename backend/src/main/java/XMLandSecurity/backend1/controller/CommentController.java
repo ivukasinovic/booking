@@ -99,6 +99,14 @@ public class CommentController {
         commentService.save(komentar);
         return new ResponseEntity<>(komentar, HttpStatus.OK);     // "200 OK"
     }
-
+    @RequestMapping(
+            value = "/all-yes",
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    public ResponseEntity<List<Comment>> pronadjiSveKojiSuOdobreni(){
+        List<Comment> listaKomentara = commentService.findByAccepted(true);
+        return new ResponseEntity(listaKomentara, HttpStatus.OK);
+    }
 
 }

@@ -67,7 +67,10 @@ export class Message {
 }
 
 export class Comment {
+  id: number;
   body: string;
+  lodging: number;
+  user: number;
 }
 
 export class  Rating {

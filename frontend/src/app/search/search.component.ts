@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {Lodging, City, Reservation, AditionalServices, TypeOfLodging, PriceList, CategoryOfLodging} from '../model';
+import {Lodging, City, Reservation, AditionalServices, TypeOfLodging, PriceList, CategoryOfLodging, Comment, User} from '../model';
 import {SearchService} from '../services/search.service';
 import {Router} from '@angular/router';
 import {FormGroup, FormControl, Validators, AbstractControl} from '@angular/forms';
@@ -31,6 +31,9 @@ export class SearchComponent implements OnInit {
   reser: Reservation[];
   priceList: PriceList[];
   lodSort: Lodging[];
+  com: Comment[];
+  comForLod: Comment[];
+  user: User[];
   form = new FormGroup({
     cityName1: new FormControl('', Validators.compose ([Validators.required])),
     numberOfPersons1: new FormControl('', Validators.compose ([Validators.required])),
@@ -54,6 +57,9 @@ export class SearchComponent implements OnInit {
     this.lodSort = [];
     this.lod = [];
     this.priceList = [];
+    this.com = [];
+    this.comForLod = [];
+    this.user = [];
     this.searchService.getReservations().subscribe(
       (response: Reservation[]) => {
 
@@ -85,6 +91,12 @@ export class SearchComponent implements OnInit {
           this.catLod[i].label = 'uncategorized';
         }
       }
+    });
+    this.searchService.getAllComment().subscribe((response: Comment[]) => {
+      this.com = response;
+    });
+    this.searchService.getAllUsers().subscribe((response: User[]) => {
+      this.user = response;
     });
   }
 
@@ -337,6 +349,24 @@ getPriceListByLodging(lodId: number): string {
     } else {
       this.router.navigateByUrl('/login');
     }
+  }
+  getCommentForLod(id: number) {
+    this.comForLod = [];
+    for (let i = 0; i < this.com.length; i++) {
+      if (this.com[i].lodging === id) {
+        this.comForLod.push(this.com[i]);
+
+      }
+    }
+    return this.comForLod;
+  }
+
+  getUserName(userId: number): string {
+  for (let i = 0; i < this.user.length; i++) {
+    if (this.user[i].id === userId) {
+      return this.user[i].username;
+    }
+  }
   }
 }
 
