@@ -1,66 +1,56 @@
+
 package com.project.model;
 
-import javax.persistence.*;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
-
-import java.io.Serializable;
-import java.util.List;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 @Entity
-@Table
-@XmlAccessorType(XmlAccessType.FIELD)
-@XmlRootElement(name="typeOfLodging")
-
-public class TypeOfLodging implements Serializable {
+public class TypeOfLodging {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    @XmlElement(name="id", required=true)
-    private Long id;
-
-    @Column(name = "label", nullable = false)
-    @XmlElement(name="label", required=true)
-    private String label;
-  
-    @XmlElement(name="name", required=true)
-    @Column(name = "name", nullable = true)     // po pravilu false ali zbog Admina true, trebala bi nova klasa a ova bez ovog atributa da ostane za sifrarnik !!!
-    private String name;
+    protected long id;
+    protected String label;
 
     public TypeOfLodging() {
     }
 
-    public TypeOfLodging(String label, String name, List<Lodging> lodgingList) {
-        this.label = label;
-        this.name = name;
-    }
-
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    /**
+     * Sets the value of the id property.
+     * 
+     */
+    public void setId(long value) {
+        this.id = value;
     }
 
+    /**
+     * Gets the value of the label property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
     public String getLabel() {
         return label;
     }
 
-    public void setLabel(String label) {
-        this.label = label;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
+    /**
+     * Sets the value of the label property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setLabel(String value) {
+        this.label = value;
     }
 
 }

@@ -60,6 +60,10 @@ public class Reservation {
     @XmlElement(required = true)
     protected User user;
 
+    public Reservation() {
+
+    }
+
     /**
      * Gets the value of the id property.
      * 

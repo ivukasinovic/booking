@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import {Router} from '@angular/router';
 import {HttpClient, HttpParams} from '@angular/common/http';
-import {AditionalServices, Lodging, Message, Reservation} from './model';
+import {AditionalServices, Lodging, LodgingRes, Message, Reservation} from './model';
 
 @Injectable()
 export class LodgingService {
 
   constructor(private router: Router, private http: HttpClient) { }
-
+  lodgingRes : LodgingRes;
   getReservations() {
     return this.http.get('api/reservations');
   }
@@ -25,7 +25,9 @@ export class LodgingService {
     return this.http.get('api/lodgings/types');
   }
   createLodging(lodging: Lodging) {
-    return this.http.post('api/lodgings', lodging);
+    this.lodgingRes = new LodgingRes();
+    this.lodgingRes.lodging = lodging;
+    return this.http.post('api/lodgings', this.lodgingRes);
   }
 
   getAdditionalServices() {

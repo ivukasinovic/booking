@@ -9,6 +9,7 @@ import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
 import org.springframework.ws.server.endpoint.annotation.RequestPayload;
 import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 
+import java.math.BigInteger;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -45,24 +46,49 @@ public class LodgingEndpoint {
     @Autowired
     private MessageService messageService;
 
+    @PayloadRoot(namespace = "http://bookingxml.com/soap-example", localPart = "getLodgingsRequest")
+    @ResponsePayload
+    public GetLodgingsResponse getLodgingsRequest(@RequestPayload GetLodgingsRequest request) {
+        GetLodgingsResponse response = new GetLodgingsResponse();
+        if (request.getLodgings().equals("all")) {
+            List<Lodging> lodgings = lodgingService.findAll();
+            for (Lodging lodging: lodgings) {
+                LodgingRes lodgingRes = new LodgingRes();
+                lodgingRes.setAddress(lodging.getAddress());
+                lodgingRes.setCategory(lodging.getCategory().getId());
+                lodgingRes.setTitle(lodging.getTitle());
+                lodgingRes.setCity(lodging.getCity().getId());
+                lodgingRes.setDetails(lodging.getDetails());
+                lodgingRes.setImage(lodging.getImage());
+                lodgingRes.setType(lodging.getType().getId());
+                lodgingRes.setPersonsNumber(BigInteger.valueOf(lodging.getPersons_number()));
+                for(AdditionalService additionalService: lodging.getAdditionalServiceList()){
+                    lodgingRes.getAdditionService().add(additionalService.getId().toString());
+                }
+                response.getLodgingRes().add(lodgingRes);
+            }
+        }
+        return response;
+    }
+
     @PayloadRoot(namespace = "http://bookingxml.com/soap-example", localPart = "setLodgingRequest")
     @ResponsePayload
     public SetLodgingResponse setLodgingRequest(@RequestPayload SetLodgingRequest request){
         SetLodgingResponse response = new SetLodgingResponse();
 
         Lodging lodging = new Lodging();
-        lodging.setAgent(userService.findOne(request.getAgent()));
-        lodging.setType(typeOfLodgingService.findOne(request.getType()));
-        lodging.setCity(cityService.findOne(request.getCity()));
-        lodging.setCategory(categoryOfLodgingService.findOne(request.getCategory()));
-        lodging.setTitle(request.getTitle());
-        lodging.setAddress(request.getAddress());
-        lodging.setDetails(request.getDetails());
-        lodging.setImage(request.getImage());
-        lodging.setPersons_number(request.getPersonsNumber().intValue());
+        lodging.setAgent(userService.findOne(request.getLodging().getAgent()));
+        lodging.setType(typeOfLodgingService.findOne(request.getLodging().getType()));
+        lodging.setCity(cityService.findOne(request.getLodging().getCity()));
+        lodging.setCategory(categoryOfLodgingService.findOne(request.getLodging().getCategory()));
+        lodging.setTitle(request.getLodging().getTitle());
+        lodging.setAddress(request.getLodging().getAddress());
+        lodging.setDetails(request.getLodging().getDetails());
+        lodging.setImage(request.getLodging().getImage());
+        lodging.setPersons_number(request.getLodging().getPersonsNumber().intValue());
 
         Lodging savedLodging  = lodgingService.save(lodging);
-        for(String ads: request.getAdditionService()){
+        for(String ads: request.getLodging().getAdditionService()){
             AdditionalService additionalService = additionalServiceService.findOne(Long.valueOf(ads));
             additionalService.getLodgingList().add(savedLodging);
             additionalServiceService.save(additionalService);

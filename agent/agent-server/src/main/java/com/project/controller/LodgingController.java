@@ -81,9 +81,6 @@ public class LodgingController {
         LodgingService objMethod = new LodgingService();
         LodgingServicePort objPort = objMethod.getLodgingServicePortSoap11();
 
-        XMLSigningUtility potpis = new XMLSigningUtility();
-        potpis.verifySignature((Document) request);
-
         SetLodgingResponse response = objPort.setLodging(request);
         System.out.println(response);
         return new ResponseEntity<>(HttpStatus.CREATED);

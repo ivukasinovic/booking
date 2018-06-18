@@ -30,6 +30,7 @@ public class ObjectFactory {
     private final static QName _MessageRes_QNAME = new QName("http://bookingxml.com/soap-example", "messageRes");
     private final static QName _Lodging_QNAME = new QName("http://bookingxml.com/soap-example", "lodging");
     private final static QName _PriceList_QNAME = new QName("http://bookingxml.com/soap-example", "priceList");
+    private final static QName _LodgingRes_QNAME = new QName("http://bookingxml.com/soap-example", "lodgingRes");
     private final static QName _AdditionalService_QNAME = new QName("http://bookingxml.com/soap-example", "additionalService");
     private final static QName _Message_QNAME = new QName("http://bookingxml.com/soap-example", "message");
     private final static QName _Rating_QNAME = new QName("http://bookingxml.com/soap-example", "rating");
@@ -131,6 +132,14 @@ public class ObjectFactory {
      */
     public GetLodgingTypesRequest createGetLodgingTypesRequest() {
         return new GetLodgingTypesRequest();
+    }
+
+    /**
+     * Create an instance of {@link LodgingRes }
+     * 
+     */
+    public LodgingRes createLodgingRes() {
+        return new LodgingRes();
     }
 
     /**
@@ -465,6 +474,15 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://bookingxml.com/soap-example", name = "priceList")
     public JAXBElement<PriceList> createPriceList(PriceList value) {
         return new JAXBElement<PriceList>(_PriceList_QNAME, PriceList.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link LodgingRes }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://bookingxml.com/soap-example", name = "lodgingRes")
+    public JAXBElement<LodgingRes> createLodgingRes(LodgingRes value) {
+        return new JAXBElement<LodgingRes>(_LodgingRes_QNAME, LodgingRes.class, null, value);
     }
 
     /**

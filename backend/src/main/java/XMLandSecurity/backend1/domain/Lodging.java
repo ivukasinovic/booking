@@ -6,13 +6,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElementWrapper;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
-
+import javax.xml.bind.annotation.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -107,13 +101,11 @@ public class Lodging implements Serializable {
     @XmlElement(name="rating", required=true)
     private List<Rating> ratingList = new ArrayList<Rating>();
 
-    // ==========
     @JsonIgnore
-    @ManyToMany(mappedBy = "lodgingList", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @ManyToMany(mappedBy = "lodgingList", cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
     @XmlElementWrapper(name="additionalServiceList", required=true)
     @XmlElement(name="additionalService", required=true)
     private List<AdditionalService> additionalServiceList = new ArrayList<AdditionalService>();
-    // ==========
 
 
     public Lodging() {
