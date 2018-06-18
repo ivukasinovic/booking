@@ -35,11 +35,13 @@ import javax.crypto.NoSuchPaddingException;
 import javax.crypto.spec.SecretKeySpec;
 import javax.servlet.http.HttpServletRequest;
 import javax.swing.*;
+import java.io.IOException;
 import java.security.InvalidKeyException;
 import java.security.Key;
 import java.security.NoSuchAlgorithmException;
 import java.security.Principal;
 import java.util.Base64;
+import java.util.Date;
 import java.util.logging.Logger;
 
 @RestController
@@ -70,7 +72,7 @@ public class AuthenticationController {
 
 
     @RequestMapping(method = RequestMethod.POST, value = "${route.authentication}")  // /login  ${route.authentication}
-    public ResponseEntity<?> authenticationRequest(@RequestBody AuthenticationRequest authenticationRequest, Device device) throws AuthenticationException {
+    public ResponseEntity<?> authenticationRequest(@RequestBody AuthenticationRequest authenticationRequest, Device device) throws AuthenticationException, IOException {
 
         // Perform the authentication
         Authentication authentication = this.authenticationManager.authenticate(
@@ -81,9 +83,17 @@ public class AuthenticationController {
         );
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
+
+
         // Reload password post-authentication so we can generate token
         UserDetails userDetails = this.userDetailsService.loadUserByUsername(authenticationRequest.getUsername());
         User user = userService.findByUsername(userDetails.getUsername());
+
+        if(user == null) {
+            XMLandSecurity.backend1.logger.Logger.getInstance().log("Pokusao logovanje sa korisnickim imenom: " + user.getUsername() + "  " + new Date());
+        }else {
+            XMLandSecurity.backend1.logger.Logger.getInstance().log("Ulogovao se: " + user.getUsername() + "  " + new Date());
+        }
         if(!user.isActivated()){
             return new ResponseEntity<>(HttpStatus.FORBIDDEN);
         }

@@ -1,7 +1,4 @@
-package XMLandSecurity.backend1.service;
-
-import XMLandSecurity.backend1.model.IssuerData;
-import XMLandSecurity.backend1.model.dto.CertificateDTO;
+package com.project.utility;
 
 import java.security.PrivateKey;
 import java.security.cert.Certificate;
@@ -10,9 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-/**
- * Created by Ivan V. on 02-Apr-18
- */
+
 public interface KeyStoreService {
 
     List<X509Certificate> getCertificates();
@@ -23,13 +18,13 @@ public interface KeyStoreService {
 
     ArrayList<String> getCertficatesSN();
 
-    CertificateDTO getCertificateDTO(String alias);
+   // CertificateDTO getCertificateDTO(String alias);
 
-    List<CertificateDTO> getCertificatesDTO();
+   // List<CertificateDTO> getCertificatesDTO();
 
     void writeCertificate(boolean isCa, Certificate certificate, String alias, PrivateKey pk);
 
-    IssuerData readIssuerFromStore(String alias);
+   // IssuerData readIssuerFromStore(String alias);
 
     ArrayList<String> getIssuers();
 

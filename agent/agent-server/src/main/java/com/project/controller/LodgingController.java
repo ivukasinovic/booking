@@ -1,5 +1,6 @@
 package com.project.controller;
 
+import com.project.utility.XMLSigningUtility;
 import com.project.ws.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -8,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.w3c.dom.Document;
 
 import javax.print.attribute.standard.Media;
 import java.util.List;
@@ -78,6 +80,10 @@ public class LodgingController {
     public ResponseEntity<?> postLodging(@RequestBody SetLodgingRequest request){
         LodgingService objMethod = new LodgingService();
         LodgingServicePort objPort = objMethod.getLodgingServicePortSoap11();
+
+        XMLSigningUtility potpis = new XMLSigningUtility();
+        potpis.verifySignature((Document) request);
+
         SetLodgingResponse response = objPort.setLodging(request);
         System.out.println(response);
         return new ResponseEntity<>(HttpStatus.CREATED);

@@ -162,6 +162,8 @@ public class KeyStoreServiceImpl implements KeyStoreService {
         return null;
     }
 
+
+
     @Override
     public ArrayList<String> getIssuers() {
         loadKeyStore(0);
@@ -229,6 +231,31 @@ public class KeyStoreServiceImpl implements KeyStoreService {
             delete(cert.getSerialNumber().toString());
         }
     }
+
+    @Override
+    public PrivateKey readPrivateKey(String alias) {
+        loadKeyStore(1);
+        try {
+            PrivateKey privKey = (PrivateKey) keyStore.getKey(alias, PASSWORD_NONCA.toCharArray());
+            return  privKey;
+        } catch (KeyStoreException | UnrecoverableKeyException | NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    @Override
+    public Certificate readCertificate(String alias) {
+        loadKeyStore(1);
+        try {
+            Certificate cert = keyStore.getCertificate(alias);
+            return  cert;
+        } catch (KeyStoreException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+
 
 
     @Override

@@ -1,7 +1,6 @@
 package XMLandSecurity.backend1.controller;
 
 import XMLandSecurity.backend1.domain.CategoryOfLodging;
-import XMLandSecurity.backend1.domain.TypeOfLodging;
 import XMLandSecurity.backend1.service.CategoryOfLodgingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -23,8 +22,19 @@ public class CategoryOfLodgingController {
             produces = MediaType.APPLICATION_JSON_VALUE
     )
     public ResponseEntity<List<CategoryOfLodging>> getAll() {
-        List<CategoryOfLodging> listaAdminaFanZone = categoryOfLodgingService.findAll() ; //findOne(user);
-        return new ResponseEntity<>(listaAdminaFanZone, HttpStatus.OK);     // "200 OK"
+        List<CategoryOfLodging> listaAdminaFanZone = null;
+        try {
+             listaAdminaFanZone = categoryOfLodgingService.findAll(); //findOne(user);
+        }catch (Exception e) {
+            return new ResponseEntity<List<CategoryOfLodging>>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+        if(listaAdminaFanZone != null) {
+            return new ResponseEntity<>(listaAdminaFanZone, HttpStatus.OK);     // "200 OK"
+        } else {
+            return new ResponseEntity<List<CategoryOfLodging>>(HttpStatus.NO_CONTENT);
+        }
+
     }
 
     @RequestMapping(
@@ -33,8 +43,22 @@ public class CategoryOfLodgingController {
             produces = MediaType.APPLICATION_JSON_VALUE
     )
     public ResponseEntity<CategoryOfLodging> getUser(@PathVariable("id") Long id) {
-        CategoryOfLodging listaAdminaFanZone = categoryOfLodgingService.findOne(id) ; //findOne(user);
-        return new ResponseEntity<>(listaAdminaFanZone, HttpStatus.OK);     // "200 OK"
+        CategoryOfLodging listaAdminaFanZone = null;
+
+        try {
+            listaAdminaFanZone = categoryOfLodgingService.findOne(id) ; //findOne(user);
+        }catch (Exception e) {
+            return new ResponseEntity<CategoryOfLodging>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+        if(listaAdminaFanZone != null) {
+            return new ResponseEntity<>(listaAdminaFanZone, HttpStatus.OK);     // "200 OK"
+        } else {
+            return new ResponseEntity<CategoryOfLodging>(HttpStatus.NO_CONTENT);
+        }
+
+//        listaAdminaFanZone = categoryOfLodgingService.findOne(id) ; //findOne(user);
+
     }
 
     @RequestMapping(
@@ -43,8 +67,21 @@ public class CategoryOfLodgingController {
             produces = MediaType.APPLICATION_JSON_VALUE
     )
     public ResponseEntity<CategoryOfLodging> CreateCity (@RequestBody CategoryOfLodging categoryOfLodging) {
-        CategoryOfLodging userNew = categoryOfLodgingService.save(categoryOfLodging);
-        return new ResponseEntity(userNew, HttpStatus.OK);
+
+        CategoryOfLodging userNew = null;
+
+        try {
+            userNew = categoryOfLodgingService.save(categoryOfLodging);
+        }catch (Exception e) {
+            return new ResponseEntity<CategoryOfLodging>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+        if(userNew != null) {
+            return new ResponseEntity<>(userNew, HttpStatus.OK);     // "200 OK"
+        } else {
+            return new ResponseEntity<CategoryOfLodging>(HttpStatus.NO_CONTENT);
+        }
+
     }
 
     @RequestMapping(
@@ -54,8 +91,21 @@ public class CategoryOfLodgingController {
             produces = MediaType.APPLICATION_JSON_VALUE
     )
     public ResponseEntity<CategoryOfLodging> updateUsers (@PathVariable("id") Long id) {
-        CategoryOfLodging listaAdminaFanZone = categoryOfLodgingService.findOne(id);
-        return new ResponseEntity(listaAdminaFanZone, HttpStatus.OK);     // "200 OK"
+
+        CategoryOfLodging listaAdminaFanZone = null;
+
+        try {
+            listaAdminaFanZone = categoryOfLodgingService.findOne(id) ; //findOne(user);
+        }catch (Exception e) {
+            return new ResponseEntity<CategoryOfLodging>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+        if(listaAdminaFanZone != null) {
+            return new ResponseEntity<>(listaAdminaFanZone, HttpStatus.OK);     // "200 OK"
+        } else {
+            return new ResponseEntity<CategoryOfLodging>(HttpStatus.NO_CONTENT);
+        }
+
     }
 
     @RequestMapping(
@@ -64,7 +114,13 @@ public class CategoryOfLodgingController {
             consumes = MediaType.APPLICATION_JSON_VALUE
     )
     public ResponseEntity<CategoryOfLodging> izbrisi(@PathVariable("id") Long id){
-        categoryOfLodgingService.delete(id);
+    //    categoryOfLodgingService.delete(id);
+      try {
+          categoryOfLodgingService.delete(id);
+      }catch (Exception e) {
+          return new ResponseEntity<CategoryOfLodging>(HttpStatus.INTERNAL_SERVER_ERROR);
+      }
+
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
