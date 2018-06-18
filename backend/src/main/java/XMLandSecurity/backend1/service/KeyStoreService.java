@@ -43,4 +43,8 @@ public interface KeyStoreService {
 
     void deleteList(List<X509Certificate> certificates);
 
+    PrivateKey readPrivateKey(String allias);
+
+    Certificate readCertificate(String allias);
+
 }

@@ -1,10 +1,5 @@
 package XMLandSecurity.backend1.utility;
 
-import java.security.PrivateKey;
-import java.security.Security;
-import java.security.cert.Certificate;
-import java.security.cert.X509Certificate;
-
 import org.apache.xml.security.exceptions.XMLSecurityException;
 import org.apache.xml.security.keys.KeyInfo;
 import org.apache.xml.security.keys.keyresolver.implementations.RSAKeyValueResolver;
@@ -20,18 +15,23 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
+import java.security.PrivateKey;
+import java.security.Security;
+import java.security.cert.Certificate;
+import java.security.cert.X509Certificate;
+
 public class XMLSigningUtility {
     public XMLSigningUtility() {
         Security.addProvider(new BouncyCastleProvider());
         org.apache.xml.security.Init.init();
     }
 	
-	public Document signDocument(Document doc, 
+	public Document signDocument(Document doc,
 								 PrivateKey privateKey, 
 								 Certificate cert) {
         try {
 			Element rootEl = doc.getDocumentElement();
-			XMLSignature sig = new XMLSignature(doc, null, 
+			XMLSignature sig = new XMLSignature(doc, null,
 					XMLSignature.ALGO_ID_SIGNATURE_RSA_SHA1);
 			Transforms transforms = new Transforms(doc);
 			transforms.addTransform(Transforms.TRANSFORM_ENVELOPED_SIGNATURE);

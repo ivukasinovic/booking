@@ -35,8 +35,8 @@ public class AdditionalService implements Serializable {
     private String name;
 
 
-    public AdditionalService() {
-    }
+    public AdditionalService(Long aLong, String s, String message) {}
+
     @JsonIgnore
     @JoinTable(
             name = "lodging_additional_service",
@@ -49,6 +49,11 @@ public class AdditionalService implements Serializable {
 
 
     public AdditionalService(int i) {
+    }
+
+    public AdditionalService(String name, List<Lodging> lodgingList) {
+        this.name = name;
+        this.lodgingList = lodgingList;
     }
 
 //
