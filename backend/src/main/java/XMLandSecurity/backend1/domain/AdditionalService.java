@@ -56,12 +56,8 @@ public class AdditionalService implements Serializable {
         this.lodgingList = lodgingList;
     }
 
-//
-//    public AdditionalService(Long id, String name, List<Lodging> lodgingList) {
-//        this.id = id;
-//        this.name = name;
-//        this.lodgingList = lodgingList;
-//    }
+    public AdditionalService() {
+    }
 
     public Long getId() {
         return id;
@@ -70,30 +66,6 @@ public class AdditionalService implements Serializable {
     public void setId(Long id) {
         this.id = id;
     }
-
-//    public String getName() {
-//        return name;
-//    }
-//
-//    public void setName(String name) {
-//        this.name = name;
-//    }
-
-//    public List<AdditionalServiceAdmin> getAdditionalService_list() {
-//        return additionalService_list;
-//    }
-//
-//    public void setAdditionalService_list(List<AdditionalServiceAdmin> additionalService_list) {
-//        this.additionalService_list = additionalService_list;
-//    }
-
-//    public Lodging getLodging() {
-//        return lodging;
-//    }
-//
-//    public void setLodging(Lodging lodging) {
-//        this.lodging = lodging;
-//    }
 
     public String getName() {
         return name;
