@@ -3,6 +3,22 @@
   targetNamespace="http://bookingxml.com/soap-example" xmlns:tns="http://bookingxml.com/soap-example"
   xmlns:xs="http://www.w3.org/2001/XMLSchema">
 
+  <xs:element name="getLodgingsRequest">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="lodgings" type="xs:string"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="getLodgingsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="lodgingRes" type="tns:lodgingRes" minOccurs="1" maxOccurs="unbounded"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
   <xs:element name="getMessagesRequest">
     <xs:complexType>
       <xs:sequence>
@@ -77,16 +93,7 @@
   <xs:element name="setLodgingRequest">
     <xs:complexType>
       <xs:sequence>
-        <xs:element name="title" type="xs:string"/>
-        <xs:element name="agent" type="xs:long"/>
-        <xs:element name="city" type="xs:long"/>
-        <xs:element name="address" type="xs:string"/>
-        <xs:element name="type" type="xs:long"/>
-        <xs:element name="category" type="xs:long"/>
-        <xs:element name="details" type="xs:string"/>
-        <xs:element name="image" type="xs:string"/>
-        <xs:element name="personsNumber" type="xs:positiveInteger"/>
-        <xs:element name="additionService" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+        <xs:element name="lodging" type="tns:lodgingRes"/>
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -185,6 +192,22 @@
             <xs:element name="receiver" type="xs:string"/>
         </xs:sequence>
     </xs:complexType>
+
+  <xs:element name="lodgingRes" type="tns:lodgingRes"/>
+  <xs:complexType name="lodgingRes">
+    <xs:sequence>
+      <xs:element name="title" type="xs:string"/>
+      <xs:element name="agent" type="xs:long"/>
+      <xs:element name="city" type="xs:long"/>
+      <xs:element name="address" type="xs:string"/>
+      <xs:element name="type" type="xs:long"/>
+      <xs:element name="category" type="xs:long"/>
+      <xs:element name="details" type="xs:string"/>
+      <xs:element name="image" type="xs:string"/>
+      <xs:element name="personsNumber" type="xs:positiveInteger"/>
+      <xs:element name="additionService" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
 
   <xs:element name="additionalService" type="tns:additionalService"/>
 

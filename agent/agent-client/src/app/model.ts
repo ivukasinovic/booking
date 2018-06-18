@@ -23,13 +23,12 @@ export class Lodging {
   title: string;
   agent: number;
   name: string;
-  city: string;
-  type: string;
-  category: string;
+  city: number;
+  type: number;
+  category: number;
   address: string;
   details: string;
   image: string;
-  rating: number;
   personsNumber: number;
   additionService: number[] = null;
 }
@@ -50,5 +49,8 @@ export class Message {
   dateTime: Date;
   sender: string;
   receiver: string;
+}
+export class LodgingRes {
+  lodging: Lodging;
 }
 

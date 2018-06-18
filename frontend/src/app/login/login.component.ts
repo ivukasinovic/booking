@@ -51,7 +51,7 @@ export class LoginComponent implements OnInit {
       if (!control.value.match(/^(?=.*[0-9])[a-zA-Z0-9!@#$%^&*]{6,100}$/)) {
         return { 'invalidPassword': true };
       } else {
-        //here i need to add check for special characters
+        // here i need to add check for special characters
       }
     }
   }

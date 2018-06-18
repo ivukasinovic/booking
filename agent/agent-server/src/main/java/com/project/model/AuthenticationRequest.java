@@ -1,4 +1,4 @@
-package com.project.model.json;
+package com.project.model;
 
 public class AuthenticationRequest {
 

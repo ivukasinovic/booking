@@ -1,7 +1,9 @@
 package com.project.controller;
 
-import com.project.model.json.AuthenticationRequest;
-import com.project.utility.XMLSigningUtility;
+import com.project.model.AuthenticationRequest;
+import com.project.model.User;
+import com.project.services.RepositoryService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -9,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import org.w3c.dom.Document;
 
 /**
  * Created by Ivan V. on 30-May-18
@@ -17,11 +18,21 @@ import org.w3c.dom.Document;
 @RestController
 public class AuthController {
 
+
+    @Autowired
+    private RepositoryService services;
+
     @RequestMapping(method = RequestMethod.POST,
             value = "login",
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<AuthenticationRequest> authenticationRequest(@RequestBody AuthenticationRequest authenticationRequest) {
-        return new ResponseEntity<>(authenticationRequest,HttpStatus.OK);
+    public ResponseEntity<User> authenticationRequest(@RequestBody AuthenticationRequest authenticationRequest) {
+        User user = services.findByUsername(authenticationRequest.getUsername());
+        if(user != null){
+            if(user.getPassword().equals(authenticationRequest.getPassword())){
+                return new ResponseEntity<>(user, HttpStatus.OK);
+            }
+        }
+        return new ResponseEntity<>(HttpStatus.FORBIDDEN);
     }
 }
