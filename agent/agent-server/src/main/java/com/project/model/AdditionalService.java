@@ -2,6 +2,7 @@ package com.project.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -13,7 +14,7 @@ public class AdditionalService implements Serializable {
     private String name;
 
 
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
+    @ManyToMany(cascade = {CascadeType.ALL}, fetch = FetchType.LAZY)
     private List<LodgingRes> lodgingList;
 
 
@@ -24,6 +25,8 @@ public class AdditionalService implements Serializable {
         this.name = name;
         this.lodgingList = lodgingList;
     }
+
+    public  AdditionalService(Long id,String name){}
 
     public AdditionalService() {
     }

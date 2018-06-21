@@ -2,6 +2,7 @@ package XMLandSecurity.backend1.endpoint;
 
 import XMLandSecurity.backend1.domain.*;
 import XMLandSecurity.backend1.service.*;
+import XMLandSecurity.backend1.utility.Converter;
 import XMLandSecurity.backend1.ws.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ws.server.endpoint.annotation.Endpoint;
@@ -9,6 +10,8 @@ import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
 import org.springframework.ws.server.endpoint.annotation.RequestPayload;
 import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 
+import javax.xml.datatype.DatatypeConfigurationException;
+import javax.xml.datatype.XMLGregorianCalendar;
 import java.math.BigInteger;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -61,6 +64,7 @@ public class LodgingEndpoint {
                 lodgingRes.setDetails(lodging.getDetails());
                 lodgingRes.setImage(lodging.getImage());
                 lodgingRes.setType(lodging.getType().getId());
+                lodgingRes.setAgent(lodging.getAgent().getId());
                 lodgingRes.setPersonsNumber(BigInteger.valueOf(lodging.getPersons_number()));
                 for(AdditionalService additionalService: lodging.getAdditionalServiceList()){
                     lodgingRes.getAdditionService().add(additionalService.getId().toString());
@@ -98,7 +102,7 @@ public class LodgingEndpoint {
     }
     @PayloadRoot(namespace = "http://bookingxml.com/soap-example", localPart = "getMessagesRequest")
     @ResponsePayload
-    public GetMessagesResponse getMessagesResponse(@RequestPayload GetMessagesRequest request){
+    public GetMessagesResponse getMessagesResponse(@RequestPayload GetMessagesRequest request) throws DatatypeConfigurationException {
         GetMessagesResponse response = new GetMessagesResponse();
         //Hardkodovan agent (2)
         List<Message> messages = messageService.findByReceiver_Id(4L);
@@ -106,6 +110,15 @@ public class LodgingEndpoint {
             MessageRes messageRes = new MessageRes();
             messageRes.setTitle(msg.getTitle());
             messageRes.setBody(msg.getBody());
+
+//            Date daatiDatum = msg.getDateSent();
+//            GregorianCalendar c = new GregorianCalendar();
+//            c.setTime(daatiDatum);
+//            XMLGregorianCalendar date2 = DatatypeFactory.newInstance().newXMLGregorianCalendar(c);
+
+            XMLGregorianCalendar datumDati = Converter.vracaXmlDate(msg.getDateSent());
+
+            messageRes.setDateSent(datumDati);
             messageRes.setId(msg.getId());
             messageRes.setSender(msg.getSender().getUsername());
             messageRes.setReceiver(msg.getReceiver().getUsername());
@@ -125,6 +138,7 @@ public class LodgingEndpoint {
         message.setReceiver(receiver);
         message.setBody(request.getMessageRes().getBody());
         message.setTitle(request.getMessageRes().getTitle());
+     //   message.setDateSent(request.getMessageRes().getDateSent());
         messageService.save(message);
         response.setMessageRes(request.getMessageRes());
 

@@ -47,9 +47,11 @@ import javax.xml.datatype.XMLGregorianCalendar;
 public class Reservation {
 
     protected long id;
+
     @XmlElement(required = true)
     @XmlSchemaType(name = "dateTime")
     protected XMLGregorianCalendar dateStart;
+
     @XmlElement(required = true)
     @XmlSchemaType(name = "dateTime")
     protected XMLGregorianCalendar dateEnd;
@@ -59,10 +61,6 @@ public class Reservation {
     protected Lodging lodging;
     @XmlElement(required = true)
     protected User user;
-
-    public Reservation() {
-
-    }
 
     /**
      * Gets the value of the id property.

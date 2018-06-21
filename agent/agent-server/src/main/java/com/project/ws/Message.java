@@ -69,9 +69,6 @@ public class Message {
     @XmlElement(required = true)
     protected User sender;
 
-    public Message() {
-
-    }
     /**
      * Gets the value of the id property.
      * 

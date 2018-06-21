@@ -138,7 +138,7 @@ public class MessageRes {
 
     /**
      * Sets the value of the dateSent property.
-     * 
+     *
      * @param value
      *     allowed object is
      *     {@link XMLGregorianCalendar }

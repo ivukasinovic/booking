@@ -133,6 +133,18 @@ public interface LodgingServicePort {
 
     /**
      * 
+     * @param getLodgingsRequest
+     * @return
+     *     returns com.bookingxml.soap_example.GetLodgingsResponse
+     */
+    @WebMethod
+    @WebResult(name = "getLodgingsResponse", targetNamespace = "http://bookingxml.com/soap-example", partName = "getLodgingsResponse")
+    public GetLodgingsResponse getLodgings(
+            @WebParam(name = "getLodgingsRequest", targetNamespace = "http://bookingxml.com/soap-example", partName = "getLodgingsRequest")
+                    GetLodgingsRequest getLodgingsRequest);
+
+    /**
+     * 
      * @param getReservationsRequest
      * @return
      *     returns com.bookingxml.soap_example.GetReservationsResponse

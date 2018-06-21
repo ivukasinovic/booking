@@ -1,6 +1,7 @@
 package com.project.model;
 
 import javax.persistence.*;
+import java.math.BigInteger;
 import java.util.List;
 
 
@@ -18,8 +19,8 @@ public class LodgingRes {
     protected long category;
     protected String details;
     protected String image;
-    protected Integer personsNumber;
-    @ManyToMany(mappedBy = "lodgingList", cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
+    protected BigInteger personsNumber;
+    @ManyToMany(mappedBy = "lodgingList", cascade = {CascadeType.ALL}, fetch = FetchType.LAZY)
     protected List<AdditionalService> additionService;
 
     public LodgingRes() {
@@ -98,11 +99,11 @@ public class LodgingRes {
         this.image = value;
     }
 
-    public Integer getPersonsNumber() {
+    public BigInteger getPersonsNumber() {
         return personsNumber;
     }
 
-    public void setPersonsNumber(Integer value) {
+    public void setPersonsNumber(BigInteger value) {
         this.personsNumber = value;
     }
 
@@ -113,4 +114,6 @@ public class LodgingRes {
     public void setAdditionService(List<AdditionalService> additionService) {
         this.additionService = additionService;
     }
+
+
 }

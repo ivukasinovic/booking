@@ -4,21 +4,22 @@
       <b><a class="navbar-brand" routerLink="/">Booking Agent</a></b>
     </div>
     <ul class="nav navbar-nav mr-auto">
-      <li class="nav-item"><a routerLink="/reservations">Reservations</a></li>
-      <li class="nav-item"><a routerLink="/lodging-new">Lodgings</a></li>
-      <li class="nav-item"><a routerLink="/messages">Messages</a></li>
-      <li class="nav-item"><a routerLink="/occupancy">Set Occupancy</a></li>
-      <li *ngIf="logged == true"><a routerLink="/certificates">Lodging</a></li>
+      <li *ngIf="logged == true" class="nav-item"><a routerLink="/reservations">Reservations</a></li>
+      <li *ngIf="logged == true" class="nav-item"><a routerLink="/lodging-new">Lodgings</a></li>
+      <li *ngIf="logged == true" class="nav-item"><a routerLink="/messages">Messages</a></li>
+      <li *ngIf="logged == true" class="nav-item"><a routerLink="/occupancy">Set Occupancy</a></li>
+      <!--<li *ngIf="logged == true"><a routerLink="/certificates">Lodging</a></li>-->
     </ul>
     <ul *ngIf="logged == true" class="nav navbar-nav navbar-right">
       <li><a routerLink="/profile">Profile</a></li>
       <li>
         <p><b>Hi, {{username}}!</b></p>
-        <button class="btn btn-sm btn-warning" (click)="logout()">Logout</button>
+        <button class="btn btn-sm btn-warning" (click)="logOut()">Logout</button>
       </li>
     </ul>
     <ul *ngIf="logged == false" class="nav navbar-nav navbar-right">
       <li><a routerLink="/login">Sign in</a></li>
     </ul>
+
   </div>
 </nav>

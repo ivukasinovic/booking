@@ -4,7 +4,6 @@ package com.project.model;
 import javax.persistence.*;
 
 
-import java.util.Date;
 
 @Entity
 @Table
@@ -13,8 +12,8 @@ public class ReservationRes {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    private Date dateStart;
-    private Date dateEnd;
+    private String dateStart;
+    private String dateEnd;
     private boolean active;
     private boolean visited;
     private String user;
@@ -27,41 +26,47 @@ public class ReservationRes {
         return id;
     }
 
-    public void setId(long value) {
-        this.id = value;
+    public void setId(long id) {
+        this.id = id;
     }
 
-
-    public Date getDateStart() {
+    public String getDateStart() {
         return dateStart;
     }
 
-
-    public void setDateStart(Date value) {
-        this.dateStart = value;
+    public void setDateStart(String dateStart) {
+        this.dateStart = dateStart;
     }
 
-    public Date getDateEnd() {
+    public String getDateEnd() {
         return dateEnd;
     }
 
-    public void setDateEnd(Date value) {
-        this.dateEnd = value;
+    public void setDateEnd(String dateEnd) {
+        this.dateEnd = dateEnd;
     }
 
     public boolean isActive() {
         return active;
     }
-    public void setActive(boolean value) {
-        this.active = value;
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
+
     public boolean isVisited() {
         return visited;
     }
-    public void setVisited(boolean value) {
-        this.visited = value;
+
+    public void setVisited(boolean visited) {
+        this.visited = visited;
     }
 
+    public String getUser() {
+        return user;
+    }
 
-
+    public void setUser(String user) {
+        this.user = user;
+    }
 }

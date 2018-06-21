@@ -191,6 +191,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link GetLodgingsRequest }
+     * 
+     */
+    public GetLodgingsRequest createGetLodgingsRequest() {
+        return new GetLodgingsRequest();
+    }
+
+    /**
      * Create an instance of {@link GetLodgingCategoriesRequest }
      * 
      */
@@ -252,6 +260,14 @@ public class ObjectFactory {
      */
     public Message createMessage() {
         return new Message();
+    }
+
+    /**
+     * Create an instance of {@link GetLodgingsResponse }
+     * 
+     */
+    public GetLodgingsResponse createGetLodgingsResponse() {
+        return new GetLodgingsResponse();
     }
 
     /**

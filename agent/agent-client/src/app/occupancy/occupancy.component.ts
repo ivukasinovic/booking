@@ -23,7 +23,7 @@ export class OccupancyComponent implements OnInit {
         this.router.navigate(['/']);
       }, error1 => {
         alert('Error, try different dates!');
-        location.reload();
+     //   location.reload();
       });
   }
 

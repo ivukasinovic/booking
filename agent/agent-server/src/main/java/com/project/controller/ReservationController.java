@@ -1,6 +1,10 @@
 package com.project.controller;
 
+import com.project.converter.Converters;
+import com.project.repository.MessageResRepository;
+import com.project.repository.ReservationResRepository;
 import com.project.ws.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +21,15 @@ import java.util.List;
 @RequestMapping(value = "/reservations")
 @RestController
 public class ReservationController {
+
+    @Autowired
+    private Converters converters;
+
+    @Autowired
+    private MessageResRepository messageResRepository;
+
+    @Autowired
+    private ReservationResRepository reservationResRepository;
 
     @RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<Reservation>> getReservations(){
@@ -40,6 +53,10 @@ public class ReservationController {
         request.setStart(dateStart);
         request.setEnd(dateEnd);
         SetOccupancyResponse response = objPort.setOccupancy(request);
+
+        com.project.model.ReservationRes lodgingRes = converters.updateLodging(id,dateStart,dateEnd);
+        reservationResRepository.save(lodgingRes);
+
         return new ResponseEntity<>(HttpStatus.OK);
 
     }
@@ -78,6 +95,10 @@ public class ReservationController {
         request.setMessageRes(messageRes);
         SetMessagesResponse response = objPort.setMessages(request);
         MessageRes msg = response.getMessageRes();
+
+        com.project.model.MessageRes  messageRes1 = converters.convertMessage(messageRes);
+        messageResRepository.save(messageRes1);
+
         return new ResponseEntity<>(msg, HttpStatus.CREATED);
     }
 }

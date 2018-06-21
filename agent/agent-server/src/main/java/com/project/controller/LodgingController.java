@@ -1,7 +1,10 @@
 package com.project.controller;
 
+import com.project.converter.Converters;
+import com.project.repository.LodgingResRepository;
 import com.project.utility.XMLSigningUtility;
 import com.project.ws.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -22,6 +25,12 @@ import java.util.List;
 @RequestMapping(value = "/lodgings")
 public class LodgingController {
 
+
+    @Autowired
+    private Converters converters;
+
+    @Autowired
+    private LodgingResRepository lodgingResRepository;
 
     @RequestMapping(method = RequestMethod.GET,
                     value = "/categories",
@@ -82,6 +91,11 @@ public class LodgingController {
         LodgingServicePort objPort = objMethod.getLodgingServicePortSoap11();
 
         SetLodgingResponse response = objPort.setLodging(request);
+
+        com.project.model.LodgingRes lodgingRes = converters.convertLodging(request.getLodging());
+
+        lodgingResRepository.save(lodgingRes);
+
         System.out.println(response);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
