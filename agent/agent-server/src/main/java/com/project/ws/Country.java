@@ -70,7 +70,7 @@ public class Country {
     @XmlElement(required = true)
     protected String code;
     @XmlElement(required = true)
-    protected CityList cityList;
+    protected Country.CityList cityList;
 
     /**
      * Gets the value of the id property.
@@ -141,10 +141,10 @@ public class Country {
      * 
      * @return
      *     possible object is
-     *     {@link CityList }
+     *     {@link Country.CityList }
      *     
      */
-    public CityList getCityList() {
+    public Country.CityList getCityList() {
         return cityList;
     }
 
@@ -153,10 +153,10 @@ public class Country {
      * 
      * @param value
      *     allowed object is
-     *     {@link CityList }
+     *     {@link Country.CityList }
      *     
      */
-    public void setCityList(CityList value) {
+    public void setCityList(Country.CityList value) {
         this.cityList = value;
     }
 

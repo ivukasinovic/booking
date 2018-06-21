@@ -1,0 +1,24 @@
+<div class="container">
+  <h3>Lodgings</h3>
+  <a class="btn btn-success" href="/lodging-new">New Lodging</a>
+  <div class="col-md-9"
+       href="#"
+       class="list-group-item clearfix"
+       *ngFor="let lodging of lodgings">
+    <div class="pull-left">
+      <h4 class="list-group-item-heading"><b>{{ lodging.title }}</b></h4>
+      <p class="list-group-item-text"><b>Details:</b> {{ lodging.details}}</p>
+      <i>
+        <small>Agent: {{lodging.agent}}<b></b></small><br>
+        <small>Persons number: {{lodging.personsNumber}}<b></b></small>
+      </i>
+    </div>
+    <span class="pull-right">
+        <img
+          [src]="lodging.image"
+          alt="{{ lodging.title }}"
+          class="img-responsive"
+          style="height: 100px; width: 100px;">
+      </span>
+  </div>
+</div>

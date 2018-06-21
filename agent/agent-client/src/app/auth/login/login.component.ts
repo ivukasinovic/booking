@@ -21,25 +21,12 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
   }
 
-  // login() {
-  //   this.authService.login(this.auth.username, this.auth.password)
-  //     .subscribe((data: any) => {
-  //       if (data) {
-  //         this.router.navigate(['/reservations']);
-  //         localStorage.setItem('username', data.username)
-  //         alert(data.username);
-  //       }
-  //     }, error1 => {
-  //         alert('Wrong username or password');
-  //       });
-  // }
-
   login(username: string, lozinka: string) {
     return this.http.post('api/login', {username: username, password: lozinka})
       .subscribe(res => {
           localStorage.setItem('ulogovaniKorisnik', JSON.stringify(res));
           localStorage.setItem('username', username);
-          this.router.navigate(['/reservations']);
+          this.router.navigate(['/lodging-list']);
           window.location.reload();
         },
         err => {

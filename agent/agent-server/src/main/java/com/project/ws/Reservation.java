@@ -47,11 +47,9 @@ import javax.xml.datatype.XMLGregorianCalendar;
 public class Reservation {
 
     protected long id;
-
     @XmlElement(required = true)
     @XmlSchemaType(name = "dateTime")
     protected XMLGregorianCalendar dateStart;
-
     @XmlElement(required = true)
     @XmlSchemaType(name = "dateTime")
     protected XMLGregorianCalendar dateEnd;

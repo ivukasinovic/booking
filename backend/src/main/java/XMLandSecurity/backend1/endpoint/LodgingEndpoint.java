@@ -64,7 +64,7 @@ public class LodgingEndpoint {
                 lodgingRes.setDetails(lodging.getDetails());
                 lodgingRes.setImage(lodging.getImage());
                 lodgingRes.setType(lodging.getType().getId());
-                lodgingRes.setAgent(lodging.getAgent().getId());
+                lodgingRes.setAgent(lodging.getAgent().getUsername());
                 lodgingRes.setPersonsNumber(BigInteger.valueOf(lodging.getPersons_number()));
                 for(AdditionalService additionalService: lodging.getAdditionalServiceList()){
                     lodgingRes.getAdditionService().add(additionalService.getId().toString());
@@ -81,7 +81,7 @@ public class LodgingEndpoint {
         SetLodgingResponse response = new SetLodgingResponse();
 
         Lodging lodging = new Lodging();
-        lodging.setAgent(userService.findOne(request.getLodging().getAgent()));
+        lodging.setAgent(userService.findByUsername(request.getLodging().getAgent()));
         lodging.setType(typeOfLodgingService.findOne(request.getLodging().getType()));
         lodging.setCity(cityService.findOne(request.getLodging().getCity()));
         lodging.setCategory(categoryOfLodgingService.findOne(request.getLodging().getCategory()));
@@ -89,6 +89,7 @@ public class LodgingEndpoint {
         lodging.setAddress(request.getLodging().getAddress());
         lodging.setDetails(request.getLodging().getDetails());
         lodging.setImage(request.getLodging().getImage());
+        lodging.setRating(0.0);
         lodging.setPersons_number(request.getLodging().getPersonsNumber().intValue());
 
         Lodging savedLodging  = lodgingService.save(lodging);
@@ -97,15 +98,16 @@ public class LodgingEndpoint {
             additionalService.getLodgingList().add(savedLodging);
             additionalServiceService.save(additionalService);
         }
-        response.setName("vratio");
+        response.setName("success");
         return response;
     }
     @PayloadRoot(namespace = "http://bookingxml.com/soap-example", localPart = "getMessagesRequest")
     @ResponsePayload
     public GetMessagesResponse getMessagesResponse(@RequestPayload GetMessagesRequest request) throws DatatypeConfigurationException {
         GetMessagesResponse response = new GetMessagesResponse();
-        //Hardkodovan agent (2)
-        List<Message> messages = messageService.findByReceiver_Id(4L);
+        String agent = request.getResponse();
+        User agentObj = userService.findByUsername(agent);
+        List<Message> messages = messageService.findByReceiver_Id(agentObj.getId());
         for (Message msg: messages) {
             MessageRes messageRes = new MessageRes();
             messageRes.setTitle(msg.getTitle());
@@ -162,8 +164,7 @@ public class LodgingEndpoint {
     public SetOccupancyResponse setOccupancyRequest(@RequestPayload SetOccupancyRequest request){
         SetOccupancyResponse response = new SetOccupancyResponse();
         Reservation reservation = new Reservation();
-        //HARDKOD
-        User agent = userService.findOne(2L);
+        User agent = userService.findByUsername(request.getAgent());
         reservation.setUser(agent);
         DateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         String dateStart = request.getStart() + " 00:00:00";
@@ -193,7 +194,7 @@ public class LodgingEndpoint {
                 user.setUsername(res.getUser().getUsername());
                 res.setUser(user);
                 Lodging lodging = new Lodging();
-                lodging.setId(res.getLodging().getId());
+                lodging.setTitle(res.getLodging().getTitle());
                 res.setLodging(lodging);
               //  res.setUser(null);
               //  res.setLodging(null);

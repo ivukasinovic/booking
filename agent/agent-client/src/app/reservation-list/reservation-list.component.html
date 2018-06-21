@@ -7,10 +7,10 @@
     <div class="pull-left">
       <h4 class="list-group-item-heading"><b>{{ reservation.id }}</b></h4>
       <p class="list-group-item-text">Start date: {{ reservation.dateStart  | date }}</p>
-      <p class="list-group-item-text">Start date: {{ reservation.dateEnd  | date }}</p>
+      <p class="list-group-item-text">End date: {{ reservation.dateEnd  | date }}</p>
       <i>
         <small>User: {{reservation.user.username}}<b></b></small><br>
-        <small>Lodging: {{reservation.lodging.id}}<b></b></small>
+        <small>Lodging: {{reservation.lodging.title}}<b></b></small>
       </i>
     </div>
     <span class="pull-right">

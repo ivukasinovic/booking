@@ -77,9 +77,9 @@ INSERT INTO comment (id,body,accepted,lodging_id,user_id) VALUES (4,'Pozdrav za 
 INSERT INTO comment (id,body,accepted,lodging_id,user_id) VALUES (5,'Odlicno!',true, 1, 5);
 INSERT INTO comment (id,body,accepted,lodging_id,user_id) VALUES (6,'Lep smestaj.',true, 1, 6);
 
-INSERT INTO message (id,title,body,date_sent,receiver_id,sender_id) VALUES (2,'Naslov za vavek vekova ','Pozdrav ja se zovem Marica i mozemo li se upoznati','2017-02-22 10:42:58',5,4 );
-INSERT INTO message (id,title,body,date_sent,receiver_id,sender_id) VALUES (1,'Odgovor marici ','Cao Marice , nisam tu za vikend cujemo se nekad !!','2017-02-22 11:02:58',4,5 );
-INSERT INTO message (body, date_sent, title, receiver_id, sender_id) VALUES ('Hiljadu lepih stvari ti j e trebalo ', '2018-06-19', 'Grahovac', 4, 5);
+INSERT INTO message (id,title,body,date_sent,receiver_id,sender_id) VALUES (2,'Naslov za vavek vekova ','Pozdrav ja se zovem Marica i mozemo li se upoznati','2017-02-22 10:42:58',5,2 );
+INSERT INTO message (id,title,body,date_sent,receiver_id,sender_id) VALUES (1,'Odgovor marici ','Cao Marice , nisam tu za vikend cujemo se nekad !!','2017-02-22 11:02:58',2,5 );
+INSERT INTO message (body, date_sent, title, receiver_id, sender_id) VALUES ('Hiljadu lepih stvari ti j e trebalo ', '2018-06-19', 'Grahovac', 2, 5);
 
 INSERT INTO rating (id,date_created,star,user_id,lodging_id) VALUES (1,'2018-04-22 09:42:58',4,3,2 );
 

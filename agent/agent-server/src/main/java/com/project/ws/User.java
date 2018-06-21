@@ -189,13 +189,13 @@ public class User {
     @XmlSchemaType(name = "dateTime")
     protected XMLGregorianCalendar lastPasswordReset;
     protected boolean activated;
-    protected ReceviedMessages receviedMessages;
-    protected SentMessages sentMessages;
-    protected Reservations reservations;
-    protected Lodgings lodgings;
-    protected Ratings ratings;
+    protected User.ReceviedMessages receviedMessages;
+    protected User.SentMessages sentMessages;
+    protected User.Reservations reservations;
+    protected User.Lodgings lodgings;
+    protected User.Ratings ratings;
     @XmlElement(required = true)
-    protected Comments comments;
+    protected User.Comments comments;
 
     /**
      * Gets the value of the id property.
@@ -474,10 +474,10 @@ public class User {
      * 
      * @return
      *     possible object is
-     *     {@link ReceviedMessages }
+     *     {@link User.ReceviedMessages }
      *     
      */
-    public ReceviedMessages getReceviedMessages() {
+    public User.ReceviedMessages getReceviedMessages() {
         return receviedMessages;
     }
 
@@ -486,10 +486,10 @@ public class User {
      * 
      * @param value
      *     allowed object is
-     *     {@link ReceviedMessages }
+     *     {@link User.ReceviedMessages }
      *     
      */
-    public void setReceviedMessages(ReceviedMessages value) {
+    public void setReceviedMessages(User.ReceviedMessages value) {
         this.receviedMessages = value;
     }
 
@@ -498,10 +498,10 @@ public class User {
      * 
      * @return
      *     possible object is
-     *     {@link SentMessages }
+     *     {@link User.SentMessages }
      *     
      */
-    public SentMessages getSentMessages() {
+    public User.SentMessages getSentMessages() {
         return sentMessages;
     }
 
@@ -510,10 +510,10 @@ public class User {
      * 
      * @param value
      *     allowed object is
-     *     {@link SentMessages }
+     *     {@link User.SentMessages }
      *     
      */
-    public void setSentMessages(SentMessages value) {
+    public void setSentMessages(User.SentMessages value) {
         this.sentMessages = value;
     }
 
@@ -522,10 +522,10 @@ public class User {
      * 
      * @return
      *     possible object is
-     *     {@link Reservations }
+     *     {@link User.Reservations }
      *     
      */
-    public Reservations getReservations() {
+    public User.Reservations getReservations() {
         return reservations;
     }
 
@@ -534,10 +534,10 @@ public class User {
      * 
      * @param value
      *     allowed object is
-     *     {@link Reservations }
+     *     {@link User.Reservations }
      *     
      */
-    public void setReservations(Reservations value) {
+    public void setReservations(User.Reservations value) {
         this.reservations = value;
     }
 
@@ -546,10 +546,10 @@ public class User {
      * 
      * @return
      *     possible object is
-     *     {@link Lodgings }
+     *     {@link User.Lodgings }
      *     
      */
-    public Lodgings getLodgings() {
+    public User.Lodgings getLodgings() {
         return lodgings;
     }
 
@@ -558,10 +558,10 @@ public class User {
      * 
      * @param value
      *     allowed object is
-     *     {@link Lodgings }
+     *     {@link User.Lodgings }
      *     
      */
-    public void setLodgings(Lodgings value) {
+    public void setLodgings(User.Lodgings value) {
         this.lodgings = value;
     }
 
@@ -570,10 +570,10 @@ public class User {
      * 
      * @return
      *     possible object is
-     *     {@link Ratings }
+     *     {@link User.Ratings }
      *     
      */
-    public Ratings getRatings() {
+    public User.Ratings getRatings() {
         return ratings;
     }
 
@@ -582,10 +582,10 @@ public class User {
      * 
      * @param value
      *     allowed object is
-     *     {@link Ratings }
+     *     {@link User.Ratings }
      *     
      */
-    public void setRatings(Ratings value) {
+    public void setRatings(User.Ratings value) {
         this.ratings = value;
     }
 
@@ -594,10 +594,10 @@ public class User {
      * 
      * @return
      *     possible object is
-     *     {@link Comments }
+     *     {@link User.Comments }
      *     
      */
-    public Comments getComments() {
+    public User.Comments getComments() {
         return comments;
     }
 
@@ -606,10 +606,10 @@ public class User {
      * 
      * @param value
      *     allowed object is
-     *     {@link Comments }
+     *     {@link User.Comments }
      *     
      */
-    public void setComments(Comments value) {
+    public void setComments(User.Comments value) {
         this.comments = value;
     }
 

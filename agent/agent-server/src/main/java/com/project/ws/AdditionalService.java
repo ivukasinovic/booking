@@ -58,7 +58,7 @@ public class AdditionalService {
     @XmlElement(required = true)
     protected String name;
     @XmlElement(required = true)
-    protected LodgingList lodgingList;
+    protected AdditionalService.LodgingList lodgingList;
 
     /**
      * Gets the value of the id property.
@@ -105,10 +105,10 @@ public class AdditionalService {
      * 
      * @return
      *     possible object is
-     *     {@link LodgingList }
+     *     {@link AdditionalService.LodgingList }
      *     
      */
-    public LodgingList getLodgingList() {
+    public AdditionalService.LodgingList getLodgingList() {
         return lodgingList;
     }
 
@@ -117,10 +117,10 @@ public class AdditionalService {
      * 
      * @param value
      *     allowed object is
-     *     {@link LodgingList }
+     *     {@link AdditionalService.LodgingList }
      *     
      */
-    public void setLodgingList(LodgingList value) {
+    public void setLodgingList(AdditionalService.LodgingList value) {
         this.lodgingList = value;
     }
 

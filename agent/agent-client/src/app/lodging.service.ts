@@ -36,6 +36,9 @@ export class LodgingService {
   getMessages() {
     return this.http.get('api/reservations/messages');
   }
+  getLodgings() {
+    return this.http.get('api/lodgings');
+  }
   reply(message: Message) {
     return this.http.post('api/reservations/reply', message);
   }

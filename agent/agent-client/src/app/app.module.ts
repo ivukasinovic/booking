@@ -10,6 +10,7 @@ import {LodgingService} from './lodging.service';
 import { LodgingNewComponent } from './lodging-new/lodging-new.component';
 import { MessagesComponent } from './messages/messages.component';
 import { OccupancyComponent } from './occupancy/occupancy.component';
+import { LodgingListComponent } from './lodging-list/lodging-list.component';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { OccupancyComponent } from './occupancy/occupancy.component';
     ReservationListComponent,
     LodgingNewComponent,
     MessagesComponent,
-    OccupancyComponent
+    OccupancyComponent,
+    LodgingListComponent
   ],
   imports: [
     BrowserModule,
