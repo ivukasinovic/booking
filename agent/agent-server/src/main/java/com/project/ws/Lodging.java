@@ -150,17 +150,17 @@ public class Lodging {
     @XmlElement(required = true)
     protected City city;
     @XmlElement(required = true)
-    protected PriceLists priceLists;
+    protected Lodging.PriceLists priceLists;
     @XmlElement(required = true)
     protected User agent;
     @XmlElement(required = true)
-    protected Comments comments;
+    protected Lodging.Comments comments;
     @XmlElement(required = true)
-    protected Reservations reservations;
+    protected Lodging.Reservations reservations;
     @XmlElement(required = true)
-    protected RatingList ratingList;
+    protected Lodging.RatingList ratingList;
     @XmlElement(required = true)
-    protected AdditionalServiceList additionalServiceList;
+    protected Lodging.AdditionalServiceList additionalServiceList;
 
     /**
      * Gets the value of the id property.
@@ -383,10 +383,10 @@ public class Lodging {
      * 
      * @return
      *     possible object is
-     *     {@link PriceLists }
+     *     {@link Lodging.PriceLists }
      *     
      */
-    public PriceLists getPriceLists() {
+    public Lodging.PriceLists getPriceLists() {
         return priceLists;
     }
 
@@ -395,10 +395,10 @@ public class Lodging {
      * 
      * @param value
      *     allowed object is
-     *     {@link PriceLists }
+     *     {@link Lodging.PriceLists }
      *     
      */
-    public void setPriceLists(PriceLists value) {
+    public void setPriceLists(Lodging.PriceLists value) {
         this.priceLists = value;
     }
 
@@ -431,10 +431,10 @@ public class Lodging {
      * 
      * @return
      *     possible object is
-     *     {@link Comments }
+     *     {@link Lodging.Comments }
      *     
      */
-    public Comments getComments() {
+    public Lodging.Comments getComments() {
         return comments;
     }
 
@@ -443,10 +443,10 @@ public class Lodging {
      * 
      * @param value
      *     allowed object is
-     *     {@link Comments }
+     *     {@link Lodging.Comments }
      *     
      */
-    public void setComments(Comments value) {
+    public void setComments(Lodging.Comments value) {
         this.comments = value;
     }
 
@@ -455,10 +455,10 @@ public class Lodging {
      * 
      * @return
      *     possible object is
-     *     {@link Reservations }
+     *     {@link Lodging.Reservations }
      *     
      */
-    public Reservations getReservations() {
+    public Lodging.Reservations getReservations() {
         return reservations;
     }
 
@@ -467,10 +467,10 @@ public class Lodging {
      * 
      * @param value
      *     allowed object is
-     *     {@link Reservations }
+     *     {@link Lodging.Reservations }
      *     
      */
-    public void setReservations(Reservations value) {
+    public void setReservations(Lodging.Reservations value) {
         this.reservations = value;
     }
 
@@ -479,10 +479,10 @@ public class Lodging {
      * 
      * @return
      *     possible object is
-     *     {@link RatingList }
+     *     {@link Lodging.RatingList }
      *     
      */
-    public RatingList getRatingList() {
+    public Lodging.RatingList getRatingList() {
         return ratingList;
     }
 
@@ -491,10 +491,10 @@ public class Lodging {
      * 
      * @param value
      *     allowed object is
-     *     {@link RatingList }
+     *     {@link Lodging.RatingList }
      *     
      */
-    public void setRatingList(RatingList value) {
+    public void setRatingList(Lodging.RatingList value) {
         this.ratingList = value;
     }
 
@@ -503,10 +503,10 @@ public class Lodging {
      * 
      * @return
      *     possible object is
-     *     {@link AdditionalServiceList }
+     *     {@link Lodging.AdditionalServiceList }
      *     
      */
-    public AdditionalServiceList getAdditionalServiceList() {
+    public Lodging.AdditionalServiceList getAdditionalServiceList() {
         return additionalServiceList;
     }
 
@@ -515,10 +515,10 @@ public class Lodging {
      * 
      * @param value
      *     allowed object is
-     *     {@link AdditionalServiceList }
+     *     {@link Lodging.AdditionalServiceList }
      *     
      */
-    public void setAdditionalServiceList(AdditionalServiceList value) {
+    public void setAdditionalServiceList(Lodging.AdditionalServiceList value) {
         this.additionalServiceList = value;
     }
 

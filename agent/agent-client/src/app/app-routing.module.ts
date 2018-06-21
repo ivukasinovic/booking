@@ -5,13 +5,15 @@ import {ReservationListComponent} from './reservation-list/reservation-list.comp
 import {LodgingNewComponent} from './lodging-new/lodging-new.component';
 import {MessagesComponent} from './messages/messages.component';
 import {OccupancyComponent} from './occupancy/occupancy.component';
+import {LodgingListComponent} from './lodging-list/lodging-list.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'reservations', component: ReservationListComponent },
   { path: 'lodging-new', component: LodgingNewComponent },
   { path: 'messages', component: MessagesComponent },
-  { path: 'occupancy', component: OccupancyComponent }
+  { path: 'occupancy', component: OccupancyComponent },
+  { path: 'lodging-list', component: LodgingListComponent }
 ];
 
 @NgModule({

@@ -173,6 +173,7 @@
   <xs:element name="setOccupancyRequest">
     <xs:complexType>
       <xs:sequence>
+        <xs:element name="agent" type="xs:string"/>
         <xs:element name="lodging" type="xs:long"/>
         <xs:element name="start" type="xs:string"/>
         <xs:element name="end" type="xs:string"/>
@@ -197,7 +198,7 @@
   <xs:complexType name="lodgingRes">
     <xs:sequence>
       <xs:element name="title" type="xs:string"/>
-      <xs:element name="agent" type="xs:long"/>
+      <xs:element name="agent" type="xs:string"/>
       <xs:element name="city" type="xs:long"/>
       <xs:element name="address" type="xs:string"/>
       <xs:element name="type" type="xs:long"/>

@@ -49,11 +49,9 @@ public class MessageRes {
     protected String title;
     @XmlElement(required = true)
     protected String body;
-
     @XmlElement(required = true)
-    @XmlSchemaType(name = "dateTime")
+    @XmlSchemaType(name = "date")
     protected XMLGregorianCalendar dateSent;
-
     @XmlElement(required = true)
     protected String sender;
     @XmlElement(required = true)

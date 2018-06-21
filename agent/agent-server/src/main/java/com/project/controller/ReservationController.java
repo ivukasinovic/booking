@@ -9,9 +9,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.ws.server.endpoint.annotation.RequestPayload;
 
 import javax.print.attribute.standard.Media;
+import javax.servlet.http.HttpSession;
 import javax.xml.ws.Response;
 import java.util.List;
 
@@ -52,6 +55,7 @@ public class ReservationController {
         request.setLodging(id);
         request.setStart(dateStart);
         request.setEnd(dateEnd);
+        request.setAgent(getUsername());
         SetOccupancyResponse response = objPort.setOccupancy(request);
 
         com.project.model.ReservationRes lodgingRes = converters.updateLodging(id,dateStart,dateEnd);
@@ -79,7 +83,8 @@ public class ReservationController {
         LodgingService objMethod = new LodgingService();
         LodgingServicePort objPort = objMethod.getLodgingServicePortSoap11();
         GetMessagesRequest request = new GetMessagesRequest();
-        request.setResponse("all");
+        String username = getUsername();
+        request.setResponse(username);
         GetMessagesResponse response = objPort.getMessages(request);
         List<MessageRes> messageRes = response.getMessageRes();
         return new ResponseEntity<>(messageRes, HttpStatus.OK);
@@ -100,5 +105,12 @@ public class ReservationController {
         messageResRepository.save(messageRes1);
 
         return new ResponseEntity<>(msg, HttpStatus.CREATED);
+    }
+
+    String getUsername(){
+        ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
+        HttpSession session= attr.getRequest().getSession(true);
+        com.project.model.User user = (com.project.model.User) session.getAttribute("user");
+        return user.getUsername();
     }
 }

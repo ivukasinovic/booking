@@ -22,7 +22,7 @@ import javax.xml.bind.annotation.XmlType;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
  *         &lt;element name="title" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *         &lt;element name="agent" type="{http://www.w3.org/2001/XMLSchema}long"/>
+ *         &lt;element name="agent" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         &lt;element name="city" type="{http://www.w3.org/2001/XMLSchema}long"/>
  *         &lt;element name="address" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         &lt;element name="type" type="{http://www.w3.org/2001/XMLSchema}long"/>
@@ -56,7 +56,8 @@ public class LodgingRes {
 
     @XmlElement(required = true)
     protected String title;
-    protected long agent;
+    @XmlElement(required = true)
+    protected String agent;
     protected long city;
     @XmlElement(required = true)
     protected String address;
@@ -98,16 +99,24 @@ public class LodgingRes {
     /**
      * Gets the value of the agent property.
      * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
-    public long getAgent() {
+    public String getAgent() {
         return agent;
     }
 
     /**
      * Sets the value of the agent property.
      * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
      */
-    public void setAgent(long value) {
+    public void setAgent(String value) {
         this.agent = value;
     }
 

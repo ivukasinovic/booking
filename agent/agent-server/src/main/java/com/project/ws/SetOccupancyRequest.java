@@ -18,6 +18,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
+ *         &lt;element name="agent" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         &lt;element name="lodging" type="{http://www.w3.org/2001/XMLSchema}long"/>
  *         &lt;element name="start" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         &lt;element name="end" type="{http://www.w3.org/2001/XMLSchema}string"/>
@@ -31,6 +32,7 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
+    "agent",
     "lodging",
     "start",
     "end"
@@ -38,11 +40,37 @@ import javax.xml.bind.annotation.XmlType;
 @XmlRootElement(name = "setOccupancyRequest")
 public class SetOccupancyRequest {
 
+    @XmlElement(required = true)
+    protected String agent;
     protected long lodging;
     @XmlElement(required = true)
     protected String start;
     @XmlElement(required = true)
     protected String end;
+
+    /**
+     * Gets the value of the agent property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getAgent() {
+        return agent;
+    }
+
+    /**
+     * Sets the value of the agent property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setAgent(String value) {
+        this.agent = value;
+    }
 
     /**
      * Gets the value of the lodging property.

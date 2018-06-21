@@ -12,7 +12,7 @@ public class LodgingRes {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected Long id;
     protected String title;
-    protected long agent;
+    protected String agent;
     protected long city;
     protected String address;
     protected long type;
@@ -42,11 +42,11 @@ public class LodgingRes {
         this.title = value;
     }
 
-    public long getAgent() {
+    public String getAgent() {
         return agent;
     }
 
-    public void setAgent(long value) {
+    public void setAgent(String value) {
         this.agent = value;
     }
 
