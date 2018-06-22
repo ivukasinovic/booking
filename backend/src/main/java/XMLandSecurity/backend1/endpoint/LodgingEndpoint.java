@@ -62,7 +62,8 @@ public class LodgingEndpoint {
                 lodgingRes.setTitle(lodging.getTitle());
                 lodgingRes.setCity(lodging.getCity().getId());
                 lodgingRes.setDetails(lodging.getDetails());
-                lodgingRes.setImage(lodging.getImage());
+                //TODO
+                //  lodgingRes.setImage(lodging.getImage());
                 lodgingRes.setType(lodging.getType().getId());
                 lodgingRes.setAgent(lodging.getAgent().getUsername());
                 lodgingRes.setPersonsNumber(BigInteger.valueOf(lodging.getPersons_number()));
@@ -88,7 +89,8 @@ public class LodgingEndpoint {
         lodging.setTitle(request.getLodging().getTitle());
         lodging.setAddress(request.getLodging().getAddress());
         lodging.setDetails(request.getLodging().getDetails());
-        lodging.setImage(request.getLodging().getImage());
+        //TODO
+        // lodging.setImage(request.getLodging().getImage());
         lodging.setRating(0.0);
         lodging.setPersons_number(request.getLodging().getPersonsNumber().intValue());
 

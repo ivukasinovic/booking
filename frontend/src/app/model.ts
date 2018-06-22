@@ -9,6 +9,15 @@ export class User {
   role: string;
   passwordHash: string;
 }
+
+export class UserDto {
+  username: string;
+  name: string;
+  surname: string;
+  email: string;
+  city: string;
+  number: string;
+}
 export class ChangePasssword {
   oldPw: string;
   newPw: string;
@@ -38,7 +47,7 @@ export class Lodging {
   title: string;
   address: string;
   details: string;
-  image: string;
+  images: Image[];
   rating: number;
   persons_number: number;
   category: string;
@@ -46,6 +55,11 @@ export class Lodging {
   city: City;
   agent: User;
 
+}
+
+export class Image {
+  id: number;
+  url: string;
 }
 export class Reservation {
   id: string;

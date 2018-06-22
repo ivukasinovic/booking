@@ -89,7 +89,10 @@
   <div  *ngFor="let lodging of lod">
       <br/>
       <div class="card bg-info text-white p5"  >
-          <img src="{{(lodging.image)}}" class="img-fluid" alt="No image">
+
+          <div  *ngFor="let image of lodging.images" >
+            <img src="{{(image.url)}}" class="img-fluid" alt="No image">
+          </div>
 
              <h4>{{lodging.title}}</h4>
             <br/><b>Adress: </b>  {{ (lodging.address) }},{{  getCityName(lodging.city) }}

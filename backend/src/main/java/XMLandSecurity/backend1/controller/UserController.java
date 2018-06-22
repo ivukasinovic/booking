@@ -1,6 +1,7 @@
 package XMLandSecurity.backend1.controller;
 
 import XMLandSecurity.backend1.domain.*;
+import XMLandSecurity.backend1.model.dto.UserDto;
 import XMLandSecurity.backend1.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -159,6 +160,20 @@ public class UserController {
             }
         }
         return new ResponseEntity(lodgings, HttpStatus.OK);
+    }
+
+    @RequestMapping(
+            value = "/my-info",
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<UserDto> getMyInfo(Principal principal) {
+ 
+        User loggedUser = userService.findByUsername(principal.getName());
+
+        UserDto userInfo = new UserDto(loggedUser.getUsername(),loggedUser.getName(),
+                loggedUser.getSurname(),loggedUser.getEmail(),loggedUser.getCity(),loggedUser.getAdress(),loggedUser.getNumber());
+
+        return new ResponseEntity(userInfo, HttpStatus.OK);
     }
 
 }
