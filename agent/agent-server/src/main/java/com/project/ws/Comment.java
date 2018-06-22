@@ -18,13 +18,7 @@ import javax.xml.bind.annotation.XmlType;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
  *         &lt;element name="id" type="{http://www.w3.org/2001/XMLSchema}long"/>
- *         &lt;element name="body">
- *           &lt;simpleType>
- *             &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
- *               &lt;maxLength value="200"/>
- *             &lt;/restriction>
- *           &lt;/simpleType>
- *         &lt;/element>
+ *         &lt;element name="body" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         &lt;element name="accepted" type="{http://www.w3.org/2001/XMLSchema}boolean"/>
  *         &lt;element ref="{http://bookingxml.com/soap-example}lodging"/>
  *         &lt;element ref="{http://bookingxml.com/soap-example}user"/>

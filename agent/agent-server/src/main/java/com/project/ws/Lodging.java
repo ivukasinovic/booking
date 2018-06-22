@@ -20,30 +20,11 @@ import javax.xml.bind.annotation.XmlType;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
  *         &lt;element name="id" type="{http://www.w3.org/2001/XMLSchema}long"/>
- *         &lt;element name="address">
- *           &lt;simpleType>
- *             &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
- *               &lt;maxLength value="200"/>
- *             &lt;/restriction>
- *           &lt;/simpleType>
- *         &lt;/element>
- *         &lt;element name="details">
- *           &lt;simpleType>
- *             &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
- *               &lt;maxLength value="250"/>
- *             &lt;/restriction>
- *           &lt;/simpleType>
- *         &lt;/element>
  *         &lt;element name="title" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *         &lt;element name="image" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         &lt;element name="address" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         &lt;element name="details" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         &lt;element name="rating" type="{http://www.w3.org/2001/XMLSchema}double"/>
- *         &lt;element name="personsNumber">
- *           &lt;simpleType>
- *             &lt;restriction base="{http://www.w3.org/2001/XMLSchema}int">
- *               &lt;maxExclusive value="100"/>
- *             &lt;/restriction>
- *           &lt;/simpleType>
- *         &lt;/element>
+ *         &lt;element name="personsNumber" type="{http://www.w3.org/2001/XMLSchema}int"/>
  *         &lt;element name="category" type="{http://bookingxml.com/soap-example}categoryOfLodging"/>
  *         &lt;element name="type" type="{http://bookingxml.com/soap-example}typeOfLodging"/>
  *         &lt;element ref="{http://bookingxml.com/soap-example}city"/>
@@ -103,6 +84,17 @@ import javax.xml.bind.annotation.XmlType;
  *             &lt;/complexContent>
  *           &lt;/complexType>
  *         &lt;/element>
+ *         &lt;element name="imagesList">
+ *           &lt;complexType>
+ *             &lt;complexContent>
+ *               &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+ *                 &lt;sequence>
+ *                   &lt;element ref="{http://bookingxml.com/soap-example}image" maxOccurs="unbounded"/>
+ *                 &lt;/sequence>
+ *               &lt;/restriction>
+ *             &lt;/complexContent>
+ *           &lt;/complexType>
+ *         &lt;/element>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -114,10 +106,9 @@ import javax.xml.bind.annotation.XmlType;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "lodging", propOrder = {
     "id",
+    "title",
     "address",
     "details",
-    "title",
-    "image",
     "rating",
     "personsNumber",
     "category",
@@ -128,19 +119,18 @@ import javax.xml.bind.annotation.XmlType;
     "comments",
     "reservations",
     "ratingList",
-    "additionalServiceList"
+    "additionalServiceList",
+    "imagesList"
 })
 public class Lodging {
 
     protected long id;
     @XmlElement(required = true)
+    protected String title;
+    @XmlElement(required = true)
     protected String address;
     @XmlElement(required = true)
     protected String details;
-    @XmlElement(required = true)
-    protected String title;
-    @XmlElement(required = true)
-    protected String image;
     protected double rating;
     protected int personsNumber;
     @XmlElement(required = true)
@@ -150,17 +140,19 @@ public class Lodging {
     @XmlElement(required = true)
     protected City city;
     @XmlElement(required = true)
-    protected Lodging.PriceLists priceLists;
+    protected PriceLists priceLists;
     @XmlElement(required = true)
     protected User agent;
     @XmlElement(required = true)
-    protected Lodging.Comments comments;
+    protected Comments comments;
     @XmlElement(required = true)
-    protected Lodging.Reservations reservations;
+    protected Reservations reservations;
     @XmlElement(required = true)
-    protected Lodging.RatingList ratingList;
+    protected RatingList ratingList;
     @XmlElement(required = true)
-    protected Lodging.AdditionalServiceList additionalServiceList;
+    protected AdditionalServiceList additionalServiceList;
+    @XmlElement(required = true)
+    protected ImagesList imagesList;
 
     /**
      * Gets the value of the id property.
@@ -176,6 +168,30 @@ public class Lodging {
      */
     public void setId(long value) {
         this.id = value;
+    }
+
+    /**
+     * Gets the value of the title property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getTitle() {
+        return title;
+    }
+
+    /**
+     * Sets the value of the title property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setTitle(String value) {
+        this.title = value;
     }
 
     /**
@@ -224,54 +240,6 @@ public class Lodging {
      */
     public void setDetails(String value) {
         this.details = value;
-    }
-
-    /**
-     * Gets the value of the title property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getTitle() {
-        return title;
-    }
-
-    /**
-     * Sets the value of the title property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setTitle(String value) {
-        this.title = value;
-    }
-
-    /**
-     * Gets the value of the image property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getImage() {
-        return image;
-    }
-
-    /**
-     * Sets the value of the image property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setImage(String value) {
-        this.image = value;
     }
 
     /**
@@ -383,10 +351,10 @@ public class Lodging {
      * 
      * @return
      *     possible object is
-     *     {@link Lodging.PriceLists }
+     *     {@link PriceLists }
      *     
      */
-    public Lodging.PriceLists getPriceLists() {
+    public PriceLists getPriceLists() {
         return priceLists;
     }
 
@@ -395,10 +363,10 @@ public class Lodging {
      * 
      * @param value
      *     allowed object is
-     *     {@link Lodging.PriceLists }
+     *     {@link PriceLists }
      *     
      */
-    public void setPriceLists(Lodging.PriceLists value) {
+    public void setPriceLists(PriceLists value) {
         this.priceLists = value;
     }
 
@@ -431,10 +399,10 @@ public class Lodging {
      * 
      * @return
      *     possible object is
-     *     {@link Lodging.Comments }
+     *     {@link Comments }
      *     
      */
-    public Lodging.Comments getComments() {
+    public Comments getComments() {
         return comments;
     }
 
@@ -443,10 +411,10 @@ public class Lodging {
      * 
      * @param value
      *     allowed object is
-     *     {@link Lodging.Comments }
+     *     {@link Comments }
      *     
      */
-    public void setComments(Lodging.Comments value) {
+    public void setComments(Comments value) {
         this.comments = value;
     }
 
@@ -455,10 +423,10 @@ public class Lodging {
      * 
      * @return
      *     possible object is
-     *     {@link Lodging.Reservations }
+     *     {@link Reservations }
      *     
      */
-    public Lodging.Reservations getReservations() {
+    public Reservations getReservations() {
         return reservations;
     }
 
@@ -467,10 +435,10 @@ public class Lodging {
      * 
      * @param value
      *     allowed object is
-     *     {@link Lodging.Reservations }
+     *     {@link Reservations }
      *     
      */
-    public void setReservations(Lodging.Reservations value) {
+    public void setReservations(Reservations value) {
         this.reservations = value;
     }
 
@@ -479,10 +447,10 @@ public class Lodging {
      * 
      * @return
      *     possible object is
-     *     {@link Lodging.RatingList }
+     *     {@link RatingList }
      *     
      */
-    public Lodging.RatingList getRatingList() {
+    public RatingList getRatingList() {
         return ratingList;
     }
 
@@ -491,10 +459,10 @@ public class Lodging {
      * 
      * @param value
      *     allowed object is
-     *     {@link Lodging.RatingList }
+     *     {@link RatingList }
      *     
      */
-    public void setRatingList(Lodging.RatingList value) {
+    public void setRatingList(RatingList value) {
         this.ratingList = value;
     }
 
@@ -503,10 +471,10 @@ public class Lodging {
      * 
      * @return
      *     possible object is
-     *     {@link Lodging.AdditionalServiceList }
+     *     {@link AdditionalServiceList }
      *     
      */
-    public Lodging.AdditionalServiceList getAdditionalServiceList() {
+    public AdditionalServiceList getAdditionalServiceList() {
         return additionalServiceList;
     }
 
@@ -515,11 +483,35 @@ public class Lodging {
      * 
      * @param value
      *     allowed object is
-     *     {@link Lodging.AdditionalServiceList }
+     *     {@link AdditionalServiceList }
      *     
      */
-    public void setAdditionalServiceList(Lodging.AdditionalServiceList value) {
+    public void setAdditionalServiceList(AdditionalServiceList value) {
         this.additionalServiceList = value;
+    }
+
+    /**
+     * Gets the value of the imagesList property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link ImagesList }
+     *     
+     */
+    public ImagesList getImagesList() {
+        return imagesList;
+    }
+
+    /**
+     * Sets the value of the imagesList property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link ImagesList }
+     *     
+     */
+    public void setImagesList(ImagesList value) {
+        this.imagesList = value;
     }
 
 
@@ -638,6 +630,66 @@ public class Lodging {
                 comment = new ArrayList<Comment>();
             }
             return this.comment;
+        }
+
+    }
+
+
+    /**
+     * <p>Java class for anonymous complex type.
+     * 
+     * <p>The following schema fragment specifies the expected content contained within this class.
+     * 
+     * <pre>
+     * &lt;complexType>
+     *   &lt;complexContent>
+     *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+     *       &lt;sequence>
+     *         &lt;element ref="{http://bookingxml.com/soap-example}image" maxOccurs="unbounded"/>
+     *       &lt;/sequence>
+     *     &lt;/restriction>
+     *   &lt;/complexContent>
+     * &lt;/complexType>
+     * </pre>
+     * 
+     * 
+     */
+    @XmlAccessorType(XmlAccessType.FIELD)
+    @XmlType(name = "", propOrder = {
+        "image"
+    })
+    public static class ImagesList {
+
+        @XmlElement(required = true)
+        protected List<Image> image;
+
+        /**
+         * Gets the value of the image property.
+         * 
+         * <p>
+         * This accessor method returns a reference to the live list,
+         * not a snapshot. Therefore any modification you make to the
+         * returned list will be present inside the JAXB object.
+         * This is why there is not a <CODE>set</CODE> method for the image property.
+         * 
+         * <p>
+         * For example, to add a new item, do as follows:
+         * <pre>
+         *    getImage().add(newItem);
+         * </pre>
+         * 
+         * 
+         * <p>
+         * Objects of the following type(s) are allowed in the list
+         * {@link Image }
+         * 
+         * 
+         */
+        public List<Image> getImage() {
+            if (image == null) {
+                image = new ArrayList<Image>();
+            }
+            return this.image;
         }
 
     }

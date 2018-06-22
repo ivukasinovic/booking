@@ -49,7 +49,6 @@ public class GlobalEndpointInterceptor implements EndpointInterceptor {
         //        Source bodySource = soapHeader .getSource();
     //        DOMSource bodyDomSource = (DOMSource) bodySource;
         //        Node bodyNode = bodyDomSource.getNode();
-        System.out.println("Lloajajajaja");
         return true;
     }
 
@@ -75,13 +74,11 @@ public class GlobalEndpointInterceptor implements EndpointInterceptor {
     @Override
     public boolean handleFault(MessageContext messageContext, Object endpoint) throws Exception {
         LOG.info("Global Exception Handling");
-        System.out.println("Lloajajajaja");
         return true;
     }
 
     @Override
     public void afterCompletion(MessageContext messageContext, Object endpoint, Exception ex) throws Exception {
         LOG.info("Execute Code After Completion");
-        System.out.println("Lloajajajaja");
     }
 }
