@@ -30,4 +30,8 @@ export class UserService {
   getSentMessages() {
     return this.http.get('api/messages/sent');
   }
+
+  getUserInfo() {
+    return this.http.get('api/users/my-info');
+  }
 }

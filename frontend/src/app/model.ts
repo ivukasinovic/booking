@@ -9,6 +9,15 @@ export class User {
   role: string;
   passwordHash: string;
 }
+
+export class UserDto {
+  username: string;
+  name: string;
+  surname: string;
+  email: string;
+  city: string;
+  number: string;
+}
 export class ChangePasssword {
   oldPw: string;
   newPw: string;
