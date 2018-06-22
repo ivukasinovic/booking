@@ -27,6 +27,7 @@ public class ObjectFactory {
     private final static QName _City_QNAME = new QName("http://bookingxml.com/soap-example", "city");
     private final static QName _TypeOfLodging_QNAME = new QName("http://bookingxml.com/soap-example", "typeOfLodging");
     private final static QName _Country_QNAME = new QName("http://bookingxml.com/soap-example", "country");
+    private final static QName _Image_QNAME = new QName("http://bookingxml.com/soap-example", "image");
     private final static QName _MessageRes_QNAME = new QName("http://bookingxml.com/soap-example", "messageRes");
     private final static QName _Lodging_QNAME = new QName("http://bookingxml.com/soap-example", "lodging");
     private final static QName _PriceList_QNAME = new QName("http://bookingxml.com/soap-example", "priceList");
@@ -231,6 +232,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link Image }
+     * 
+     */
+    public Image createImage() {
+        return new Image();
+    }
+
+    /**
      * Create an instance of {@link SetOccupancyResponse }
      * 
      */
@@ -423,6 +432,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link Lodging.ImagesList }
+     * 
+     */
+    public Lodging.ImagesList createLodgingImagesList() {
+        return new Lodging.ImagesList();
+    }
+
+    /**
      * Create an instance of {@link AdditionalService.LodgingList }
      * 
      */
@@ -463,6 +480,15 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://bookingxml.com/soap-example", name = "country")
     public JAXBElement<Country> createCountry(Country value) {
         return new JAXBElement<Country>(_Country_QNAME, Country.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link Image }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://bookingxml.com/soap-example", name = "image")
+    public JAXBElement<Image> createImage(Image value) {
+        return new JAXBElement<Image>(_Image_QNAME, Image.class, null, value);
     }
 
     /**

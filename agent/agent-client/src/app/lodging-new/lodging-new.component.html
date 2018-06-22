@@ -30,9 +30,12 @@
       <label for="details">Details:</label>
       <input type="text" [(ngModel)]="lodging.details" class="form-control" id="details">
     </div>
-    <div class="form-group">
-      <label for="image">Image:</label>
-      <input type="text" [(ngModel)]="lodging.image" class="form-control" id="image">
+    <div>
+      <button class="btn btn-success btn-sm " (click)="addMore()">Add more images</button>
+    </div>
+    <div class="form-group" *ngFor="let image of imagesList; let i = index" >
+      <label for="image">Image: {{i+1}}</label>
+      <input type="text" [(ngModel)]="imagesList[i]" class="form-control" id="image">
     </div>
     <div class="form-group">
       <label for="personsNumber">Number of persons:</label>

@@ -19,8 +19,12 @@ export class ReservationListComponent implements OnInit {
   }
   setCompleted(id: number) {
     this.lodgingService.setCompleted(id)
-      .subscribe();
-    location.reload();
+      .subscribe(response => {
+        location.reload();
+      },
+        error1 => {
+        location.reload();
+        });
   }
 
 }

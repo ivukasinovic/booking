@@ -1,6 +1,7 @@
 package com.project.converter;
 
 import com.project.model.AdditionalService;
+import com.project.model.Image;
 import com.project.model.MessageRes;
 import com.project.model.ReservationRes;
 import com.project.repository.AdditionServiceRepository;
@@ -9,9 +10,7 @@ import com.project.repository.MessageResRepository;
 import com.project.repository.ReservationResRepository;
 import com.project.services.RepositoryService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
-
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,7 +45,8 @@ public class Converters {
          lodgingRes1.setAddress(lodgingRes.getAddress());
          lodgingRes1.setCity(lodgingRes.getCity());
          lodgingRes1.setDetails(lodgingRes.getDetails());
-         lodgingRes1.setImage(lodgingRes.getImage());
+         Image img = new Image();
+//         lodgingRes1.setImages(lodgingRes.getImagesList());
          lodgingRes1.setPersonsNumber( lodgingRes.getPersonsNumber() );
          lodgingRes1.setTitle(lodgingRes.getTitle());
 

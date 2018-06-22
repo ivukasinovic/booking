@@ -1,14 +1,10 @@
 
 package com.project.ws;
 
+import javax.xml.bind.annotation.*;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
 
 
 /**
@@ -28,7 +24,7 @@ import javax.xml.bind.annotation.XmlType;
  *         &lt;element name="type" type="{http://www.w3.org/2001/XMLSchema}long"/>
  *         &lt;element name="category" type="{http://www.w3.org/2001/XMLSchema}long"/>
  *         &lt;element name="details" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *         &lt;element name="image" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         &lt;element name="imagesList" type="{http://www.w3.org/2001/XMLSchema}string" maxOccurs="unbounded" minOccurs="0"/>
  *         &lt;element name="personsNumber" type="{http://www.w3.org/2001/XMLSchema}positiveInteger"/>
  *         &lt;element name="additionService" type="{http://www.w3.org/2001/XMLSchema}string" maxOccurs="unbounded" minOccurs="0"/>
  *       &lt;/sequence>
@@ -48,7 +44,7 @@ import javax.xml.bind.annotation.XmlType;
     "type",
     "category",
     "details",
-    "image",
+    "imagesList",
     "personsNumber",
     "additionService"
 })
@@ -65,8 +61,7 @@ public class LodgingRes {
     protected long category;
     @XmlElement(required = true)
     protected String details;
-    @XmlElement(required = true)
-    protected String image;
+    protected List<String> imagesList;
     @XmlElement(required = true)
     @XmlSchemaType(name = "positiveInteger")
     protected BigInteger personsNumber;
@@ -217,27 +212,32 @@ public class LodgingRes {
     }
 
     /**
-     * Gets the value of the image property.
+     * Gets the value of the imagesList property.
      * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getImage() {
-        return image;
-    }
-
-    /**
-     * Sets the value of the image property.
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the imagesList property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getImagesList().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link String }
+     * 
+     * 
      */
-    public void setImage(String value) {
-        this.image = value;
+    public List<String> getImagesList() {
+        if (imagesList == null) {
+            imagesList = new ArrayList<String>();
+        }
+        return this.imagesList;
     }
 
     /**

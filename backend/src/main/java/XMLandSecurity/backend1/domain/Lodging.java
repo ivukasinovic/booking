@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import javax.xml.bind.annotation.*;
@@ -104,7 +106,8 @@ public class Lodging implements Serializable {
     @XmlElement(name="additionalService", required=true)
     private List<AdditionalService> additionalServiceList = new ArrayList<AdditionalService>();
 
-    @OneToMany(mappedBy = "lodging", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "lodging", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @Fetch(FetchMode.SELECT)
     private List<Image> images = new ArrayList<>();
 
     public Lodging() {

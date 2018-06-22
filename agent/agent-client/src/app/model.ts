@@ -28,7 +28,7 @@ export class Lodging {
   category: number;
   address: string;
   details: string;
-  image: string;
+  imagesList: String[];
   personsNumber: number;
   additionService: number[] = null;
 }

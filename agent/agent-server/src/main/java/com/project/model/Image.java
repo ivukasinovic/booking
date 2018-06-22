@@ -1,8 +1,4 @@
-package XMLandSecurity.backend1.domain;
-
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIdentityReference;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+package com.project.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -18,10 +14,8 @@ public class Image implements Serializable {
     @Column(name = "url", nullable = false)
     private String url;
 
-    @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-    @JsonIdentityReference(alwaysAsId = true)
     @ManyToOne
-    private Lodging lodging;
+    private LodgingRes lodgingRes;
 
     public Image() {
     }
@@ -42,11 +36,11 @@ public class Image implements Serializable {
         this.url = url;
     }
 
-    public Lodging getLodging() {
-        return lodging;
+    public LodgingRes getLodging() {
+        return lodgingRes;
     }
 
-    public void setLodging(Lodging lodging) {
-        this.lodging = lodging;
+    public void setLodging(LodgingRes lodging) {
+        this.lodgingRes = lodging;
     }
 }

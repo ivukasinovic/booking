@@ -62,11 +62,12 @@ public class LodgingEndpoint {
                 lodgingRes.setTitle(lodging.getTitle());
                 lodgingRes.setCity(lodging.getCity().getId());
                 lodgingRes.setDetails(lodging.getDetails());
-                //TODO
-                //  lodgingRes.setImage(lodging.getImage());
                 lodgingRes.setType(lodging.getType().getId());
                 lodgingRes.setAgent(lodging.getAgent().getUsername());
                 lodgingRes.setPersonsNumber(BigInteger.valueOf(lodging.getPersons_number()));
+                for(Image img : lodging.getImages()){
+                    lodgingRes.getImagesList().add(img.getUrl());
+                }
                 for(AdditionalService additionalService: lodging.getAdditionalServiceList()){
                     lodgingRes.getAdditionService().add(additionalService.getId().toString());
                 }

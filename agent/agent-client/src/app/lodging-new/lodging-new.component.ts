@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {AditionalServices, City, Lodging} from '../model';
 import {LodgingService} from '../lodging.service';
+import {forEach} from '@angular/router/src/utils/collection';
 
 @Component({
   selector: 'app-lodging-new',
@@ -13,14 +14,19 @@ export class LodgingNewComponent implements OnInit {
   categories: any[];
   types: any[];
   aditionServices:  AditionalServices[];
+  imagesList: String[];
+  newImages: String[];
 
   nizCekiranih: number[];
   cekiraniSlanje: number[];
 
   constructor(private lodgingService: LodgingService) {
     this.lodging = new Lodging();
+    this.imagesList = [];
+    this.newImages = [];
     this.nizCekiranih = [];
     this.cekiraniSlanje = [];
+    this.imagesList.push('');
   }
 
   ngOnInit() {
@@ -32,6 +38,13 @@ export class LodgingNewComponent implements OnInit {
 
   createLodging() {
     this.lodging.additionService = this.nizCekiranih;
+
+    for (const img of this.imagesList) {
+      if (img.length > 0) {
+        this.newImages.push(img);
+      }
+    }
+    this.lodging.imagesList = this.newImages;
     this.lodgingService.createLodging(this.lodging)
       .subscribe(() => {
         alert('Success');
@@ -88,6 +101,9 @@ export class LodgingNewComponent implements OnInit {
       }
     }
 
+  }
+  addMore() {
+    this.imagesList.push('');
   }
 
 

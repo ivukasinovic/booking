@@ -22,51 +22,14 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
  *         &lt;element name="id" type="{http://www.w3.org/2001/XMLSchema}long"/>
- *         &lt;element name="username">
- *           &lt;simpleType>
- *             &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
- *               &lt;maxLength value="50"/>
- *               &lt;minLength value="1"/>
- *             &lt;/restriction>
- *           &lt;/simpleType>
- *         &lt;/element>
+ *         &lt;element name="username" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         &lt;element name="passwordHash" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *         &lt;element name="name">
- *           &lt;simpleType>
- *             &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
- *               &lt;maxLength value="50"/>
- *             &lt;/restriction>
- *           &lt;/simpleType>
- *         &lt;/element>
- *         &lt;element name="surname">
- *           &lt;simpleType>
- *             &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
- *               &lt;maxLength value="50"/>
- *             &lt;/restriction>
- *           &lt;/simpleType>
- *         &lt;/element>
- *         &lt;element name="email">
- *           &lt;simpleType>
- *             &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
- *               &lt;maxLength value="50"/>
- *             &lt;/restriction>
- *           &lt;/simpleType>
- *         &lt;/element>
+ *         &lt;element name="name" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         &lt;element name="surname" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         &lt;element name="email" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         &lt;element name="city" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *         &lt;element name="adress" minOccurs="0">
- *           &lt;simpleType>
- *             &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
- *               &lt;maxLength value="100"/>
- *             &lt;/restriction>
- *           &lt;/simpleType>
- *         &lt;/element>
- *         &lt;element name="number">
- *           &lt;simpleType>
- *             &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
- *               &lt;maxLength value="15"/>
- *             &lt;/restriction>
- *           &lt;/simpleType>
- *         &lt;/element>
+ *         &lt;element name="adress" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="number" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         &lt;element name="role" type="{http://bookingxml.com/soap-example}role"/>
  *         &lt;element name="lastPasswordReset" type="{http://www.w3.org/2001/XMLSchema}dateTime" minOccurs="0"/>
  *         &lt;element name="activated" type="{http://www.w3.org/2001/XMLSchema}boolean"/>
@@ -189,13 +152,13 @@ public class User {
     @XmlSchemaType(name = "dateTime")
     protected XMLGregorianCalendar lastPasswordReset;
     protected boolean activated;
-    protected User.ReceviedMessages receviedMessages;
-    protected User.SentMessages sentMessages;
-    protected User.Reservations reservations;
-    protected User.Lodgings lodgings;
-    protected User.Ratings ratings;
+    protected ReceviedMessages receviedMessages;
+    protected SentMessages sentMessages;
+    protected Reservations reservations;
+    protected Lodgings lodgings;
+    protected Ratings ratings;
     @XmlElement(required = true)
-    protected User.Comments comments;
+    protected Comments comments;
 
     /**
      * Gets the value of the id property.
@@ -474,10 +437,10 @@ public class User {
      * 
      * @return
      *     possible object is
-     *     {@link User.ReceviedMessages }
+     *     {@link ReceviedMessages }
      *     
      */
-    public User.ReceviedMessages getReceviedMessages() {
+    public ReceviedMessages getReceviedMessages() {
         return receviedMessages;
     }
 
@@ -486,10 +449,10 @@ public class User {
      * 
      * @param value
      *     allowed object is
-     *     {@link User.ReceviedMessages }
+     *     {@link ReceviedMessages }
      *     
      */
-    public void setReceviedMessages(User.ReceviedMessages value) {
+    public void setReceviedMessages(ReceviedMessages value) {
         this.receviedMessages = value;
     }
 
@@ -498,10 +461,10 @@ public class User {
      * 
      * @return
      *     possible object is
-     *     {@link User.SentMessages }
+     *     {@link SentMessages }
      *     
      */
-    public User.SentMessages getSentMessages() {
+    public SentMessages getSentMessages() {
         return sentMessages;
     }
 
@@ -510,10 +473,10 @@ public class User {
      * 
      * @param value
      *     allowed object is
-     *     {@link User.SentMessages }
+     *     {@link SentMessages }
      *     
      */
-    public void setSentMessages(User.SentMessages value) {
+    public void setSentMessages(SentMessages value) {
         this.sentMessages = value;
     }
 
@@ -522,10 +485,10 @@ public class User {
      * 
      * @return
      *     possible object is
-     *     {@link User.Reservations }
+     *     {@link Reservations }
      *     
      */
-    public User.Reservations getReservations() {
+    public Reservations getReservations() {
         return reservations;
     }
 
@@ -534,10 +497,10 @@ public class User {
      * 
      * @param value
      *     allowed object is
-     *     {@link User.Reservations }
+     *     {@link Reservations }
      *     
      */
-    public void setReservations(User.Reservations value) {
+    public void setReservations(Reservations value) {
         this.reservations = value;
     }
 
@@ -546,10 +509,10 @@ public class User {
      * 
      * @return
      *     possible object is
-     *     {@link User.Lodgings }
+     *     {@link Lodgings }
      *     
      */
-    public User.Lodgings getLodgings() {
+    public Lodgings getLodgings() {
         return lodgings;
     }
 
@@ -558,10 +521,10 @@ public class User {
      * 
      * @param value
      *     allowed object is
-     *     {@link User.Lodgings }
+     *     {@link Lodgings }
      *     
      */
-    public void setLodgings(User.Lodgings value) {
+    public void setLodgings(Lodgings value) {
         this.lodgings = value;
     }
 
@@ -570,10 +533,10 @@ public class User {
      * 
      * @return
      *     possible object is
-     *     {@link User.Ratings }
+     *     {@link Ratings }
      *     
      */
-    public User.Ratings getRatings() {
+    public Ratings getRatings() {
         return ratings;
     }
 
@@ -582,10 +545,10 @@ public class User {
      * 
      * @param value
      *     allowed object is
-     *     {@link User.Ratings }
+     *     {@link Ratings }
      *     
      */
-    public void setRatings(User.Ratings value) {
+    public void setRatings(Ratings value) {
         this.ratings = value;
     }
 
@@ -594,10 +557,10 @@ public class User {
      * 
      * @return
      *     possible object is
-     *     {@link User.Comments }
+     *     {@link Comments }
      *     
      */
-    public User.Comments getComments() {
+    public Comments getComments() {
         return comments;
     }
 
@@ -606,10 +569,10 @@ public class User {
      * 
      * @param value
      *     allowed object is
-     *     {@link User.Comments }
+     *     {@link Comments }
      *     
      */
-    public void setComments(User.Comments value) {
+    public void setComments(Comments value) {
         this.comments = value;
     }
 

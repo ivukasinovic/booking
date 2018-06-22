@@ -2,6 +2,7 @@ package com.project.model;
 
 import javax.persistence.*;
 import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -18,10 +19,11 @@ public class LodgingRes {
     protected long type;
     protected long category;
     protected String details;
-    protected String image;
     protected BigInteger personsNumber;
     @ManyToMany(mappedBy = "lodgingList", cascade = {CascadeType.ALL}, fetch = FetchType.LAZY)
     protected List<AdditionalService> additionService;
+    @OneToMany(mappedBy = "lodgingRes", cascade = CascadeType.ALL)
+    private List<Image> imagesList = new ArrayList<>();
 
     public LodgingRes() {
     }
@@ -90,13 +92,12 @@ public class LodgingRes {
         this.details = value;
     }
 
-    public String getImage() {
-        return image;
+    public List<Image> getImages() {
+        return imagesList;
     }
 
-
-    public void setImage(String value) {
-        this.image = value;
+    public void setImages(List<Image> images) {
+        this.imagesList = images;
     }
 
     public BigInteger getPersonsNumber() {

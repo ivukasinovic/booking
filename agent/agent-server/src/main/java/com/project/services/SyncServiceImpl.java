@@ -135,7 +135,7 @@ public class SyncServiceImpl implements SyncService {
             lodgingRes1.setAddress(lodgingRes.get(i).getAddress());
             lodgingRes1.setCity(lodgingRes.get(i).getCity());
             lodgingRes1.setDetails(lodgingRes.get(i).getDetails());
-            lodgingRes1.setImage(lodgingRes.get(i).getImage());
+//            lodgingRes1.setImages(lodgingRes.get(i).getImages());
             lodgingRes1.setPersonsNumber( lodgingRes.get(i).getPersonsNumber() );
             lodgingRes1.setTitle(lodgingRes.get(i).getTitle());
 //                if(brojac ==0) {
