@@ -4,6 +4,7 @@ import XMLandSecurity.backend1.domain.Lodging;
 import XMLandSecurity.backend1.domain.Reservation;
 import XMLandSecurity.backend1.domain.User;
 import XMLandSecurity.backend1.repository.LodgingRepository;
+import XMLandSecurity.backend1.service.EmailService;
 import XMLandSecurity.backend1.service.LodgingService;
 import XMLandSecurity.backend1.service.ReservationService;
 import XMLandSecurity.backend1.service.UserService;
@@ -34,6 +35,9 @@ public class ReservationController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private EmailService emailService;
+
     @RequestMapping(value = "/{idLodging}",
             method = RequestMethod.POST)
     public ResponseEntity createReservation(@RequestBody Reservation reservation, @PathVariable("idLodging") Long idLodging, Principal principal) {
@@ -51,6 +55,7 @@ public class ReservationController {
         User loggedUser = userService.findByUsername(principal.getName());
         reservation.setUser(loggedUser);
         reservationService.save(reservation);
+        emailService.sendReservationDetails(loggedUser, reservation);
 
         return new ResponseEntity(HttpStatus.OK);
 

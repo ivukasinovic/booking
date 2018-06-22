@@ -341,12 +341,15 @@ getPriceListByLodging(lodId: number): string {
   }
 
   reserve(id: string) {
-    if (this.authService.isAuthenticated()) {
+    this.res.dateStart = this.form.value.searchSDT;
+    this.res.dateEnd = this.form.value.searchEDT;
 
-      this.res.dateStart = this.form.value.searchSDT;
-      this.res.dateEnd = this.form.value.searchEDT;
+    if (this.authService.isAuthenticated()) {
       this.router.navigateByUrl('/make-reservation/' + id + '/' + this.res.dateStart + '/' + this.res.dateEnd);
     } else {
+      localStorage.setItem('reserve', 'true');
+      localStorage.setItem('make-res-path', '/make-reservation/' + id + '/' + this.res.dateStart + '/' + this.res.dateEnd);
+      console.log('/make-reservation/' + id + '/' + this.res.dateStart + '/' + this.res.dateEnd);
       this.router.navigateByUrl('/login');
     }
   }
