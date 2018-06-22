@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
 import {HttpClient} from '@angular/common/http';
-import {AuthService} from "../auth/auth.service";
+import {AuthService} from '../auth/auth.service';
 
 
 
@@ -15,19 +15,19 @@ export class NavbarComponent implements OnInit {
   role: string;
   username: string;
   constructor(private router: Router, private http: HttpClient, private authService: AuthService) {
-    this.logged = true;
 
   }
 
   ngOnInit() {
     this.role = localStorage.getItem('role');
     this.username = localStorage.getItem('username');
-    if (this.authService.isAuthenticated()) {
-      this.logged = true;
-    } else {
+    if (this.username === null ) {
       this.logged = false;
+    } else {
+      this.logged = true;
     }
   }
+
   logOut() {
     // this.authService.logout();
     this.logged = false;
