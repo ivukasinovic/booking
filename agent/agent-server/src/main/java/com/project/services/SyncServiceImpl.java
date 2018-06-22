@@ -12,7 +12,10 @@ import com.project.repository.*;
 import com.project.ws.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
+import javax.servlet.http.HttpSession;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Date;
@@ -44,6 +47,13 @@ public class SyncServiceImpl implements SyncService {
     private  TypeOfLodgingRepository typeOfLodgingRepository;
 
     static int brojac =0;
+
+    String getUsername(){
+        ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
+        HttpSession session= attr.getRequest().getSession(true);
+        com.project.model.User user = (com.project.model.User) session.getAttribute("user");
+        return user.getUsername();
+    }
 
     public void brisiSve(){
         try {
@@ -89,6 +99,8 @@ public class SyncServiceImpl implements SyncService {
 
         if(brojac == 0) {
             brisiSve();
+        } else {
+            messageResRepository.deleteAll();           // Ako se samo poruke menjaju u zavisnosti od ulogovanog agenta !!!
         }
       //  brojac++;
 
@@ -174,6 +186,7 @@ public class SyncServiceImpl implements SyncService {
           // lodgingRes1.setAdditionService(adicioniPravi);
         //}
 
+
         GetAdditionsRequest request12 = new GetAdditionsRequest();
         request12.setTypes("all");
         GetAdditionsResponse response11 = objPort.getAdditions(request12);
@@ -225,10 +238,9 @@ public class SyncServiceImpl implements SyncService {
 
         }
 
-
-
         GetMessagesRequest request = new GetMessagesRequest();
-        request.setResponse("all");
+        String username = getUsername();
+        request.setResponse(username);
         GetMessagesResponse response = objPort.getMessages(request);
         List<com.project.ws.MessageRes> messageResList = response.getMessageRes();
 

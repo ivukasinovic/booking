@@ -43,12 +43,8 @@ public class AuthController {
 
                 System.out.print("  ___  " +  user.getUsername());
                 // syncService.syncWholeDb();
-                try{
-                    syncService.syncWholeDb();
-                }catch (Exception e){
-                    e.printStackTrace();
-                }
-
+                syncService.syncWholeDb();
+                
                 return new ResponseEntity<com.project.DTO.Credentials>(credentials, HttpStatus.OK);
             }
         }
@@ -66,31 +62,5 @@ public class AuthController {
         return new ResponseEntity(HttpStatus.OK);
     }
 
-//    @RequestMapping(
-//            value = "/login",
-//            method = RequestMethod.POST,
-//            consumes = MediaType.APPLICATION_JSON_VALUE,
-//            produces = MediaType.APPLICATION_JSON_VALUE)
-//    public ResponseEntity<User> login(@RequestBody com.project.DTO.Credentials credentials){
-//
-//
-//        User user = userService.findByEmailAndPassword(credentials.getUsername(),credentials.getPassword());
-//
-//        if(user == null)
-//            return new ResponseEntity<User> (user, HttpStatus.UNAUTHORIZED);
-//
-//        if(user.getRole().equals("USER"))
-//        {
-//            User regPos = (User) user;
-//            if(!regPos.isActivated())
-//            {
-//                syncService.syncWholeDb();
-//                user =  null;
-//                return new ResponseEntity<User>(user,HttpStatus.UNAUTHORIZED);
-//            }
-//        }
-//
-//        return  new ResponseEntity<User>( user, HttpStatus.OK);
-//    }
 
 }
