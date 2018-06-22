@@ -36,9 +36,6 @@ public class Lodging implements Serializable {
     @XmlElement(name="details", required=true)
     private String details;
 
-    @Column(name = "image")
-    @XmlElement(name="image", required=true)
-    private String image;
 
     @Column(name = "rating", columnDefinition = "Decimal(3,2)")
     @XmlElement(name="rating", required=true)
@@ -107,6 +104,8 @@ public class Lodging implements Serializable {
     @XmlElement(name="additionalService", required=true)
     private List<AdditionalService> additionalServiceList = new ArrayList<AdditionalService>();
 
+    @OneToMany(mappedBy = "lodging", cascade = CascadeType.ALL)
+    private List<Image> images = new ArrayList<>();
 
     public Lodging() {
     }
@@ -216,14 +215,6 @@ public class Lodging implements Serializable {
         this.details = details;
     }
 
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
-    }
-
     public Integer getPersons_number() {
         return personsNumber;
     }
@@ -254,6 +245,14 @@ public class Lodging implements Serializable {
 //    public void setAdditionalServices_list(List<AdditionalService> additionalServices_list) {
 //        this.additionalServices_list = additionalServices_list;
 //    }
+
+    public List<Image> getImages() {
+        return images;
+    }
+
+    public void setImages(List<Image> images) {
+        this.images = images;
+    }
 
     public String getTitle() {
         return title;

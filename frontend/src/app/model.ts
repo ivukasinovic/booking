@@ -38,7 +38,7 @@ export class Lodging {
   title: string;
   address: string;
   details: string;
-  image: string;
+  images: Image[];
   rating: number;
   persons_number: number;
   category: string;
@@ -46,6 +46,11 @@ export class Lodging {
   city: City;
   agent: User;
 
+}
+
+export class Image {
+  id: number;
+  url: string;
 }
 export class Reservation {
   id: string;
