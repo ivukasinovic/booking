@@ -1,5 +1,6 @@
 package XMLandSecurity.backend1.service;
 
+import XMLandSecurity.backend1.domain.Reservation;
 import XMLandSecurity.backend1.domain.User;
 
 /**
@@ -8,4 +9,6 @@ import XMLandSecurity.backend1.domain.User;
 public interface EmailService {
     void sendActivationMail(User user);
     void sendResetPassword(User user);
+
+    void sendReservationDetails(User user, Reservation reservation);
 }

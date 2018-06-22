@@ -1,5 +1,6 @@
 package XMLandSecurity.backend1.service.impl;
 
+import XMLandSecurity.backend1.domain.Reservation;
 import XMLandSecurity.backend1.domain.User;
 import XMLandSecurity.backend1.service.EmailService;
 import XMLandSecurity.backend1.utility.EncDecSimple;
@@ -68,6 +69,28 @@ public class EmailServiceImpl implements EmailService {
             mimeMessage.setContent(htmlMsg, "text/html");
             helper.setTo(user.getEmail());
             helper.setSubject("Link for reset password on Booking.com");
+            javaMailSender.send(mimeMessage);
+        } catch (Exception e) {
+        }
+    }
+
+    @Async
+    @Override
+    public void sendReservationDetails(User user, Reservation reservation) {
+
+        MimeMessage mimeMessage = javaMailSender.createMimeMessage();
+        try {
+            MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, false, "utf-8");
+            String htmlMsg = "<h3>You succesufully reserved " + reservation.getLodging().getTitle()
+                    + " in " + reservation.getLodging().getCity().getName()
+                    + " ," + reservation.getLodging().getAddress()
+                    + " from " + reservation.getDateStart()
+                    + " until " + reservation.getDateEnd()
+                    + " on  <b>Booking.com </b>!</h3><br>";
+
+            mimeMessage.setContent(htmlMsg, "text/html");
+            helper.setTo(user.getEmail());
+            helper.setSubject("Successfull reservation");
             javaMailSender.send(mimeMessage);
         } catch (Exception e) {
         }

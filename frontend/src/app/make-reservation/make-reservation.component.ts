@@ -13,7 +13,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 export class MakeReservationComponent implements OnInit {
 
   lodgings: Lodging[];
-  avaliable = false;
+  avaliable;
   res: Reservation;
   lodging_help: Lodging;
   error = '';
@@ -45,6 +45,8 @@ export class MakeReservationComponent implements OnInit {
         this.res.dateStart = params['dateS'];
         this.res.dateEnd = params['dateE'];
         this.avaliable = true;
+      } else {
+        this.avaliable = false;
       }
     });
   }
