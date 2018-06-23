@@ -23,6 +23,7 @@
     "@angular/platform-browser-dynamic": "^5.2.0",
     "@angular/router": "^5.2.0",
     "@auth0/angular-jwt": "^1.1.0",
+    "@ng-bootstrap/ng-bootstrap": "2.0.0",
     "angular-jwt": "^0.1.9",
     "angular4-datepicker": "^1.0.1",
     "bootstrap": "^3.3.7",

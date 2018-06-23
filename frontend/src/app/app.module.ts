@@ -33,7 +33,8 @@ import { SendMessageComponent } from './send-message/send-message.component';
 import { MakeReservationComponent } from './make-reservation/make-reservation.component';
 import { UserInfoComponent } from './user-info/user-info.component';
 import { MyMessagesComponent } from './my-messages/my-messages.component';
-
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {CarouselModule} from 'ngx-bootstrap/carousel';
 @NgModule({
   declarations: [
     AppComponent,
@@ -63,7 +64,9 @@ import { MyMessagesComponent } from './my-messages/my-messages.component';
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule,
-    BsDatepickerModule.forRoot()
+    BsDatepickerModule.forRoot(),
+    NgbModule.forRoot(),
+    CarouselModule.forRoot()
   ],
   providers: [CertificatesService, {
     provide: HTTP_INTERCEPTORS,

@@ -61,7 +61,7 @@
       </form>
       <br>
   </div>
-  <div data-block-id="sort_bar" class = "sort-bar">
+  <div data-block-id="sort_bar" class="navbar navbar-default">
     <ul>
       <li id="Price"><a>Price</a>
         <ul>
@@ -84,16 +84,17 @@
     </ul>
 
   </div>
-  <br>
-<div *ngIf="lod.length>0">
+  <br/>
+
+  <div *ngIf="lod.length>0">
   <div  *ngFor="let lodging of lod">
       <br/>
-      <div class="card bg-info text-white p5"  >
-
-          <div  *ngFor="let image of lodging.images" >
-            <img src="{{(image.url)}}" class="img-fluid" alt="No image">
-          </div>
-
+    <div class="card bg-info text-white p5">
+      <carousel>
+        <slide *ngFor="let image of lodging.images; let index=index">
+          <img [src]="image.url" class="img-fluid">
+        </slide>
+      </carousel>
              <h4>{{lodging.title}}</h4>
             <br/><b>Adress: </b>  {{ (lodging.address) }},{{  getCityName(lodging.city) }}
             <br/><b>Number of persons: </b>{{(lodging.persons_number)}}
