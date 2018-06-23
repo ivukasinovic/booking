@@ -5,9 +5,11 @@
 
     <div class="pull-center" id="{{reservation.id}}">
       <h4  class="list-group-item-heading">{{reservation.lodging.title}}</h4>
-      <div  *ngFor="let image of reservation.lodging.images" >
-        <img src="{{(image.url)}}" class="img-fluid" alt="No image">
-      </div>
+      <carousel>
+        <slide *ngFor="let image of reservation.lodging.images; let index=index">
+          <img [src]="image.url" class="carousel-inner">
+        </slide>
+      </carousel>
       <br/><b>Address: </b>  {{ reservation.lodging.address }}
       <br/><b>Rating: </b>{{reservation.lodging.rating}}
       <br/><b>Details: </b> {{reservation.lodging.details}}

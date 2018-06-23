@@ -49,6 +49,10 @@ public class LodgingEndpoint {
     @Autowired
     private MessageService messageService;
 
+    @Autowired
+    private ImageService imageService;
+
+
     @PayloadRoot(namespace = "http://bookingxml.com/soap-example", localPart = "getLodgingsRequest")
     @ResponsePayload
     public GetLodgingsResponse getLodgingsRequest(@RequestPayload GetLodgingsRequest request) {
@@ -161,6 +165,18 @@ public class LodgingEndpoint {
         System.out.println(res.getDateEnd());
         response.setStatus("success");
         return response;
+    }
+    @PayloadRoot(namespace = "http://bookingxml.com/soap-example", localPart = "getImagesRequest")
+    @ResponsePayload
+    public GetImagesResponse getImagesRequest(@RequestPayload GetImagesRequest request){
+        GetImagesResponse response = new GetImagesResponse();
+        List<Image> images = imageService.findAll();
+        for(Image im : images){
+            im.setLodging(null);
+            response.getImagesList().add(im);
+        }
+        return response;
+
     }
     @PayloadRoot(namespace = "http://bookingxml.com/soap-example", localPart = "setOccupancyRequest")
     @ResponsePayload

@@ -20,14 +20,15 @@ export class MakeReservationComponent implements OnInit {
 
   form = new FormGroup({
     lodging_id: new FormControl(),
-    searchSDT: new FormControl(this.getTodaysDate(), Validators.compose ([Validators.maxLength(10)])),
-    searchEDT: new FormControl(this.getTodaysDate())
+    searchSDT: new FormControl(),
+    searchEDT: new FormControl()
   });
 
   constructor(private searchService: SearchService, private reserveService: ReserveService,
               private router: Router, private routeA: ActivatedRoute) {
     this.res = new Reservation();
-  this.lodging_help = new Lodging();
+    this.setTodaysDate();
+    this.lodging_help = new Lodging();
   }
 
   ngOnInit() {
@@ -61,7 +62,10 @@ export class MakeReservationComponent implements OnInit {
         });
   }
   checkAvaliability() {
-    console.log('parametri su ' , this.form.value.lodging_id  , this.form.value.searchSDT, this.form.value.searchEDT);
+    if (this.form.value.searchSDT >= this.form.value.searchEDT) {
+      this.error = 'Strat date must be lower than the end date !';
+      return;
+    }
     if ( !this.form.value.lodging_id
       || !this.form.value.searchSDT
       || !this.form.value.searchEDT) {
@@ -82,7 +86,10 @@ export class MakeReservationComponent implements OnInit {
   }
 
   onSubmit = function () {
-    console.log('rezervacija je ', this.form.value.lodging_id, this.res.dateStart, this.res.dateEnd);
+    if (this.form.value.searchSDT >= this.form.value.searchEDT) {
+      this.error = 'Strat date must be lower than the end date !';
+      return;
+    }
     this.res.dateStart =  this.form.value.searchSDT;
     this.res.dateEnd = this.form.value.searchEDT;
     this.reserveService.reserve(this.res, this.form.value.lodging_id).subscribe((res: Response) => {
@@ -95,7 +102,8 @@ export class MakeReservationComponent implements OnInit {
     this.avaliable = false;
   }
 
-  getTodaysDate(): string {
+
+  setTodaysDate() {
     const today = new Date();
     const dd = today.getDate();
     const mm = today.getMonth() + 1; // January is 0!
@@ -109,8 +117,9 @@ export class MakeReservationComponent implements OnInit {
       pm = '0' + mm ;
     }
     const todayStr = yyyy + '-' + pm + '-' + pd ;
-    console.log(todayStr);
-    return todayStr;
-  }
 
+    this.res.dateStart = new Date(todayStr);
+    this.res.dateEnd = new Date(todayStr);
+
+  }
 }
