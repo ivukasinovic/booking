@@ -17,6 +17,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpSession;
 import java.lang.reflect.Array;
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -45,6 +46,9 @@ public class SyncServiceImpl implements SyncService {
 
     @Autowired
     private  TypeOfLodgingRepository typeOfLodgingRepository;
+
+    @Autowired
+    private ImageRepository imageRepository;
 
     static int brojac =0;
 
@@ -91,6 +95,12 @@ public class SyncServiceImpl implements SyncService {
 
         }
 
+        try{
+            imageRepository.deleteAll();
+        }catch (Exception e){
+
+        }
+
     }
 
 
@@ -102,16 +112,58 @@ public class SyncServiceImpl implements SyncService {
         } else {
             messageResRepository.deleteAll();           // Ako se samo poruke menjaju u zavisnosti od ulogovanog agenta !!!
         }
-      //  brojac++;
 
         List<AdditionalService> listaDodatnihServisa =  additionServiceRepository.findAll();
 
 
-
         LodgingService objMethod = new LodgingService();
         LodgingServicePort objPort = objMethod.getLodgingServicePortSoap11();
-
         // ========
+        //imageRepository
+        // pROVERII !!!!!
+        GetImagesRequest getImageRequest = new GetImagesRequest();
+        GetImagesResponse slikice = objPort.getImages(getImageRequest);
+        List<com.project.ws.Image> images= slikice.getImagesList();
+
+
+        List<String> listaSlika = new ArrayList<>();
+
+        for(int i=0; i < images.size();i++ ){
+
+
+            Long idid = Long.valueOf(i+1);
+            com.project.model.Image slika = imageRepository.findOne(idid);
+
+            if(slika == null){
+
+                com.project.model.Image image = new com.project.model.Image();
+                image.setUrl(images.get(i).getUrl());
+                LodgingRes lodgingRes1 = lodgingResRepository.findOne(images.get(i).getId());
+                listaSlika.add(image.getUrl());
+
+//                LodgingRes lodging = new LodgingRes();                                              // Ne moze zato sto nemam informaciju o Lodgingu !!!
+//                    lodging.setAgent(images.get(i).getLodging().getAgent().getUsername());
+//                    lodging.setAddress(images.get(i).getLodging().getAddress());
+//                    lodging.setCategory(images.get(i).getLodging().getCategory().getId());
+//                    lodging.setCity(images.get(i).getLodging().getCity().getId());
+//                    lodging.setDetails(images.get(i).getLodging().getDetails());
+//                    lodging.setPersonsNumber( BigInteger.valueOf( images.get(i).getLodging().getPersonsNumber()) );
+//                    lodging.setType( images.get(i).getLodging().getType().getId());
+//                    lodging.setTitle(images.get(i).getLodging().getTitle());
+//
+//                image.setLodging(lodging);
+
+
+
+               // imageRepository.save(image);
+
+            }else{
+             //   imageRepository.save(slika);
+                listaSlika.add(slika.getUrl());
+            }
+
+        }
+
 
         GetLodgingsRequest requestLod = new GetLodgingsRequest();
         requestLod.setLodgings("all");
@@ -138,7 +190,11 @@ public class SyncServiceImpl implements SyncService {
 //            lodgingRes1.setImages(lodgingRes.get(i).getImages());
             lodgingRes1.setPersonsNumber( lodgingRes.get(i).getPersonsNumber() );
             lodgingRes1.setTitle(lodgingRes.get(i).getTitle());
-//                if(brojac ==0) {
+
+           // lodgingRes1.setImages(lodgingRes.get(i).getImagesList() );
+        //    lodgingRes1.setImages(images1);
+
+            //                if(brojac ==0) {
 //                    if (lodgingRes.get(i).getAdditionService().size() > 0) {
 //                        List<String> niz = new ArrayList<>();
 //                        for (String novi : lodgingRes.get(i).getAdditionService()) {
@@ -178,6 +234,61 @@ public class SyncServiceImpl implements SyncService {
                             lodgingResRepository.save(lodgingRes1);
 
                         }
+
+
+            List<com.project.model.Image> images1 = new ArrayList<>();
+            for( int w=0; w < listaSlika.size(); w ++ ){
+
+
+                if(  brojac == 0) {
+
+                    com.project.model.Image slikaa = new com.project.model.Image();
+
+                    for (int z = 0; z < lodgingRes.get(i).getImagesList().size(); z++) {
+
+
+                        if (lodgingRes.get(i).getImagesList().get(z).equals(listaSlika.get(w))) {
+                            String url = listaSlika.get(w);
+                            //slikaa.setId(Long.valueOf(w+1));
+                            slikaa.setUrl(url);
+                            slikaa.setLodging(lodgingRes1);
+                            images1.add(slikaa);
+                            if (images1.size() <= lodgingRes.get(i).getImagesList().size()) {
+                                imageRepository.save(slikaa);
+                            }
+                        }
+                    }
+                } else {
+                        Long njegovId = Long.valueOf(w) + 1;
+
+                        try {
+                            com.project.model.Image picture = imageRepository.findOne(njegovId);
+                            imageRepository.save(picture);
+                        }catch (Exception e){
+
+                            com.project.model.Image slikaa = new com.project.model.Image();
+
+                            for (int z = 0; z < lodgingRes.get(i).getImagesList().size(); z++) {
+
+
+                                if (lodgingRes.get(i).getImagesList().get(z).equals(listaSlika.get(w))) {
+                                    String url = listaSlika.get(w);
+                                    //slikaa.setId(Long.valueOf(w+1));
+                                    slikaa.setUrl(url);
+                                    slikaa.setLodging(lodgingResRepository.findOne(Long.valueOf(i+1)));
+                                    images1.add(slikaa);
+                                    if (images1.size() <= lodgingRes.get(i).getImagesList().size()) {
+                                        imageRepository.save(slikaa);
+                                    }
+
+                                }
+                            }
+                        }
+
+                }
+
+            }
+
 
 
         }
@@ -237,6 +348,7 @@ public class SyncServiceImpl implements SyncService {
 
 
         }
+
 
         GetMessagesRequest request = new GetMessagesRequest();
         String username = getUsername();
