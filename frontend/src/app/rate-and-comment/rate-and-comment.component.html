@@ -5,7 +5,13 @@
     <div class="card">
       <br/>
       <div class="card bg-info text-white p5"  >
-        <img src="{{(lodging.image)}}" class="img-fluid" alt="No image">
+
+        <carousel>
+          <slide *ngFor="let image of lodging.images; let index=index">
+            <img [src]="image.url" class="carousel-inner">
+          </slide>
+        </carousel>
+
 
         <h4>{{lodging.title}}</h4>
         <br/><b>Adress: </b>  {{ (lodging.address) }}
@@ -17,18 +23,17 @@
         <button class="btn btn-warning"  (click)="setCollapse(lodging.id)" > Comment and rate</button>
 
         <form *ngIf="isCollapsed(lodging.id)">
-          <label for="rating">Rate (1-10): </label>
           <br/>
-          <input [(ngModel)]="rating.star" type="number" id="rating" name="rating"
-                 placeholder="Enter your rating(1-10)">
-          <br/>
-          <br/>
+          <label>Rate: {{rating.star}} </label>
+          <ngb-rating [(rate)]="rating.star" max="10"></ngb-rating>
+
+          <hr>
           <label >Comment:   </label>
           <br/>
-          <textarea [(ngModel)]="com.body" type="text"  name="body"
+          <textarea [(ngModel)]="com.body" type="text" name="body"
                     placeholder="Enter your comment"></textarea>
           <br/>
-          <button class="btn btn-warning" (click)="comment(lodging.id)">Send</button>
+          <input type="submit" class="btn btn-warning" value="Send" (click)="comment(lodging.id)">
         </form>
 
     </div>
