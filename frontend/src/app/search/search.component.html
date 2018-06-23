@@ -61,7 +61,7 @@
       </form>
       <br>
   </div>
-  <div data-block-id="sort_bar" class = "sort-bar">
+  <div data-block-id="sort_bar" class="navbar navbar-default">
     <ul>
       <li id="Price"><a>Price</a>
         <ul>
@@ -84,8 +84,9 @@
     </ul>
 
   </div>
-  <br>
-<div *ngIf="lod.length>0">
+  <br/>
+
+  <div *ngIf="lod.length>0">
   <div  *ngFor="let lodging of lod">
       <br/>
     <div class="card bg-info text-white p5">
