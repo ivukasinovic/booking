@@ -12,9 +12,9 @@ export class SearchService {
     return this.http.get('api/lodging/getLodgings');
   }
   searchLodging(cityName: string, nbrOfPersons: number, dateStart: Date, dateEnd: Date,
-                typeOfLodging: string, catOfLodging: string, as: AditionalServices) {
+                typeOfLodging: string, catOfLodging: string, rating: string, as: AditionalServices) {
     return this.http.post('api/search/searchLodging/' + cityName + '/' + nbrOfPersons +
-      '/' + dateStart + '/' + dateEnd + '/' + typeOfLodging + '/' + '/' + catOfLodging + '/', as );
+      '/' + dateStart + '/' + dateEnd + '/' + typeOfLodging + '/' + '/' + catOfLodging + '/' + rating + '/', as );
   }
 
   getAllAditionalServices() {

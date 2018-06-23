@@ -10,7 +10,7 @@ var mysql = require('mysql');
 var con = mysql.createConnection({
     host: 'localhost',
     user: 'root',
-    password: 'admin',
+    password: 'stefan',
     database:'booking'
 });
 
@@ -19,71 +19,99 @@ con.connect(function(err) {
     console.log('Connected!');
 });
 
-/* jshint node: true */
-
-/*require('@google/cloud-debug');
-exports.helloHttp = function helloHttp(req, res) {
-
-  // Example input: ?name=Pera or {"name": "Pera"}
-  var name = req.query.name || req.body.name;
-  if (name === undefined) {
-    // This is an error case, as "name" is required.
-    console.warn('Bad request: No name provided.');
-    res.status(400).send('Greskka!');
-  } else {
-    // Everything is okay.
-    console.log('Sending a greeting to: ' + name);
-    res.status(200).send('Hello11 ' + name + '!');
-  }
-};
-con.query('UPDATE `rating` SET `star`=? WHERE  `id`=1;',[1],
-    function (err, results, fields) {
-        if (err) {
-            console.log(err);
-            //throw err;
-            //res.status(400).send('Greskka!');
-        }
-        console.log(results);
-    });
-*/
-//var cors = require('cors')();
-
 var express = require('express');
 var bodyParser = require('body-parser');
 require('@google/cloud-debug');
 var app = express();
-
 app.use(bodyParser());
+//app.post('/',exports.newRating = function newRating(req, res){
 
-
-
-app.post('/',exports.newRating = function newRating(req, res){
-
-
-    //var smestajID = req.query.lodgingID;
-
-
-
-        var name = req.query.name || req.body.name;
-        name ='samoProba';
-        if (name === undefined) {
+exports.newRating = function (req, res) {
+        var star = req.query.star || req.body.star;
+        var lodging = req.query.lodging || req.body.lodging;
+        var user = req.query.user || req.body.user;
+        var dateCreated = req.query.dateCreated || req.body.dateCreated;
+        var accepted = req.query.accepted || req.body.accepted;
+        var body = req.query.body || req.body.body;
+        var avg =0.0;
+        var sum= 0;
+        if (star === undefined) {
             // This is an error case, as "name" is required.
             console.warn('Bad request: No name provided.');
-            res.status(400)
+            res.status(400).send('greska');
         } else {
-            // Everything is okay.
-            console.log('Sending a greeting to: ' + name);
-            con.query('UPDATE `rating` SET `star`=? WHERE  `id`=1;',[5],
-                function (err, results, fields) {
-                    if (err) {
-                        console.log(err);
-                        //throw err;
-                        //res.status(400).send('Greskka!');
+
+            con.query('select * from rating where lodging_id='+lodging+ ' and user_id=' + user +';', function(err, results){
+                if(err){
+                    res.status(400).send("errr");
+                }else {
+
+                    if(results.length == 0) {
+                        con.query('insert into rating (lodging_id, user_id, star, date_created) values (' + lodging + ', ' + user + ', ' + star + ', ' + ' \'2018-06-26\' '+')')
+                    } else {
+                        con.query('update rating set star=' + star + ' where lodging_id=' + lodging + ' and user_id=' + user + '');
                     }
-                    console.log(results);
-                });
-            res.status(200)
+
+                    con.query('select * from rating where lodging_id ='+ lodging+';',
+                        function(err,results){
+                            for (i = 0; i < results.length; i++) {
+                                sum = sum + results[i].star;
+                            }
+                            avg = sum/ results.length;
+
+                            con.query('update lodging set rating = '+avg+' where id = '+lodging+';')
+                            console.warn('Bad request: No name provided.' + avg);
+
+                           // res.status(200).send("avg = "+avg +"   i  sum =" + sum +" results ->" +results+" res[0] ->"+ results[0].star);
+                    })
+                   // res.status(200).send("Uspesno dodat ili izmenjen.");
+                }
+            })
+
         }
 
+    con.query('insert into comment (accepted, body, lodging_id, user_id) values (' + accepted + ', \'' + body + ' \', ' + lodging + ', ' + user +')',
+        function(err,result){
+            if(err){
+                res.status(400).send("errr");
+            }else{
+               res.status(200).send("comment cloud");
+            }
+        })
+
+
 }
-)
+
+
+exports.searchRating = function (req, res) {
+    var ratingValue = req.query.ratingValue || req.body.ratingValue;
+    var ratingBig = ratingValue + 1;
+    var ratingSmall = ratingValue - 1;
+    var retString="";
+    var retString1="";
+    var lodgingId= [] ;
+
+    lodgingId = req.lodgingId;
+    res.status(200).send('aaaaaaaaaaaaaaaaaaaaaaa ' lodgingId[0].);
+   /* for (i = 0; i < lodgingId.length; i++) {
+        retString1 = retString1 = lodging.id;
+    }
+    res.status(200).send(retString1);
+    if (ratingValue === undefined) {
+        // This is an error case, as "name" is required.
+        console.warn('Bad request: No name provided.');
+        res.status(400).send('greska');
+    } else {
+        for (i = 0; i < lodgingId.length; i++) {
+            con.query('select * from lodging where rating<' + ratingBig + ' and rating>' + ratingSmall + ' and id ='+lodgingId.id+';'
+                , function (err, results) {
+
+                    retString = retString + results[i].id + ",";
+
+
+                //res.status(200).send(retString);
+            })
+        }
+        res.status(200).send(retString);
+    }*/
+}

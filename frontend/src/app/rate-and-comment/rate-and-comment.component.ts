@@ -32,9 +32,9 @@ export class RateAndCommentComponent implements OnInit {
       });
   }
 
-  comment(id: string) {
+  comment(id: string, star: number) {
     this.reserveService.postComment(this.com, id).subscribe();
-    this.reserveService.postRating(this.rating, id).subscribe();
+    this.reserveService.postRating(this.com, id, star).subscribe();
     this.collapsed = -1;
     this.rating = new Rating();
     this.rating.star = 1;

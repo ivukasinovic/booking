@@ -33,6 +33,7 @@
           <textarea [(ngModel)]="com.body" type="text" name="body"
                     placeholder="Enter your comment"></textarea>
           <br/>
+          <button class="btn btn-warning" (click)="comment(lodging.id, rating.star)">Send</button>
           <input type="submit" class="btn btn-warning" value="Send" (click)="comment(lodging.id)">
         </form>
 

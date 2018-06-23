@@ -1,12 +1,15 @@
 package XMLandSecurity.backend1.controller;
 
 import XMLandSecurity.backend1.domain.*;
+import XMLandSecurity.backend1.model.dto.CommentCloud;
 import XMLandSecurity.backend1.service.LodgingService;
 import XMLandSecurity.backend1.service.RatingService;
 import XMLandSecurity.backend1.service.UserService;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectWriter;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
@@ -14,6 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.security.Principal;
 import java.util.Date;
+
 
 @RestController
 @RequestMapping("/ratings")
@@ -27,39 +31,74 @@ public class RatingController {
     @Autowired
     private LodgingService lodgingService;
 
-    @RequestMapping(value = "/{idLodging}",
+    @RequestMapping(value = "/{idLodging}/{star}",
             method = RequestMethod.POST)
-    public ResponseEntity createRating(@RequestBody Rating rating, @PathVariable("idLodging") Long idLodging, Principal principal) {
+    public ResponseEntity createRating(@RequestBody Comment comment, @PathVariable("idLodging") Long idLodging,@PathVariable("star") Long star, Principal principal) {
 
         Lodging lodging = lodgingService.findOne(idLodging);
-        rating.setLodging(lodging);
+        comment.setLodging(lodging);
 
         User loggedUser = userService.findByUsername(principal.getName());
-        rating.setUser(loggedUser);
+        comment.setUser(loggedUser);
 
-        rating.setDateCreated(new Date());
-        ratingService.save(rating);
+        //ratingService.save(rating); cuvanje preko cloud-a cemo raditi
+
+
+        CommentCloud commentCloud = new CommentCloud(comment.getBody(), comment.getAccepted(), comment.getUser().getId(), comment.getLodging().getId(),new Date(),star);
+
+        ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
+        String json="{\"queriedQuestion\":\"Is there pain in your hand?\"}";
+        try {
+            json = ow.writeValueAsString(commentCloud);
+        } catch (JsonProcessingException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+        RestTemplate restTemplate = new RestTemplate();
+        String path = "http://localhost:8010/cloud-demo/us-central1/newRating/";
+        //String url=path+"set";
+        String url=path;
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        HttpEntity<String> entity = new HttpEntity<String>(json,headers);
+        String answer = restTemplate.postForObject(url, entity, String.class);
+       // System.out.println(answer);
+
+
 
         return new ResponseEntity(HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/proba",
-            method = RequestMethod.POST)
-    public ResponseEntity<?> proba(HttpServletResponse httpServletResponse) {
+    @RequestMapping(value = "/newStar",
+            method = RequestMethod.POST,
+            produces = MediaType.APPLICATION_JSON_VALUE,
+            consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> proba( @RequestBody Rating ratingFront) {
         Rating rating = new Rating();
-        //rating.setLodging(2);
-        rating.setStar((long) 1);
-        String path = "http://localhost:8010/cloud-demo/us-central1/newRating";
+
+        ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
+        String json="{\"queriedQuestion\":\"Is there pain in your hand?\"}";
+        try {
+            json = ow.writeValueAsString(ratingFront);
+        } catch (JsonProcessingException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+
         RestTemplate restTemplate = new RestTemplate();
-        Cloud response = restTemplate.postForObject(path, rating, Cloud.class);
-        if(!response.getResult()) {
-            System.out.println("Los prolazak kroz cloud");
-            return new ResponseEntity<>(new Cloud(false, "Bad Request"), HttpStatus.BAD_REQUEST);
-        }
-        else{
-            System.out.println("Dobar prolazak kroz cloud");
-            return new ResponseEntity<>(new Cloud(true, "Success"), HttpStatus.OK);
-        }
+        String path = "http://localhost:8010/cloud-demo/us-central1/newRating/";
+        String url=path+"set";
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        HttpEntity<String> entity = new HttpEntity<String>(json,headers);
+        String answer = restTemplate.postForObject(url, entity, String.class);
+        System.out.println(answer);
+
+        return new ResponseEntity<>(HttpStatus.OK);
     }
     @RequestMapping(
             value = "/ppp",

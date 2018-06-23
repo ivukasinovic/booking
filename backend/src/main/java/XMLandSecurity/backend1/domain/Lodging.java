@@ -41,7 +41,7 @@ public class Lodging implements Serializable {
 
     @Column(name = "rating", columnDefinition = "Decimal(3,2)")
     @XmlElement(name="rating", required=true)
-    private Double rating;
+    private Double rating =0.0;
 
     @Column(name = "persons_number", nullable = false)
     @XmlElement(name="personsNumber", required=true)
