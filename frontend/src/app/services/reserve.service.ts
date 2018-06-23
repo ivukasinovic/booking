@@ -31,8 +31,8 @@ export class ReserveService {
     return this.http.post('api/comment/' + id, com);
   }
 
-  postRating(rating: Rating, id: string) {
-    return this.http.post('api/ratings/' + id, rating);
+  postRating(com: Comment, id: string, star: number) {
+    return this.http.post('api/ratings/' + id + '/' + star, com);
   }
 
   checkAvaliability(id: number, dateStart: Date, dateEnd: Date) {

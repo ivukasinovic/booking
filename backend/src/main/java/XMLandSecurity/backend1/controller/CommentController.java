@@ -2,17 +2,21 @@ package XMLandSecurity.backend1.controller;
 
 import XMLandSecurity.backend1.domain.Comment;
 import XMLandSecurity.backend1.domain.Lodging;
+import XMLandSecurity.backend1.domain.Rating;
 import XMLandSecurity.backend1.domain.User;
 import XMLandSecurity.backend1.service.CommentService;
 import XMLandSecurity.backend1.service.LodgingService;
 import XMLandSecurity.backend1.service.UserService;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectWriter;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 
 import java.security.Principal;
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -51,8 +55,9 @@ public class CommentController {
         Lodging lodging = lodgingService.findOne(idLod);
         comment.setLodging(lodging);
 
-        Comment commentNew = commentService.save(comment);
-        return new ResponseEntity(commentNew, HttpStatus.OK);
+       // Comment commentNew = commentService.save(comment); Preko cloud-a dodajemo
+
+        return new ResponseEntity(HttpStatus.OK);
     }
 
 
@@ -109,4 +114,33 @@ public class CommentController {
         return new ResponseEntity(listaKomentara, HttpStatus.OK);
     }
 
+    @RequestMapping(value = "/newCommentCloud",
+            method = RequestMethod.POST,
+            produces = MediaType.APPLICATION_JSON_VALUE,
+            consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> proba( @RequestBody Comment comment) {
+
+
+        ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
+        String json="{\"queriedQuestion\":\"Is there pain in your hand?\"}";
+        try {
+            json = ow.writeValueAsString(comment);
+        } catch (JsonProcessingException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+
+        RestTemplate restTemplate = new RestTemplate();
+        String path = "http://localhost:8010/cloud-demo/us-central1/newComment/";
+        String url=path+"set";
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        HttpEntity<String> entity = new HttpEntity<String>(json,headers);
+        String answer = restTemplate.postForObject(url, entity, String.class);
+        System.out.println(answer);
+
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 }
