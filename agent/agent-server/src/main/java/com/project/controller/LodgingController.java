@@ -2,10 +2,8 @@ package com.project.controller;
 
 import com.project.converter.Converters;
 import com.project.repository.LodgingResRepository;
-import com.project.utility.XMLSigningUtility;
 import com.project.ws.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -15,12 +13,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
-import org.w3c.dom.Document;
 
-import javax.print.attribute.standard.Media;
 import javax.servlet.http.HttpSession;
-import javax.xml.ws.Response;
-import java.security.Principal;
 import java.util.List;
 
 
@@ -41,6 +35,12 @@ public class LodgingController {
     @RequestMapping(method = RequestMethod.GET,
                     produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> getLodgings(){
+        try{
+             getUsername();
+        }catch (Exception e){
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+        }
         LodgingService objMethod = new LodgingService();
         LodgingServicePort objPort = objMethod.getLodgingServicePortSoap11();
         GetLodgingsRequest request = new GetLodgingsRequest();
@@ -105,17 +105,21 @@ public class LodgingController {
             consumes = MediaType.APPLICATION_JSON_VALUE
     )
     public ResponseEntity<?> postLodging(@RequestBody SetLodgingRequest request, HttpSession session){
+        String agent;
+        try{
+            agent = getUsername();
+        }catch (Exception e){
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+        }
+
         LodgingService objMethod = new LodgingService();
         LodgingServicePort objPort = objMethod.getLodgingServicePortSoap11();
         System.out.println(session.getAttribute("user"));
-//        request.getLodging().setAgent();
-        request.getLodging().setAgent(getUsername());
+        request.getLodging().setAgent(agent);
         SetLodgingResponse response = objPort.setLodging(request);
         com.project.model.LodgingRes lodgingRes = converters.convertLodging(request.getLodging());
         lodgingResRepository.save(lodgingRes);
-
-
-
         System.out.println(response);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }

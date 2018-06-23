@@ -105,6 +105,12 @@ public class LodgingEndpoint {
             additionalService.getLodgingList().add(savedLodging);
             additionalServiceService.save(additionalService);
         }
+        for(String image: request.getLodging().getImagesList()){
+            Image img = new Image();
+            img.setLodging(savedLodging);
+            img.setUrl(image);
+            imageService.save(img);
+        }
         response.setName("success");
         return response;
     }

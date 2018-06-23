@@ -11,11 +11,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
-import org.springframework.ws.server.endpoint.annotation.RequestPayload;
 
-import javax.print.attribute.standard.Media;
 import javax.servlet.http.HttpSession;
-import javax.xml.ws.Response;
 import java.util.List;
 
 /**
@@ -36,6 +33,11 @@ public class ReservationController {
 
     @RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<Reservation>> getReservations(){
+        try{
+            getUsername();
+        }catch (Exception e){
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+        }
         LodgingService objMethod = new LodgingService();
         LodgingServicePort objPort = objMethod.getLodgingServicePortSoap11();
         GetReservationsRequest request = new GetReservationsRequest();
@@ -49,13 +51,19 @@ public class ReservationController {
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> setOccupancy(@RequestParam("id") Long id, @RequestParam("dateStart") String dateStart, @RequestParam("dateEnd") String dateEnd){
+        String agent;
+        try{
+            agent = getUsername();
+        }catch (Exception e){
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+        }
         LodgingService objMethod = new LodgingService();
         LodgingServicePort objPort = objMethod.getLodgingServicePortSoap11();
         SetOccupancyRequest request = new SetOccupancyRequest();
         request.setLodging(id);
         request.setStart(dateStart);
         request.setEnd(dateEnd);
-        request.setAgent(getUsername());
+        request.setAgent(agent);
         SetOccupancyResponse response = objPort.setOccupancy(request);
 
         com.project.model.ReservationRes lodgingRes = converters.updateLodging(id,dateStart,dateEnd);
@@ -68,6 +76,11 @@ public class ReservationController {
             method = RequestMethod.GET,
             produces = MediaType.TEXT_PLAIN_VALUE)
     public ResponseEntity<String> setCompleted(@PathVariable Long id){
+        try{
+            getUsername();
+        }catch (Exception e){
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+        }
         LodgingService objMethod = new LodgingService();
         LodgingServicePort objPort = objMethod.getLodgingServicePortSoap11();
         SetCompletedLodgingRequest request = new SetCompletedLodgingRequest();
@@ -80,11 +93,16 @@ public class ReservationController {
     @RequestMapping(value = "/messages",
                     produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<MessageRes>> getMessages(){
+        String agent;
+        try{
+            agent = getUsername();
+        }catch (Exception e){
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+        }
         LodgingService objMethod = new LodgingService();
         LodgingServicePort objPort = objMethod.getLodgingServicePortSoap11();
         GetMessagesRequest request = new GetMessagesRequest();
-        String username = getUsername();
-        request.setResponse(username);
+        request.setResponse(agent);
         GetMessagesResponse response = objPort.getMessages(request);
         List<MessageRes> messageRes = response.getMessageRes();
         return new ResponseEntity<>(messageRes, HttpStatus.OK);
@@ -94,6 +112,11 @@ public class ReservationController {
                     produces = MediaType.APPLICATION_JSON_VALUE,
                     consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<MessageRes> reply(@RequestBody MessageRes messageRes){
+        try{
+            getUsername();
+        }catch (Exception e){
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+        }
         LodgingService objMethod = new LodgingService();
         LodgingServicePort objPort = objMethod.getLodgingServicePortSoap11();
         SetMessagesRequest request = new SetMessagesRequest();
