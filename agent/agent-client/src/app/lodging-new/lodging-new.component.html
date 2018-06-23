@@ -45,17 +45,16 @@
     <details>
       <summary  class="form-control" ><b>Additional services </b></summary>
       <br>
-      <div     *ngFor="let a of aditionServices " >
-        <div>
-
-
-          <label>{{ (a.name) }}</label>
-          <input class="form-control" name={{a.id}}   id={{a.id}}  type="checkbox"  (change)="vrati(a.id)">
-
-        </div>
-      </div>
+      <br>
+        <table>
+          <tr *ngFor="let a of aditionServices ">
+          <td><label>{{ (a.name) }}</label></td>
+          <td><input  name={{a.id}}   id={{a.id}}  type="checkbox"  (change)="vrati(a.id)">
+          </td>
+          </tr>
+        </table>
     </details>
-
+    <br>
     <button class="btn btn-primary" (click)="createLodging()">Create</button>
   </div>
 
