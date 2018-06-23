@@ -154,6 +154,23 @@
     </xs:complexType>
   </xs:element>
 
+    <xs:element name="getImagesRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="imagesList" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getImagesResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="imagesList" type="tns:image" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+
   <xs:element name="getAdditionsRequest">
     <xs:complexType>
       <xs:sequence>

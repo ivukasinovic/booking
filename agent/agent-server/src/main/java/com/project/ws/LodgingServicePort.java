@@ -61,6 +61,18 @@ public interface LodgingServicePort {
 
     /**
      * 
+     * @param getImagesRequest
+     * @return
+     *     returns com.bookingxml.soap_example.GetImagesResponse
+     */
+    @WebMethod
+    @WebResult(name = "getImagesResponse", targetNamespace = "http://bookingxml.com/soap-example", partName = "getImagesResponse")
+    public GetImagesResponse getImages(
+            @WebParam(name = "getImagesRequest", targetNamespace = "http://bookingxml.com/soap-example", partName = "getImagesRequest")
+                    GetImagesRequest getImagesRequest);
+
+    /**
+     * 
      * @param setCompletedLodgingRequest
      * @return
      *     returns com.bookingxml.soap_example.SetCompletedLodgingResponse

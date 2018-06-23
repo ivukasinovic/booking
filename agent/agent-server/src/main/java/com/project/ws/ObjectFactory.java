@@ -240,6 +240,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link GetImagesRequest }
+     * 
+     */
+    public GetImagesRequest createGetImagesRequest() {
+        return new GetImagesRequest();
+    }
+
+    /**
      * Create an instance of {@link SetOccupancyResponse }
      * 
      */
@@ -309,6 +317,14 @@ public class ObjectFactory {
      */
     public GetReservationsResponse createGetReservationsResponse() {
         return new GetReservationsResponse();
+    }
+
+    /**
+     * Create an instance of {@link GetImagesResponse }
+     * 
+     */
+    public GetImagesResponse createGetImagesResponse() {
+        return new GetImagesResponse();
     }
 
     /**
