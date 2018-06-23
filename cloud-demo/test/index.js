@@ -33,7 +33,8 @@ exports.newRating = function (req, res) {
         var dateCreated = req.query.dateCreated || req.body.dateCreated;
         var accepted = req.query.accepted || req.body.accepted;
         var body = req.query.body || req.body.body;
-
+        var avg =0.0;
+        var sum= 0;
         if (star === undefined) {
             // This is an error case, as "name" is required.
             console.warn('Bad request: No name provided.');
@@ -50,6 +51,19 @@ exports.newRating = function (req, res) {
                     } else {
                         con.query('update rating set star=' + star + ' where lodging_id=' + lodging + ' and user_id=' + user + '');
                     }
+
+                    con.query('select * from rating where lodging_id ='+ lodging+';',
+                        function(err,results){
+                            for (i = 0; i < results.length; i++) {
+                                sum = sum + results[i].star;
+                            }
+                            avg = sum/ results.length;
+
+                            con.query('update lodging set rating = '+avg+' where id = '+lodging+';')
+                            console.warn('Bad request: No name provided.' + avg);
+
+                           // res.status(200).send("avg = "+avg +"   i  sum =" + sum +" results ->" +results+" res[0] ->"+ results[0].star);
+                    })
                    // res.status(200).send("Uspesno dodat ili izmenjen.");
                 }
             })
@@ -61,9 +75,10 @@ exports.newRating = function (req, res) {
             if(err){
                 res.status(400).send("errr");
             }else{
-                res.status(200).send("comment cloud");
+               res.status(200).send("comment cloud");
             }
         })
+
 
 }
 
