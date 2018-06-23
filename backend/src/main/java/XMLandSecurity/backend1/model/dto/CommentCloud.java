@@ -1,4 +1,4 @@
-package XMLandSecurity.backend1.domain;
+package XMLandSecurity.backend1.model.dto;
 
 import java.util.Date;
 

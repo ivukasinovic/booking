@@ -34,6 +34,7 @@ export class SearchComponent implements OnInit {
   com: Comment[];
   comForLod: Comment[];
   user: User[];
+
   form = new FormGroup({
     cityName1: new FormControl('', Validators.compose ([Validators.required])),
     numberOfPersons1: new FormControl('', Validators.compose ([Validators.required])),
@@ -41,6 +42,7 @@ export class SearchComponent implements OnInit {
     searchEDT: new FormControl(this.getTodaysDate(), Validators.compose ([Validators.maxLength(10),
       this.dateValidationStart]) ), // god-mes-dan
     typeOfLodging: new FormControl('undefined'),
+    rating: new FormControl(''),
     categoryOfLodging: new FormControl('undefined')
   });
 
@@ -101,9 +103,12 @@ export class SearchComponent implements OnInit {
   }
 
   onSubmit = function (lodging, aditionS) {
+    if (lodging.rating === '') {
+      lodging.rating = 'undefined';
+    }
   if (lodging.searchSDT <= lodging.searchEDT) {
     this.searchService.searchLodging(lodging.cityName1, lodging.numberOfPersons1, lodging.searchSDT,
-      lodging.searchEDT, lodging.typeOfLodging, lodging.categoryOfLodging, this.nizCekiranih)
+      lodging.searchEDT, lodging.typeOfLodging, lodging.categoryOfLodging, lodging.rating, this.nizCekiranih)
       .subscribe(
         (response: Lodging[]) => {
           this.lod = response;

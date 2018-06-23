@@ -1,6 +1,7 @@
 package XMLandSecurity.backend1.controller;
 
 import XMLandSecurity.backend1.domain.*;
+import XMLandSecurity.backend1.model.dto.CommentCloud;
 import XMLandSecurity.backend1.service.LodgingService;
 import XMLandSecurity.backend1.service.RatingService;
 import XMLandSecurity.backend1.service.UserService;
@@ -15,7 +16,6 @@ import org.springframework.web.client.RestTemplate;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.security.Principal;
-import java.util.ArrayList;
 import java.util.Date;
 
 
@@ -57,13 +57,14 @@ public class RatingController {
 
         RestTemplate restTemplate = new RestTemplate();
         String path = "http://localhost:8010/cloud-demo/us-central1/newRating/";
-        String url=path+"set";
+        //String url=path+"set";
+        String url=path;
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
 
         HttpEntity<String> entity = new HttpEntity<String>(json,headers);
         String answer = restTemplate.postForObject(url, entity, String.class);
-        System.out.println(answer);
+       // System.out.println(answer);
 
 
 

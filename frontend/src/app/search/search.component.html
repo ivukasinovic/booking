@@ -23,8 +23,14 @@
         <input class="form-control"  required="required"  name="searchEDT" type="date" formControlName="searchEDT" (ngModelChange)="searchEDT = $event">
         </div>
         <div class="form-group">
+          <label>  Rating</label>
+          <input class="form-control" value="" type="number" name="Rating"
+                 formControlName="rating" placeholder="Rating" maxlength="2" min = "1" max = "10"  onKeyPress="if(this.value.length==1) return false;" onkeydown="javascript: return (event.keyCode > 47 && event.keyCode < 58 || event.keyCode == 08)" >
+        </div>
+        <div class="form-group">
         <label>  Type</label>
         </div>
+
         <div class="form-group">
         <select   class="form-control" name = "typeOfLodging" formControlName="typeOfLodging" >
 

@@ -82,3 +82,36 @@ exports.newRating = function (req, res) {
 
 }
 
+
+exports.searchRating = function (req, res) {
+    var ratingValue = req.query.ratingValue || req.body.ratingValue;
+    var ratingBig = ratingValue + 1;
+    var ratingSmall = ratingValue - 1;
+    var retString="";
+    var retString1="";
+    var lodgingId= [] ;
+
+    lodgingId = req.lodgingId;
+    res.status(200).send('aaaaaaaaaaaaaaaaaaaaaaa ' lodgingId[0].);
+   /* for (i = 0; i < lodgingId.length; i++) {
+        retString1 = retString1 = lodging.id;
+    }
+    res.status(200).send(retString1);
+    if (ratingValue === undefined) {
+        // This is an error case, as "name" is required.
+        console.warn('Bad request: No name provided.');
+        res.status(400).send('greska');
+    } else {
+        for (i = 0; i < lodgingId.length; i++) {
+            con.query('select * from lodging where rating<' + ratingBig + ' and rating>' + ratingSmall + ' and id ='+lodgingId.id+';'
+                , function (err, results) {
+
+                    retString = retString + results[i].id + ",";
+
+
+                //res.status(200).send(retString);
+            })
+        }
+        res.status(200).send(retString);
+    }*/
+}

@@ -3,12 +3,15 @@ package XMLandSecurity.backend1.controller;
 
 import XMLandSecurity.backend1.domain.AdditionalService;
 import XMLandSecurity.backend1.domain.Lodging;
+import XMLandSecurity.backend1.model.dto.RatingCloudDto;
 import XMLandSecurity.backend1.service.*;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectWriter;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -37,7 +40,7 @@ public class SearchController {
 
 
     @RequestMapping(
-            value = "/searchLodging/{cityName}/{personsNbr}/{dateStart}/{dateEnd}/{typeLodging}/{catLodging}/",
+            value = "/searchLodging/{cityName}/{personsNbr}/{dateStart}/{dateEnd}/{typeLodging}/{catLodging}/{ratingLod}",
             method = RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE,
             consumes = MediaType.APPLICATION_JSON_VALUE
@@ -45,18 +48,19 @@ public class SearchController {
     public ResponseEntity<?> search(@PathVariable("cityName") String cityName, @PathVariable("personsNbr") String personsNbr,
                                     @PathVariable("dateStart") String dateStart, @PathVariable("dateEnd") String dateEnd,
                                     @PathVariable("typeLodging") String typeLodging, @PathVariable("catLodging") String catLodging,
-                                    @RequestBody ArrayList<Long> checkedArray){
+                                    @PathVariable("ratingLod") String ratingLod, @RequestBody ArrayList<Long> checkedArray){
         List<Lodging> reservatedLodgings = new ArrayList<Lodging>();
         List<Lodging> retLodgings = new ArrayList<Lodging>();
         List<Lodging> pom = new ArrayList<Lodging>();
         List<Lodging> ret = new ArrayList<Lodging>();
         List<AdditionalService> aditionalS = new ArrayList<AdditionalService>();
         List<Lodging> retLodDate = new ArrayList<Lodging>();
+        RatingCloudDto ratingCloudDto = new RatingCloudDto();
         for(Long l : checkedArray) {
             aditionalS.add(additionalServiceService.findOne(l));
 
         }
-        int broj;
+        int broj, ratingNumb;
 
         if(dateStart.equals("undefined") || dateStart.equals("")) {
             dateStart ="1995-09-16" ;
@@ -83,6 +87,7 @@ public class SearchController {
         if(cityName.equals("undefined") || cityName.equals("null")) {
             cityName = "";
         }
+
 
         if(personsNbr.equals("undefined") || personsNbr.equals("") || personsNbr.equals("null")) {
             //ne bi trebalo nikad da udje
@@ -132,6 +137,42 @@ public class SearchController {
         //ako nema zahteva za add Serv onda mu prosledjuemo proslu listu  sa svim vrednostima
         if(aditionalS.size() ==0){
             ret = retLodDate;
+        }
+
+        //pretraga po rejtingu ako ga nije uneo, nista ne radi ako ga je uneo izbaci iz liste one koje nemaju takav rejting
+        if(ratingLod.equals("undefined") || ratingLod.equals("null") || personsNbr.equals("")){
+            ratingLod ="0";
+        }else{ //ako je uneo neki promeni krajnju ret listu
+            ArrayList<Long> ids = new ArrayList<Long>();
+            for(Lodging lods : ret){
+                ids.add(lods.getId());
+
+            }
+
+            ratingNumb = Integer.parseInt(ratingLod);
+            ratingCloudDto.setRatingValue(ratingNumb);
+            ratingCloudDto.setLodgingId(ids);
+            //pocetak formiranja jsona za cloud
+            ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
+            String json="{\"queriedQuestion\":\"Is there pain in your hand?\"}";
+            try {
+                json = ow.writeValueAsString(ratingCloudDto);
+            } catch (JsonProcessingException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+
+            RestTemplate restTemplate = new RestTemplate();
+            String path = "http://localhost:8010/cloud-demo/us-central1/searchRating/";
+            //String url=path+"set";
+            String url=path;
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_JSON);
+
+            HttpEntity<String> entity = new HttpEntity<String>(json,headers);
+           // String answer = restTemplate.postForObject(url, entity, String.class);
+           // System.out.println("povratna vrednost: " + answer);
+
         }
 
 //promeni vrednost liste za nazad
