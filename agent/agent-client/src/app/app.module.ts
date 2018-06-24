@@ -11,6 +11,7 @@ import { LodgingNewComponent } from './lodging-new/lodging-new.component';
 import { MessagesComponent } from './messages/messages.component';
 import { OccupancyComponent } from './occupancy/occupancy.component';
 import { LodgingListComponent } from './lodging-list/lodging-list.component';
+import { PricePlanNewComponent } from './price-plan-new/price-plan-new.component';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { LodgingListComponent } from './lodging-list/lodging-list.component';
     LodgingNewComponent,
     MessagesComponent,
     OccupancyComponent,
-    LodgingListComponent
+    LodgingListComponent,
+    PricePlanNewComponent
   ],
   imports: [
     BrowserModule,

@@ -37,18 +37,6 @@ public interface LodgingServicePort {
 
     /**
      * 
-     * @param setOccupancyRequest
-     * @return
-     *     returns com.bookingxml.soap_example.SetOccupancyResponse
-     */
-    @WebMethod
-    @WebResult(name = "setOccupancyResponse", targetNamespace = "http://bookingxml.com/soap-example", partName = "setOccupancyResponse")
-    public SetOccupancyResponse setOccupancy(
-            @WebParam(name = "setOccupancyRequest", targetNamespace = "http://bookingxml.com/soap-example", partName = "setOccupancyRequest")
-                    SetOccupancyRequest setOccupancyRequest);
-
-    /**
-     * 
      * @param getLodgingCategoriesRequest
      * @return
      *     returns com.bookingxml.soap_example.GetLodgingCategoriesResponse
@@ -61,15 +49,15 @@ public interface LodgingServicePort {
 
     /**
      * 
-     * @param getImagesRequest
+     * @param getLodgingTypesRequest
      * @return
-     *     returns com.bookingxml.soap_example.GetImagesResponse
+     *     returns com.bookingxml.soap_example.GetLodgingTypesResponse
      */
     @WebMethod
-    @WebResult(name = "getImagesResponse", targetNamespace = "http://bookingxml.com/soap-example", partName = "getImagesResponse")
-    public GetImagesResponse getImages(
-            @WebParam(name = "getImagesRequest", targetNamespace = "http://bookingxml.com/soap-example", partName = "getImagesRequest")
-                    GetImagesRequest getImagesRequest);
+    @WebResult(name = "getLodgingTypesResponse", targetNamespace = "http://bookingxml.com/soap-example", partName = "getLodgingTypesResponse")
+    public GetLodgingTypesResponse getLodgingTypes(
+            @WebParam(name = "getLodgingTypesRequest", targetNamespace = "http://bookingxml.com/soap-example", partName = "getLodgingTypesRequest")
+                    GetLodgingTypesRequest getLodgingTypesRequest);
 
     /**
      * 
@@ -85,6 +73,18 @@ public interface LodgingServicePort {
 
     /**
      * 
+     * @param setMessagesRequest
+     * @return
+     *     returns com.bookingxml.soap_example.SetMessagesResponse
+     */
+    @WebMethod
+    @WebResult(name = "setMessagesResponse", targetNamespace = "http://bookingxml.com/soap-example", partName = "setMessagesResponse")
+    public SetMessagesResponse setMessages(
+            @WebParam(name = "setMessagesRequest", targetNamespace = "http://bookingxml.com/soap-example", partName = "setMessagesRequest")
+                    SetMessagesRequest setMessagesRequest);
+
+    /**
+     * 
      * @param getAdditionsRequest
      * @return
      *     returns com.bookingxml.soap_example.GetAdditionsResponse
@@ -97,15 +97,51 @@ public interface LodgingServicePort {
 
     /**
      * 
-     * @param getLodgingTypesRequest
+     * @param getLodgingsRequest
      * @return
-     *     returns com.bookingxml.soap_example.GetLodgingTypesResponse
+     *     returns com.bookingxml.soap_example.GetLodgingsResponse
      */
     @WebMethod
-    @WebResult(name = "getLodgingTypesResponse", targetNamespace = "http://bookingxml.com/soap-example", partName = "getLodgingTypesResponse")
-    public GetLodgingTypesResponse getLodgingTypes(
-            @WebParam(name = "getLodgingTypesRequest", targetNamespace = "http://bookingxml.com/soap-example", partName = "getLodgingTypesRequest")
-                    GetLodgingTypesRequest getLodgingTypesRequest);
+    @WebResult(name = "getLodgingsResponse", targetNamespace = "http://bookingxml.com/soap-example", partName = "getLodgingsResponse")
+    public GetLodgingsResponse getLodgings(
+            @WebParam(name = "getLodgingsRequest", targetNamespace = "http://bookingxml.com/soap-example", partName = "getLodgingsRequest")
+                    GetLodgingsRequest getLodgingsRequest);
+
+    /**
+     * 
+     * @param setOccupancyRequest
+     * @return
+     *     returns com.bookingxml.soap_example.SetOccupancyResponse
+     */
+    @WebMethod
+    @WebResult(name = "setOccupancyResponse", targetNamespace = "http://bookingxml.com/soap-example", partName = "setOccupancyResponse")
+    public SetOccupancyResponse setOccupancy(
+            @WebParam(name = "setOccupancyRequest", targetNamespace = "http://bookingxml.com/soap-example", partName = "setOccupancyRequest")
+                    SetOccupancyRequest setOccupancyRequest);
+
+    /**
+     * 
+     * @param getImagesRequest
+     * @return
+     *     returns com.bookingxml.soap_example.GetImagesResponse
+     */
+    @WebMethod
+    @WebResult(name = "getImagesResponse", targetNamespace = "http://bookingxml.com/soap-example", partName = "getImagesResponse")
+    public GetImagesResponse getImages(
+            @WebParam(name = "getImagesRequest", targetNamespace = "http://bookingxml.com/soap-example", partName = "getImagesRequest")
+                    GetImagesRequest getImagesRequest);
+
+    /**
+     * 
+     * @param setPricePlanRequest
+     * @return
+     *     returns com.bookingxml.soap_example.SetPricePlanResponse
+     */
+    @WebMethod
+    @WebResult(name = "setPricePlanResponse", targetNamespace = "http://bookingxml.com/soap-example", partName = "setPricePlanResponse")
+    public SetPricePlanResponse setPricePlan(
+            @WebParam(name = "setPricePlanRequest", targetNamespace = "http://bookingxml.com/soap-example", partName = "setPricePlanRequest")
+                    SetPricePlanRequest setPricePlanRequest);
 
     /**
      * 
@@ -130,30 +166,6 @@ public interface LodgingServicePort {
     public GetMessagesResponse getMessages(
             @WebParam(name = "getMessagesRequest", targetNamespace = "http://bookingxml.com/soap-example", partName = "getMessagesRequest")
                     GetMessagesRequest getMessagesRequest);
-
-    /**
-     * 
-     * @param setMessagesRequest
-     * @return
-     *     returns com.bookingxml.soap_example.SetMessagesResponse
-     */
-    @WebMethod
-    @WebResult(name = "setMessagesResponse", targetNamespace = "http://bookingxml.com/soap-example", partName = "setMessagesResponse")
-    public SetMessagesResponse setMessages(
-            @WebParam(name = "setMessagesRequest", targetNamespace = "http://bookingxml.com/soap-example", partName = "setMessagesRequest")
-                    SetMessagesRequest setMessagesRequest);
-
-    /**
-     * 
-     * @param getLodgingsRequest
-     * @return
-     *     returns com.bookingxml.soap_example.GetLodgingsResponse
-     */
-    @WebMethod
-    @WebResult(name = "getLodgingsResponse", targetNamespace = "http://bookingxml.com/soap-example", partName = "getLodgingsResponse")
-    public GetLodgingsResponse getLodgings(
-            @WebParam(name = "getLodgingsRequest", targetNamespace = "http://bookingxml.com/soap-example", partName = "getLodgingsRequest")
-                    GetLodgingsRequest getLodgingsRequest);
 
     /**
      * 

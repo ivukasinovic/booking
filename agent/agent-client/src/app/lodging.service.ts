@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {Router} from '@angular/router';
 import {HttpClient, HttpParams} from '@angular/common/http';
-import {AditionalServices, Lodging, LodgingRes, Message, Reservation} from './model';
+import {AditionalServices, Lodging, LodgingRes, Message, PricePlan, Reservation} from './model';
 
 @Injectable()
 export class LodgingService {
@@ -41,6 +41,9 @@ export class LodgingService {
   }
   reply(message: Message) {
     return this.http.post('api/reservations/reply', message);
+  }
+  postPricePlan(pricePlan: PricePlan){
+    return this.http.post('api/lodgings/price-plan', pricePlan);
   }
   // reserve(reservation: Reservation) {
   //   return this.http.post('api/reservations', reservation);

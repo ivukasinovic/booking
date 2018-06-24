@@ -10,4 +10,6 @@ import java.util.List;
 public interface ImageService {
 
     List<Image> findAll();
+
+    Image save(Image image);
 }

@@ -1,0 +1,39 @@
+<div class="form-group container">
+  <H2>Price plan</H2>
+  <div>
+    <label> Chose lodging: </label>
+    <div class="form-group form-inline">
+      <label>Lodging: </label>&nbsp;
+      <select class="form-control" name="lodging" [(ngModel)]="pricePlan.lodging">
+        <option *ngFor="let lodging of lodgings" value="{{lodging.title}}">{{lodging.title}}</option>
+      </select>
+    </div>
+    <label> Year: </label>
+    <input type="text" [(ngModel)]="pricePlan.year"  class="form-control col-2" id="year">
+    <label> Jan: </label>
+    <input type="text" [(ngModel)]="pricePlan.january"  class="form-control col-2" id="jan">
+    <label> Feb: </label>
+    <input type="text" [(ngModel)]="pricePlan.february"  class="form-control col-2" id="feb">
+    <label> Mar: </label>
+    <input type="text" [(ngModel)]="pricePlan.mart"  class="form-control col-2" id="mar">
+    <label> Apr: </label>
+    <input type="text" [(ngModel)]="pricePlan.april"  class="form-control col-2" id="apr">
+    <label> May: </label>
+    <input type="text" [(ngModel)]="pricePlan.may"  class="form-control col-2" id="may">
+    <label> Jun: </label>
+    <input type="text" [(ngModel)]="pricePlan.june"  class="form-control col-2" id="jun">
+    <label> Jul: </label>
+    <input type="text" [(ngModel)]="pricePlan.july"  class="form-control col-2" id="jul">
+    <label> Aug: </label>
+    <input type="text" [(ngModel)]="pricePlan.august"  class="form-control col-2" id="avg">
+    <label> Sep: </label>
+    <input type="text" [(ngModel)]="pricePlan.september"  class="form-control col-2" id="sep">
+    <label> Oct: </label>
+    <input type="text" [(ngModel)]="pricePlan.october"  class="form-control col-2" id="oct">
+    <label> Nov: </label>
+    <input type="text" [(ngModel)]="pricePlan.november"  class="form-control col-2" id="nov">
+    <label> Dec: </label>
+    <input type="text" [(ngModel)]="pricePlan.december"  class="form-control col-2" id="dec">
+    <button class="btn btn-primary" (click)="setPricePlan()">Set</button>
+  </div>
+</div>

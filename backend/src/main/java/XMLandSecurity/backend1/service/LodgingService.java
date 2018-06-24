@@ -1,7 +1,5 @@
 package XMLandSecurity.backend1.service;
 
-import XMLandSecurity.backend1.domain.AdditionalService;
-import XMLandSecurity.backend1.domain.City;
 import XMLandSecurity.backend1.domain.Lodging;
 
 import java.util.Date;
@@ -12,6 +10,8 @@ public interface LodgingService {
     List<Lodging> findAll();
 
     Lodging findOne(Long id);
+    Lodging findByTitle(String title);
+
 
     Lodging save(Lodging user);
 

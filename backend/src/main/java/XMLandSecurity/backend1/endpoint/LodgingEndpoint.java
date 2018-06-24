@@ -52,6 +52,10 @@ public class LodgingEndpoint {
     @Autowired
     private ImageService imageService;
 
+    @Autowired
+    private PriceListService priceListService;
+
+
 
     @PayloadRoot(namespace = "http://bookingxml.com/soap-example", localPart = "getLodgingsRequest")
     @ResponsePayload
@@ -105,7 +109,41 @@ public class LodgingEndpoint {
             additionalService.getLodgingList().add(savedLodging);
             additionalServiceService.save(additionalService);
         }
+        for(String image: request.getLodging().getImagesList()){
+            Image img = new Image();
+            img.setLodging(savedLodging);
+            img.setUrl(image);
+            imageService.save(img);
+        }
         response.setName("success");
+        return response;
+    }
+    @PayloadRoot(namespace = "http://bookingxml.com/soap-example", localPart = "setPricePlanRequest")
+    @ResponsePayload
+    public SetPricePlanResponse setPricePlanRequest(@RequestPayload SetPricePlanRequest request){
+        SetPricePlanResponse response = new SetPricePlanResponse();
+        PriceList pl = new PriceList();
+        pl.setYear(String.valueOf(request.getYear()));
+        pl.setJanuary(Double.valueOf(String.valueOf(request.getJanuary())));
+        pl.setFebruary(Double.valueOf(String.valueOf(request.getFebruary())));
+        pl.setMart(Double.valueOf(String.valueOf(request.getMart())));
+        pl.setApril(Double.valueOf(String.valueOf(request.getApril())));
+        pl.setMay(Double.valueOf(String.valueOf(request.getMay())));
+        pl.setJune(Double.valueOf(String.valueOf(request.getJune())));
+        pl.setJuly(Double.valueOf(String.valueOf(request.getJuly())));
+        pl.setAugust(Double.valueOf(String.valueOf(request.getAugust())));
+        pl.setSeptember(Double.valueOf(String.valueOf(request.getSeptember())));
+        pl.setOctober(Double.valueOf(String.valueOf(request.getOctober())));
+        pl.setNovember(Double.valueOf(String.valueOf(request.getNovember())));
+        pl.setDecember(Double.valueOf(String.valueOf(request.getDecember())));
+        pl.setLodging(lodgingService.findByTitle(request.getLodging()));
+        pl.setDateCreated(new Date());
+        try {
+            priceListService.save(pl);
+            response.setTypes("success");
+        }catch (Exception e){
+            response.setTypes("failed");
+        }
         return response;
     }
     @PayloadRoot(namespace = "http://bookingxml.com/soap-example", localPart = "getMessagesRequest")
