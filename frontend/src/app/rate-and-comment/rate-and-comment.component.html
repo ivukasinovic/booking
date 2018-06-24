@@ -30,11 +30,11 @@
           <hr>
           <label >Comment:   </label>
           <br/>
-          <textarea [(ngModel)]="com.body" type="text" name="body"
+          <textarea required [(ngModel)]="com.body" type="text" name="body"
                     placeholder="Enter your comment"></textarea>
           <br/>
-          <button class="btn btn-warning" (click)="comment(lodging.id, rating.star)">Send</button>
-          <input type="submit" class="btn btn-warning" value="Send" (click)="comment(lodging.id)">
+          <!--<button class="btn btn-warning" (click)="comment(lodging.id, rating.star)">Send</button>-->
+          <input type="submit" class="btn btn-warning" value="Send" (click)="comment(lodging.id, rating.star)">
         </form>
 
     </div>

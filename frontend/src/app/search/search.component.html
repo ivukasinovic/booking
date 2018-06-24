@@ -50,13 +50,11 @@
           <details>
             <summary><b>  Additional services </b></summary>
             <br>
-            <div     *ngFor="let a of aditionServices " >
-              <div>
-                  <label class="pull-left">{{ (a.name) }}</label>
-                  <input class="form-control pull-right" name={{a.id}}   id={{a.id}}  type="checkbox"  (change)="vrati(a.id)">
-
-              </div>
-            </div>
+            <table>
+               <tr *ngFor="let a of aditionServices ">
+                 <td><label class="pull-left">{{ (a.name) }}</label></td>
+                  <td><input class="form-control pull-right" name={{a.id}}   id={{a.id}}  type="checkbox"  (change)="vrati(a.id)"></td>               </tr>
+             </table>
         </details>
         </div>
         <br/>

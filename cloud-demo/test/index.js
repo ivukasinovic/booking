@@ -10,7 +10,7 @@ var mysql = require('mysql');
 var con = mysql.createConnection({
     host: 'localhost',
     user: 'root',
-    password: 'stefan',
+    password: 'admin',
     database:'booking'
 });
 
@@ -89,29 +89,49 @@ exports.searchRating = function (req, res) {
     var ratingSmall = ratingValue - 1;
     var retString="";
     var retString1="";
-    var lodgingId= [] ;
+    var listaIds = req.body.lodgingId;
 
-    lodgingId = req.lodgingId;
-    res.status(200).send('aaaaaaaaaaaaaaaaaaaaaaa ' lodgingId[0].);
-   /* for (i = 0; i < lodgingId.length; i++) {
-        retString1 = retString1 = lodging.id;
-    }
-    res.status(200).send(retString1);
     if (ratingValue === undefined) {
         // This is an error case, as "name" is required.
         console.warn('Bad request: No name provided.');
         res.status(400).send('greska');
     } else {
-        for (i = 0; i < lodgingId.length; i++) {
-            con.query('select * from lodging where rating<' + ratingBig + ' and rating>' + ratingSmall + ' and id ='+lodgingId.id+';'
+
+        if(listaIds.length >0){
+
+            //res.status(200).send(retString);
+            con.query('select * from lodging where rating<' + ratingBig + ' and rating>' + ratingSmall +';'
                 , function (err, results) {
+                    if(err){
+                        //res.status(400).send("errr");
+                    }else{
+                       //res.status(200).send("comment cloud" + ratingBig + " sm " + ratingSmall + results.length + " asd  " + results[2].id );
+                    if(results.length >0) {
+                        // res.status(200).send(retString);
+                        //    res.status(200).send("ziv");
+                        for (i = 0; i < listaIds.length; i++) {
+                            for (j = 0; j < results.length; j++) {
+                                if (listaIds[i] === results[j].id) {
+                                    // res.status(200).send(results[i].id);
+                                    //retString = retString + results[i].id + ",";
+                                    retString = retString.concat(results[j].id);
+                                    retString = retString.concat(",");
 
-                    retString = retString + results[i].id + ",";
 
+                                }
 
-                //res.status(200).send(retString);
+                            }
+                        }
+                        retString = retString.slice(0, -1);
+                        res.status(200).send(retString);
+                    }else{res.status(200).send("res prazans");}
+
+                    }
+
+             //  res.status(200).send(retString);
             })
-        }
-        res.status(200).send(retString);
-    }*/
+
+      // res.status(200).send(retString);
+        }else{res.status(200).send("pooslata prazna");}
+    }
 }

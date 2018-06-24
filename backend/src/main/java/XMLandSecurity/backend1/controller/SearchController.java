@@ -17,6 +17,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -51,6 +52,7 @@ public class SearchController {
                                     @PathVariable("ratingLod") String ratingLod, @RequestBody ArrayList<Long> checkedArray){
         List<Lodging> reservatedLodgings = new ArrayList<Lodging>();
         List<Lodging> retLodgings = new ArrayList<Lodging>();
+        List<Lodging> ratingLodgings = new ArrayList<Lodging>();
         List<Lodging> pom = new ArrayList<Lodging>();
         List<Lodging> ret = new ArrayList<Lodging>();
         List<AdditionalService> aditionalS = new ArrayList<AdditionalService>();
@@ -149,30 +151,65 @@ public class SearchController {
 
             }
 
+
+
+
             ratingNumb = Integer.parseInt(ratingLod);
-            ratingCloudDto.setRatingValue(ratingNumb);
-            ratingCloudDto.setLodgingId(ids);
-            //pocetak formiranja jsona za cloud
-            ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
-            String json="{\"queriedQuestion\":\"Is there pain in your hand?\"}";
-            try {
-                json = ow.writeValueAsString(ratingCloudDto);
-            } catch (JsonProcessingException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
+            int flagg = 0;//nema odgovarajucih
+            //provera ako se rejtin ne nalazi u okviru ostalih ne zovi servis!!!
+            for(Lodging ser : ret){
+                if(ser.getRating() <  ratingNumb+1 ){
+                    if(ser.getRating() > ratingNumb-1){
+                        flagg =1; // ima barem jedan odgovarajuc
+                    }
+                }
             }
 
-            RestTemplate restTemplate = new RestTemplate();
-            String path = "http://localhost:8010/cloud-demo/us-central1/searchRating/";
-            //String url=path+"set";
-            String url=path;
-            HttpHeaders headers = new HttpHeaders();
-            headers.setContentType(MediaType.APPLICATION_JSON);
+            if(flagg == 1){
+                ratingCloudDto.setRatingValue(ratingNumb);
+                ratingCloudDto.setLodgingId(ids);
+                //pocetak formiranja jsona za cloud
+                ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
+                String json="{\"queriedQuestion\":\"Is there pain in your hand?\"}";
+                try {
+                    json = ow.writeValueAsString(ratingCloudDto);
+                } catch (JsonProcessingException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
 
-            HttpEntity<String> entity = new HttpEntity<String>(json,headers);
-           // String answer = restTemplate.postForObject(url, entity, String.class);
-           // System.out.println("povratna vrednost: " + answer);
+                RestTemplate restTemplate = new RestTemplate();
+                String path = "http://localhost:8010/cloud-demo/us-central1/searchRating/";
+                //String url=path+"set";
+                String url=path;
+                HttpHeaders headers = new HttpHeaders();
+                headers.setContentType(MediaType.APPLICATION_JSON);
 
+                HttpEntity<String> entity = new HttpEntity<String>(json,headers);
+                String answer = restTemplate.postForObject(url, entity, String.class);
+                System.out.println("Id of lodgings from cloud: " + answer);
+                if(answer.equals(null)){
+                    ret = new ArrayList<Lodging>();
+                }else { // ako je vratio null znaci da nema nista u blizini te ocene te nista ne vracaj
+
+                    List<String> listaIdStr = Arrays.asList(answer.split(","));
+                    ArrayList<Long> noviId = new ArrayList<Long>();
+                    for (String st : listaIdStr) { // parsiram rezultate id od odgovarajucih lodginga
+                        Long ll = Long.parseLong(st, 10);
+                        noviId.add(ll);
+                    }
+
+                    for (Long lo : noviId) {
+                        System.out.println("Writing lodging with id : " + lo);
+                        ratingLodgings.add(lodgingService.findOne(lo));
+                    }
+
+                    ret = ratingLodgings;
+                }
+            }else{
+                System.out.println("No use of calling cloud,there is no lodgings with that rating!");
+                ret = new ArrayList<Lodging>();
+            }
         }
 
 //promeni vrednost liste za nazad
