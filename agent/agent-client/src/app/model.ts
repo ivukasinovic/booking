@@ -54,3 +54,19 @@ export class LodgingRes {
   lodging: Lodging;
 }
 
+export class PricePlan {
+  lodging: string;
+  april: number;
+  august: number;
+  december: number;
+  february: number;
+  january: number;
+  july: number;
+  june: number;
+  mart: number;
+  may: number;
+  november: number;
+  october: number;
+  september: number;
+  year: number;
+}

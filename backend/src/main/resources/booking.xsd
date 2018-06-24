@@ -179,6 +179,36 @@
     </xs:complexType>
   </xs:element>
 
+    <xs:element name="setPricePlanRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="year" type="xs:positiveInteger" />
+                <xs:element name="lodging" type="xs:string" />
+                <xs:element name="january" type="xs:positiveInteger" />
+                <xs:element name="february" type="xs:positiveInteger" />
+                <xs:element name="mart" type="xs:positiveInteger" />
+                <xs:element name="april" type="xs:positiveInteger" />
+                <xs:element name="may" type="xs:positiveInteger" />
+                <xs:element name="june" type="xs:positiveInteger" />
+                <xs:element name="july" type="xs:positiveInteger" />
+                <xs:element name="august" type="xs:positiveInteger" />
+                <xs:element name="september" type="xs:positiveInteger" />
+                <xs:element name="october" type="xs:positiveInteger" />
+                <xs:element name="november" type="xs:positiveInteger" />
+                <xs:element name="december" type="xs:positiveInteger" />
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+
+    <xs:element name="setPricePlanResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="types" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
   <xs:element name="getAdditionsResponse">
     <xs:complexType>
       <xs:sequence>

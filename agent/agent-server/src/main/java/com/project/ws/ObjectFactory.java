@@ -224,6 +224,22 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link SetPricePlanRequest }
+     * 
+     */
+    public SetPricePlanRequest createSetPricePlanRequest() {
+        return new SetPricePlanRequest();
+    }
+
+    /**
+     * Create an instance of {@link SetPricePlanResponse }
+     * 
+     */
+    public SetPricePlanResponse createSetPricePlanResponse() {
+        return new SetPricePlanResponse();
+    }
+
+    /**
      * Create an instance of {@link SetCompletedLodgingResponse }
      * 
      */

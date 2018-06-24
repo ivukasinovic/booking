@@ -6,6 +6,7 @@ import {LodgingNewComponent} from './lodging-new/lodging-new.component';
 import {MessagesComponent} from './messages/messages.component';
 import {OccupancyComponent} from './occupancy/occupancy.component';
 import {LodgingListComponent} from './lodging-list/lodging-list.component';
+import {PricePlanNewComponent} from './price-plan-new/price-plan-new.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -13,7 +14,8 @@ const routes: Routes = [
   { path: 'lodging-new', component: LodgingNewComponent },
   { path: 'messages', component: MessagesComponent },
   { path: 'occupancy', component: OccupancyComponent },
-  { path: 'lodging-list', component: LodgingListComponent }
+  { path: 'lodging-list', component: LodgingListComponent },
+  { path: 'price-plan', component: PricePlanNewComponent },
 ];
 
 @NgModule({
