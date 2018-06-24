@@ -7,8 +7,8 @@ import {Component, OnInit} from '@angular/core';
 })
 export class CategoryLodgingComponent implements OnInit {
 
-  currentRate = 3;
-  maximum = 5;
+  currentRate = 6;
+  maximum = 6;
 
   checked = false;
 
