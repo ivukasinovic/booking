@@ -20,7 +20,6 @@ export class AddAgentComponent implements OnInit {
   }
 
   register() {
-    alert("Usloo log in");
     this.authService.registerAgent(this.user)
       .subscribe((data: User) => {
           // alert('Succes registration ' + data.username + '!');

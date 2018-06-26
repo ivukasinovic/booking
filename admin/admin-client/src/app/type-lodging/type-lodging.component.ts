@@ -45,17 +45,14 @@ export class TypeLodgingComponent implements OnInit {
           window.location.reload();
         },
         err => {
-          alert('Niste uspeli obrisati(Doslo je do greske)');
+          alert('Niste obrisali zato sto odredjeni Smestaj sadrzi dati tip');
         });
-
 
   }
 
   add(ime: string) {
     this.pritisni = true;
-    //  this.niz.push(noviTip);
     this.noviTip.label = ime;
-    //  this.noviTip.label= ime;
 
 
     this.authService.addTypeOfLodging(this.noviTip)

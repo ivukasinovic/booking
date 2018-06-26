@@ -19,7 +19,9 @@ export class PricePlanNewComponent implements OnInit {
   ngOnInit() {
     this.lodgingService.getLodgings()
       .subscribe((response: Lodging[]) => {
-        this.lodgings = response;
+        this.lodgings = response.filter((lodging: Lodging) => lodging.agent === localStorage.getItem('username'));
+        // this.lodgings = response;
+        //  this.lodgings = response;
       }, error1 => {
         alert('Error with fetching lodgings!');
       });
