@@ -110,3 +110,44 @@ INSERT INTO reservation (id,date_start,date_end,active,visited,lodging_id,user_i
 INSERT INTO reservation (id,date_start,date_end,active,visited,lodging_id,user_id) VALUES (4,'2018-07-24 10:42:58','2018-08-22 10:42:58',true,true ,4,6 );
 INSERT INTO reservation (id,date_start,date_end,active,visited,lodging_id,user_id) VALUES (5,'2018-08-25 10:42:58','2018-09-22 10:42:58',true,true ,1,3 );
 INSERT INTO reservation (id,date_start,date_end,active,visited,lodging_id,user_id) VALUES (6,'2018-09-26 10:42:58','2018-10-22 10:42:58',true,false ,2,4 );
+
+
+
+
+INSERT INTO permission (id,role,endpoint, method) VALUES (1,'USER', '/addtional-service', 'GET');
+INSERT INTO permission (id,role,endpoint, method) VALUES (2,'USER', '/addtional-service/{id}', 'GET');
+INSERT INTO permission (id,role,endpoint, method) VALUES (3,'ADMIN', '/addtional-service', 'POST');
+INSERT INTO permission (id,role,endpoint, method) VALUES (4,'ADMIN', '/addtional-service/{id}', 'PUT');
+INSERT INTO permission (id,role,endpoint, method) VALUES (5,'ADMIN', '/addtional-service/{id}', 'DELETE');
+
+INSERT INTO permission (id,role,endpoint, method) VALUES (6,'USER', '/lodging/getLodgings', 'GET');
+INSERT INTO permission (id,role,endpoint, method) VALUES (7,'USER', '/lodging/{id}', 'GET');
+INSERT INTO permission (id,role,endpoint, method) VALUES (8,'AGENT', '/lodging/{id}', 'POST');
+INSERT INTO permission (id,role,endpoint, method) VALUES (9,'AGENT', '/lodging/{id}', 'PUT');
+INSERT INTO permission (id,role,endpoint, method) VALUES (10,'AGENT', '/lodging/{id}', 'DELETE');
+
+
+INSERT INTO permission (id,role,endpoint, method) VALUES (11,'USER', '/priceList/{id}', 'GET');
+INSERT INTO permission (id,role,endpoint, method) VALUES (12,'USER', '/priceList/getPriceLists', 'GET');
+INSERT INTO permission (id,role,endpoint, method) VALUES (13,'AGENT', '/priceList', 'POST');
+INSERT INTO permission (id,role,endpoint, method) VALUES (14,'AGENT', '/priceList/{id}', 'PUT');
+
+INSERT INTO permission (id,role,endpoint, method) VALUES (15,'USER', '/reservations/{idLodging}', 'POST');
+INSERT INTO permission (id,role,endpoint, method) VALUES (16,'USER', '/reservations', 'GET');
+INSERT INTO permission (id,role,endpoint, method) VALUES (17,'USER', '/reservations/cancel/{id}', 'GET');
+INSERT INTO permission (id,role,endpoint, method) VALUES (18,'USER', '/reservations/getReservationByLodging/{idLodg}', 'GET');
+INSERT INTO permission (id,role,endpoint, method) VALUES (19,'USER', '/reservations/check/{id}/{startDate}/{endDate}', 'GET');
+
+INSERT INTO permission (id,role,endpoint, method) VALUES (20,'USER', '/certificates', 'GET');
+INSERT INTO permission (id,role,endpoint, method) VALUES (21,'USER', '/certificates', 'POST');
+INSERT INTO permission (id,role,endpoint, method) VALUES (22,'USER', '/certificates/issuers', 'GET');
+INSERT INTO permission (id,role,endpoint, method) VALUES (23,'USER', '/certificates/{id}', 'GET');
+INSERT INTO permission (id,role,endpoint, method) VALUES (24,'USER', '/certificates/check/{id}', 'GET');
+INSERT INTO permission (id,role,endpoint, method) VALUES (25,'USER', '/certificates/download/{id}', 'GET');
+INSERT INTO permission (id,role,endpoint, method) VALUES (26,'ADMIN', '/certificates/revoke/{id}', 'GET');
+
+
+
+
+
+

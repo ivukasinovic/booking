@@ -64,8 +64,9 @@ export class CertificateListComponent implements OnInit {
 
   revoke(serialNumber: number) {
     this.certificateService.revoke(serialNumber)
-      .subscribe();
-    location.reload();
+      .subscribe(response => {
+        alert('Success');
+      });
   }
 
 

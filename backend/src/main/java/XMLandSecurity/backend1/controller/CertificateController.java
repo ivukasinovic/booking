@@ -5,6 +5,7 @@ import XMLandSecurity.backend1.domain.User;
 import XMLandSecurity.backend1.model.dto.CertificateDTO;
 import XMLandSecurity.backend1.service.CertificateService;
 import XMLandSecurity.backend1.service.KeyStoreService;
+import XMLandSecurity.backend1.service.PermissionService;
 import XMLandSecurity.backend1.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -31,6 +32,9 @@ public class CertificateController {
 
     @Autowired
     private KeyStoreService keyStoreService;
+
+    @Autowired
+    private PermissionService permissionService;
 
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<List<CertificateDTO>> getCerticatesAll() {
@@ -89,17 +93,29 @@ public class CertificateController {
 
     @PreAuthorize("hasAuthority('ADMIN')")
     @RequestMapping(value = "/revoke/{id}", method = RequestMethod.GET)
-    public ResponseEntity<CertificateDTO> revoke(@PathVariable String id) {
+    public ResponseEntity<CertificateDTO> revoke(@PathVariable String id, Principal principal) {
+        Role permission = permissionService.findByEndpointAndMethod("/certificates/revoke/{id}","GET").getRole();
+        if(!permission.equals(getRole(principal.getName()))){
+            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+        }
         certificateService.revoke(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @PreAuthorize("hasAuthority('ADMIN')")
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    public ResponseEntity<CertificateDTO> delete(@PathVariable String id) {
+    public ResponseEntity<CertificateDTO> delete(@PathVariable String id, Principal principal) {
+        Role permission = permissionService.findByEndpointAndMethod("/certificates/{id}", "GET").getRole();
+        if(!permission.equals(getRole(principal.getName()))){
+            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+        }
         keyStoreService.delete(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
+    Role getRole(String username) {
+        User user = userService.findByUsername(username);
+        return user.getRole();
+    }
 
 }

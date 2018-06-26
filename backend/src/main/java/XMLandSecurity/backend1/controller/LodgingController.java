@@ -1,6 +1,6 @@
 package XMLandSecurity.backend1.controller;
 
-import XMLandSecurity.backend1.domain.*;
+import XMLandSecurity.backend1.domain.Lodging;
 import XMLandSecurity.backend1.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -8,14 +8,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.security.Principal;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 @RestController
 @RequestMapping(value = "/lodging")
@@ -43,8 +36,6 @@ public class LodgingController {
         Lodging lodging = lodgingService.findOne(id); //findOne(user);
         return new ResponseEntity<>(lodging, HttpStatus.OK);     // "200 OK"
     }
-
-    // ===
 
 
     @RequestMapping(
