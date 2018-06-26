@@ -101,7 +101,7 @@ public class Lodging implements Serializable {
     private List<Rating> ratingList = new ArrayList<Rating>();
 
     @JsonIgnore
-    @ManyToMany(mappedBy = "lodgingList", cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
+    @ManyToMany(mappedBy = "lodgingList", cascade = {CascadeType.PERSIST}, fetch = FetchType.EAGER)
     @XmlElementWrapper(name="additionalServiceList", required=true)
     @XmlElement(name="additionalService", required=true)
     private List<AdditionalService> additionalServiceList = new ArrayList<AdditionalService>();

@@ -117,6 +117,7 @@ public class LodgingController {
         request.getLodging().setAgent(agent);
         SetLodgingResponse response = objPort.setLodging(request);
         com.project.model.LodgingRes lodgingRes = converters.convertLodging(request.getLodging());
+
         lodgingResRepository.save(lodgingRes);
         System.out.println(response);
         return new ResponseEntity<>(HttpStatus.CREATED);

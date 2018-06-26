@@ -37,6 +37,7 @@ public class TypeOfLodgingController {
         return new ResponseEntity<>(listaAdminaFanZone, HttpStatus.OK);     // "200 OK"
     }
 
+
     @RequestMapping(
             method = RequestMethod.POST,
             consumes = MediaType.APPLICATION_JSON_VALUE,
