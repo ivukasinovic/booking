@@ -16,6 +16,7 @@ import java.math.BigInteger;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -223,20 +224,64 @@ public class LodgingEndpoint {
         Reservation reservation = new Reservation();
         User agent = userService.findByUsername(request.getAgent());
         reservation.setUser(agent);
-        DateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-        String dateStart = request.getStart() + " 00:00:00";
-        String dateEnd = request.getEnd() + " 00:00:00";
-        try {
-            reservation.setDateStart(format.parse(dateStart));
-            reservation.setDateEnd(format.parse(dateEnd));
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+//        DateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+//        String dateStart = request.getStart() + " 00:00:00";
+//        String dateEnd = request.getEnd() + " 00:00:00";
+//        try {
+//            reservation.setDateStart(format.parse(dateStart));
+//            reservation.setDateEnd(format.parse(dateEnd));
+//        } catch (ParseException e) {
+//            e.printStackTrace();
+//        }
+//        reservation.setVisited(false);
+//        reservation.setActive(true);
+//        reservation.setLodging(lodgingService.findOne(request.getLodging()));
+//        reservationService.save(reservation);
+//        response.setSuccess("success");
+//
+        //======
+        DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        String dateStart = request.getStart() ;
+        String dateEnd = request.getEnd();
+
+        List<Lodging> reservatedLodgings = new ArrayList<Lodging>();
+        List<Lodging> retLodgings = new ArrayList<Lodging>();
+        List<Lodging> svi = new ArrayList<Lodging>();
+        List<Lodging> ret = new ArrayList<Lodging>();
+
         reservation.setVisited(false);
         reservation.setActive(true);
-        reservation.setLodging(lodgingService.findOne(request.getLodging()));
-        reservationService.save(reservation);
-        response.setSuccess("success");
+
+        reservatedLodgings = null;
+        try {
+            Date dStart = format.parse(dateStart);
+            Date dEnd = format.parse(dateEnd);
+            reservatedLodgings = lodgingService.findByReservationsDateStartBetweenAndReservationsDateEndBetween(dStart,dEnd,dStart,dEnd);
+            lodgingService.findOne(2L);
+
+            int flag = 0;//petlja za proveravanje koji smestaji su dozvoljeni zbog termina rezervacija
+            for (int i=0; i < reservatedLodgings.size();i++ ){
+                if(request.getLodging() == reservatedLodgings.get(i).getId() ){
+                    flag = 1;
+                }
+            }
+
+            if(flag == 0){
+                reservation.setDateStart(dStart);
+                reservation.setDateEnd(format.parse(dateEnd));
+                reservation.setLodging(lodgingService.findOne(request.getLodging()));
+                reservationService.save(reservation);
+                response.setSuccess("success");
+
+            }else {
+
+                response.setSuccess("U okviru datog datuma nije moguce uraditi !");
+            }
+        }catch (Exception e) {
+            System.out.print("Hajmooo !!!==============");
+        }
+        //======
+
         return response;
     }
 

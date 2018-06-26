@@ -12,7 +12,7 @@ import { MessagesComponent } from './messages/messages.component';
 import { OccupancyComponent } from './occupancy/occupancy.component';
 import { LodgingListComponent } from './lodging-list/lodging-list.component';
 import { PricePlanNewComponent } from './price-plan-new/price-plan-new.component';
-
+import {CarouselModule} from 'ngx-bootstrap/carousel';
 
 @NgModule({
   declarations: [
@@ -30,7 +30,8 @@ import { PricePlanNewComponent } from './price-plan-new/price-plan-new.component
     AppRoutingModule,
     AppRoutingModule,
     AuthModule,
-    FormsModule
+    FormsModule,
+    CarouselModule.forRoot()
   ],
   providers: [LodgingService],
   bootstrap: [AppComponent]

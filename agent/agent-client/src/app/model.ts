@@ -21,7 +21,7 @@ export class User {
 export class Lodging {
   id: number;
   title: string;
-  agent: number;
+  agent: any;
   name: string;
   city: number;
   type: number;
