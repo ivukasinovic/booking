@@ -31,4 +31,9 @@ public class PermissionServiceImpl implements PermissionService {
     public Permission findByEndpoint(String endpoint) {
         return permissionRepository.findByEndpoint(endpoint);
     }
+
+    @Override
+    public Permission findByEndpointAndMethod(String endpoint, String method) {
+        return permissionRepository.findByEndpointAndMethod(endpoint, method);
+    }
 }

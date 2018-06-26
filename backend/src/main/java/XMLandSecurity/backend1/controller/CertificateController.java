@@ -94,7 +94,7 @@ public class CertificateController {
     @PreAuthorize("hasAuthority('ADMIN')")
     @RequestMapping(value = "/revoke/{id}", method = RequestMethod.GET)
     public ResponseEntity<CertificateDTO> revoke(@PathVariable String id, Principal principal) {
-        Role permission = permissionService.findByEndpoint("/certificates/revoke/{id}").getRole();
+        Role permission = permissionService.findByEndpointAndMethod("/certificates/revoke/{id}","GET").getRole();
         if(!permission.equals(getRole(principal.getName()))){
             return new ResponseEntity<>(HttpStatus.FORBIDDEN);
         }
@@ -104,7 +104,11 @@ public class CertificateController {
 
     @PreAuthorize("hasAuthority('ADMIN')")
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    public ResponseEntity<CertificateDTO> delete(@PathVariable String id) {
+    public ResponseEntity<CertificateDTO> delete(@PathVariable String id, Principal principal) {
+        Role permission = permissionService.findByEndpointAndMethod("/certificates/{id}", "GET").getRole();
+        if(!permission.equals(getRole(principal.getName()))){
+            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+        }
         keyStoreService.delete(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }

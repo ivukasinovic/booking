@@ -9,4 +9,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface PermissionRepository extends JpaRepository<Permission, Long> {
 
     Permission findByEndpoint(String endpoint);
+
+    Permission findByEndpointAndMethod(String endpoint, String method);
 }

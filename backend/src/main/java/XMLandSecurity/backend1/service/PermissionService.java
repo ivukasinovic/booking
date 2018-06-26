@@ -14,4 +14,6 @@ public interface PermissionService {
     Permission findOne(Long id);
 
     Permission findByEndpoint(String endpoint);
+
+    Permission findByEndpointAndMethod(String endpoint, String method);
 }
