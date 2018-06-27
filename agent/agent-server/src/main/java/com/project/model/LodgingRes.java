@@ -20,7 +20,7 @@ public class LodgingRes {
     protected long category;
     protected String details;
     protected BigInteger personsNumber;
-    @ManyToMany(mappedBy = "lodgingList", cascade = {CascadeType.ALL}, fetch = FetchType.LAZY)
+    @ManyToMany(mappedBy = "lodgingList", cascade = {CascadeType.PERSIST}, fetch = FetchType.LAZY)
     protected List<AdditionalService> additionService;
     @OneToMany(mappedBy = "lodgingRes", cascade = CascadeType.ALL)
     private List<Image> imagesList = new ArrayList<>();

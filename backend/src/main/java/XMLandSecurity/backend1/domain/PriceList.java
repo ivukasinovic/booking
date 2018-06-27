@@ -1,13 +1,8 @@
 package XMLandSecurity.backend1.domain;
 
-import java.io.Serializable;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-
-import java.io.Serializable;
-import java.time.LocalDateTime;
-import java.util.Date;
 
 import javax.persistence.*;
 import javax.validation.constraints.DecimalMax;
@@ -16,7 +11,8 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
+import java.io.Serializable;
+import java.util.Date;
 
 @Entity
 @Table
@@ -26,6 +22,7 @@ public class PriceList implements Serializable {
 
     @Id
     @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @XmlElement(name="id", required=true)
     private Long id;
 

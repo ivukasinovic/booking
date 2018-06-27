@@ -13,12 +13,20 @@
         <small>Persons number: {{lodging.personsNumber}}<b></b></small>
       </i>
     </div>
-    <span class="pull-right">
-        <img
-          [src]="lodging.imagesList[1]"
-          alt="{{ lodging.title }}"
-          class="img-responsive"
-          style="height: 100px; width: 100px;">
-      </span>
+
+    <carousel>
+      <slide *ngFor="let image of lodging.imagesList; let index=index">
+        <img [src]="image" class="carousel-inner">
+      </slide>
+    </carousel>
+
+
+    <!--<span class="pull-right">-->
+        <!--<img-->
+          <!--[src]="lodging.imagesList[1]"-->
+          <!--alt="{{ lodging.title }}"-->
+          <!--class="img-responsive"-->
+          <!--style="height: 100px; width: 100px;">-->
+      <!--</span>-->
   </div>
 </div>
