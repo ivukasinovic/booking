@@ -145,6 +145,7 @@ INSERT INTO permission (id,role,endpoint, method) VALUES (23,'USER', '/certifica
 INSERT INTO permission (id,role,endpoint, method) VALUES (24,'USER', '/certificates/check/{id}', 'GET');
 INSERT INTO permission (id,role,endpoint, method) VALUES (25,'USER', '/certificates/download/{id}', 'GET');
 INSERT INTO permission (id,role,endpoint, method) VALUES (26,'ADMIN', '/certificates/revoke/{id}', 'GET');
+INSERT INTO permission (id,role,endpoint, method) VALUES (27,'ADMIN', '/certificates/{id}', 'DELETE');
 
 
 
