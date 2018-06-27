@@ -10,6 +10,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.security.Principal;
 import java.util.Date;
 import java.util.List;
@@ -65,13 +66,15 @@ public class MessageController {
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public ResponseEntity<Message> sendMessage(@RequestBody Message message, @PathVariable("idRec") Long idRec, Principal principal) {
+    public ResponseEntity<Message> sendMessage(@RequestBody Message message, @PathVariable("idRec") Long idRec, Principal principal) throws IOException {
         User loggedUser = userService.findByUsername(principal.getName());
         message.setSender(loggedUser);
         User receiver = userService.findOne(idRec);
         message.setReceiver(receiver);
         message.setDateSent(new Date());
         Message messageNew = messageService.save(message);
+        XMLandSecurity.backend1.logger.Logger.getInstance().log(" ,Dodata poruka: " + message.getTitle() + ", Posiljalac: " + message.getSender() + " ,Primalac: " + message.getReceiver() +"  " + new Date());
+
         return new ResponseEntity(messageNew, HttpStatus.OK);
     }
 
@@ -92,7 +95,10 @@ public class MessageController {
             method = RequestMethod.DELETE,
             consumes = MediaType.APPLICATION_JSON_VALUE
     )
-    public ResponseEntity<Message> deleteMessage(@PathVariable("id") Long id) {
+    public ResponseEntity<Message> deleteMessage(@PathVariable("id") Long id) throws IOException {
+        Message message = messageService.findOne(id);
+        XMLandSecurity.backend1.logger.Logger.getInstance().log(" ,Izbrisana poruka: " + message.getTitle() + ", Posiljalac: " + message.getSender() + " ,Primalac: " + message.getReceiver() +"  " + new Date());
+
         messageService.delete(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }

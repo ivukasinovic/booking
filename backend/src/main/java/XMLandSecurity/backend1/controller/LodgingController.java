@@ -8,6 +8,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.security.Principal;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -52,8 +53,10 @@ public class LodgingController {
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public ResponseEntity<Lodging> createLodging(@RequestBody Lodging lodging) {
+    public ResponseEntity<Lodging> createLodging(@RequestBody Lodging lodging) throws IOException {
         Lodging lodgingNew = lodgingService.save(lodging);
+        XMLandSecurity.backend1.logger.Logger.getInstance().log(" ,Dodat smestaj: " + lodging.getTitle() + " Agent: " + lodging.getAgent()  +"  " + new Date());
+
         return new ResponseEntity(lodgingNew, HttpStatus.OK);
     }
 
@@ -73,7 +76,11 @@ public class LodgingController {
             value = "/{id}",
             method = RequestMethod.DELETE
     )
-    public ResponseEntity<Lodging> izbrisi(@PathVariable("id") Long id){
+    public ResponseEntity<Lodging> izbrisi(@PathVariable("id") Long id) throws IOException {
+        Lodging lodging = lodgingService.findOne(id); //findOne(user);
+        XMLandSecurity.backend1.logger.Logger.getInstance().log(" ,Izbrisan smestaj: " + lodging.getTitle() + " Agent: " + lodging.getAgent()  +"  " + new Date());
+
+
         lodgingService.delete(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
