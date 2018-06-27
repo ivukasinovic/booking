@@ -28,19 +28,16 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import javax.crypto.BadPaddingException;
-import javax.crypto.Cipher;
-import javax.crypto.IllegalBlockSizeException;
-import javax.crypto.NoSuchPaddingException;
-import javax.crypto.spec.SecretKeySpec;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.swing.*;
+import javax.xml.bind.DatatypeConverter;
 import java.io.IOException;
-import java.security.InvalidKeyException;
-import java.security.Key;
+import java.io.UnsupportedEncodingException;
+import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.Principal;
-import java.util.Base64;
+import java.security.SecureRandom;
 import java.util.Date;
 import java.util.logging.Logger;
 
@@ -72,7 +69,7 @@ public class AuthenticationController {
 
 
     @RequestMapping(method = RequestMethod.POST, value = "${route.authentication}")  // /login  ${route.authentication}
-    public ResponseEntity<?> authenticationRequest(@RequestBody AuthenticationRequest authenticationRequest, Device device) throws AuthenticationException, IOException {
+    public ResponseEntity<?> authenticationRequest(@RequestBody AuthenticationRequest authenticationRequest, Device device, HttpServletResponse response) throws AuthenticationException, IOException {
 
         // Perform the authentication
         Authentication authentication = this.authenticationManager.authenticate(
@@ -84,23 +81,27 @@ public class AuthenticationController {
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
 
-
         // Reload password post-authentication so we can generate token
         UserDetails userDetails = this.userDetailsService.loadUserByUsername(authenticationRequest.getUsername());
         User user = userService.findByUsername(userDetails.getUsername());
 
-        if(user == null) {
+        if (user == null) {
             XMLandSecurity.backend1.logger.Logger.getInstance().log("Pokusao logovanje sa korisnickim imenom: " + user.getUsername() + "  " + new Date());
-        }else {
+        } else {
             XMLandSecurity.backend1.logger.Logger.getInstance().log("Ulogovao se: " + user.getUsername() + "  " + new Date());
         }
-        if(!user.isActivated()){
+        if (!user.isActivated()) {
             return new ResponseEntity<>(HttpStatus.FORBIDDEN);
         }
-        String token = this.tokenUtils.generateToken(userDetails, device);
 
+        String fingerprint = getFingerprint();
+        String fingerprintCookie = "__Secure-Fgp=" + fingerprint + "; SameSite=Strict; HttpOnly; Secure";
+        response.addHeader("Set-Cookie", fingerprintCookie);
+        String fingerprintHash = getFingerprintHash(fingerprint);
+        String token = this.tokenUtils.generateToken(userDetails, device, fingerprintHash);
         return ResponseEntity.ok(new AuthenticationResponse(token));
     }
+
 
     @RequestMapping(value = "${route.authentication.refresh}", method = RequestMethod.GET)
     public ResponseEntity<?> authenticationRequest(HttpServletRequest request) {
@@ -120,7 +121,7 @@ public class AuthenticationController {
             method = RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE,
             consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> register(@Validated @RequestBody User user,Errors error) {
+    public ResponseEntity<?> register(@Validated @RequestBody User user, Errors error) {
         if ((userService.findByUsername(user.getUsername()) != null) || (userService.findByEmail(user.getEmail()) != null)) {
             JOptionPane.showMessageDialog(null, "Email alredy exist or username exist!", "Email alredy exist or username exis",
                     JOptionPane.ERROR_MESSAGE);
@@ -138,6 +139,7 @@ public class AuthenticationController {
         emailService.sendActivationMail(user);
         return new ResponseEntity<>(savedUser, HttpStatus.CREATED);
     }
+
     // ===
     @RequestMapping(
             value = "/registerAgent",
@@ -145,14 +147,14 @@ public class AuthenticationController {
             produces = MediaType.APPLICATION_JSON_VALUE,
             consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<User> registerAgent(@RequestBody User user) {
-        if ((userService.findByUsername(user.getUsername()) != null) ) {
+        if ((userService.findByUsername(user.getUsername()) != null)) {
             return new ResponseEntity<>(HttpStatus.FORBIDDEN);
         }
         user.setRole(Role.AGENT);
         user.setPasswordHash(new BCryptPasswordEncoder().encode(user.getPasswordHash()));
         user.setActivated(false);
         User savedUser = userService.save(user);
-         //emailService.sendActivationMail(user);
+        //emailService.sendActivationMail(user);
         return new ResponseEntity<>(savedUser, HttpStatus.CREATED);
     }
 
@@ -163,7 +165,7 @@ public class AuthenticationController {
             method = RequestMethod.POST,
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> changePassword(@Validated @RequestBody ChangePasswordDto chp, Principal principal,Errors errors){
+    public ResponseEntity<?> changePassword(@Validated @RequestBody ChangePasswordDto chp, Principal principal, Errors errors) {
         HttpStatus status = HttpStatus.FORBIDDEN;
 
         if (errors.hasErrors()) {
@@ -172,53 +174,77 @@ public class AuthenticationController {
 
         User user = userService.findByUsername(principal.getName());
         BCryptPasswordEncoder bc = new BCryptPasswordEncoder();
-        if(bc.matches(chp.getOldPw(),user.getPasswordHash())){
+        if (bc.matches(chp.getOldPw(), user.getPasswordHash())) {
             user.setPasswordHash(bc.encode(chp.getNewPw()));
             userService.save(user);
             status = HttpStatus.OK;
         }
-        return new ResponseEntity<>(user,status);
+        return new ResponseEntity<>(user, status);
     }
 
     @RequestMapping(
             value = "/reset-password-req",
             method = RequestMethod.POST)
-    public ResponseEntity<User> forgotPasswordReq(@RequestBody String email){
-        User user =userService.findByEmail(email);
-        if((user == null) || (user.getRole() != Role.USER)){
+    public ResponseEntity<User> forgotPasswordReq(@RequestBody String email) {
+        User user = userService.findByEmail(email);
+        if ((user == null) || (user.getRole() != Role.USER)) {
             return new ResponseEntity<>(HttpStatus.FORBIDDEN);
         }
         emailService.sendResetPassword(user);
-        return new ResponseEntity<>(user,HttpStatus.OK);
+        return new ResponseEntity<>(user, HttpStatus.OK);
     }
+
     @RequestMapping(
             value = "/reset-password/{code}",
             method = RequestMethod.POST,
             consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<User> forgotPassword(@PathVariable String code, @RequestBody ChangePasswordDto chp){
+    public ResponseEntity<User> forgotPassword(@PathVariable String code, @RequestBody ChangePasswordDto chp) {
         String username = EncDecSimple.decrypt(code);
-        User user =userService.findByUsername(username);
-        if(user == null){
+        User user = userService.findByUsername(username);
+        if (user == null) {
             return new ResponseEntity<>(HttpStatus.FORBIDDEN);
         }
         BCryptPasswordEncoder bc = new BCryptPasswordEncoder();
         user.setPasswordHash(bc.encode(chp.getNewPw()));
         userService.save(user);
-        return new ResponseEntity<>(user,HttpStatus.OK);
+        return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
     @RequestMapping(
             value = "/activate/{username}",
             method = RequestMethod.GET)
-    public String activateUser(@PathVariable("username") String username ){
+    public String activateUser(@PathVariable("username") String username) {
         username = EncDecSimple.decrypt(username);
         User user = userService.findByUsername(username);
-        if(user == null){
+        if (user == null) {
             return "Error!";
         }
         user.setActivated(true);
         userService.save(user);
         return "Your account is now activated!";
+    }
+
+    private String getFingerprint() {
+        SecureRandom secureRandom = new SecureRandom();
+        byte[] randomFgp = new byte[50];
+        secureRandom.nextBytes(randomFgp);
+        String userFingerprint = DatatypeConverter.printHexBinary(randomFgp);
+
+        //Add the fingerprint in a hardened cookie - Add cookie manually because SameSite attribute is not supported by javax.servlet.http.Cookie class
+        return userFingerprint;
+    }
+
+    private String getFingerprintHash(String fingerprintCookie) {
+        MessageDigest digest = null;
+        byte[] userFingerprintDigest = null;
+        try {
+            digest = MessageDigest.getInstance("SHA-256");
+            userFingerprintDigest = digest.digest(fingerprintCookie.getBytes("utf-8"));
+        } catch (NoSuchAlgorithmException | UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+
+        return DatatypeConverter.printHexBinary(userFingerprintDigest);
     }
 
 }

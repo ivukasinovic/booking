@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
@@ -91,7 +90,6 @@ public class CertificateController {
         return new ResponseEntity<>(file, HttpStatus.OK);
     }
 
-    @PreAuthorize("hasAuthority('ADMIN')")
     @RequestMapping(value = "/revoke/{id}", method = RequestMethod.GET)
     public ResponseEntity<CertificateDTO> revoke(@PathVariable String id, Principal principal) {
         Role permission = permissionService.findByEndpointAndMethod("/certificates/revoke/{id}","GET").getRole();
@@ -102,12 +100,13 @@ public class CertificateController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @PreAuthorize("hasAuthority('ADMIN')")
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<CertificateDTO> delete(@PathVariable String id, Principal principal) {
-        Role permission = permissionService.findByEndpointAndMethod("/certificates/{id}", "GET").getRole();
-        if(!permission.equals(getRole(principal.getName()))){
-            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+        Role permission = permissionService.findByEndpointAndMethod("/certificates/{id}", "DELETE").getRole();
+        if(!permission.equals(Role.USER)){
+            if(!permission.equals(getRole(principal.getName()))){
+                return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+            }
         }
         keyStoreService.delete(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
