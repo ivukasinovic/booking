@@ -35,7 +35,11 @@ import javax.crypto.NoSuchPaddingException;
 import javax.crypto.spec.SecretKeySpec;
 import javax.servlet.http.HttpServletRequest;
 import javax.swing.*;
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
+import java.net.InetAddress;
+import java.nio.file.Files;
 import java.security.InvalidKeyException;
 import java.security.Key;
 import java.security.NoSuchAlgorithmException;
@@ -74,32 +78,62 @@ public class AuthenticationController {
     @RequestMapping(method = RequestMethod.POST, value = "${route.authentication}")  // /login  ${route.authentication}
     public ResponseEntity<?> authenticationRequest(@RequestBody AuthenticationRequest authenticationRequest, Device device) throws AuthenticationException, IOException {
 
-        // Perform the authentication
-        Authentication authentication = this.authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(
-                        authenticationRequest.getUsername(),
-                        authenticationRequest.getPassword()
-                )
-        );
-        SecurityContextHolder.getContext().setAuthentication(authentication);
+
+        InetAddress iAddress = InetAddress.getLocalHost();
+        String currentIp = iAddress.getHostAddress();
+
+        int broj = 0;
+        String prvaLinija ="";
+        String petaSaIpa ="";
+
+//            try (BufferedReader br = new BufferedReader(new FileReader("trenutni.txt"))) {
+//                StringBuilder sb = new StringBuilder();
+//                String line = br.readLine();
+//
+//                while (line != null) {
+//                    sb.append(line);
+//                    sb.append(System.lineSeparator());
+//                    line = br.readLine();
+//                    if (line.contains(currentIp)) {
+//                        broj++;
+//                    }
+//                }
+//                String everything = sb.toString();
+//                //System.out.print(everything);
+//
+//            }
 
 
+      //  if (broj < 5) {      // pet puta max sa jedne IP adrese !!!
 
-        // Reload password post-authentication so we can generate token
-        UserDetails userDetails = this.userDetailsService.loadUserByUsername(authenticationRequest.getUsername());
-        User user = userService.findByUsername(userDetails.getUsername());
+            // Perform the authentication
+            Authentication authentication = this.authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(
+                            authenticationRequest.getUsername(),
+                            authenticationRequest.getPassword()
+                    )
+            );
+            SecurityContextHolder.getContext().setAuthentication(authentication);
 
-        if(user == null) {
-            XMLandSecurity.backend1.logger.Logger.getInstance().log("Pokusao logovanje sa korisnickim imenom: " + user.getUsername() + "  " + new Date());
-        }else {
-            XMLandSecurity.backend1.logger.Logger.getInstance().log("Ulogovao se: " + user.getUsername() + "  " + new Date());
-        }
-        if(!user.isActivated()){
-            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
-        }
-        String token = this.tokenUtils.generateToken(userDetails, device);
 
-        return ResponseEntity.ok(new AuthenticationResponse(token));
+            // Reload password post-authentication so we can generate token
+            UserDetails userDetails = this.userDetailsService.loadUserByUsername(authenticationRequest.getUsername());
+            User user = userService.findByUsername(userDetails.getUsername());
+
+            if (user == null) {
+                XMLandSecurity.backend1.logger.Logger.getInstance().log(" ,Pokusao logovanje sa korisnickim imenom: " + user.getUsername() + "  " + new Date());
+            } else {
+                XMLandSecurity.backend1.logger.Logger.getInstance().log(" ,Ulogovao se: " + user.getUsername() + "  " + new Date());
+            }
+            if (!user.isActivated()) {
+                return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+            }
+            String token = this.tokenUtils.generateToken(userDetails, device);
+
+
+            return ResponseEntity.ok(new AuthenticationResponse(token));
+      //  broj++;
+     //   return new ResponseEntity<>(HttpStatus.FORBIDDEN);
     }
 
     @RequestMapping(value = "${route.authentication.refresh}", method = RequestMethod.GET)
