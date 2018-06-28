@@ -1,5 +1,6 @@
 package XMLandSecurity.backend1.service.impl;
 
+import XMLandSecurity.backend1.configuration.LoginAttemptService;
 import XMLandSecurity.backend1.domain.User;
 import XMLandSecurity.backend1.model.factory.CustomUserFactory;
 import XMLandSecurity.backend1.repository.UserRepository;
@@ -10,6 +11,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -20,6 +22,12 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private LoginAttemptService loginAttemptService;
+
+    @Autowired
+    private HttpServletRequest request;
 
     @Override
     public List<User> findAll() {
@@ -55,11 +63,25 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
         User user = findByUsername(s);
 
+        String ip = getClientIP();
+        if (loginAttemptService.isBlocked(ip)) {
+            throw new RuntimeException("blocked");
+        }
+
         if (user == null) {
+            loginAttemptService.loginFailed(ip);
             throw new UsernameNotFoundException(String.format("No user found with username '%s'.", s));
         } else {
             return CustomUserFactory.create(user);
         }
+    }
+
+    private String getClientIP() {
+        String xfHeader = request.getHeader("X-Forwarded-For");
+        if (xfHeader == null){
+            return request.getRemoteAddr();
+        }
+        return xfHeader.split(",")[0];
     }
 
 

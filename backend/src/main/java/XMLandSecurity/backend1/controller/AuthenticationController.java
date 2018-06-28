@@ -1,5 +1,6 @@
 package XMLandSecurity.backend1.controller;
 
+import XMLandSecurity.backend1.configuration.LoginAttemptService;
 import XMLandSecurity.backend1.domain.Role;
 import XMLandSecurity.backend1.domain.User;
 import XMLandSecurity.backend1.model.dto.ChangePasswordDto;
@@ -63,6 +64,9 @@ public class AuthenticationController {
     private TokenUtils tokenUtils;
 
     @Autowired
+    private LoginAttemptService loginAttemptService;
+
+    @Autowired
     private UserDetailsService userDetailsService;
 
     @Autowired
@@ -74,19 +78,27 @@ public class AuthenticationController {
     @Autowired
     private EncDecSimple encDecSimple;
 
+    @Autowired
+    private HttpServletRequest request;
+
 
     @RequestMapping(method = RequestMethod.POST, value = "${route.authentication}")  // /login  ${route.authentication}
     public ResponseEntity<?> authenticationRequest(@RequestBody AuthenticationRequest authenticationRequest, Device device, HttpServletResponse response) throws AuthenticationException, IOException {
-      
-        InetAddress iAddress = InetAddress.getLocalHost();
-        String currentIp = iAddress.getHostAddress();
             // Perform the authentication
-            Authentication authentication = this.authenticationManager.authenticate(
+        Authentication authentication = null;
+        try{
+            authentication = this.authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(
                             authenticationRequest.getUsername(),
                             authenticationRequest.getPassword()
                     )
             );
+            loginAttemptService.loginSucceeded(getClientIP());
+        }catch (Exception e) {
+            loginAttemptService.loginFailed(getClientIP());
+            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+        }
+
             SecurityContextHolder.getContext().setAuthentication(authentication);
 
         // Reload password post-authentication so we can generate token
@@ -249,6 +261,13 @@ public class AuthenticationController {
         }
 
         return DatatypeConverter.printHexBinary(userFingerprintDigest);
+    }
+    private String getClientIP() {
+        String xfHeader = request.getHeader("X-Forwarded-For");
+        if (xfHeader == null){
+            return request.getRemoteAddr();
+        }
+        return xfHeader.split(",")[0];
     }
 
 }
