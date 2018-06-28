@@ -7,6 +7,7 @@ import XMLandSecurity.backend1.service.CertificateService;
 import XMLandSecurity.backend1.service.KeyStoreService;
 import XMLandSecurity.backend1.service.PermissionService;
 import XMLandSecurity.backend1.service.UserService;
+import org.bouncycastle.pkcs.PKCS10CertificationRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -60,6 +61,20 @@ public class CertificateController {
         if (created != null) {
             CertificateDTO creDto = new CertificateDTO(created);
             return new ResponseEntity<>(creDto, HttpStatus.CREATED);
+        }
+        return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+    }
+
+    @RequestMapping(value = "/request",
+            method = RequestMethod.POST,
+            consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<CertificateDTO> genCertificateRequest(@RequestBody CertificateDTO dto, Principal principal) {
+
+
+        PKCS10CertificationRequest created = certificateService.generateCertificateRequest(dto);
+        if (created != null) {
+            // CertificateDTO creDto = new CertificateDTO(created);
+            return new ResponseEntity<>(HttpStatus.CREATED);
         }
         return new ResponseEntity<>(HttpStatus.FORBIDDEN);
     }

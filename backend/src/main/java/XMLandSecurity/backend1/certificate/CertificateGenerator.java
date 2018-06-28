@@ -11,9 +11,12 @@ import org.bouncycastle.cert.jcajce.JcaX509v3CertificateBuilder;
 import org.bouncycastle.operator.ContentSigner;
 import org.bouncycastle.operator.OperatorCreationException;
 import org.bouncycastle.operator.jcajce.JcaContentSignerBuilder;
+import org.bouncycastle.pkcs.PKCS10CertificationRequest;
 
+
+import javax.security.auth.x500.X500Principal;
 import java.math.BigInteger;
-import java.security.Security;
+import java.security.*;
 import java.security.cert.CertificateEncodingException;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
@@ -54,7 +57,7 @@ public class CertificateGenerator {
             }
 
             // AIA extension
-            GeneralName ocspLocation = new GeneralName(6, "http://localhost:8080/api/certificates/" + issuerID);
+            GeneralName ocspLocation = new GeneralName(6, "https://localhost:8443/api/certificates/" + issuerID);
             certGen.addExtension(Extension.authorityInfoAccess, isCA, new AuthorityInformationAccess(X509ObjectIdentifiers.ocspAccessMethod, ocspLocation));
 
             //Generise se sertifikat
@@ -75,6 +78,10 @@ public class CertificateGenerator {
         } catch (CertificateException e) {
             e.printStackTrace();
         }
+        return null;
+    }
+
+    public PKCS10CertificationRequest createCertificateSigningRequest() {
         return null;
     }
 }

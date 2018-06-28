@@ -18,6 +18,9 @@ export class CertificatesService {
   postCertificate(certificate: Certificate) {
     return this.http.post('/api/certificates', certificate);
   }
+ postCertificateReq(certificate: Certificate) {
+    return this.http.post('/api/certificates/request', certificate);
+  }
 
   getCertificate(serialNumber: number) {
     const url = '/api/certificates/' + serialNumber;

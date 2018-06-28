@@ -14,9 +14,11 @@ import {SearchComponent} from './search/search.component';
 import {SendMessageComponent} from './send-message/send-message.component';
 import {RateAndCommentComponent} from './rate-and-comment/rate-and-comment.component';
 import {MakeReservationComponent} from './make-reservation/make-reservation.component';
+import {CertificateRequestComponent} from "./certificates/certificate-request/certificate-request.component";
 
 const routes: Routes = [
   {path: 'certificates/new-certificate', component: CertificatComponent},
+  {path: 'certificates/certificate-request', component: CertificateRequestComponent},
   {path: 'login', component: LoginComponent},
   {path: 'registration', component: RegistrationComponent},
   {path: 'certificates/:id', component: CertificateDetailsComponent},

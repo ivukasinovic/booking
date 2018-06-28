@@ -5,17 +5,27 @@ import XMLandSecurity.backend1.model.IssuerData;
 import XMLandSecurity.backend1.model.SubjectData;
 import XMLandSecurity.backend1.model.dto.CertificateDTO;
 import XMLandSecurity.backend1.service.CertificateService;
+import XMLandSecurity.backend1.service.EmailService;
 import XMLandSecurity.backend1.service.KeyStoreService;
+import org.bouncycastle.asn1.x500.X500Name;
 import org.bouncycastle.asn1.x500.X500NameBuilder;
 import org.bouncycastle.asn1.x500.style.BCStyle;
 import org.bouncycastle.cert.CertIOException;
+import org.bouncycastle.openssl.jcajce.JcaPEMWriter;
+import org.bouncycastle.operator.ContentSigner;
+import org.bouncycastle.operator.OperatorCreationException;
+import org.bouncycastle.operator.jcajce.JcaContentSignerBuilder;
+import org.bouncycastle.pkcs.PKCS10CertificationRequest;
+import org.bouncycastle.pkcs.jcajce.JcaPKCS10CertificationRequestBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import javax.xml.bind.DatatypeConverter;
 import java.io.*;
 import java.security.*;
 import java.security.cert.CertificateEncodingException;
+import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -28,7 +38,8 @@ public class CertificateServiceImpl implements CertificateService {
     private KeyStoreService keyStoreService;
 
     private KeyPair keyPair;
-
+    @Autowired
+    private EmailService emailService;
     @Override
     public List<CertificateDTO> convertToDTO(List<X509Certificate> certificates) {
         ArrayList<CertificateDTO> certificateDTOS = new ArrayList<>();
@@ -59,6 +70,65 @@ public class CertificateServiceImpl implements CertificateService {
         keyStoreService.writeCertificate(certificateDTO.getisCa(), certificate, certificate.getSerialNumber().toString(), sd.getPrivateKey());
 
         return certificate;
+    }
+
+    @Override
+    public PKCS10CertificationRequest generateCertificateRequest(CertificateDTO certificateDTO) {
+        try {
+            // Serijski broj sertifikata
+            int randomNum = 0 + (int) (Math.random() * 10000000);
+            String sn = String.valueOf(randomNum);
+            certificateDTO.setSerialNumber(sn);
+
+            X500NameBuilder b = new X500NameBuilder(BCStyle.INSTANCE);
+            b.addRDN(BCStyle.CN, certificateDTO.getCommonName());
+            b.addRDN(BCStyle.SURNAME, certificateDTO.getSurname());
+            b.addRDN(BCStyle.GIVENNAME, certificateDTO.getGivenName());
+            b.addRDN(BCStyle.O, certificateDTO.getOrgName());
+            b.addRDN(BCStyle.OU, certificateDTO.getOrgNameUnit());
+            b.addRDN(BCStyle.C, certificateDTO.getCountry());
+            b.addRDN(BCStyle.E, certificateDTO.getEmail());
+            //b.addRDN(BCStyle.UID, certificateDTO.getUid());
+
+            X500Name name = b.build();
+
+            KeyPairGenerator keyGen = KeyPairGenerator.getInstance("RSA");
+            SecureRandom random = SecureRandom.getInstance("SHA1PRNG", "SUN");
+            keyGen.initialize(2048, random);
+
+            KeyPair pair = keyGen.generateKeyPair();
+
+            System.out.println(pair.getPublic());
+
+            JcaPKCS10CertificationRequestBuilder p10Builder = new JcaPKCS10CertificationRequestBuilder(name, pair.getPublic());
+            JcaContentSignerBuilder csBuilder = new JcaContentSignerBuilder("SHA256withRSA");
+            ContentSigner signer = csBuilder.build(pair.getPrivate());
+            PKCS10CertificationRequest request = p10Builder.build(signer);
+            String data = request.getSubject().toString();
+            System.out.println("CSR is: " + data);
+
+            File f = new File("./files/csr/" + certificateDTO.getSerialNumber() + ".csr");
+            BufferedWriter w = new BufferedWriter(new FileWriter(f.getPath()));
+            StringWriter sw = new StringWriter();
+            JcaPEMWriter pemWriter = new JcaPEMWriter(sw);
+            pemWriter.writeObject(request);
+
+            pemWriter.close();
+            w.write(sw.toString());
+            sw.close();
+            w.flush();
+            w.close();
+
+            emailService.sendCSRDetails(certificateDTO.getEmail(), pair.getPrivate());
+            return request;
+        } catch (NoSuchAlgorithmException e) {
+        } catch (NoSuchProviderException e) {
+        } catch (OperatorCreationException e) {
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+
     }
 
 

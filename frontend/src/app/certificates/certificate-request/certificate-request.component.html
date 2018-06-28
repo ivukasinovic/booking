@@ -1,0 +1,50 @@
+<div class="container">
+  <div class="col-md-6">
+    <h3>New Certificate Request</h3>
+    <form>
+
+      <div class="form-group">
+        <label>Common Name</label>
+        <input [(ngModel)]="cerReq.commonName" class="form-control" name="commonName"
+               placeholder="Enter common name">
+      </div>
+      <div class="form-group">
+        <label>Surname</label>
+        <input [(ngModel)]="cerReq.surname" class="form-control" name="surname" placeholder="Enter surname">
+      </div>
+      <div class="form-group">
+        <label>Given name</label>
+        <input [(ngModel)]="cerReq.givenName" class="form-control" name="givenname" placeholder="Enter given name">
+      </div>
+      <div class="form-group">
+        <label>Organisation</label>
+        <input [(ngModel)]="cerReq.orgName" class="form-control" name="surname" placeholder="Enter organisation">
+      </div>
+
+      <div class="form-group">
+        <label>Organisation Unit</label>
+        <input [(ngModel)]="cerReq.orgNameUnit" class="form-control" name="orgNameUnit"
+               placeholder="Enter organisation unit">
+      </div>
+      <div class="form-group">
+        <label>City/Locality</label>
+        <input [(ngModel)]="cerReq.locality" class="form-control" name="localityName"
+               placeholder="Enter locality name">
+      </div>
+      <div class="form-group">
+        <label>State/Country/Region</label>
+        <input [(ngModel)]="cerReq.country" class="form-control" name="country" placeholder="Enter Country name">
+      </div>
+      <div class="form-group">
+        <label>Email address </label>
+        <input [(ngModel)]="cerReq.email" type="email" class="form-control" name="exampleInputEmail1"
+               aria-describedby="emailHelp" placeholder="Enter email">
+      </div>
+
+
+      <button type="submit" class="btn btn-success" (click)="create()">Create</button>
+      <a class="btn btn-primary pull-right" href="/certificates">Back</a>
+    </form>
+  </div>
+
+</div>
