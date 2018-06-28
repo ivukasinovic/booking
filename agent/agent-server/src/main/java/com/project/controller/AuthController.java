@@ -43,7 +43,12 @@ public class AuthController {
 
                 System.out.print("  ___  " +  user.getUsername());
                 // syncService.syncWholeDb();
-                syncService.syncWholeDb();
+                try{
+                    syncService.syncWholeDb();
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+
                 
                 return new ResponseEntity<com.project.DTO.Credentials>(credentials, HttpStatus.OK);
             }

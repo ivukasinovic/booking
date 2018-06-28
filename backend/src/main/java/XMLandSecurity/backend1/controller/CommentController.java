@@ -15,6 +15,7 @@ import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
+import java.io.IOException;
 import java.security.Principal;
 import java.util.Date;
 import java.util.List;
@@ -98,9 +99,10 @@ public class CommentController {
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public ResponseEntity<Comment> prihvati(@PathVariable("id") Long id) {
+    public ResponseEntity<Comment> prihvati(@PathVariable("id") Long id) throws IOException {
         Comment komentar = commentService.findOne(id) ; //findOne(user);
         komentar.setAccepted(true);
+        XMLandSecurity.backend1.logger.Logger.getInstance().log(" ,Prihvacen komentar: " + komentar.getBody() + " Korisnik: " + komentar.getUser()  +"  " + new Date());
         commentService.save(komentar);
         return new ResponseEntity<>(komentar, HttpStatus.OK);     // "200 OK"
     }
@@ -118,7 +120,7 @@ public class CommentController {
             method = RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE,
             consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> proba( @RequestBody Comment comment) {
+    public ResponseEntity<?> proba( @RequestBody Comment comment) throws IOException {
 
 
         ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
@@ -140,6 +142,9 @@ public class CommentController {
         HttpEntity<String> entity = new HttpEntity<String>(json,headers);
         String answer = restTemplate.postForObject(url, entity, String.class);
         System.out.println(answer);
+
+        XMLandSecurity.backend1.logger.Logger.getInstance().log(" ,Novi komentar: " + comment.getBody() + " Korisnik: " + comment.getUser()  +"  " + new Date());
+
 
         return new ResponseEntity<>(HttpStatus.OK);
     }

@@ -9,7 +9,10 @@ import org.springframework.mobile.device.Device;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
+import javax.xml.bind.DatatypeConverter;
 import java.io.UnsupportedEncodingException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -39,6 +42,17 @@ public class TokenUtils {
             username = null;
         }
         return username;
+    }
+
+    public String getFingerprintFromToken(String token) {
+        String fingerprint;
+        try {
+            final Claims claims = this.getClaimsFromToken(token);
+            fingerprint = (String) claims.get("fingerprint");
+        } catch (Exception e) {
+            fingerprint = null;
+        }
+        return fingerprint;
     }
 
     public Date getCreatedDateFromToken(String token) {
@@ -121,13 +135,14 @@ public class TokenUtils {
         return (this.AUDIENCE_TABLET.equals(audience) || this.AUDIENCE_MOBILE.equals(audience));
     }
 
-    public String generateToken(UserDetails userDetails, Device device) {
+    public String generateToken(UserDetails userDetails, Device device, String fingerprintHash) {
         String role = userDetails.getAuthorities().toArray()[0].toString();
         Map<String, Object> claims = new HashMap<String, Object>();
         claims.put("sub", userDetails.getUsername());
         claims.put("audience", this.generateAudience(device));
         claims.put("created", this.generateCurrentDate());
         claims.put("role", role);
+        claims.put("fingerprint", fingerprintHash);
         return this.generateToken(claims);
     }
 
@@ -166,12 +181,30 @@ public class TokenUtils {
         return refreshedToken;
     }
 
-    public Boolean validateToken(String token, UserDetails userDetails) {
+    public Boolean validateToken(String token, UserDetails userDetails, String fingerprint) {
         CustomUser user = (CustomUser) userDetails;
         final String username = this.getUsernameFromToken(token);
+        final String fingerprintHash = this.getFingerprintFromToken(token);
         final Date created = this.getCreatedDateFromToken(token);
         final Date expiration = this.getExpirationDateFromToken(token);
-        return (username.equals(user.getUsername()) && !(this.isTokenExpired(token)) && !(this.isCreatedBeforeLastPasswordReset(created, user.getLastPasswordReset())));
+        return (username.equals(user.getUsername()) && !(this.isTokenExpired(token)) && !(this.isCreatedBeforeLastPasswordReset(created, user.getLastPasswordReset())) && this.isFingerprintValid(fingerprint, fingerprintHash));
     }
+
+    private boolean isFingerprintValid(String fingerprint, String fingerprintHash) {
+        MessageDigest digest = null;
+        byte[] userFingerprintDigest = null;
+        try {
+            digest = MessageDigest.getInstance("SHA-256");
+            userFingerprintDigest = digest.digest(fingerprint.getBytes("utf-8"));
+        } catch (NoSuchAlgorithmException | UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        String cookieFingerprintHash = DatatypeConverter.printHexBinary(userFingerprintDigest);
+        if (cookieFingerprintHash.equals(fingerprintHash)) {
+            return true;
+        }
+        return false;
+    }
+
 
 }

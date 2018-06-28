@@ -38,16 +38,15 @@ public class GlobalEndpointInterceptor implements EndpointInterceptor {
 
 
         XMLSigningUtility xmlSigningUtility = new XMLSigningUtility();
-       Document document = xmlSigningUtility.signDocument(soapMessage.getDocument(),privateKey,certificate);
+        Document document = xmlSigningUtility.signDocument(soapMessage.getDocument(), privateKey, certificate);
 
         // verifySignature
 
         soapMessage.setDocument(document);
 
 
-
         //        Source bodySource = soapHeader .getSource();
-    //        DOMSource bodyDomSource = (DOMSource) bodySource;
+        //        DOMSource bodyDomSource = (DOMSource) bodySource;
         //        Node bodyNode = bodyDomSource.getNode();
         return true;
     }
@@ -64,7 +63,7 @@ public class GlobalEndpointInterceptor implements EndpointInterceptor {
         Certificate certificate = keyStoreService.readCertificate("6476022");
 
         XMLSigningUtility xmlSigningUtility = new XMLSigningUtility();
-        Document document = xmlSigningUtility.signDocument(soapMessage.getDocument(),privateKey,certificate);
+        Document document = xmlSigningUtility.signDocument(soapMessage.getDocument(), privateKey, certificate);
 
         soapMessage.setDocument(document);
 

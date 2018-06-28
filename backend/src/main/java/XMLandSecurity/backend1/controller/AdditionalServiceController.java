@@ -10,6 +10,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.ConstraintViolation;
+import java.io.IOException;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
@@ -50,7 +52,7 @@ public class AdditionalServiceController {
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public ResponseEntity<AdditionalService> getUser(@PathVariable("id") Long id) {
+    public ResponseEntity<AdditionalService> getUser(@PathVariable("id") Long id) throws IOException {
 
         AdditionalService additionalService = null;
 
@@ -75,7 +77,7 @@ public class AdditionalServiceController {
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public ResponseEntity<AdditionalService> napravi (@RequestBody AdditionalService additionalService) {
+    public ResponseEntity<AdditionalService> napravi (@RequestBody AdditionalService additionalService) throws IOException {
 
         AdditionalService additionalService12 = null;
 
@@ -88,6 +90,7 @@ public class AdditionalServiceController {
         if(additionalService12 == null){
             return new ResponseEntity<AdditionalService>(HttpStatus.NO_CONTENT);
         }else {
+            XMLandSecurity.backend1.logger.Logger.getInstance().log(" ,Dodata usluga: " + additionalService.getName() + "  " + new Date());
             return new ResponseEntity<>(additionalService12, HttpStatus.OK);     // "200 OK"
         }
 
@@ -109,7 +112,10 @@ public class AdditionalServiceController {
             value = "/{id}",
             method = RequestMethod.DELETE
     )
-    public ResponseEntity<AdditionalService> izbrisi(@PathVariable("id") Long id){
+    public ResponseEntity<AdditionalService> izbrisi(@PathVariable("id") Long id) throws IOException {
+       AdditionalService additionalService = additionalServiceService.findOne(id);
+        XMLandSecurity.backend1.logger.Logger.getInstance().log(" ,Izbrisana usluga: " + additionalService.getName() + "  " + new Date());
+
         additionalServiceService.delete(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
