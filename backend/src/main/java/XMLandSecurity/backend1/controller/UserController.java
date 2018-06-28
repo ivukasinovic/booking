@@ -72,7 +72,7 @@ public class UserController {
         if (errors.hasErrors()) {
             return new ResponseEntity<String>(errors.getAllErrors().toString(), HttpStatus.BAD_REQUEST);
         }
-
+        
         User userNew = userService.save(user);
         return new ResponseEntity(userNew, HttpStatus.OK);
     }

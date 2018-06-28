@@ -8,6 +8,8 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -46,7 +48,7 @@ public class CategoryOfLodgingController {
         CategoryOfLodging listaAdminaFanZone = null;
 
         try {
-            listaAdminaFanZone = categoryOfLodgingService.findOne(id) ; //findOne(user);
+            listaAdminaFanZone = categoryOfLodgingService.findOne(id); //findOne(user);
         }catch (Exception e) {
             return new ResponseEntity<CategoryOfLodging>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -66,7 +68,7 @@ public class CategoryOfLodgingController {
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public ResponseEntity<CategoryOfLodging> CreateCity (@RequestBody CategoryOfLodging categoryOfLodging) {
+    public ResponseEntity<CategoryOfLodging> CreateCity (@RequestBody CategoryOfLodging categoryOfLodging) throws IOException {
 
         CategoryOfLodging userNew = null;
 
@@ -77,6 +79,7 @@ public class CategoryOfLodgingController {
         }
 
         if(userNew != null) {
+            XMLandSecurity.backend1.logger.Logger.getInstance().log(" ,Dodata kategorija: " + categoryOfLodging.getLabel() + "  " + new Date());
             return new ResponseEntity<>(userNew, HttpStatus.OK);     // "200 OK"
         } else {
             return new ResponseEntity<CategoryOfLodging>(HttpStatus.NO_CONTENT);
@@ -90,7 +93,7 @@ public class CategoryOfLodgingController {
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public ResponseEntity<CategoryOfLodging> updateUsers (@PathVariable("id") Long id) {
+    public ResponseEntity<CategoryOfLodging> updateUsers (@PathVariable("id") Long id) throws IOException {
 
         CategoryOfLodging listaAdminaFanZone = null;
 
@@ -101,6 +104,7 @@ public class CategoryOfLodgingController {
         }
 
         if(listaAdminaFanZone != null) {
+            XMLandSecurity.backend1.logger.Logger.getInstance().log(" ,Izbrisana kategorija: " + listaAdminaFanZone.getLabel() + "  " + new Date());
             return new ResponseEntity<>(listaAdminaFanZone, HttpStatus.OK);     // "200 OK"
         } else {
             return new ResponseEntity<CategoryOfLodging>(HttpStatus.NO_CONTENT);

@@ -31,6 +31,13 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.swing.*;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.net.InetAddress;
+import java.nio.file.Files;
+import java.security.InvalidKeyException;
+import java.security.Key;
 import javax.xml.bind.DatatypeConverter;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -70,16 +77,17 @@ public class AuthenticationController {
 
     @RequestMapping(method = RequestMethod.POST, value = "${route.authentication}")  // /login  ${route.authentication}
     public ResponseEntity<?> authenticationRequest(@RequestBody AuthenticationRequest authenticationRequest, Device device, HttpServletResponse response) throws AuthenticationException, IOException {
-
-        // Perform the authentication
-        Authentication authentication = this.authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(
-                        authenticationRequest.getUsername(),
-                        authenticationRequest.getPassword()
-                )
-        );
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-
+      
+        InetAddress iAddress = InetAddress.getLocalHost();
+        String currentIp = iAddress.getHostAddress();
+            // Perform the authentication
+            Authentication authentication = this.authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(
+                            authenticationRequest.getUsername(),
+                            authenticationRequest.getPassword()
+                    )
+            );
+            SecurityContextHolder.getContext().setAuthentication(authentication);
 
         // Reload password post-authentication so we can generate token
         UserDetails userDetails = this.userDetailsService.loadUserByUsername(authenticationRequest.getUsername());
@@ -140,7 +148,6 @@ public class AuthenticationController {
         return new ResponseEntity<>(savedUser, HttpStatus.CREATED);
     }
 
-    // ===
     @RequestMapping(
             value = "/registerAgent",
             method = RequestMethod.POST,
@@ -157,9 +164,6 @@ public class AuthenticationController {
         //emailService.sendActivationMail(user);
         return new ResponseEntity<>(savedUser, HttpStatus.CREATED);
     }
-
-    // ===
-
     @RequestMapping(
             value = "/change-password",
             method = RequestMethod.POST,
