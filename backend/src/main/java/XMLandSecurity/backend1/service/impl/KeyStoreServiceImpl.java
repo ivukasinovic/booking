@@ -49,10 +49,8 @@ public class KeyStoreServiceImpl implements KeyStoreService {
 
                 while (aliases.hasMoreElements()) {
                     String alias = aliases.nextElement();
-
-                    if (keyStore.isKeyEntry(alias)) {
                         certificates.add(getCertificate(alias, i).get());
-                    }
+
                 }
             }
 
@@ -141,7 +139,9 @@ public class KeyStoreServiceImpl implements KeyStoreService {
         }
         try {
             keyStore.setCertificateEntry(alias, certificate);
-            keyStore.setKeyEntry(alias, pk, keyStorePassword.toCharArray(), new Certificate[]{certificate});
+            if (pk != null) {
+                keyStore.setKeyEntry(alias, pk, keyStorePassword.toCharArray(), new Certificate[]{certificate});
+            }
         } catch (KeyStoreException e) {
             e.printStackTrace();
         }
@@ -179,8 +179,9 @@ public class KeyStoreServiceImpl implements KeyStoreService {
 
     @Override
     public boolean saveKeyStore(String fileName, char[] password) {
+        System.out.println("Keystoree" + fileName + password.toString());
         try {
-            keyStore.store(new FileOutputStream("keystores/" + fileName), password);
+            keyStore.store(new FileOutputStream("./keystores/" + fileName), password);
             return true;
         } catch (KeyStoreException | CertificateException | NoSuchAlgorithmException | IOException e) {
             e.printStackTrace();

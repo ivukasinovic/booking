@@ -9,7 +9,7 @@ import java.util.Date;
 public class SubjectData {
 
     private PublicKey publicKey;
-    private PrivateKey privateKey;
+
     private X500Name x500name;
     private String serialNumber;
     private Date startDate;
@@ -19,9 +19,8 @@ public class SubjectData {
 
     }
 
-    public SubjectData(PublicKey publicKey, PrivateKey privateKey, X500Name x500name, String serialNumber, Date startDate, Date endDate) {
+    public SubjectData(PublicKey publicKey, X500Name x500name, String serialNumber, Date startDate, Date endDate) {
         this.publicKey = publicKey;
-        this.privateKey = privateKey;
         this.x500name = x500name;
         this.serialNumber = serialNumber;
         this.startDate = startDate;
@@ -68,11 +67,5 @@ public class SubjectData {
         this.endDate = endDate;
     }
 
-    public PrivateKey getPrivateKey() {
-        return privateKey;
-    }
 
-    public void setPrivateKey(PrivateKey privateKey) {
-        this.privateKey = privateKey;
-    }
 }

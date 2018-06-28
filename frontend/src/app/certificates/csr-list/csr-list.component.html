@@ -1,0 +1,14 @@
+<div  class="list-group-item clearfix"
+  *ngFor="let certificate of certificates">
+  <div class="pull-left">
+
+    <p class="list-group-item-text"> ON: {{ certificate.orgName }}</p>
+    <p>CN: {{certificate.commonName}}</p>
+    <br>
+  </div>
+  <span class="pull-right">
+
+      <button *ngIf="role == 'ADMIN'" class="btn btn-warning" (click)="aprove(certificate.uid)">Aprove</button>
+      <button *ngIf="role == 'ADMIN'" class="btn btn-danger" (click)="delete(certificate.uid)">Delete</button>
+    </span>
+</div>

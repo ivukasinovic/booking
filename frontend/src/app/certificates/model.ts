@@ -11,7 +11,7 @@ export class Certificate {
   surname: string;
   orgName: string;
   givenName: string;
-  local;
+  locality: string;
   country: string;
   email: string;
   caa: number;
@@ -21,6 +21,7 @@ export class Certificate {
   issuerSerialNumber: string;
   endDate: Date;
   startDate: Date;
+  public_k: string;
 }
 
 export class NewKeyStore {

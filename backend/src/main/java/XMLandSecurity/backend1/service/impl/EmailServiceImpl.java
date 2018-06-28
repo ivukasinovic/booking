@@ -4,22 +4,20 @@ import XMLandSecurity.backend1.domain.Reservation;
 import XMLandSecurity.backend1.domain.User;
 import XMLandSecurity.backend1.service.EmailService;
 import XMLandSecurity.backend1.utility.EncDecSimple;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ByteArrayResource;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
-import javax.crypto.BadPaddingException;
-import javax.crypto.Cipher;
-import javax.crypto.IllegalBlockSizeException;
-import javax.crypto.NoSuchPaddingException;
-import javax.crypto.spec.SecretKeySpec;
 import javax.mail.internet.MimeMessage;
-import java.security.InvalidKeyException;
-import java.security.Key;
-import java.security.NoSuchAlgorithmException;
-import java.util.Base64;
+import javax.xml.bind.DatatypeConverter;
+import java.io.File;
+import java.io.StringWriter;
+import java.security.PrivateKey;
+import java.security.cert.CertificateEncodingException;
 
 /**
  * Created by Ivan V. on 19-May-18
@@ -92,8 +90,78 @@ public class EmailServiceImpl implements EmailService {
             helper.setTo(user.getEmail());
             helper.setSubject("Successfull reservation");
             javaMailSender.send(mimeMessage);
+
         } catch (Exception e) {
+            e.printStackTrace();
         }
+    }
+
+    @Async
+    @Override
+    public void sendCSRDetails(String email, PrivateKey aPrivate) {
+
+        MimeMessage mimeMessage = javaMailSender.createMimeMessage();
+
+        try {
+            MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true, "utf-8");
+            String htmlMsg = "Hi, <br/> We have received your certificate request. In attacment we are sending" +
+                    " you your public/private keypair. You should keep it, and you shouldn't share it with others.<br><br>" +
+                    " As soon as our admin aproves your request, we will notify you by email for futher details.<br>" +
+                    " Best regards,<br> Booking.com";
+
+            // mimeMessage.setContent(htmlMsg, "text/html");
+            helper.setText(htmlMsg, true);
+            helper.setTo(email);
+            helper.setSubject("Ceritificate request");
+
+            StringWriter sw = new StringWriter();
+
+            try {
+                sw.write("-----BEGIN PRIVATE KEY-----\n");
+                sw.write(DatatypeConverter.printBase64Binary(aPrivate.getEncoded()).replaceAll("(.{64})", "$1\n"));
+                sw.write("\n-----END PRIVATE KEY-----\n");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+
+            helper.addAttachment("private key", new ByteArrayResource(sw.toString().getBytes()));
+            javaMailSender.send(mimeMessage);
+
+            System.out.println("poslao mailll");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    @Async
+    @Override
+    public void sendCSRStatus(String email, String status) {
+
+        MimeMessage mimeMessage = javaMailSender.createMimeMessage();
+        String htmlMsg = "";
+
+        try {
+            MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, false, "utf-8");
+
+
+            if (status.equals("aproved")) {
+                htmlMsg = "We're happy to inform you that you certificate is ready. You can download it now from our cite.";
+            } else {
+                htmlMsg = "There was problem with your request.";
+            }
+
+            mimeMessage.setContent(htmlMsg, "text/html");
+            helper.setTo(email);
+            helper.setSubject("CSR status");
+            javaMailSender.send(mimeMessage);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
     }
 
 

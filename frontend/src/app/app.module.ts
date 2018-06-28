@@ -35,6 +35,8 @@ import { UserInfoComponent } from './user-info/user-info.component';
 import { MyMessagesComponent } from './my-messages/my-messages.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {CarouselModule} from 'ngx-bootstrap/carousel';
+import { CertificateRequestComponent } from './certificates/certificate-request/certificate-request.component';
+import { CsrListComponent } from './certificates/csr-list/csr-list.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -55,7 +57,9 @@ import {CarouselModule} from 'ngx-bootstrap/carousel';
     SendMessageComponent,
     MakeReservationComponent,
     UserInfoComponent,
-    MyMessagesComponent
+    MyMessagesComponent,
+    CertificateRequestComponent,
+    CsrListComponent
   ],
   imports: [
     BrowserModule,

@@ -7,6 +7,7 @@ import XMLandSecurity.backend1.service.CertificateService;
 import XMLandSecurity.backend1.service.KeyStoreService;
 import XMLandSecurity.backend1.service.PermissionService;
 import XMLandSecurity.backend1.service.UserService;
+import org.bouncycastle.pkcs.PKCS10CertificationRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -61,6 +62,64 @@ public class CertificateController {
             return new ResponseEntity<>(creDto, HttpStatus.CREATED);
         }
         return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+    }
+
+    @RequestMapping(value = "/request",
+            method = RequestMethod.POST,
+            consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<CertificateDTO> genCertificateRequest(@RequestBody CertificateDTO dto, Principal principal) {
+
+
+        PKCS10CertificationRequest created = certificateService.generateCertificateRequest(dto);
+        if (created != null) {
+            return new ResponseEntity<>(HttpStatus.CREATED);
+        }
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @RequestMapping(value = "/request",
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<CertificateDTO>> getCertificateRequest(Principal principal) {
+
+        User user = userService.findByUsername(principal.getName());
+        if (user.getRole() != Role.ADMIN) {
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+        }
+
+        List<CertificateDTO> csrList = certificateService.getAllCSRs();
+
+        return new ResponseEntity<>(csrList, HttpStatus.OK);
+
+
+    }
+
+    @RequestMapping(value = "/request/approve/{id}",
+            method = RequestMethod.GET)
+    public ResponseEntity aproveCertificateRequest(@PathVariable("id") String id, Principal principal) {
+
+        User user = userService.findByUsername(principal.getName());
+        if (user.getRole() != Role.ADMIN) {
+            return new ResponseEntity(HttpStatus.UNAUTHORIZED);
+        }
+
+        certificateService.aproveCSR(id);
+        return new ResponseEntity(HttpStatus.OK);
+
+    }
+
+    @RequestMapping(value = "/request/delete/{id}",
+            method = RequestMethod.GET)
+    public ResponseEntity deleteCertificateRequest(@PathVariable("id") String id, Principal principal) {
+
+        User user = userService.findByUsername(principal.getName());
+        if (user.getRole() != Role.ADMIN) {
+            return new ResponseEntity(HttpStatus.UNAUTHORIZED);
+        }
+
+        certificateService.deleteCSR(id);
+        return new ResponseEntity(HttpStatus.OK);
+
     }
 
     @RequestMapping(value = "/issuers", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
