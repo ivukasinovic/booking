@@ -31,6 +31,18 @@ export class CertificatesService {
     return this.http.get('/api/certificates/issuers');
   }
 
+  getCSRList() {
+    return this.http.get('/api/certificates/request');
+  }
+
+  aproveCSR(id: string) {
+    return this.http.get('/api/certificates/request/approve/' + id);
+  }
+
+  deleteCSR(id: string) {
+    return this.http.get('/api/certificates/request/delete/' + id);
+  }
+
   check(serialNumber: number) {
     const url = '/api/certificates/check/' + serialNumber;
     return this.http.get(url, {responseType: 'text'});

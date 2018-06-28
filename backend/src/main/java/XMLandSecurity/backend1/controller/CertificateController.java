@@ -73,10 +73,54 @@ public class CertificateController {
 
         PKCS10CertificationRequest created = certificateService.generateCertificateRequest(dto);
         if (created != null) {
-            // CertificateDTO creDto = new CertificateDTO(created);
             return new ResponseEntity<>(HttpStatus.CREATED);
         }
-        return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @RequestMapping(value = "/request",
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<CertificateDTO>> getCertificateRequest(Principal principal) {
+
+        User user = userService.findByUsername(principal.getName());
+        if (user.getRole() != Role.ADMIN) {
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+        }
+
+        List<CertificateDTO> csrList = certificateService.getAllCSRs();
+
+        return new ResponseEntity<>(csrList, HttpStatus.OK);
+
+
+    }
+
+    @RequestMapping(value = "/request/approve/{id}",
+            method = RequestMethod.GET)
+    public ResponseEntity aproveCertificateRequest(@PathVariable("id") String id, Principal principal) {
+
+        User user = userService.findByUsername(principal.getName());
+        if (user.getRole() != Role.ADMIN) {
+            return new ResponseEntity(HttpStatus.UNAUTHORIZED);
+        }
+
+        certificateService.aproveCSR(id);
+        return new ResponseEntity(HttpStatus.OK);
+
+    }
+
+    @RequestMapping(value = "/request/delete/{id}",
+            method = RequestMethod.GET)
+    public ResponseEntity deleteCertificateRequest(@PathVariable("id") String id, Principal principal) {
+
+        User user = userService.findByUsername(principal.getName());
+        if (user.getRole() != Role.ADMIN) {
+            return new ResponseEntity(HttpStatus.UNAUTHORIZED);
+        }
+
+        certificateService.deleteCSR(id);
+        return new ResponseEntity(HttpStatus.OK);
+
     }
 
     @RequestMapping(value = "/issuers", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)

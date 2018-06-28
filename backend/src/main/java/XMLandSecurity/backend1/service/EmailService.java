@@ -15,4 +15,6 @@ public interface EmailService {
     void sendReservationDetails(User user, Reservation reservation);
 
     void sendCSRDetails(String email, PrivateKey aPrivate);
+
+    void sendCSRStatus(String email, String status);
 }

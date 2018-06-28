@@ -135,5 +135,34 @@ public class EmailServiceImpl implements EmailService {
 
     }
 
+    @Async
+    @Override
+    public void sendCSRStatus(String email, String status) {
+
+        MimeMessage mimeMessage = javaMailSender.createMimeMessage();
+        String htmlMsg = "";
+
+        try {
+            MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, false, "utf-8");
+
+
+            if (status.equals("aproved")) {
+                htmlMsg = "We're happy to inform you that you certificate is ready. You can download it now from our cite.";
+            } else {
+                htmlMsg = "There was problem with your request.";
+            }
+
+            mimeMessage.setContent(htmlMsg, "text/html");
+            helper.setTo(email);
+            helper.setSubject("CSR status");
+            javaMailSender.send(mimeMessage);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
 
 }

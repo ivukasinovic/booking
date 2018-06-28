@@ -2,6 +2,7 @@
   <div class=" pull-right">
     <a href="certificates/new-certificate" class="btn btn-success">New Certificate</a>
     <a href="certificates/certificate-request" class="btn btn-success">New Certificate Request</a>
+    <a *ngIf="role == 'ADMIN'" href="csr-list" class="btn btn-success">CSR list</a>
   </div>
   <div class="col-md-9">
     <div>

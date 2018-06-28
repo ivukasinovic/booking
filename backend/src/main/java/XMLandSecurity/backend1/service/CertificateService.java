@@ -8,6 +8,7 @@ import org.bouncycastle.pkcs.PKCS10CertificationRequest;
 
 import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
+import java.security.PublicKey;
 import java.security.cert.X509Certificate;
 import java.util.List;
 
@@ -19,7 +20,13 @@ public interface CertificateService {
 
     PKCS10CertificationRequest generateCertificateRequest(CertificateDTO certificateDTO);
 
-    SubjectData newSubjectData(CertificateDTO certificate);
+    List<CertificateDTO> getAllCSRs();
+
+    void aproveCSR(String id);
+
+    void deleteCSR(String id);
+
+    SubjectData newSubjectData(CertificateDTO certificate, PublicKey publicKey);
 
     IssuerData newIssuerData(CertificateDTO certificate);
 
