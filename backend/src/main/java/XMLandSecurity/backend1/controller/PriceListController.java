@@ -1,8 +1,6 @@
 package XMLandSecurity.backend1.controller;
 
-import XMLandSecurity.backend1.domain.City;
 import XMLandSecurity.backend1.domain.PriceList;
-import XMLandSecurity.backend1.service.CityService;
 import XMLandSecurity.backend1.service.PriceListService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -31,9 +29,6 @@ public class PriceListController {
             PriceList listaAdminaFanZone = priceListService.findOne(id) ; //findOne(user);
             return new ResponseEntity<>(listaAdminaFanZone, HttpStatus.OK);     // "200 OK"
         }
-
-        // ===
-
 
         @RequestMapping(
                 method = RequestMethod.POST,
