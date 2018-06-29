@@ -22,8 +22,7 @@ public class Logger {
 
         InetAddress iAddress = InetAddress.getLocalHost();
         String currentIp = iAddress.getHostAddress();
-        System.out.println("Current IP address : " +currentIp);
-
+       // System.out.println("Current IP address : " +currentIp);
 
         BufferedWriter bw = null;
         FileWriter fw = null;
@@ -38,31 +37,30 @@ public class Logger {
 
         InetAddress iAddress = InetAddress.getLocalHost();
         String currentIp = iAddress.getHostAddress();
-        System.out.println("Current IP address : " +currentIp);
 
-        File file = new File ("trenutni.txt");
-        if (! file.exists() )
-        {
-            boolean success = file.delete();
-        }
-
-        file.delete();
-
-        try{
-            // Create file
-            FileWriter fstream = new FileWriter("trenutni.txt");
-            BufferedWriter out = new BufferedWriter(fstream);
-            //   out.write("Hello Java");
-
-            out.close();
-        }catch (Exception e){//Catch exception if any
-            System.err.println("Error: " + e.getMessage());
-        }
+//        File file = new File ("trenutni.txt");
+//        if (! file.exists() )
+//        {
+//            boolean success = file.delete();
+//        }
+//
+//        file.delete();
+//
+//        try{
+//            // Create file
+//            FileWriter fstream = new FileWriter("trenutni.txt");
+//            BufferedWriter out = new BufferedWriter(fstream);
+//            //   out.write("Hello Java");
+//
+//            out.close();
+//        }catch (Exception e){//Catch exception if any
+//            System.err.println("Error: " + e.getMessage());
+//        }
 
 
         BufferedWriter bw = null;
         FileWriter fw = null;
-        fw = new FileWriter("trenutni.txt",true);
+        fw = new FileWriter("warning.txt",true);
         bw = new BufferedWriter(fw);
         bw.append("Current IP address : " +currentIp + poruka);
         bw.newLine();
