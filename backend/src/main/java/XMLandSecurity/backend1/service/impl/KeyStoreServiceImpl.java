@@ -8,6 +8,7 @@ import org.bouncycastle.cert.jcajce.JcaX509CertificateHolder;
 import org.springframework.stereotype.Service;
 
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.security.*;
@@ -235,22 +236,39 @@ public class KeyStoreServiceImpl implements KeyStoreService {
 
     @Override
     public PrivateKey readPrivateKey(String alias) {
-        loadKeyStore(1);
         try {
+
+            keyStore.load(new FileInputStream("./files/tls/ksNonCa.jks"), PASSWORD_NONCA.toCharArray());
+
             PrivateKey privKey = (PrivateKey) keyStore.getKey(alias, PASSWORD_NONCA.toCharArray());
             return  privKey;
         } catch (KeyStoreException | UnrecoverableKeyException | NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        } catch (CertificateException e) {
+            e.printStackTrace();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
             e.printStackTrace();
         }
         return null;
     }
     @Override
     public Certificate readCertificate(String alias) {
-        loadKeyStore(1);
         try {
+            keyStore.load(new FileInputStream("./files/tls/ksNonCa.jks"), PASSWORD_NONCA.toCharArray());
+
             Certificate cert = keyStore.getCertificate(alias);
             return  cert;
         } catch (KeyStoreException e) {
+            e.printStackTrace();
+        } catch (CertificateException e) {
+            e.printStackTrace();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
             e.printStackTrace();
         }
         return null;
