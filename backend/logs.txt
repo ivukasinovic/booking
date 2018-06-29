@@ -3,3 +3,10 @@ Current IP address : 192.168.1.5Ulogovao se: admin  Fri Jun 29 13:58:57 CEST 201
 Current IP address : 192.168.1.5Ulogovao se: admin  Fri Jun 29 14:01:09 CEST 2018
 Current IP address : 192.168.1.5Ulogovao se: admin  Fri Jun 29 14:34:56 CEST 2018
 Current IP address : 192.168.0.100Ulogovao se: admin  Fri Jun 29 18:33:43 CEST 2018
+Current IP address : 192.168.1.2Ulogovao se: admin  Fri Jun 29 19:53:16 CEST 2018
+Current IP address : 192.168.1.2Ulogovao se: admin  Fri Jun 29 21:23:46 CEST 2018
+
+Current IP address : 192.168.1.2 ,Ulogovao se: dejan  Fri Jun 29 22:08:24 CEST 2018
+127.0.0.1 ,Ulogovao se: stefan  Fri Jun 29 23:42:55 CEST 2018
+127.0.0.1 ,Ulogovao se: stefan  Fri Jun 29 23:59:09 CEST 2018
+ Rezervisali ste:   Fri Jun 29 23:59:44 CEST 2018

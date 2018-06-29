@@ -10,6 +10,8 @@ import {Router} from '@angular/router';
 })
 export class RegistrationComponent implements OnInit {
   user: User;
+  loading = false;
+
   constructor(private authService: AuthService, private router: Router) {
     this.user = new User();
   }
@@ -17,6 +19,7 @@ export class RegistrationComponent implements OnInit {
   ngOnInit() {
   }
   register() {
+    this.loading = true;
     this.authService.register(this.user)
       .subscribe((data: User) => {
         alert('Succes registration ' + data.username + '!');

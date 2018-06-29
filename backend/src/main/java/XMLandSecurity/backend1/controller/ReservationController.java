@@ -15,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.websocket.server.PathParam;
+import java.io.IOException;
 import java.security.Principal;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -40,10 +41,11 @@ public class ReservationController {
 
     @RequestMapping(value = "/{idLodging}",
             method = RequestMethod.POST)
-    public ResponseEntity createReservation(@RequestBody Reservation reservation, @PathVariable("idLodging") Long idLodging, Principal principal) {
+    public ResponseEntity createReservation(@RequestBody Reservation reservation, @PathVariable("idLodging") Long idLodging, Principal principal) throws IOException {
 
 
         if (reservationService.checkIfOverlapingDate(idLodging,reservation.getDateStart(),reservation.getDateEnd())) {
+            XMLandSecurity.backend1.logger.Logger.getInstance().logError( " Neuspesna rezervacija " + reservation.getLodging().getTitle() +  "  " + new Date());
             return new ResponseEntity(HttpStatus.CONFLICT);
         }
 
@@ -56,6 +58,8 @@ public class ReservationController {
         reservation.setUser(loggedUser);
         reservationService.save(reservation);
         emailService.sendReservationDetails(loggedUser, reservation);
+
+        XMLandSecurity.backend1.logger.Logger.getInstance().log( " Rezervisali ste: " +reservation.getLodging().getTitle()+ "  " + new Date());
 
         return new ResponseEntity(HttpStatus.OK);
 
