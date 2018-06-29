@@ -58,8 +58,6 @@ public class MessageController {
     }
 
 
-
-
     @RequestMapping(
             value = "/{idRec}",
             method = RequestMethod.POST,
