@@ -75,6 +75,7 @@ public class CategoryOfLodgingController {
         try {
             userNew = categoryOfLodgingService.save(categoryOfLodging);
         }catch (Exception e) {
+            XMLandSecurity.backend1.logger.Logger.getInstance().logError(" ,Nije dodata kategorija: " + "  " + new Date());
             return new ResponseEntity<CategoryOfLodging>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
@@ -82,6 +83,7 @@ public class CategoryOfLodgingController {
             XMLandSecurity.backend1.logger.Logger.getInstance().log(" ,Dodata kategorija: " + categoryOfLodging.getLabel() + "  " + new Date());
             return new ResponseEntity<>(userNew, HttpStatus.OK);     // "200 OK"
         } else {
+
             return new ResponseEntity<CategoryOfLodging>(HttpStatus.NO_CONTENT);
         }
 

@@ -140,6 +140,14 @@ public class CertificateController {
         return new ResponseEntity<>(respond, HttpStatus.OK);
     }
 
+    @RequestMapping(value = "/crl", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<X509Certificate>> getCRLlist() {
+
+        List<X509Certificate> listRevoked = certificateService.readRevoked();
+
+        return new ResponseEntity<>(listRevoked, HttpStatus.OK);
+    }
+
     @RequestMapping(value = "/download/{id}", method = RequestMethod.GET)
     public ResponseEntity<String> download(@PathVariable String id) {
         String file = certificateService.download(id);

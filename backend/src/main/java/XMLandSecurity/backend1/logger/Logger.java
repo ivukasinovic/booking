@@ -20,54 +20,46 @@ public class Logger {
 
     public void log(String poruka) throws IOException {
 
-        InetAddress iAddress = InetAddress.getLocalHost();
-        String currentIp = iAddress.getHostAddress();
-        System.out.println("Current IP address : " +currentIp);
-
+//        InetAddress iAddress = InetAddress.getLocalHost();
+//        String currentIp = iAddress.getHostAddress();
+       // System.out.println("Current IP address : " +currentIp);
 
         BufferedWriter bw = null;
         FileWriter fw = null;
         fw = new FileWriter("logs.txt",true);
         bw = new BufferedWriter(fw);
-        bw.append("Current IP address : " +currentIp + poruka);
+        bw.append(poruka);
         bw.newLine();
         bw.close();
     }
 
     public void logTrenutni(String poruka) throws IOException {
 
-        InetAddress iAddress = InetAddress.getLocalHost();
-        String currentIp = iAddress.getHostAddress();
-        System.out.println("Current IP address : " +currentIp);
-
-        File file = new File ("trenutni.txt");
-        if (! file.exists() )
-        {
-            boolean success = file.delete();
-        }
-
-        file.delete();
-
-        try{
-            // Create file
-            FileWriter fstream = new FileWriter("trenutni.txt");
-            BufferedWriter out = new BufferedWriter(fstream);
-            //   out.write("Hello Java");
-
-            out.close();
-        }catch (Exception e){//Catch exception if any
-            System.err.println("Error: " + e.getMessage());
-        }
-
+//        InetAddress iAddress = InetAddress.getLocalHost();
+//        String currentIp = iAddress.getHostAddress();
 
         BufferedWriter bw = null;
         FileWriter fw = null;
-        fw = new FileWriter("trenutni.txt",true);
+        fw = new FileWriter("warning.txt",true);
         bw = new BufferedWriter(fw);
-        bw.append("Current IP address : " +currentIp + poruka);
+        bw.append(poruka);
         bw.newLine();
         bw.close();
     }
+
+    public void logError(String poruka) throws IOException {
+//        InetAddress iAddress = InetAddress.getLocalHost();
+//        String currentIp = iAddress.getHostAddress();
+
+        BufferedWriter bw = null;
+        FileWriter fw = null;
+        fw = new FileWriter("error.txt",true);
+        bw = new BufferedWriter(fw);
+        bw.append(poruka);
+        bw.newLine();
+        bw.close();
+    }
+
 
     public static Logger getInstance() {
         if(instance == null){

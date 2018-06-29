@@ -11,6 +11,7 @@ import XMLandSecurity.backend1.security.TokenUtils;
 import XMLandSecurity.backend1.service.EmailService;
 import XMLandSecurity.backend1.service.UserService;
 import XMLandSecurity.backend1.utility.EncDecSimple;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -85,6 +86,8 @@ public class AuthenticationController {
     @RequestMapping(method = RequestMethod.POST, value = "${route.authentication}")  // /login  ${route.authentication}
     public ResponseEntity<?> authenticationRequest(@RequestBody AuthenticationRequest authenticationRequest, Device device, HttpServletResponse response) throws AuthenticationException, IOException {
             // Perform the authentication
+        org.slf4j.Logger loggeri= LoggerFactory.getLogger(AuthenticationController.class);
+
         Authentication authentication = null;
         try{
             authentication = this.authenticationManager.authenticate(
@@ -94,8 +97,11 @@ public class AuthenticationController {
                     )
             );
             loginAttemptService.loginSucceeded(getClientIP());
+            loggeri.info("Ulogovao se !!!!!!!!  " + loggeri.getName());
         }catch (Exception e) {
+            XMLandSecurity.backend1.logger.Logger.getInstance().logTrenutni(getClientIP() + " ,Nije uspelo logovanje: " + "  " + new Date());
             loginAttemptService.loginFailed(getClientIP());
+            loggeri.warn("Niste se ulogovalii !!!....");
             return new ResponseEntity<>(HttpStatus.FORBIDDEN);
         }
 
@@ -106,11 +112,12 @@ public class AuthenticationController {
         User user = userService.findByUsername(userDetails.getUsername());
 
         if (user == null) {
-            XMLandSecurity.backend1.logger.Logger.getInstance().log("Pokusao logovanje sa korisnickim imenom: " + user.getUsername() + "  " + new Date());
+            XMLandSecurity.backend1.logger.Logger.getInstance().logTrenutni(getClientIP() + "Pokusao logovanje sa korisnickim imenom: " + user.getUsername() + "  " + new Date());
         } else {
-            XMLandSecurity.backend1.logger.Logger.getInstance().log("Ulogovao se: " + user.getUsername() + "  " + new Date());
+            XMLandSecurity.backend1.logger.Logger.getInstance().log(getClientIP() +" ,Ulogovao se: " + user.getUsername() + "  " + new Date());
         }
         if (!user.isActivated()) {
+
             return new ResponseEntity<>(HttpStatus.FORBIDDEN);
         }
 
@@ -141,13 +148,8 @@ public class AuthenticationController {
             method = RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE,
             consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> register(@Validated @RequestBody User user, Errors error) {
-        if ((userService.findByUsername(user.getUsername()) != null) || (userService.findByEmail(user.getEmail()) != null)) {
-            JOptionPane.showMessageDialog(null, "Email alredy exist or username exist!", "Email alredy exist or username exis",
-                    JOptionPane.ERROR_MESSAGE);
-            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
-        }
-
+    public ResponseEntity<?> register(@Validated @RequestBody User user, Errors error) throws IOException {
+        User savedUser = null;
         if (error.hasErrors()) {
             return new ResponseEntity<String>(error.getAllErrors().toString(), HttpStatus.BAD_REQUEST);
         }
@@ -155,7 +157,13 @@ public class AuthenticationController {
         user.setRole(Role.USER);
         user.setPasswordHash(new BCryptPasswordEncoder().encode(user.getPasswordHash()));
         user.setActivated(false);
-        User savedUser = userService.save(user);
+        try{
+            savedUser = userService.save(user);
+        }catch (Exception e) {
+            XMLandSecurity.backend1.logger.Logger.getInstance().logError(getClientIP() + " ,Registracija nije uspjela: " + "  " + new Date());
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+
         emailService.sendActivationMail(user);
         return new ResponseEntity<>(savedUser, HttpStatus.CREATED);
     }
@@ -165,8 +173,9 @@ public class AuthenticationController {
             method = RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE,
             consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<User> registerAgent(@RequestBody User user) {
+    public ResponseEntity<User> registerAgent(@RequestBody User user) throws IOException {
         if ((userService.findByUsername(user.getUsername()) != null)) {
+            XMLandSecurity.backend1.logger.Logger.getInstance().logError(getClientIP() +" ,Registracija nije uspjela: " + "  " + new Date());
             return new ResponseEntity<>(HttpStatus.FORBIDDEN);
         }
         user.setRole(Role.AGENT);
