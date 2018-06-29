@@ -21,11 +21,13 @@ import {AuthService} from './auth.service';
 import {RoleGuardService} from './role-guard.service';
 import {AuthGuardService} from './auth-guard-service.service';
 import {NavbarComponent} from './navbar/navbar.component';
-import {HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {AdminComponent} from './admin/admin.component';
 import {AddAgentComponent} from './add-agent/add-agent.component';
 import {CommentComponent} from './comment/comment.component';
 import {UsersComponent} from './users/users.component';
+import {TokenInterceptor} from "./token-interceptor";
+import {CertificatesServiceService} from "./certificates-service.service";
 
 // import {MatCardModule} from '@angular/material/card';
 // import {MatCheckbox} from "@angular/material/checkbox";
@@ -57,7 +59,11 @@ import {UsersComponent} from './users/users.component';
     RouterModule  // .forRoot([{ path: '', component: LoginComponent}])
     // MatCardModule
   ],
-  providers: [
+  providers: [CertificatesServiceService, {
+    provide: HTTP_INTERCEPTORS,
+    useClass: TokenInterceptor,
+    multi: true
+  },
     AuthGuardService,
     AuthService,
     RoleGuardService],

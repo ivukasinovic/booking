@@ -79,15 +79,15 @@ export class AuthService {
   // ====
 
   getAdditional() {
-    return this.http.get('api/addtional-serviceadmin');
+    return this.http.get('api/addtional-service');
   }
 
   addAdditional(tip: Additional) {
-    return this.http.post('api/addtional-serviceadmin', tip);
+    return this.http.post('api/addtional-service', tip);
   }
 
   deleteAdditional(id: number) {
-    return this.http.delete('api/addtional-serviceadmin/' + id);
+    return this.http.delete('api/addtional-service/' + id);
   }
 
   // ====
