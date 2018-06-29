@@ -15,14 +15,22 @@ public class TestData {
     @Autowired
     private KeyStoreService keyStoreService;
 
+    public TestData() {
+    }
+
     @PostConstruct
     private void init() {
 //        System.out.println("Kreiranje keystorova");
 //        keyStoreService.createKeyStores();
 
-        //generating hash for passwords
+//        //generating hash for passwords
 //        BCryptPasswordEncoder bc = new BCryptPasswordEncoder();
-//        System.out.println(bc.encode("agent"));
+////        System.out.println(bc.encode("Dejan 1010"));
+////        System.out.println(bc.encode("Stefan 1010"));
+////        System.out.println(bc.encode("Jovana 1010"));
+////        System.out.println(bc.encode("Ivan 1010"));
+////        System.out.println(bc.encode("Admin 1010"));
+////        System.out.println(bc.encode("Agent 1010"));
 
     }
 

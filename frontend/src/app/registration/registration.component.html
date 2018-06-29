@@ -5,8 +5,8 @@
       <label for="username">Username</label>
       <input name="username" [(ngModel)]="user.username" class="form-control" id="username" aria-describedby="usernameHelp" placeholder="Enter username">
       <label for="password">Password</label>
-      <!-- Minimum eight characters, at least one letter and one number -->
-      <input type="password" required name="password" minlength="10" maxlength="20" pattern="/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{10,100})/" [(ngModel)]="user.passwordHash" class="form-control" id="password" placeholder="Password">
+      <!-- Minimum eight characters, at least one letter and one number             pattern="/^(?=.*[0-9])[a-zA-Z0-9!@#$%^&*]{6,100}$/" -->
+      <input type="password" required name="password" minlength="10" maxlength="20" [(ngModel)]="user.passwordHash" class="form-control" id="password" placeholder="Password">
       <label for="email">Email address</label>
       <input type="email" name="email" [(ngModel)]="user.email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email">
       <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>

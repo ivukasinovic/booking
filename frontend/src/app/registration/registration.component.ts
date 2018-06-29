@@ -23,7 +23,7 @@ export class RegistrationComponent implements OnInit {
     this.authService.register(this.user)
       .subscribe((data: User) => {
         alert('Succes registration ' + data.username + '!');
-          this.passwordValueValidator(data.passwordHash);
+        //  this.passwordValueValidator(data.passwordHash);
         this.router.navigate(['/']);
         },
         error1 => {
