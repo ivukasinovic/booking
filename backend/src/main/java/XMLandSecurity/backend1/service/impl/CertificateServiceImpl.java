@@ -79,7 +79,7 @@ public class CertificateServiceImpl implements CertificateService {
         } catch (CertIOException e) {
             e.printStackTrace();
         }
-        keyStoreService.writeCertificate(certificateDTO.getisCa(), certificate, certificateDTO.getCommonName(), keyPair.getPrivate());
+        keyStoreService.writeCertificate(certificateDTO.getisCa(), certificate, certificateDTO.getSerialNumber(), keyPair.getPrivate());
 
         return certificate;
     }
@@ -266,7 +266,9 @@ public class CertificateServiceImpl implements CertificateService {
             r.close();
 
             dto.setIsCa(false);
-            dto.setIssuerSerialNumber("tim10");
+            //
+            dto.setIssuerSerialNumber("4569360");
+
             dto.setSerialNumber(id);
             //public key
             SubjectPublicKeyInfo pkInfo = csr.getSubjectPublicKeyInfo();
@@ -287,7 +289,7 @@ public class CertificateServiceImpl implements CertificateService {
                 e.printStackTrace();
             }
 
-            keyStoreService.writeCertificate(dto.getisCa(), certificate, dto.getCommonName(), null);
+            keyStoreService.writeCertificate(dto.getisCa(), certificate, dto.getSerialNumber(), null);
             //brisanje csr zahteva
             f.delete();
             emailService.sendCSRStatus(dto.getEmail(), "aproved");
