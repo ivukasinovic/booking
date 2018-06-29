@@ -99,7 +99,7 @@ public class AuthenticationController {
             loginAttemptService.loginSucceeded(getClientIP());
             loggeri.info("Ulogovao se !!!!!!!!  " + loggeri.getName());
         }catch (Exception e) {
-            XMLandSecurity.backend1.logger.Logger.getInstance().logTrenutni(" ,Nije uspelo logovanje: " + "  " + new Date());
+            XMLandSecurity.backend1.logger.Logger.getInstance().logTrenutni(getClientIP() + " ,Nije uspelo logovanje: " + "  " + new Date());
             loginAttemptService.loginFailed(getClientIP());
             loggeri.warn("Niste se ulogovalii !!!....");
             return new ResponseEntity<>(HttpStatus.FORBIDDEN);
@@ -112,9 +112,9 @@ public class AuthenticationController {
         User user = userService.findByUsername(userDetails.getUsername());
 
         if (user == null) {
-            XMLandSecurity.backend1.logger.Logger.getInstance().logTrenutni("Pokusao logovanje sa korisnickim imenom: " + user.getUsername() + "  " + new Date());
+            XMLandSecurity.backend1.logger.Logger.getInstance().logTrenutni(getClientIP() + "Pokusao logovanje sa korisnickim imenom: " + user.getUsername() + "  " + new Date());
         } else {
-            XMLandSecurity.backend1.logger.Logger.getInstance().log(" ,Ulogovao se: " + user.getUsername() + "  " + new Date());
+            XMLandSecurity.backend1.logger.Logger.getInstance().log(getClientIP() +" ,Ulogovao se: " + user.getUsername() + "  " + new Date());
         }
         if (!user.isActivated()) {
 
@@ -160,7 +160,7 @@ public class AuthenticationController {
         try{
             savedUser = userService.save(user);
         }catch (Exception e) {
-            XMLandSecurity.backend1.logger.Logger.getInstance().logError(" ,Registracija nije uspjela: " + "  " + new Date());
+            XMLandSecurity.backend1.logger.Logger.getInstance().logError(getClientIP() + " ,Registracija nije uspjela: " + "  " + new Date());
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
 
@@ -175,7 +175,7 @@ public class AuthenticationController {
             consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<User> registerAgent(@RequestBody User user) throws IOException {
         if ((userService.findByUsername(user.getUsername()) != null)) {
-            XMLandSecurity.backend1.logger.Logger.getInstance().logError(" ,Registracija nije uspjela: " + "  " + new Date());
+            XMLandSecurity.backend1.logger.Logger.getInstance().logError(getClientIP() +" ,Registracija nije uspjela: " + "  " + new Date());
             return new ResponseEntity<>(HttpStatus.FORBIDDEN);
         }
         user.setRole(Role.AGENT);

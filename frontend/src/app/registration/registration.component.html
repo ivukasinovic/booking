@@ -6,7 +6,7 @@
       <input name="username" [(ngModel)]="user.username" class="form-control" id="username" aria-describedby="usernameHelp" placeholder="Enter username">
       <label for="password">Password</label>
       <!-- Minimum eight characters, at least one letter and one number -->
-      <input type="password" required name="password" minlength="10" maxlength="20" pattern="/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{6,100})/" [(ngModel)]="user.passwordHash" class="form-control" id="password" placeholder="Password">
+      <input type="password" required name="password" minlength="10" maxlength="20" pattern="/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{10,100})/" [(ngModel)]="user.passwordHash" class="form-control" id="password" placeholder="Password">
       <label for="email">Email address</label>
       <input type="email" name="email" [(ngModel)]="user.email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email">
       <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
@@ -17,7 +17,7 @@
       <input name="surname" [(ngModel)]="user.surname" class="form-control" id="surname" aria-describedby="surname" placeholder="Enter surname">
       <label for="city">City</label>
       <input name="city" [(ngModel)]="user.city" class="form-control" id="city" aria-describedby="city" placeholder="Enter city">
-      <label for="city">Address</label>
+      <label for="city"> Address </label>
       <input name="city" [(ngModel)]="user.adress" class="form-control" id="adress" aria-describedby="adress" placeholder="Enter address">
       <label for="number">Number</label>
       <input name="number" [(ngModel)]="user.number" class="form-control" id="number" aria-describedby="number" placeholder="Enter number">
