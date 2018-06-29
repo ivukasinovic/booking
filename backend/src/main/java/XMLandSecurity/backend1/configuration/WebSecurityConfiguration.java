@@ -75,9 +75,10 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers(HttpMethod.OPTIONS, "api/**").permitAll()
                 .antMatchers("/login").permitAll()
-                .antMatchers("/registration").permitAll()
+                .antMatchers("/register").permitAll()
                 .antMatchers("/reset-password-req").permitAll()
                 .antMatchers("/reset-password/**").permitAll()
+                .antMatchers("/activate/**").permitAll()
                 .antMatchers("/ws/**").permitAll()
                 .anyRequest().fullyAuthenticated();
 
