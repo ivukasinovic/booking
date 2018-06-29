@@ -58,14 +58,20 @@ export class CertificateListComponent implements OnInit {
 
   delete(serialNumber: number) {
     this.certificateService.delete(serialNumber)
-      .subscribe();
-    location.reload();
+      .subscribe(response => {
+        alert('Success');
+        location.reload();
+      }, error1 => {
+        alert('Nije uspelo brisanje sertifikatas!');
+      });
+
   }
 
   revoke(serialNumber: number) {
     this.certificateService.revoke(serialNumber)
       .subscribe(response => {
         alert('Success');
+        location.reload();
       });
   }
 
