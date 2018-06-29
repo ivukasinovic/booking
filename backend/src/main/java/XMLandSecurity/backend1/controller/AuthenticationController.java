@@ -142,12 +142,7 @@ public class AuthenticationController {
             produces = MediaType.APPLICATION_JSON_VALUE,
             consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> register(@Validated @RequestBody User user, Errors error) {
-        if ((userService.findByUsername(user.getUsername()) != null) || (userService.findByEmail(user.getEmail()) != null)) {
-            JOptionPane.showMessageDialog(null, "Email alredy exist or username exist!", "Email alredy exist or username exis",
-                    JOptionPane.ERROR_MESSAGE);
-            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
-        }
-
+        User savedUser = null;
         if (error.hasErrors()) {
             return new ResponseEntity<String>(error.getAllErrors().toString(), HttpStatus.BAD_REQUEST);
         }
@@ -155,7 +150,12 @@ public class AuthenticationController {
         user.setRole(Role.USER);
         user.setPasswordHash(new BCryptPasswordEncoder().encode(user.getPasswordHash()));
         user.setActivated(false);
-        User savedUser = userService.save(user);
+        try{
+            savedUser = userService.save(user);
+        }catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+
         emailService.sendActivationMail(user);
         return new ResponseEntity<>(savedUser, HttpStatus.CREATED);
     }

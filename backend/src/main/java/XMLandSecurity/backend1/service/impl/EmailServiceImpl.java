@@ -41,7 +41,7 @@ public class EmailServiceImpl implements EmailService {
             String htmlMsg = "<h3>Profile activation!</h3><br>"
                     + "<div>Welcome "+user.getUsername()+"  on <b>Booking.com </b></div>"
                     + "<div>Click  <a href ="
-                    + " \"http://localhost:4200/api/activate/"+encryptedString+"\">"
+                    + " \"https://localhost:4200/api/activate/"+encryptedString+"\">"
                     + "<u>here</u></a> for activation.</div>";
             mimeMessage.setContent(htmlMsg, "text/html");
             helper.setTo(user.getEmail());
@@ -62,7 +62,7 @@ public class EmailServiceImpl implements EmailService {
             String htmlMsg = "<h3>Reset password!</h3><br>"
                     + "<div>Hi "+user.getUsername()+", you want reset password on <b>Booking.com </b></div>"
                     + "<div>Click  <a href ="
-                    + " \"http://localhost:4200/reset-password/"+encryptedString+"\">"
+                    + " \"https://localhost:4200/reset-password/"+encryptedString+"\">"
                     + "<u>here</u></a> to reset your password.</div>";
             mimeMessage.setContent(htmlMsg, "text/html");
             helper.setTo(user.getEmail());
