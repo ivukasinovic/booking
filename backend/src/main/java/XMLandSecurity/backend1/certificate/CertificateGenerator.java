@@ -57,8 +57,19 @@ public class CertificateGenerator {
             }
 
             // AIA extension
-            GeneralName ocspLocation = new GeneralName(6, "https://localhost:8443/api/certificates/" + issuerID);
+            GeneralName ocspLocation = new GeneralName(GeneralName.uniformResourceIdentifier, "https://localhost:8443/api/certificates/" + issuerID);
             certGen.addExtension(Extension.authorityInfoAccess, isCA, new AuthorityInformationAccess(X509ObjectIdentifiers.ocspAccessMethod, ocspLocation));
+
+            //cdp extension
+
+            GeneralName generalName = new GeneralName(GeneralName.uniformResourceIdentifier, "https//localhost:8443/api/certificates/crl");
+
+            DistributionPointName distributionPoint = new DistributionPointName(new GeneralNames(generalName));
+
+            DistributionPoint[] distPoints = new DistributionPoint[1];
+            distPoints[0] = new DistributionPoint(distributionPoint, null, null);
+
+            certGen.addExtension(Extension.cRLDistributionPoints, false, new CRLDistPoint(distPoints));
 
             //Generise se sertifikat
             X509CertificateHolder certHolder = certGen.build(contentSigner);

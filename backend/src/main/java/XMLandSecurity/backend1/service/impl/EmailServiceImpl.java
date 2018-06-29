@@ -105,8 +105,8 @@ public class EmailServiceImpl implements EmailService {
         try {
             MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true, "utf-8");
             String htmlMsg = "Hi, <br/> We have received your certificate request. In attacment we are sending" +
-                    " you your public/private keypair. You should keep it, and you shouldn't share it with others.<br><br>" +
-                    " As soon as our admin aproves your request, we will notify you by email for futher details.<br>" +
+                    " you your private key. <br>You should keep it, and you shouldn't share it with others.<br><br>" +
+                    " As soon as our admin team reviews your request, we will notify you by email for futher details.<br>" +
                     " Best regards,<br> Booking.com";
 
             // mimeMessage.setContent(htmlMsg, "text/html");
@@ -128,7 +128,6 @@ public class EmailServiceImpl implements EmailService {
             helper.addAttachment("private key", new ByteArrayResource(sw.toString().getBytes()));
             javaMailSender.send(mimeMessage);
 
-            System.out.println("poslao mailll");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -147,14 +146,16 @@ public class EmailServiceImpl implements EmailService {
 
 
             if (status.equals("aproved")) {
-                htmlMsg = "We're happy to inform you that you certificate is ready. You can download it now from our cite.";
+                htmlMsg = "We're happy to inform you that you certificate is ready. You can download it now from our site." +
+                        "<br> Best regards,<br> Booking.com";
             } else {
-                htmlMsg = "There was problem with your request.";
+                htmlMsg = "We regret to inform you that your request for certificate is denied." +
+                        " Our admin team found problem with your informations.<br>Best regards,<br> Booking.com";
             }
 
             mimeMessage.setContent(htmlMsg, "text/html");
             helper.setTo(email);
-            helper.setSubject("CSR status");
+            helper.setSubject("Certificate request status");
             javaMailSender.send(mimeMessage);
 
         } catch (Exception e) {
