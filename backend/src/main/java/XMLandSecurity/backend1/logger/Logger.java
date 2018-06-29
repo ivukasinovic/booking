@@ -67,6 +67,20 @@ public class Logger {
         bw.close();
     }
 
+    public void logError(String poruka) throws IOException {
+        InetAddress iAddress = InetAddress.getLocalHost();
+        String currentIp = iAddress.getHostAddress();
+
+        BufferedWriter bw = null;
+        FileWriter fw = null;
+        fw = new FileWriter("error.txt",true);
+        bw = new BufferedWriter(fw);
+        bw.append("Current IP address : " +currentIp + poruka);
+        bw.newLine();
+        bw.close();
+    }
+
+
     public static Logger getInstance() {
         if(instance == null){
             instance = new Logger();

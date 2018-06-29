@@ -148,7 +148,7 @@ public class AuthenticationController {
             method = RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE,
             consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> register(@Validated @RequestBody User user, Errors error) {
+    public ResponseEntity<?> register(@Validated @RequestBody User user, Errors error) throws IOException {
         User savedUser = null;
         if (error.hasErrors()) {
             return new ResponseEntity<String>(error.getAllErrors().toString(), HttpStatus.BAD_REQUEST);
@@ -160,6 +160,7 @@ public class AuthenticationController {
         try{
             savedUser = userService.save(user);
         }catch (Exception e) {
+            XMLandSecurity.backend1.logger.Logger.getInstance().logError(" ,Registracija nije uspjela: " + "  " + new Date());
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
 
@@ -172,8 +173,9 @@ public class AuthenticationController {
             method = RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE,
             consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<User> registerAgent(@RequestBody User user) {
+    public ResponseEntity<User> registerAgent(@RequestBody User user) throws IOException {
         if ((userService.findByUsername(user.getUsername()) != null)) {
+            XMLandSecurity.backend1.logger.Logger.getInstance().logError(" ,Registracija nije uspjela: " + "  " + new Date());
             return new ResponseEntity<>(HttpStatus.FORBIDDEN);
         }
         user.setRole(Role.AGENT);
