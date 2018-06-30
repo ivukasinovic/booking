@@ -32,10 +32,10 @@ public class ReservationController {
     private ReservationResRepository reservationResRepository;
 
     @RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<Reservation>> getReservations(){
-        try{
+    public ResponseEntity<List<Reservation>> getReservations() {
+        try {
             getUsername();
-        }catch (Exception e){
+        } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         }
         LodgingService objMethod = new LodgingService();
@@ -50,11 +50,11 @@ public class ReservationController {
     @RequestMapping(value = "/occupancy",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> setOccupancy(@RequestParam("id") Long id, @RequestParam("dateStart") String dateStart, @RequestParam("dateEnd") String dateEnd){
+    public ResponseEntity<String> setOccupancy(@RequestParam("id") Long id, @RequestParam("dateStart") String dateStart, @RequestParam("dateEnd") String dateEnd) {
         String agent;
-        try{
+        try {
             agent = getUsername();
-        }catch (Exception e){
+        } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         }
         LodgingService objMethod = new LodgingService();
@@ -66,19 +66,20 @@ public class ReservationController {
         request.setAgent(agent);
         SetOccupancyResponse response = objPort.setOccupancy(request);
 
-        com.project.model.ReservationRes lodgingRes = converters.updateLodging(id,dateStart,dateEnd);
+        com.project.model.ReservationRes lodgingRes = converters.updateLodging(id, dateStart, dateEnd);
         reservationResRepository.save(lodgingRes);
 
         return new ResponseEntity<>(HttpStatus.OK);
 
     }
+
     @RequestMapping(value = "/completed/{id}",
             method = RequestMethod.GET,
             produces = MediaType.TEXT_PLAIN_VALUE)
-    public ResponseEntity<String> setCompleted(@PathVariable Long id){
-        try{
+    public ResponseEntity<String> setCompleted(@PathVariable Long id) {
+        try {
             getUsername();
-        }catch (Exception e){
+        } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         }
         LodgingService objMethod = new LodgingService();
@@ -91,12 +92,12 @@ public class ReservationController {
     }
 
     @RequestMapping(value = "/messages",
-                    produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<MessageRes>> getMessages(){
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<MessageRes>> getMessages() {
         String agent;
-        try{
+        try {
             agent = getUsername();
-        }catch (Exception e){
+        } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         }
         LodgingService objMethod = new LodgingService();
@@ -109,12 +110,12 @@ public class ReservationController {
     }
 
     @RequestMapping(value = "/reply",
-                    produces = MediaType.APPLICATION_JSON_VALUE,
-                    consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<MessageRes> reply(@RequestBody MessageRes messageRes){
-        try{
+            produces = MediaType.APPLICATION_JSON_VALUE,
+            consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<MessageRes> reply(@RequestBody MessageRes messageRes) {
+        try {
             getUsername();
-        }catch (Exception e){
+        } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         }
         LodgingService objMethod = new LodgingService();
@@ -124,15 +125,15 @@ public class ReservationController {
         SetMessagesResponse response = objPort.setMessages(request);
         MessageRes msg = response.getMessageRes();
 
-        com.project.model.MessageRes  messageRes1 = converters.convertMessage(messageRes);
+        com.project.model.MessageRes messageRes1 = converters.convertMessage(messageRes);
         messageResRepository.save(messageRes1);
 
         return new ResponseEntity<>(msg, HttpStatus.CREATED);
     }
 
-    String getUsername(){
+    String getUsername() {
         ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
-        HttpSession session= attr.getRequest().getSession(true);
+        HttpSession session = attr.getRequest().getSession(true);
         com.project.model.User user = (com.project.model.User) session.getAttribute("user");
         return user.getUsername();
     }

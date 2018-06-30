@@ -8,7 +8,7 @@ public interface CategoryOfLodgingService {
 
     List<CategoryOfLodging> findAll();
 
-    CategoryOfLodging  findOne(Long id);
+    CategoryOfLodging findOne(Long id);
 
     CategoryOfLodging save(CategoryOfLodging categoryOfLodging);
 

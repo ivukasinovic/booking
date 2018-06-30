@@ -1,6 +1,9 @@
 package XMLandSecurity.backend1.controller;
 
-import XMLandSecurity.backend1.domain.*;
+import XMLandSecurity.backend1.domain.Comment;
+import XMLandSecurity.backend1.domain.Lodging;
+import XMLandSecurity.backend1.domain.Rating;
+import XMLandSecurity.backend1.domain.User;
 import XMLandSecurity.backend1.model.dto.CommentCloud;
 import XMLandSecurity.backend1.service.LodgingService;
 import XMLandSecurity.backend1.service.RatingService;
@@ -33,7 +36,7 @@ public class RatingController {
 
     @RequestMapping(value = "/{idLodging}/{star}",
             method = RequestMethod.POST)
-    public ResponseEntity createRating(@RequestBody Comment comment, @PathVariable("idLodging") Long idLodging,@PathVariable("star") Long star, Principal principal) {
+    public ResponseEntity createRating(@RequestBody Comment comment, @PathVariable("idLodging") Long idLodging, @PathVariable("star") Long star, Principal principal) {
 
         Lodging lodging = lodgingService.findOne(idLodging);
         comment.setLodging(lodging);
@@ -44,10 +47,10 @@ public class RatingController {
         //ratingService.save(rating); cuvanje preko cloud-a cemo raditi
 
 
-        CommentCloud commentCloud = new CommentCloud(comment.getBody(), comment.getAccepted(), comment.getUser().getId(), comment.getLodging().getId(),new Date(),star);
+        CommentCloud commentCloud = new CommentCloud(comment.getBody(), comment.getAccepted(), comment.getUser().getId(), comment.getLodging().getId(), new Date(), star);
 
         ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
-        String json="{\"queriedQuestion\":\"Is there pain in your hand?\"}";
+        String json = "{\"queriedQuestion\":\"Is there pain in your hand?\"}";
         try {
             json = ow.writeValueAsString(commentCloud);
         } catch (JsonProcessingException e) {
@@ -58,14 +61,13 @@ public class RatingController {
         RestTemplate restTemplate = new RestTemplate();
         String path = "http://localhost:8010/cloud-demo/us-central1/newRating/";
         //String url=path+"set";
-        String url=path;
+        String url = path;
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
 
-        HttpEntity<String> entity = new HttpEntity<String>(json,headers);
+        HttpEntity<String> entity = new HttpEntity<String>(json, headers);
         String answer = restTemplate.postForObject(url, entity, String.class);
-       // System.out.println(answer);
-
+        // System.out.println(answer);
 
 
         return new ResponseEntity(HttpStatus.OK);
@@ -75,11 +77,11 @@ public class RatingController {
             method = RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE,
             consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> proba( @RequestBody Rating ratingFront) {
+    public ResponseEntity<?> proba(@RequestBody Rating ratingFront) {
         Rating rating = new Rating();
 
         ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
-        String json="{\"queriedQuestion\":\"Is there pain in your hand?\"}";
+        String json = "{\"queriedQuestion\":\"Is there pain in your hand?\"}";
         try {
             json = ow.writeValueAsString(ratingFront);
         } catch (JsonProcessingException e) {
@@ -90,16 +92,17 @@ public class RatingController {
 
         RestTemplate restTemplate = new RestTemplate();
         String path = "http://localhost:8010/cloud-demo/us-central1/newRating/";
-        String url=path+"set";
+        String url = path + "set";
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
 
-        HttpEntity<String> entity = new HttpEntity<String>(json,headers);
+        HttpEntity<String> entity = new HttpEntity<String>(json, headers);
         String answer = restTemplate.postForObject(url, entity, String.class);
         System.out.println(answer);
 
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
     @RequestMapping(
             value = "/ppp",
             method = RequestMethod.GET)

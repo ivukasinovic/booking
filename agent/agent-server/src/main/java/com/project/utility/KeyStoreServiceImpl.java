@@ -3,14 +3,15 @@ package com.project.utility;
 import org.springframework.stereotype.Service;
 
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.security.*;
 import java.security.cert.Certificate;
-import java.security.cert.CertificateEncodingException;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Enumeration;
+import java.util.List;
+import java.util.Optional;
 
 
 @Service
@@ -82,7 +83,7 @@ public class KeyStoreServiceImpl {
         loadKeyStore(1);
         try {
             PrivateKey privKey = (PrivateKey) keyStore.getKey(alias, PASSWORD_NONCA.toCharArray());
-            return  privKey;
+            return privKey;
         } catch (KeyStoreException | UnrecoverableKeyException | NoSuchAlgorithmException e) {
             e.printStackTrace();
         }
@@ -93,14 +94,12 @@ public class KeyStoreServiceImpl {
         loadKeyStore(1);
         try {
             Certificate cert = keyStore.getCertificate(alias);
-            return  cert;
+            return cert;
         } catch (KeyStoreException e) {
             e.printStackTrace();
         }
         return null;
     }
-
-
 
 
     public void loadKeyStore(String keyStoreFile, String keyStorePassword) {

@@ -1,55 +1,51 @@
 package XMLandSecurity.backend1.domain;
 
 
-import java.io.Serializable;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-
-import java.io.Serializable;
-import java.time.LocalDateTime;
-import java.util.Date;
 
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
+import java.io.Serializable;
+import java.util.Date;
 
 @Entity
 @Table
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlRootElement(name="rating")
+@XmlRootElement(name = "rating")
 public class Rating implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    @XmlElement(name="id", required=true)
+    @XmlElement(name = "id", required = true)
     private Long id;
 
     @Column(name = "date_created", nullable = false)
     @Temporal(TemporalType.DATE)
-    @XmlElement(name="dateCreated", required=true)
+    @XmlElement(name = "dateCreated", required = true)
     private Date dateCreated;
 
     @Column(name = "star", nullable = false)
-    @XmlElement(name="star", required=true)
+    @XmlElement(name = "star", required = true)
     private Long star;
 
     @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
     @JsonIdentityReference(alwaysAsId = true)
     @ManyToOne
     @JoinColumn(name = "user_id")
-    @XmlElement(name="user", required=true)
+    @XmlElement(name = "user", required = true)
     private User user;
 
     @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
     @JsonIdentityReference(alwaysAsId = true)
     @ManyToOne
     @JoinColumn(name = "lodging_id", nullable = false)
-    @XmlElement(name="lodging", required=true)
+    @XmlElement(name = "lodging", required = true)
     private Lodging lodging;
 
     public Rating() {

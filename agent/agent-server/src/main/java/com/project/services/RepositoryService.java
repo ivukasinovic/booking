@@ -18,10 +18,9 @@ public class RepositoryService {
     @Autowired
     private AdditionServiceRepository additionServiceRepository;
 
-    public  User findByUsername(String username){
+    public User findByUsername(String username) {
         return userRepository.findByUsername(username);
     }
-
 
 
 }

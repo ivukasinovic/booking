@@ -14,7 +14,6 @@ import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.XMLGregorianCalendar;
 import java.math.BigInteger;
 import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -57,14 +56,13 @@ public class LodgingEndpoint {
     private PriceListService priceListService;
 
 
-
     @PayloadRoot(namespace = "http://bookingxml.com/soap-example", localPart = "getLodgingsRequest")
     @ResponsePayload
     public GetLodgingsResponse getLodgingsRequest(@RequestPayload GetLodgingsRequest request) {
         GetLodgingsResponse response = new GetLodgingsResponse();
         if (request.getLodgings().equals("all")) {
             List<Lodging> lodgings = lodgingService.findAll();
-            for (Lodging lodging: lodgings) {
+            for (Lodging lodging : lodgings) {
                 LodgingRes lodgingRes = new LodgingRes();
                 lodgingRes.setAddress(lodging.getAddress());
                 lodgingRes.setCategory(lodging.getCategory().getId());
@@ -74,10 +72,10 @@ public class LodgingEndpoint {
                 lodgingRes.setType(lodging.getType().getId());
                 lodgingRes.setAgent(lodging.getAgent().getUsername());
                 lodgingRes.setPersonsNumber(BigInteger.valueOf(lodging.getPersons_number()));
-                for(Image img : lodging.getImages()){
+                for (Image img : lodging.getImages()) {
                     lodgingRes.getImagesList().add(img.getUrl());
                 }
-                for(AdditionalService additionalService: lodging.getAdditionalServiceList()){
+                for (AdditionalService additionalService : lodging.getAdditionalServiceList()) {
                     lodgingRes.getAdditionService().add(additionalService.getId().toString());
                 }
                 response.getLodgingRes().add(lodgingRes);
@@ -88,7 +86,7 @@ public class LodgingEndpoint {
 
     @PayloadRoot(namespace = "http://bookingxml.com/soap-example", localPart = "setLodgingRequest")
     @ResponsePayload
-    public SetLodgingResponse setLodgingRequest(@RequestPayload SetLodgingRequest request){
+    public SetLodgingResponse setLodgingRequest(@RequestPayload SetLodgingRequest request) {
         SetLodgingResponse response = new SetLodgingResponse();
 
         Lodging lodging = new Lodging();
@@ -104,13 +102,13 @@ public class LodgingEndpoint {
         lodging.setRating(0.0);
         lodging.setPersons_number(request.getLodging().getPersonsNumber().intValue());
 
-        Lodging savedLodging  = lodgingService.save(lodging);
-        for(String ads: request.getLodging().getAdditionService()){
+        Lodging savedLodging = lodgingService.save(lodging);
+        for (String ads : request.getLodging().getAdditionService()) {
             AdditionalService additionalService = additionalServiceService.findOne(Long.valueOf(ads));
             additionalService.getLodgingList().add(savedLodging);
             additionalServiceService.save(additionalService);
         }
-        for(String image: request.getLodging().getImagesList()){
+        for (String image : request.getLodging().getImagesList()) {
             Image img = new Image();
             img.setLodging(savedLodging);
             img.setUrl(image);
@@ -119,9 +117,10 @@ public class LodgingEndpoint {
         response.setName("success");
         return response;
     }
+
     @PayloadRoot(namespace = "http://bookingxml.com/soap-example", localPart = "setPricePlanRequest")
     @ResponsePayload
-    public SetPricePlanResponse setPricePlanRequest(@RequestPayload SetPricePlanRequest request){
+    public SetPricePlanResponse setPricePlanRequest(@RequestPayload SetPricePlanRequest request) {
         SetPricePlanResponse response = new SetPricePlanResponse();
         PriceList pl = new PriceList();
         pl.setYear(String.valueOf(request.getYear()));
@@ -142,11 +141,12 @@ public class LodgingEndpoint {
         try {
             priceListService.save(pl);
             response.setTypes("success");
-        }catch (Exception e){
+        } catch (Exception e) {
             response.setTypes("failed");
         }
         return response;
     }
+
     @PayloadRoot(namespace = "http://bookingxml.com/soap-example", localPart = "getMessagesRequest")
     @ResponsePayload
     public GetMessagesResponse getMessagesResponse(@RequestPayload GetMessagesRequest request) throws DatatypeConfigurationException {
@@ -154,7 +154,7 @@ public class LodgingEndpoint {
         String agent = request.getResponse();
         User agentObj = userService.findByUsername(agent);
         List<Message> messages = messageService.findByReceiver_Id(agentObj.getId());
-        for (Message msg: messages) {
+        for (Message msg : messages) {
             MessageRes messageRes = new MessageRes();
             messageRes.setTitle(msg.getTitle());
             messageRes.setBody(msg.getBody());
@@ -174,9 +174,10 @@ public class LodgingEndpoint {
         }
         return response;
     }
+
     @PayloadRoot(namespace = "http://bookingxml.com/soap-example", localPart = "setMessagesRequest")
     @ResponsePayload
-    public SetMessagesResponse setMessagesResponse(@RequestPayload SetMessagesRequest request){
+    public SetMessagesResponse setMessagesResponse(@RequestPayload SetMessagesRequest request) {
         SetMessagesResponse response = new SetMessagesResponse();
         Message message = new Message();
         message.setDateSent(new Date());
@@ -186,16 +187,16 @@ public class LodgingEndpoint {
         message.setReceiver(receiver);
         message.setBody(request.getMessageRes().getBody());
         message.setTitle(request.getMessageRes().getTitle());
-     //   message.setDateSent(request.getMessageRes().getDateSent());
+        //   message.setDateSent(request.getMessageRes().getDateSent());
         messageService.save(message);
         response.setMessageRes(request.getMessageRes());
 
-        return  response;
+        return response;
     }
 
     @PayloadRoot(namespace = "http://bookingxml.com/soap-example", localPart = "setCompletedLodgingRequest")
     @ResponsePayload
-    public SetCompletedLodgingResponse setCompletedLodgingRequest(@RequestPayload SetCompletedLodgingRequest request){
+    public SetCompletedLodgingResponse setCompletedLodgingRequest(@RequestPayload SetCompletedLodgingRequest request) {
         SetCompletedLodgingResponse response = new SetCompletedLodgingResponse();
         Reservation reservation = reservationService.findOne(request.getReservation());
         reservation.setActive(false);
@@ -205,21 +206,23 @@ public class LodgingEndpoint {
         response.setStatus("success");
         return response;
     }
+
     @PayloadRoot(namespace = "http://bookingxml.com/soap-example", localPart = "getImagesRequest")
     @ResponsePayload
-    public GetImagesResponse getImagesRequest(@RequestPayload GetImagesRequest request){
+    public GetImagesResponse getImagesRequest(@RequestPayload GetImagesRequest request) {
         GetImagesResponse response = new GetImagesResponse();
         List<Image> images = imageService.findAll();
-        for(Image im : images){
+        for (Image im : images) {
             im.setLodging(null);
             response.getImagesList().add(im);
         }
         return response;
 
     }
+
     @PayloadRoot(namespace = "http://bookingxml.com/soap-example", localPart = "setOccupancyRequest")
     @ResponsePayload
-    public SetOccupancyResponse setOccupancyRequest(@RequestPayload SetOccupancyRequest request){
+    public SetOccupancyResponse setOccupancyRequest(@RequestPayload SetOccupancyRequest request) {
         SetOccupancyResponse response = new SetOccupancyResponse();
         Reservation reservation = new Reservation();
         User agent = userService.findByUsername(request.getAgent());
@@ -241,7 +244,7 @@ public class LodgingEndpoint {
 //
         //======
         DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        String dateStart = request.getStart() ;
+        String dateStart = request.getStart();
         String dateEnd = request.getEnd();
 
         List<Lodging> reservatedLodgings = new ArrayList<Lodging>();
@@ -256,28 +259,28 @@ public class LodgingEndpoint {
         try {
             Date dStart = format.parse(dateStart);
             Date dEnd = format.parse(dateEnd);
-            reservatedLodgings = lodgingService.findByReservationsDateStartBetweenAndReservationsDateEndBetween(dStart,dEnd,dStart,dEnd);
+            reservatedLodgings = lodgingService.findByReservationsDateStartBetweenAndReservationsDateEndBetween(dStart, dEnd, dStart, dEnd);
             lodgingService.findOne(2L);
 
             int flag = 0;//petlja za proveravanje koji smestaji su dozvoljeni zbog termina rezervacija
-            for (int i=0; i < reservatedLodgings.size();i++ ){
-                if(request.getLodging() == reservatedLodgings.get(i).getId() ){
+            for (int i = 0; i < reservatedLodgings.size(); i++) {
+                if (request.getLodging() == reservatedLodgings.get(i).getId()) {
                     flag = 1;
                 }
             }
 
-            if(flag == 0){
+            if (flag == 0) {
                 reservation.setDateStart(dStart);
                 reservation.setDateEnd(format.parse(dateEnd));
                 reservation.setLodging(lodgingService.findOne(request.getLodging()));
                 reservationService.save(reservation);
                 response.setSuccess("success");
 
-            }else {
+            } else {
 
                 response.setSuccess("U okviru datog datuma nije moguce uraditi !");
             }
-        }catch (Exception e) {
+        } catch (Exception e) {
             System.out.print("Hajmooo !!!==============");
         }
         //======
@@ -287,19 +290,19 @@ public class LodgingEndpoint {
 
     @PayloadRoot(namespace = "http://bookingxml.com/soap-example", localPart = "getReservationsRequest")
     @ResponsePayload
-    public GetReservationsResponse getReservationsRequest(@RequestPayload GetReservationsRequest request){
+    public GetReservationsResponse getReservationsRequest(@RequestPayload GetReservationsRequest request) {
         GetReservationsResponse response = new GetReservationsResponse();
-        if(request.getType().equals("all")){
+        if (request.getType().equals("all")) {
             List<Reservation> reservations = reservationService.findAll();
-            for (Reservation res: reservations) {
+            for (Reservation res : reservations) {
                 User user = new User();
                 user.setUsername(res.getUser().getUsername());
                 res.setUser(user);
                 Lodging lodging = new Lodging();
                 lodging.setTitle(res.getLodging().getTitle());
                 res.setLodging(lodging);
-              //  res.setUser(null);
-              //  res.setLodging(null);
+                //  res.setUser(null);
+                //  res.setLodging(null);
                 response.getReservations().add(res);
             }
         }
@@ -311,17 +314,18 @@ public class LodgingEndpoint {
     public GetLodgingCategoriesResponse getLodgingCategoriesRequest(@RequestPayload GetLodgingCategoriesRequest request) {
         GetLodgingCategoriesResponse response = new GetLodgingCategoriesResponse();
         List<CategoryOfLodging> categories = categoryOfLodgingService.findAll();
-        for (CategoryOfLodging cat: categories) {
+        for (CategoryOfLodging cat : categories) {
             response.getTypes().add(cat);
         }
         return response;
     }
+
     @PayloadRoot(namespace = "http://bookingxml.com/soap-example", localPart = "getAdditionsRequest")
     @ResponsePayload
-    public GetAdditionsResponse getAdditionsRequest(@RequestPayload GetAdditionsRequest getAdditionsRequest){
+    public GetAdditionsResponse getAdditionsRequest(@RequestPayload GetAdditionsRequest getAdditionsRequest) {
         GetAdditionsResponse response = new GetAdditionsResponse();
         List<AdditionalService> additionalServices = additionalServiceService.findAll();
-        for(AdditionalService s : additionalServices){
+        for (AdditionalService s : additionalServices) {
             s.setLodgingList(null);
             response.getTypes().add(s);
         }
@@ -330,21 +334,22 @@ public class LodgingEndpoint {
 
     @PayloadRoot(namespace = "http://bookingxml.com/soap-example", localPart = "getCitiesRequest")
     @ResponsePayload
-    public GetCitiesResponse getCtitiesRequest(@RequestPayload GetCitiesRequest getCitiesRequest){
+    public GetCitiesResponse getCtitiesRequest(@RequestPayload GetCitiesRequest getCitiesRequest) {
         GetCitiesResponse response = new GetCitiesResponse();
         List<City> cities = cityService.findAll();
-        for(City city: cities){
+        for (City city : cities) {
             city.setCountry(null);
             response.getCities().add(city);
         }
         return response;
     }
+
     @PayloadRoot(namespace = "http://bookingxml.com/soap-example", localPart = "getLodgingTypesRequest")
     @ResponsePayload
-    public GetLodgingTypesResponse getLodgingTypesResponse(@RequestPayload GetLodgingTypesRequest getLodgingTypesRequest){
+    public GetLodgingTypesResponse getLodgingTypesResponse(@RequestPayload GetLodgingTypesRequest getLodgingTypesRequest) {
         GetLodgingTypesResponse response = new GetLodgingTypesResponse();
         List<TypeOfLodging> types = typeOfLodgingService.findAll();
-        for(TypeOfLodging type: types){
+        for (TypeOfLodging type : types) {
             response.getTypes().add(type);
         }
         return response;

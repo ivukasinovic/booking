@@ -71,7 +71,7 @@ public class MessageController {
         message.setReceiver(receiver);
         message.setDateSent(new Date());
         Message messageNew = messageService.save(message);
-        XMLandSecurity.backend1.logger.Logger.getInstance().log(" ,Dodata poruka: " + message.getTitle() + ", Posiljalac: " + message.getSender() + " ,Primalac: " + message.getReceiver() +"  " + new Date());
+        XMLandSecurity.backend1.logger.Logger.getInstance().log(" ,Dodata poruka: " + message.getTitle() + ", Posiljalac: " + message.getSender() + " ,Primalac: " + message.getReceiver() + "  " + new Date());
 
         return new ResponseEntity(messageNew, HttpStatus.OK);
     }
@@ -95,7 +95,7 @@ public class MessageController {
     )
     public ResponseEntity<Message> deleteMessage(@PathVariable("id") Long id) throws IOException {
         Message message = messageService.findOne(id);
-        XMLandSecurity.backend1.logger.Logger.getInstance().log(" ,Izbrisana poruka: " + message.getTitle() + ", Posiljalac: " + message.getSender() + " ,Primalac: " + message.getReceiver() +"  " + new Date());
+        XMLandSecurity.backend1.logger.Logger.getInstance().log(" ,Izbrisana poruka: " + message.getTitle() + ", Posiljalac: " + message.getSender() + " ,Primalac: " + message.getReceiver() + "  " + new Date());
 
         messageService.delete(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);

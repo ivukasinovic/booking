@@ -16,9 +16,9 @@ import java.util.List;
 
 /**
  * <p>Java class for lodgingRes complex type.
- * 
+ *
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ *
  * <pre>
  * &lt;complexType name="lodgingRes">
  *   &lt;complexContent>
@@ -39,21 +39,19 @@ import java.util.List;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "lodgingRes", propOrder = {
-    "title",
-    "agent",
-    "city",
-    "address",
-    "type",
-    "category",
-    "details",
-    "imagesList",
-    "personsNumber",
-    "additionService"
+        "title",
+        "agent",
+        "city",
+        "address",
+        "type",
+        "category",
+        "details",
+        "imagesList",
+        "personsNumber",
+        "additionService"
 })
 public class LodgingRes {
 
@@ -76,11 +74,9 @@ public class LodgingRes {
 
     /**
      * Gets the value of the title property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     * {@link String }
      */
     public String getTitle() {
         return title;
@@ -88,11 +84,9 @@ public class LodgingRes {
 
     /**
      * Sets the value of the title property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setTitle(String value) {
         this.title = value;
@@ -100,11 +94,9 @@ public class LodgingRes {
 
     /**
      * Gets the value of the agent property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     * {@link String }
      */
     public String getAgent() {
         return agent;
@@ -112,11 +104,9 @@ public class LodgingRes {
 
     /**
      * Sets the value of the agent property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setAgent(String value) {
         this.agent = value;
@@ -124,7 +114,6 @@ public class LodgingRes {
 
     /**
      * Gets the value of the city property.
-     * 
      */
     public long getCity() {
         return city;
@@ -132,7 +121,6 @@ public class LodgingRes {
 
     /**
      * Sets the value of the city property.
-     * 
      */
     public void setCity(long value) {
         this.city = value;
@@ -140,11 +128,9 @@ public class LodgingRes {
 
     /**
      * Gets the value of the address property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     * {@link String }
      */
     public String getAddress() {
         return address;
@@ -152,11 +138,9 @@ public class LodgingRes {
 
     /**
      * Sets the value of the address property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setAddress(String value) {
         this.address = value;
@@ -164,7 +148,6 @@ public class LodgingRes {
 
     /**
      * Gets the value of the type property.
-     * 
      */
     public long getType() {
         return type;
@@ -172,7 +155,6 @@ public class LodgingRes {
 
     /**
      * Sets the value of the type property.
-     * 
      */
     public void setType(long value) {
         this.type = value;
@@ -180,7 +162,6 @@ public class LodgingRes {
 
     /**
      * Gets the value of the category property.
-     * 
      */
     public long getCategory() {
         return category;
@@ -188,7 +169,6 @@ public class LodgingRes {
 
     /**
      * Sets the value of the category property.
-     * 
      */
     public void setCategory(long value) {
         this.category = value;
@@ -196,11 +176,9 @@ public class LodgingRes {
 
     /**
      * Gets the value of the details property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     * {@link String }
      */
     public String getDetails() {
         return details;
@@ -208,11 +186,9 @@ public class LodgingRes {
 
     /**
      * Sets the value of the details property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setDetails(String value) {
         this.details = value;
@@ -220,25 +196,23 @@ public class LodgingRes {
 
     /**
      * Gets the value of the imagesList property.
-     * 
+     *
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
      * This is why there is not a <CODE>set</CODE> method for the imagesList property.
-     * 
+     *
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
      *    getImagesList().add(newItem);
      * </pre>
-     * 
-     * 
+     *
+     *
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link String }
-     * 
-     * 
      */
     public List<String> getImagesList() {
         if (imagesList == null) {
@@ -249,11 +223,9 @@ public class LodgingRes {
 
     /**
      * Gets the value of the personsNumber property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigInteger }
-     *     
+     *
+     * @return possible object is
+     * {@link BigInteger }
      */
     public BigInteger getPersonsNumber() {
         return personsNumber;
@@ -261,11 +233,9 @@ public class LodgingRes {
 
     /**
      * Sets the value of the personsNumber property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigInteger }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigInteger }
      */
     public void setPersonsNumber(BigInteger value) {
         this.personsNumber = value;
@@ -273,25 +243,23 @@ public class LodgingRes {
 
     /**
      * Gets the value of the additionService property.
-     * 
+     *
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
      * This is why there is not a <CODE>set</CODE> method for the additionService property.
-     * 
+     *
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
      *    getAdditionService().add(newItem);
      * </pre>
-     * 
-     * 
+     *
+     *
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link String }
-     * 
-     * 
      */
     public List<String> getAdditionService() {
         if (additionService == null) {

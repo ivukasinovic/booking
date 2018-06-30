@@ -1,8 +1,11 @@
 package XMLandSecurity.backend1.controller;
 
-import XMLandSecurity.backend1.domain.*;
+import XMLandSecurity.backend1.domain.Lodging;
+import XMLandSecurity.backend1.domain.Reservation;
+import XMLandSecurity.backend1.domain.Role;
+import XMLandSecurity.backend1.domain.User;
 import XMLandSecurity.backend1.model.dto.UserDto;
-import XMLandSecurity.backend1.service.*;
+import XMLandSecurity.backend1.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -11,12 +14,10 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(value = "/users")
@@ -43,8 +44,8 @@ public class UserController {
         List<User> listausera = userService.findAll();
         ArrayList<User> SAMO = new ArrayList<>();
 
-        for(int i=0;i< listausera.size();i++){
-            if(listausera.get(i).getRole().equals(Role.USER)){
+        for (int i = 0; i < listausera.size(); i++) {
+            if (listausera.get(i).getRole().equals(Role.USER)) {
                 SAMO.add(listausera.get(i));
             }
         }
@@ -67,12 +68,12 @@ public class UserController {
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public ResponseEntity<?> CreateUser (@Validated @RequestBody User user, Errors errors) {
+    public ResponseEntity<?> CreateUser(@Validated @RequestBody User user, Errors errors) {
 
         if (errors.hasErrors()) {
             return new ResponseEntity<String>(errors.getAllErrors().toString(), HttpStatus.BAD_REQUEST);
         }
-        
+
         User userNew = userService.save(user);
         return new ResponseEntity(userNew, HttpStatus.OK);
     }
@@ -84,7 +85,7 @@ public class UserController {
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public ResponseEntity<User> updateUsers (@PathVariable("id") Long id) {
+    public ResponseEntity<User> updateUsers(@PathVariable("id") Long id) {
         User listaAdminaFanZone = userService.findOne(id);
         return new ResponseEntity(listaAdminaFanZone, HttpStatus.OK);     // "200 OK"
     }
@@ -93,7 +94,7 @@ public class UserController {
             value = "/{id}",
             method = RequestMethod.DELETE
     )
-    public ResponseEntity<User> izbrisi(@PathVariable("id") Long id){
+    public ResponseEntity<User> izbrisi(@PathVariable("id") Long id) {
 
         userService.delete(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -135,8 +136,8 @@ public class UserController {
         List<Reservation> reservations = loggedUser.getReservations();
         Date today = new Date();
         //ako je istekla rezervacija da se ne moze otkazati
-        for(Reservation reservation : reservations){
-            if(reservation.getDateStart().before(today) && reservation.getActive() == true){
+        for (Reservation reservation : reservations) {
+            if (reservation.getDateStart().before(today) && reservation.getActive() == true) {
                 reservation.setActive(false);
             }
         }
@@ -167,11 +168,11 @@ public class UserController {
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<UserDto> getMyInfo(Principal principal) {
- 
+
         User loggedUser = userService.findByUsername(principal.getName());
 
-        UserDto userInfo = new UserDto(loggedUser.getUsername(),loggedUser.getName(),
-                loggedUser.getSurname(),loggedUser.getEmail(),loggedUser.getCity(),loggedUser.getAdress(),loggedUser.getNumber());
+        UserDto userInfo = new UserDto(loggedUser.getUsername(), loggedUser.getName(),
+                loggedUser.getSurname(), loggedUser.getEmail(), loggedUser.getCity(), loggedUser.getAdress(), loggedUser.getNumber());
 
         return new ResponseEntity(userInfo, HttpStatus.OK);
     }

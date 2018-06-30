@@ -32,14 +32,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.swing.*;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.net.InetAddress;
-import java.nio.file.Files;
-import java.security.InvalidKeyException;
-import java.security.Key;
 import javax.xml.bind.DatatypeConverter;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -85,11 +77,11 @@ public class AuthenticationController {
 
     @RequestMapping(method = RequestMethod.POST, value = "${route.authentication}")  // /login  ${route.authentication}
     public ResponseEntity<?> authenticationRequest(@RequestBody AuthenticationRequest authenticationRequest, Device device, HttpServletResponse response) throws AuthenticationException, IOException {
-            // Perform the authentication
-        org.slf4j.Logger loggeri= LoggerFactory.getLogger(AuthenticationController.class);
+        // Perform the authentication
+        org.slf4j.Logger loggeri = LoggerFactory.getLogger(AuthenticationController.class);
 
         Authentication authentication = null;
-        try{
+        try {
             authentication = this.authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(
                             authenticationRequest.getUsername(),
@@ -98,14 +90,14 @@ public class AuthenticationController {
             );
             loginAttemptService.loginSucceeded(getClientIP());
             loggeri.info("Ulogovao se !!!!!!!!  " + loggeri.getName());
-        }catch (Exception e) {
+        } catch (Exception e) {
             XMLandSecurity.backend1.logger.Logger.getInstance().logTrenutni(getClientIP() + " ,Nije uspelo logovanje: " + "  " + new Date());
             loginAttemptService.loginFailed(getClientIP());
             loggeri.warn("Niste se ulogovalii !!!....");
             return new ResponseEntity<>(HttpStatus.FORBIDDEN);
         }
 
-            SecurityContextHolder.getContext().setAuthentication(authentication);
+        SecurityContextHolder.getContext().setAuthentication(authentication);
 
         // Reload password post-authentication so we can generate token
         UserDetails userDetails = this.userDetailsService.loadUserByUsername(authenticationRequest.getUsername());
@@ -114,7 +106,7 @@ public class AuthenticationController {
         if (user == null) {
             XMLandSecurity.backend1.logger.Logger.getInstance().logTrenutni(getClientIP() + "Pokusao logovanje sa korisnickim imenom: " + user.getUsername() + "  " + new Date());
         } else {
-            XMLandSecurity.backend1.logger.Logger.getInstance().log(getClientIP() +" ,Ulogovao se: " + user.getUsername() + "  " + new Date());
+            XMLandSecurity.backend1.logger.Logger.getInstance().log(getClientIP() + " ,Ulogovao se: " + user.getUsername() + "  " + new Date());
         }
         if (!user.isActivated()) {
 
@@ -157,9 +149,9 @@ public class AuthenticationController {
         user.setRole(Role.USER);
         user.setPasswordHash(new BCryptPasswordEncoder().encode(user.getPasswordHash()));
         user.setActivated(false);
-        try{
+        try {
             savedUser = userService.save(user);
-        }catch (Exception e) {
+        } catch (Exception e) {
             XMLandSecurity.backend1.logger.Logger.getInstance().logError(getClientIP() + " ,Registracija nije uspjela: " + "  " + new Date());
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
@@ -175,7 +167,7 @@ public class AuthenticationController {
             consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<User> registerAgent(@RequestBody User user) throws IOException {
         if ((userService.findByUsername(user.getUsername()) != null)) {
-            XMLandSecurity.backend1.logger.Logger.getInstance().logError(getClientIP() +" ,Registracija nije uspjela: " + "  " + new Date());
+            XMLandSecurity.backend1.logger.Logger.getInstance().logError(getClientIP() + " ,Registracija nije uspjela: " + "  " + new Date());
             return new ResponseEntity<>(HttpStatus.FORBIDDEN);
         }
         user.setRole(Role.AGENT);
@@ -185,6 +177,7 @@ public class AuthenticationController {
         //emailService.sendActivationMail(user);
         return new ResponseEntity<>(savedUser, HttpStatus.CREATED);
     }
+
     @RequestMapping(
             value = "/change-password",
             method = RequestMethod.POST,
@@ -271,9 +264,10 @@ public class AuthenticationController {
 
         return DatatypeConverter.printHexBinary(userFingerprintDigest);
     }
+
     private String getClientIP() {
         String xfHeader = request.getHeader("X-Forwarded-For");
-        if (xfHeader == null){
+        if (xfHeader == null) {
             return request.getRemoteAddr();
         }
         return xfHeader.split(",")[0];

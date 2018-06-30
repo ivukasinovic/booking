@@ -4,52 +4,52 @@ import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
-import java.io.Serializable;
-import java.time.LocalDateTime;
-import java.util.Date;
-
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import java.io.Serializable;
+import java.util.Date;
 
 @Entity
 @Table
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlRootElement(name="reservation")
+@XmlRootElement(name = "reservation")
 
 public class Reservation implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    @XmlElement(name="id", required=true)
+    @XmlElement(name = "id", required = true)
     private Long id;
 
 
     @Column(name = "date_start", nullable = false)
     @Temporal(TemporalType.DATE)
-    @XmlElement(name="dateStart", required=true)
+    @XmlElement(name = "dateStart", required = true)
     private Date dateStart;
 
 
     @Column(name = "date_end", nullable = false)
     @Temporal(TemporalType.DATE)
-    @XmlElement(name="dateEnd", required=true)
+    @XmlElement(name = "dateEnd", required = true)
     private Date dateEnd;
 
     @Column(name = "active", nullable = false, columnDefinition = "boolean default true")
-    @XmlElement(name="active", required=true)
+    @XmlElement(name = "active", required = true)
     private Boolean active;
 
     @Column(name = "visited", nullable = false, columnDefinition = "boolean default false")
-    @XmlElement(name="visited", required=true)
+    @XmlElement(name = "visited", required = true)
     private Boolean visited;
 
     @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
     @JsonIdentityReference(alwaysAsId = true)
     @ManyToOne
     @JoinColumn(name = "lodging_id", nullable = false)
-    @XmlElement(name="lodging", required=true)
+    @XmlElement(name = "lodging", required = true)
     private Lodging lodging;
 
 
@@ -57,7 +57,7 @@ public class Reservation implements Serializable {
     @JsonIdentityReference(alwaysAsId = true)
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
-    @XmlElement(name="user", required=true)
+    @XmlElement(name = "user", required = true)
     private User user;
 
 

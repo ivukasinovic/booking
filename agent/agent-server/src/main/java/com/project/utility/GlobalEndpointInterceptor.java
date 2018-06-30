@@ -54,11 +54,11 @@ public class GlobalEndpointInterceptor implements EndpointInterceptor {
         outputStream.close();
 
         int responseCode = connection.getResponseCode();
-        System.out.println("\nSending 'POST' xml document over URL: " + url );
+        System.out.println("\nSending 'POST' xml document over URL: " + url);
         System.out.println("Post parameters: " + writer.toString());
         System.out.println("Response code: " + responseCode);
 
-        BufferedReader in = new BufferedReader (new InputStreamReader(connection.getInputStream()));
+        BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
         String inputLine;
         StringBuffer response = new StringBuffer();
 
@@ -83,16 +83,14 @@ public class GlobalEndpointInterceptor implements EndpointInterceptor {
         Certificate certificate = keyStoreService.readCertificate("6476022");
 
         XMLSigningUtility xmlSigningUtility = new XMLSigningUtility();
-       Document document = xmlSigningUtility.signDocument(soapMessage.getDocument(),privateKey,certificate);
+        Document document = xmlSigningUtility.signDocument(soapMessage.getDocument(), privateKey, certificate);
 
         soapMessage.setDocument(document);
-        sendPost(document,"https://localhost:8443/api/ws");
-
-
+        sendPost(document, "https://localhost:8443/api/ws");
 
 
         //        Source bodySource = soapHeader .getSource();
-    //        DOMSource bodyDomSource = (DOMSource) bodySource;
+        //        DOMSource bodyDomSource = (DOMSource) bodySource;
         //        Node bodyNode = bodyDomSource.getNode();
         System.out.println("Lloajajajaja");
         return true;
@@ -110,10 +108,10 @@ public class GlobalEndpointInterceptor implements EndpointInterceptor {
         Certificate certificate = keyStoreService.readCertificate("6476022");
 
         XMLSigningUtility xmlSigningUtility = new XMLSigningUtility();
-        Document document = xmlSigningUtility.signDocument(soapMessage.getDocument(),privateKey,certificate);
+        Document document = xmlSigningUtility.signDocument(soapMessage.getDocument(), privateKey, certificate);
 
         soapMessage.setDocument(document);
-        sendPost(document,"https://localhost:8443/api/ws");
+        sendPost(document, "https://localhost:8443/api/ws");
 
 
         return true;

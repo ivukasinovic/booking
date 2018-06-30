@@ -1,19 +1,18 @@
-
 package com.project.ws;
 
-import java.util.ArrayList;
-import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
  * <p>Java class for country complex type.
- * 
+ *
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ *
  * <pre>
  * &lt;complexType name="country">
  *   &lt;complexContent>
@@ -38,15 +37,13 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "country", propOrder = {
-    "id",
-    "name",
-    "code",
-    "cityList"
+        "id",
+        "name",
+        "code",
+        "cityList"
 })
 public class Country {
 
@@ -60,7 +57,6 @@ public class Country {
 
     /**
      * Gets the value of the id property.
-     * 
      */
     public long getId() {
         return id;
@@ -68,7 +64,6 @@ public class Country {
 
     /**
      * Sets the value of the id property.
-     * 
      */
     public void setId(long value) {
         this.id = value;
@@ -76,11 +71,9 @@ public class Country {
 
     /**
      * Gets the value of the name property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     * {@link String }
      */
     public String getName() {
         return name;
@@ -88,11 +81,9 @@ public class Country {
 
     /**
      * Sets the value of the name property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setName(String value) {
         this.name = value;
@@ -100,11 +91,9 @@ public class Country {
 
     /**
      * Gets the value of the code property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     * {@link String }
      */
     public String getCode() {
         return code;
@@ -112,11 +101,9 @@ public class Country {
 
     /**
      * Sets the value of the code property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCode(String value) {
         this.code = value;
@@ -124,11 +111,9 @@ public class Country {
 
     /**
      * Gets the value of the cityList property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link CityList }
-     *     
+     *
+     * @return possible object is
+     * {@link CityList }
      */
     public CityList getCityList() {
         return cityList;
@@ -136,11 +121,9 @@ public class Country {
 
     /**
      * Sets the value of the cityList property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link CityList }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link CityList }
      */
     public void setCityList(CityList value) {
         this.cityList = value;
@@ -149,9 +132,9 @@ public class Country {
 
     /**
      * <p>Java class for anonymous complex type.
-     * 
+     *
      * <p>The following schema fragment specifies the expected content contained within this class.
-     * 
+     *
      * <pre>
      * &lt;complexType>
      *   &lt;complexContent>
@@ -163,12 +146,10 @@ public class Country {
      *   &lt;/complexContent>
      * &lt;/complexType>
      * </pre>
-     * 
-     * 
      */
     @XmlAccessorType(XmlAccessType.FIELD)
     @XmlType(name = "", propOrder = {
-        "city"
+            "city"
     })
     public static class CityList {
 
@@ -177,25 +158,23 @@ public class Country {
 
         /**
          * Gets the value of the city property.
-         * 
+         *
          * <p>
          * This accessor method returns a reference to the live list,
          * not a snapshot. Therefore any modification you make to the
          * returned list will be present inside the JAXB object.
          * This is why there is not a <CODE>set</CODE> method for the city property.
-         * 
+         *
          * <p>
          * For example, to add a new item, do as follows:
          * <pre>
          *    getCity().add(newItem);
          * </pre>
-         * 
-         * 
+         *
+         *
          * <p>
          * Objects of the following type(s) are allowed in the list
          * {@link City }
-         * 
-         * 
          */
         public List<City> getCity() {
             if (city == null) {

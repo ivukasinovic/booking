@@ -14,9 +14,9 @@ import java.math.BigInteger;
 
 /**
  * <p>Java class for anonymous complex type.
- * 
+ *
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ *
  * <pre>
  * &lt;complexType>
  *   &lt;complexContent>
@@ -41,25 +41,23 @@ import java.math.BigInteger;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "year",
-    "lodging",
-    "january",
-    "february",
-    "mart",
-    "april",
-    "may",
-    "june",
-    "july",
-    "august",
-    "september",
-    "october",
-    "november",
-    "december"
+        "year",
+        "lodging",
+        "january",
+        "february",
+        "mart",
+        "april",
+        "may",
+        "june",
+        "july",
+        "august",
+        "september",
+        "october",
+        "november",
+        "december"
 })
 @XmlRootElement(name = "setPricePlanRequest")
 public class SetPricePlanRequest {
@@ -108,11 +106,9 @@ public class SetPricePlanRequest {
 
     /**
      * Gets the value of the year property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigInteger }
-     *     
+     *
+     * @return possible object is
+     * {@link BigInteger }
      */
     public BigInteger getYear() {
         return year;
@@ -120,11 +116,9 @@ public class SetPricePlanRequest {
 
     /**
      * Sets the value of the year property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigInteger }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigInteger }
      */
     public void setYear(BigInteger value) {
         this.year = value;
@@ -132,11 +126,9 @@ public class SetPricePlanRequest {
 
     /**
      * Gets the value of the lodging property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     * {@link String }
      */
     public String getLodging() {
         return lodging;
@@ -144,11 +136,9 @@ public class SetPricePlanRequest {
 
     /**
      * Sets the value of the lodging property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setLodging(String value) {
         this.lodging = value;
@@ -156,11 +146,9 @@ public class SetPricePlanRequest {
 
     /**
      * Gets the value of the january property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigInteger }
-     *     
+     *
+     * @return possible object is
+     * {@link BigInteger }
      */
     public BigInteger getJanuary() {
         return january;
@@ -168,11 +156,9 @@ public class SetPricePlanRequest {
 
     /**
      * Sets the value of the january property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigInteger }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigInteger }
      */
     public void setJanuary(BigInteger value) {
         this.january = value;
@@ -180,11 +166,9 @@ public class SetPricePlanRequest {
 
     /**
      * Gets the value of the february property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigInteger }
-     *     
+     *
+     * @return possible object is
+     * {@link BigInteger }
      */
     public BigInteger getFebruary() {
         return february;
@@ -192,11 +176,9 @@ public class SetPricePlanRequest {
 
     /**
      * Sets the value of the february property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigInteger }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigInteger }
      */
     public void setFebruary(BigInteger value) {
         this.february = value;
@@ -204,11 +186,9 @@ public class SetPricePlanRequest {
 
     /**
      * Gets the value of the mart property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigInteger }
-     *     
+     *
+     * @return possible object is
+     * {@link BigInteger }
      */
     public BigInteger getMart() {
         return mart;
@@ -216,11 +196,9 @@ public class SetPricePlanRequest {
 
     /**
      * Sets the value of the mart property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigInteger }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigInteger }
      */
     public void setMart(BigInteger value) {
         this.mart = value;
@@ -228,11 +206,9 @@ public class SetPricePlanRequest {
 
     /**
      * Gets the value of the april property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigInteger }
-     *     
+     *
+     * @return possible object is
+     * {@link BigInteger }
      */
     public BigInteger getApril() {
         return april;
@@ -240,11 +216,9 @@ public class SetPricePlanRequest {
 
     /**
      * Sets the value of the april property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigInteger }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigInteger }
      */
     public void setApril(BigInteger value) {
         this.april = value;
@@ -252,11 +226,9 @@ public class SetPricePlanRequest {
 
     /**
      * Gets the value of the may property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigInteger }
-     *     
+     *
+     * @return possible object is
+     * {@link BigInteger }
      */
     public BigInteger getMay() {
         return may;
@@ -264,11 +236,9 @@ public class SetPricePlanRequest {
 
     /**
      * Sets the value of the may property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigInteger }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigInteger }
      */
     public void setMay(BigInteger value) {
         this.may = value;
@@ -276,11 +246,9 @@ public class SetPricePlanRequest {
 
     /**
      * Gets the value of the june property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigInteger }
-     *     
+     *
+     * @return possible object is
+     * {@link BigInteger }
      */
     public BigInteger getJune() {
         return june;
@@ -288,11 +256,9 @@ public class SetPricePlanRequest {
 
     /**
      * Sets the value of the june property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigInteger }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigInteger }
      */
     public void setJune(BigInteger value) {
         this.june = value;
@@ -300,11 +266,9 @@ public class SetPricePlanRequest {
 
     /**
      * Gets the value of the july property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigInteger }
-     *     
+     *
+     * @return possible object is
+     * {@link BigInteger }
      */
     public BigInteger getJuly() {
         return july;
@@ -312,11 +276,9 @@ public class SetPricePlanRequest {
 
     /**
      * Sets the value of the july property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigInteger }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigInteger }
      */
     public void setJuly(BigInteger value) {
         this.july = value;
@@ -324,11 +286,9 @@ public class SetPricePlanRequest {
 
     /**
      * Gets the value of the august property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigInteger }
-     *     
+     *
+     * @return possible object is
+     * {@link BigInteger }
      */
     public BigInteger getAugust() {
         return august;
@@ -336,11 +296,9 @@ public class SetPricePlanRequest {
 
     /**
      * Sets the value of the august property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigInteger }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigInteger }
      */
     public void setAugust(BigInteger value) {
         this.august = value;
@@ -348,11 +306,9 @@ public class SetPricePlanRequest {
 
     /**
      * Gets the value of the september property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigInteger }
-     *     
+     *
+     * @return possible object is
+     * {@link BigInteger }
      */
     public BigInteger getSeptember() {
         return september;
@@ -360,11 +316,9 @@ public class SetPricePlanRequest {
 
     /**
      * Sets the value of the september property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigInteger }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigInteger }
      */
     public void setSeptember(BigInteger value) {
         this.september = value;
@@ -372,11 +326,9 @@ public class SetPricePlanRequest {
 
     /**
      * Gets the value of the october property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigInteger }
-     *     
+     *
+     * @return possible object is
+     * {@link BigInteger }
      */
     public BigInteger getOctober() {
         return october;
@@ -384,11 +336,9 @@ public class SetPricePlanRequest {
 
     /**
      * Sets the value of the october property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigInteger }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigInteger }
      */
     public void setOctober(BigInteger value) {
         this.october = value;
@@ -396,11 +346,9 @@ public class SetPricePlanRequest {
 
     /**
      * Gets the value of the november property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigInteger }
-     *     
+     *
+     * @return possible object is
+     * {@link BigInteger }
      */
     public BigInteger getNovember() {
         return november;
@@ -408,11 +356,9 @@ public class SetPricePlanRequest {
 
     /**
      * Sets the value of the november property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigInteger }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigInteger }
      */
     public void setNovember(BigInteger value) {
         this.november = value;
@@ -420,11 +366,9 @@ public class SetPricePlanRequest {
 
     /**
      * Gets the value of the december property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigInteger }
-     *     
+     *
+     * @return possible object is
+     * {@link BigInteger }
      */
     public BigInteger getDecember() {
         return december;
@@ -432,11 +376,9 @@ public class SetPricePlanRequest {
 
     /**
      * Sets the value of the december property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigInteger }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigInteger }
      */
     public void setDecember(BigInteger value) {
         this.december = value;

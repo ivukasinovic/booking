@@ -10,6 +10,7 @@ public interface LodgingService {
     List<Lodging> findAll();
 
     Lodging findOne(Long id);
+
     Lodging findByTitle(String title);
 
 
@@ -22,7 +23,7 @@ public interface LodgingService {
     List<Lodging> findByCityAndPersons_number(String city, Integer personsNbr, String typeLodging, String catLodging);
 
 
-   // List<Lodging> findByAdditionalServiceList(Long id);
-    List<Lodging>findByReservationsDateStartBetweenAndReservationsDateEndBetween( Date startDate, Date endDate,Date startDate1, Date endDate1);
+    // List<Lodging> findByAdditionalServiceList(Long id);
+    List<Lodging> findByReservationsDateStartBetweenAndReservationsDateEndBetween(Date startDate, Date endDate, Date startDate1, Date endDate1);
 
 }

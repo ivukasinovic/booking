@@ -15,7 +15,8 @@ public interface ReservationService {
 
     void delete(Long id);
 
-    boolean checkIfOverlapingDate(Long lodging_id, Date early, Date late) ;
+    boolean checkIfOverlapingDate(Long lodging_id, Date early, Date late);
+
     List<Reservation> findByLodging(Long id);
 
     List<Reservation> findByUser(Long id);

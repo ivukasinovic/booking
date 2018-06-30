@@ -2,7 +2,6 @@ package XMLandSecurity.backend1.controller;
 
 import XMLandSecurity.backend1.domain.Comment;
 import XMLandSecurity.backend1.domain.Lodging;
-import XMLandSecurity.backend1.domain.Rating;
 import XMLandSecurity.backend1.domain.User;
 import XMLandSecurity.backend1.service.CommentService;
 import XMLandSecurity.backend1.service.LodgingService;
@@ -56,7 +55,7 @@ public class CommentController {
         Lodging lodging = lodgingService.findOne(idLod);
         comment.setLodging(lodging);
 
-       // Comment commentNew = commentService.save(comment); Preko cloud-a dodajemo
+        // Comment commentNew = commentService.save(comment); Preko cloud-a dodajemo
 
         return new ResponseEntity(HttpStatus.OK);
     }
@@ -89,7 +88,7 @@ public class CommentController {
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public ResponseEntity<List<Comment>> pronadjiSveKojiNisuOdobreni(){
+    public ResponseEntity<List<Comment>> pronadjiSveKojiNisuOdobreni() {
         List<Comment> listaKomentara = commentService.findByAccepted(false);
         return new ResponseEntity(listaKomentara, HttpStatus.OK);
     }
@@ -100,18 +99,19 @@ public class CommentController {
             produces = MediaType.APPLICATION_JSON_VALUE
     )
     public ResponseEntity<Comment> prihvati(@PathVariable("id") Long id) throws IOException {
-        Comment komentar = commentService.findOne(id) ; //findOne(user);
+        Comment komentar = commentService.findOne(id); //findOne(user);
         komentar.setAccepted(true);
-        XMLandSecurity.backend1.logger.Logger.getInstance().log(" ,Prihvacen komentar: " + komentar.getBody() + " Korisnik: " + komentar.getUser()  +"  " + new Date());
+        XMLandSecurity.backend1.logger.Logger.getInstance().log(" ,Prihvacen komentar: " + komentar.getBody() + " Korisnik: " + komentar.getUser() + "  " + new Date());
         commentService.save(komentar);
         return new ResponseEntity<>(komentar, HttpStatus.OK);     // "200 OK"
     }
+
     @RequestMapping(
             value = "/all-yes",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public ResponseEntity<List<Comment>> pronadjiSveKojiSuOdobreni(){
+    public ResponseEntity<List<Comment>> pronadjiSveKojiSuOdobreni() {
         List<Comment> listaKomentara = commentService.findByAccepted(true);
         return new ResponseEntity(listaKomentara, HttpStatus.OK);
     }
@@ -120,11 +120,11 @@ public class CommentController {
             method = RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE,
             consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> proba( @RequestBody Comment comment) throws IOException {
+    public ResponseEntity<?> proba(@RequestBody Comment comment) throws IOException {
 
 
         ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
-        String json="{\"queriedQuestion\":\"Is there pain in your hand?\"}";
+        String json = "{\"queriedQuestion\":\"Is there pain in your hand?\"}";
         try {
             json = ow.writeValueAsString(comment);
         } catch (JsonProcessingException e) {
@@ -135,15 +135,15 @@ public class CommentController {
 
         RestTemplate restTemplate = new RestTemplate();
         String path = "http://localhost:8010/cloud-demo/us-central1/newComment/";
-        String url=path+"set";
+        String url = path + "set";
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
 
-        HttpEntity<String> entity = new HttpEntity<String>(json,headers);
+        HttpEntity<String> entity = new HttpEntity<String>(json, headers);
         String answer = restTemplate.postForObject(url, entity, String.class);
         System.out.println(answer);
 
-        XMLandSecurity.backend1.logger.Logger.getInstance().log(" ,Novi komentar: " + comment.getBody() + " Korisnik: " + comment.getUser()  +"  " + new Date());
+        XMLandSecurity.backend1.logger.Logger.getInstance().log(" ,Novi komentar: " + comment.getBody() + " Korisnik: " + comment.getUser() + "  " + new Date());
 
 
         return new ResponseEntity<>(HttpStatus.OK);

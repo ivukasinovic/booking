@@ -1,4 +1,3 @@
-
 package com.project.model;
 
 import javax.persistence.*;
@@ -16,7 +15,8 @@ public class MessageRes {
     protected String sender;
     protected String receiver;
 
-    public MessageRes(){}
+    public MessageRes() {
+    }
 
     public long getId() {
         return id;

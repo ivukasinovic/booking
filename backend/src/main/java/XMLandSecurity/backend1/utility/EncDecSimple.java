@@ -2,7 +2,10 @@ package XMLandSecurity.backend1.utility;
 
 import org.springframework.stereotype.Component;
 
-import javax.crypto.*;
+import javax.crypto.BadPaddingException;
+import javax.crypto.Cipher;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
 import javax.crypto.spec.SecretKeySpec;
 import java.security.InvalidKeyException;
 import java.security.Key;
@@ -16,7 +19,7 @@ import java.util.Base64;
 public class EncDecSimple {
     public static final String KEY = "Bar12345Bar12345";
 
-    public static String encrypt(String text){
+    public static String encrypt(String text) {
         Key aesKey = new SecretKeySpec(KEY.getBytes(), "AES");
         Cipher cipher = null;
         byte[] encrypted = null;
@@ -30,10 +33,10 @@ public class EncDecSimple {
         Base64.Encoder encoder = Base64.getEncoder();
         String encryptedString = encoder.encodeToString(encrypted);
         System.out.println(encryptedString);
-        return  encryptedString;
+        return encryptedString;
     }
 
-    public static String decrypt(String encText){
+    public static String decrypt(String encText) {
         Key aesKey = new SecretKeySpec(KEY.getBytes(), "AES");
         Cipher cipher = null;
         try {

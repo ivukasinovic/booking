@@ -1,32 +1,32 @@
 package XMLandSecurity.backend1.domain;
 
-import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
-
 import java.io.Serializable;
 import java.util.List;
 
 @Entity
 @Table
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlRootElement(name="city")
+@XmlRootElement(name = "city")
 
 public class City implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    @XmlElement(name="id", required=true)
+    @XmlElement(name = "id", required = true)
     private Long id;
 
     @Column(name = "name", nullable = false)
-    @XmlElement(name="name", required=true)
+    @XmlElement(name = "name", required = true)
     private String name;
 
 
@@ -34,7 +34,7 @@ public class City implements Serializable {
     @JsonIdentityReference(alwaysAsId = true)
     @JoinColumn(name = "country_id", nullable = false)
     @ManyToOne
-    @XmlElement(name="country", required=true)
+    @XmlElement(name = "country", required = true)
     private Country country;
 
     public City() {

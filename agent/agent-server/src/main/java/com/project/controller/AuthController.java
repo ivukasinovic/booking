@@ -1,6 +1,5 @@
 package com.project.controller;
 
-import com.project.model.AuthenticationRequest;
 import com.project.model.User;
 import com.project.services.RepositoryService;
 import com.project.services.SyncService;
@@ -35,21 +34,21 @@ public class AuthController {
             consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<com.project.DTO.Credentials> authenticationRequest(@RequestBody com.project.DTO.Credentials credentials) {
         User user = services.findByUsername(credentials.getUsername());
-        if(user != null){
-            if(user.getPassword().equals(credentials.getPassword())){
+        if (user != null) {
+            if (user.getPassword().equals(credentials.getPassword())) {
                 ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
-                HttpSession session= attr.getRequest().getSession(true);
+                HttpSession session = attr.getRequest().getSession(true);
                 session.setAttribute("user", user);
 
-                System.out.print("  ___  " +  user.getUsername());
+                System.out.print("  ___  " + user.getUsername());
                 // syncService.syncWholeDb();
-                try{
+                try {
                     syncService.syncWholeDb();
-                }catch (Exception e){
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
 
-                
+
                 return new ResponseEntity<com.project.DTO.Credentials>(credentials, HttpStatus.OK);
             }
         }
@@ -58,9 +57,9 @@ public class AuthController {
 
     @RequestMapping(value = "/logOut",
             method = RequestMethod.GET)
-    public ResponseEntity logOut(){
+    public ResponseEntity logOut() {
         ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
-        HttpSession session= attr.getRequest().getSession(true);
+        HttpSession session = attr.getRequest().getSession(true);
         session.invalidate();
 
 

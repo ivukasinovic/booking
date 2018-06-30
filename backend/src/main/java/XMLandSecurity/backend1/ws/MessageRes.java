@@ -14,9 +14,9 @@ import javax.xml.datatype.XMLGregorianCalendar;
 
 /**
  * <p>Java class for messageRes complex type.
- * 
+ *
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ *
  * <pre>
  * &lt;complexType name="messageRes">
  *   &lt;complexContent>
@@ -33,17 +33,15 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "messageRes", propOrder = {
-    "id",
-    "title",
-    "body",
-    "dateSent",
-    "sender",
-    "receiver"
+        "id",
+        "title",
+        "body",
+        "dateSent",
+        "sender",
+        "receiver"
 })
 public class MessageRes {
 
@@ -62,7 +60,6 @@ public class MessageRes {
 
     /**
      * Gets the value of the id property.
-     * 
      */
     public long getId() {
         return id;
@@ -70,7 +67,6 @@ public class MessageRes {
 
     /**
      * Sets the value of the id property.
-     * 
      */
     public void setId(long value) {
         this.id = value;
@@ -78,11 +74,9 @@ public class MessageRes {
 
     /**
      * Gets the value of the title property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     * {@link String }
      */
     public String getTitle() {
         return title;
@@ -90,11 +84,9 @@ public class MessageRes {
 
     /**
      * Sets the value of the title property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setTitle(String value) {
         this.title = value;
@@ -102,11 +94,9 @@ public class MessageRes {
 
     /**
      * Gets the value of the body property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     * {@link String }
      */
     public String getBody() {
         return body;
@@ -114,11 +104,9 @@ public class MessageRes {
 
     /**
      * Sets the value of the body property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setBody(String value) {
         this.body = value;
@@ -126,11 +114,9 @@ public class MessageRes {
 
     /**
      * Gets the value of the dateSent property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @return possible object is
+     * {@link XMLGregorianCalendar }
      */
     public XMLGregorianCalendar getDateSent() {
         return dateSent;
@@ -139,10 +125,8 @@ public class MessageRes {
     /**
      * Sets the value of the dateSent property.
      *
-     * @param value
-     *     allowed object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     * @param value allowed object is
+     *              {@link XMLGregorianCalendar }
      */
     public void setDateSent(XMLGregorianCalendar value) {
         this.dateSent = value;
@@ -150,11 +134,9 @@ public class MessageRes {
 
     /**
      * Gets the value of the sender property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     * {@link String }
      */
     public String getSender() {
         return sender;
@@ -162,11 +144,9 @@ public class MessageRes {
 
     /**
      * Sets the value of the sender property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setSender(String value) {
         this.sender = value;
@@ -174,11 +154,9 @@ public class MessageRes {
 
     /**
      * Gets the value of the receiver property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     * {@link String }
      */
     public String getReceiver() {
         return receiver;
@@ -186,11 +164,9 @@ public class MessageRes {
 
     /**
      * Sets the value of the receiver property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setReceiver(String value) {
         this.receiver = value;

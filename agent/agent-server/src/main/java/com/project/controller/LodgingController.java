@@ -33,11 +33,11 @@ public class LodgingController {
     private LodgingResRepository lodgingResRepository;
 
     @RequestMapping(method = RequestMethod.GET,
-                    produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> getLodgings(){
-        try{
-             getUsername();
-        }catch (Exception e){
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> getLodgings() {
+        try {
+            getUsername();
+        } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         }
         LodgingService objMethod = new LodgingService();
@@ -45,13 +45,13 @@ public class LodgingController {
         GetLodgingsRequest request = new GetLodgingsRequest();
         request.setLodgings("all");
         GetLodgingsResponse response = objPort.getLodgings(request);
-        return new ResponseEntity<>(response.getLodgingRes(),HttpStatus.OK);
+        return new ResponseEntity<>(response.getLodgingRes(), HttpStatus.OK);
     }
 
     @RequestMapping(method = RequestMethod.GET,
-                    value = "/categories",
-                    produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<CategoryOfLodging>> getCategories(){
+            value = "/categories",
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<CategoryOfLodging>> getCategories() {
         LodgingService objMethod = new LodgingService();
         LodgingServicePort objPort = objMethod.getLodgingServicePortSoap11();
         GetLodgingCategoriesRequest request = new GetLodgingCategoriesRequest();
@@ -64,7 +64,7 @@ public class LodgingController {
     @RequestMapping(method = RequestMethod.GET,
             value = "/additions",
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<AdditionalService>> getAdditions(){
+    public ResponseEntity<List<AdditionalService>> getAdditions() {
         LodgingService objMethod = new LodgingService();
         LodgingServicePort objPort = objMethod.getLodgingServicePortSoap11();
         GetAdditionsRequest request = new GetAdditionsRequest();
@@ -73,10 +73,11 @@ public class LodgingController {
         List<com.project.ws.AdditionalService> additions = response.getTypes();
         return new ResponseEntity<>(additions, HttpStatus.OK);
     }
+
     @RequestMapping(method = RequestMethod.GET,
             value = "/cities",
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<City>> getCities(){
+    public ResponseEntity<List<City>> getCities() {
         LodgingService objMethod = new LodgingService();
         LodgingServicePort objPort = objMethod.getLodgingServicePortSoap11();
         GetCitiesRequest request = new GetCitiesRequest();
@@ -85,10 +86,11 @@ public class LodgingController {
         List<City> cities = response.getCities();
         return new ResponseEntity<>(cities, HttpStatus.OK);
     }
+
     @RequestMapping(method = RequestMethod.GET,
             value = "/types",
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<TypeOfLodging>> getTypes(){
+    public ResponseEntity<List<TypeOfLodging>> getTypes() {
 
         LodgingService objMethod = new LodgingService();
         LodgingServicePort objPort = objMethod.getLodgingServicePortSoap11();
@@ -103,11 +105,11 @@ public class LodgingController {
             produces = MediaType.APPLICATION_JSON_VALUE,
             consumes = MediaType.APPLICATION_JSON_VALUE
     )
-    public ResponseEntity<?> postLodging(@RequestBody SetLodgingRequest request){
+    public ResponseEntity<?> postLodging(@RequestBody SetLodgingRequest request) {
         String agent;
-        try{
+        try {
             agent = getUsername();
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         }
@@ -122,20 +124,21 @@ public class LodgingController {
         System.out.println(response);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
+
     @RequestMapping(value = "price-plan",
             method = RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE,
             consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> setPriceList(@RequestBody SetPricePlanRequest request){
+    public ResponseEntity<?> setPriceList(@RequestBody SetPricePlanRequest request) {
         LodgingService objMethod = new LodgingService();
         LodgingServicePort objPort = objMethod.getLodgingServicePortSoap11();
         SetPricePlanResponse response = objPort.setPricePlan(request);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    String getUsername(){
+    String getUsername() {
         ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
-        HttpSession session= attr.getRequest().getSession(true);
+        HttpSession session = attr.getRequest().getSession(true);
         com.project.model.User user = (com.project.model.User) session.getAttribute("user");
         return user.getUsername();
     }

@@ -8,9 +8,10 @@ public class ChangePasswordDto {
     private String oldPw;
     private String newPw;
 
-    public ChangePasswordDto(){
+    public ChangePasswordDto() {
 
     }
+
     public ChangePasswordDto(String oldPw, String newPw) {
         this.oldPw = oldPw;
         this.newPw = newPw;
@@ -20,12 +21,12 @@ public class ChangePasswordDto {
         return oldPw;
     }
 
-    public String getNewPw() {
-        return newPw;
-    }
-
     public void setOldPw(String oldPw) {
         this.oldPw = oldPw;
+    }
+
+    public String getNewPw() {
+        return newPw;
     }
 
     public void setNewPw(String newPw) {

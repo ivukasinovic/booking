@@ -36,11 +36,9 @@ public class PriceListServiceImpl implements PriceListService {
     }
 
     @Override
-    public List<PriceList> findByLodging( Long id) {
+    public List<PriceList> findByLodging(Long id) {
         return priceListRepository.findByLodging(id);
     }
-
-
 
 
 }

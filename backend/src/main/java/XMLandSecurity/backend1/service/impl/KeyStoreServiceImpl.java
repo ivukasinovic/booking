@@ -50,7 +50,7 @@ public class KeyStoreServiceImpl implements KeyStoreService {
 
                 while (aliases.hasMoreElements()) {
                     String alias = aliases.nextElement();
-                        certificates.add(getCertificate(alias, i).get());
+                    certificates.add(getCertificate(alias, i).get());
 
                 }
             }
@@ -164,7 +164,6 @@ public class KeyStoreServiceImpl implements KeyStoreService {
     }
 
 
-
     @Override
     public ArrayList<String> getIssuers() {
         loadKeyStore(0);
@@ -241,7 +240,7 @@ public class KeyStoreServiceImpl implements KeyStoreService {
             keyStore.load(new FileInputStream("./files/tls/ksNonCa.jks"), PASSWORD_NONCA.toCharArray());
 
             PrivateKey privKey = (PrivateKey) keyStore.getKey(alias, PASSWORD_NONCA.toCharArray());
-            return  privKey;
+            return privKey;
         } catch (KeyStoreException | UnrecoverableKeyException | NoSuchAlgorithmException e) {
             e.printStackTrace();
         } catch (CertificateException e) {
@@ -253,13 +252,14 @@ public class KeyStoreServiceImpl implements KeyStoreService {
         }
         return null;
     }
+
     @Override
     public Certificate readCertificate(String alias) {
         try {
             keyStore.load(new FileInputStream("./files/tls/ksNonCa.jks"), PASSWORD_NONCA.toCharArray());
 
             Certificate cert = keyStore.getCertificate(alias);
-            return  cert;
+            return cert;
         } catch (KeyStoreException e) {
             e.printStackTrace();
         } catch (CertificateException e) {
@@ -273,8 +273,6 @@ public class KeyStoreServiceImpl implements KeyStoreService {
         }
         return null;
     }
-
-
 
 
     @Override

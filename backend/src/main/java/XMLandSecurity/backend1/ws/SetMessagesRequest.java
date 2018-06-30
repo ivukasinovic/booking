@@ -14,9 +14,9 @@ import javax.xml.bind.annotation.*;
 
 /**
  * <p>Java class for anonymous complex type.
- * 
+ *
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ *
  * <pre>
  * &lt;complexType>
  *   &lt;complexContent>
@@ -28,12 +28,10 @@ import javax.xml.bind.annotation.*;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "messageRes"
+        "messageRes"
 })
 @XmlRootElement(name = "setMessagesRequest")
 public class SetMessagesRequest {
@@ -44,10 +42,8 @@ public class SetMessagesRequest {
     /**
      * Gets the value of the messageRes property.
      *
-     * @return
-     *     possible object is
-     *     {@link MessageRes }
-     *
+     * @return possible object is
+     * {@link MessageRes }
      */
     public MessageRes getMessageRes() {
         return messageRes;
@@ -56,10 +52,8 @@ public class SetMessagesRequest {
     /**
      * Sets the value of the messageRes property.
      *
-     * @param value
-     *     allowed object is
-     *     {@link MessageRes }
-     *     
+     * @param value allowed object is
+     *              {@link MessageRes }
      */
     public void setMessageRes(MessageRes value) {
         this.messageRes = value;

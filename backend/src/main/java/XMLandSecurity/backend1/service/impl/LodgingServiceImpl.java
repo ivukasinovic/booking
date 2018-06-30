@@ -52,8 +52,8 @@ public class LodgingServiceImpl implements LodgingService {
     }
 
     @Override
-    public List<Lodging> findByReservationsDateStartBetweenAndReservationsDateEndBetween(Date startDate, Date endDate,Date startDate1, Date endDate1) {
-        return lodgingRepository.findByReservationsDateStartBetweenAndReservationsDateEndBetween(startDate,endDate,startDate1,endDate1);
+    public List<Lodging> findByReservationsDateStartBetweenAndReservationsDateEndBetween(Date startDate, Date endDate, Date startDate1, Date endDate1) {
+        return lodgingRepository.findByReservationsDateStartBetweenAndReservationsDateEndBetween(startDate, endDate, startDate1, endDate1);
     }
 //    @Override
 //    public List<Lodging> findByAdditionalServiceList(Long id) {

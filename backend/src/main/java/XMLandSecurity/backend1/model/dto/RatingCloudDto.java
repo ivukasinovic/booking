@@ -6,7 +6,8 @@ public class RatingCloudDto {
 
     private int ratingValue;
     private ArrayList<Long> lodgingId;
-    public RatingCloudDto(){
+
+    public RatingCloudDto() {
 
     }
 

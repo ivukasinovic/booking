@@ -16,94 +16,93 @@ import java.util.List;
 @Entity
 @Table
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlRootElement(name="lodging")
+@XmlRootElement(name = "lodging")
 
 public class Lodging implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    @XmlElement(name="id", required=true)
+    @XmlElement(name = "id", required = true)
     private Long id;
 
     @Column(name = "title", nullable = false)
-    @XmlElement(name="title", required=true)
+    @XmlElement(name = "title", required = true)
     private String title;
 
     @Column(name = "address", nullable = false)
-    @XmlElement(name="address", required=true)
+    @XmlElement(name = "address", required = true)
     private String address;
 
     @Column(name = "details")
-    @XmlElement(name="details", required=true)
+    @XmlElement(name = "details", required = true)
     private String details;
 
 
     @Column(name = "rating", columnDefinition = "Decimal(3,2)")
-    @XmlElement(name="rating", required=true)
-    private Double rating =0.0;
+    @XmlElement(name = "rating", required = true)
+    private Double rating = 0.0;
 
     @Column(name = "persons_number", nullable = false)
-    @XmlElement(name="personsNumber", required=true)
+    @XmlElement(name = "personsNumber", required = true)
     private Integer personsNumber;
 
     @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
     @JsonIdentityReference(alwaysAsId = true)
     @ManyToOne
     @JoinColumn(name = "category_id")
-    @XmlElement(name="category", required=true)
+    @XmlElement(name = "category", required = true)
     private CategoryOfLodging category;
 
     @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
     @JsonIdentityReference(alwaysAsId = true)
     @ManyToOne
     @JoinColumn(name = "type_id", nullable = false)
-    @XmlElement(name="type", required=true)
+    @XmlElement(name = "type", required = true)
     private TypeOfLodging type;
 
     @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
     @JsonIdentityReference(alwaysAsId = true)
     @ManyToOne
     @JoinColumn(name = "city_id", nullable = false)
-    @XmlElement(name="city", required=true)
+    @XmlElement(name = "city", required = true)
     private City city;
 
     @JsonIgnore
     @OneToMany(mappedBy = "lodging", cascade = CascadeType.ALL)
-    @XmlElementWrapper(name="priceLists", required=true)
-    @XmlElement(name="priceList", required=true)
+    @XmlElementWrapper(name = "priceLists", required = true)
+    @XmlElement(name = "priceList", required = true)
     private List<PriceList> priceLists = new ArrayList<PriceList>();
 
     @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
     @JsonIdentityReference(alwaysAsId = true)
     @ManyToOne
     @JoinColumn(name = "agent_id", nullable = false)
-    @XmlElement(name="agent", required=true)
+    @XmlElement(name = "agent", required = true)
     private User agent;
 
     @JsonIgnore
     @OneToMany(mappedBy = "lodging", cascade = CascadeType.ALL)
-    @XmlElementWrapper(name="comments", required=true)
-    @XmlElement(name="comment", required=true)
+    @XmlElementWrapper(name = "comments", required = true)
+    @XmlElement(name = "comment", required = true)
     private List<Comment> comments = new ArrayList<Comment>();
 
     @JsonIgnore
     @OneToMany(mappedBy = "lodging", cascade = CascadeType.ALL)
-    @XmlElementWrapper(name="reservations", required=true)
-    @XmlElement(name="reservation", required=true)
+    @XmlElementWrapper(name = "reservations", required = true)
+    @XmlElement(name = "reservation", required = true)
     private List<Reservation> reservations = new ArrayList<Reservation>();
 
 
-
     @OneToMany(mappedBy = "lodging", cascade = CascadeType.ALL)
-    @XmlElementWrapper(name="ratingList", required=true)
-    @XmlElement(name="rating", required=true)
+    @XmlElementWrapper(name = "ratingList", required = true)
+    @XmlElement(name = "rating", required = true)
     private List<Rating> ratingList = new ArrayList<Rating>();
 
     @JsonIgnore
     @ManyToMany(mappedBy = "lodgingList", cascade = {CascadeType.PERSIST}, fetch = FetchType.EAGER)
-    @XmlElementWrapper(name="additionalServiceList", required=true)
-    @XmlElement(name="additionalService", required=true)
+    @XmlElementWrapper(name = "additionalServiceList", required = true)
+    @XmlElement(name = "additionalService", required = true)
     private List<AdditionalService> additionalServiceList = new ArrayList<AdditionalService>();
 
     @OneToMany(mappedBy = "lodging", cascade = CascadeType.ALL, fetch = FetchType.EAGER)

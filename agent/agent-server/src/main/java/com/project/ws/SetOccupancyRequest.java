@@ -1,18 +1,13 @@
-
 package com.project.ws;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 
 
 /**
  * <p>Java class for anonymous complex type.
- * 
+ *
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ *
  * <pre>
  * &lt;complexType>
  *   &lt;complexContent>
@@ -27,15 +22,13 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "agent",
-    "lodging",
-    "start",
-    "end"
+        "agent",
+        "lodging",
+        "start",
+        "end"
 })
 @XmlRootElement(name = "setOccupancyRequest")
 public class SetOccupancyRequest {
@@ -50,11 +43,9 @@ public class SetOccupancyRequest {
 
     /**
      * Gets the value of the agent property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     * {@link String }
      */
     public String getAgent() {
         return agent;
@@ -62,11 +53,9 @@ public class SetOccupancyRequest {
 
     /**
      * Sets the value of the agent property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setAgent(String value) {
         this.agent = value;
@@ -74,7 +63,6 @@ public class SetOccupancyRequest {
 
     /**
      * Gets the value of the lodging property.
-     * 
      */
     public long getLodging() {
         return lodging;
@@ -82,7 +70,6 @@ public class SetOccupancyRequest {
 
     /**
      * Sets the value of the lodging property.
-     * 
      */
     public void setLodging(long value) {
         this.lodging = value;
@@ -90,11 +77,9 @@ public class SetOccupancyRequest {
 
     /**
      * Gets the value of the start property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     * {@link String }
      */
     public String getStart() {
         return start;
@@ -102,11 +87,9 @@ public class SetOccupancyRequest {
 
     /**
      * Sets the value of the start property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setStart(String value) {
         this.start = value;
@@ -114,11 +97,9 @@ public class SetOccupancyRequest {
 
     /**
      * Gets the value of the end property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     * {@link String }
      */
     public String getEnd() {
         return end;
@@ -126,11 +107,9 @@ public class SetOccupancyRequest {
 
     /**
      * Sets the value of the end property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setEnd(String value) {
         this.end = value;

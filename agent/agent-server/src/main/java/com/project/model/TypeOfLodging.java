@@ -1,4 +1,3 @@
-
 package com.project.model;
 
 import javax.persistence.Entity;
@@ -23,7 +22,6 @@ public class TypeOfLodging {
 
     /**
      * Sets the value of the id property.
-     * 
      */
     public void setId(long value) {
         this.id = value;
@@ -31,11 +29,9 @@ public class TypeOfLodging {
 
     /**
      * Gets the value of the label property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     * {@link String }
      */
     public String getLabel() {
         return label;
@@ -43,11 +39,9 @@ public class TypeOfLodging {
 
     /**
      * Sets the value of the label property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setLabel(String value) {
         this.label = value;

@@ -2,7 +2,6 @@ package com.project.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -26,7 +25,8 @@ public class AdditionalService implements Serializable {
         this.lodgingList = lodgingList;
     }
 
-    public  AdditionalService(Long id,String name){}
+    public AdditionalService(Long id, String name) {
+    }
 
     public AdditionalService() {
     }

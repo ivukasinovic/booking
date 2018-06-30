@@ -13,9 +13,9 @@ import javax.xml.bind.annotation.*;
 
 /**
  * <p>Java class for anonymous complex type.
- * 
+ *
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ *
  * <pre>
  * &lt;complexType>
  *   &lt;complexContent>
@@ -27,12 +27,10 @@ import javax.xml.bind.annotation.*;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "types"
+        "types"
 })
 @XmlRootElement(name = "setPricePlanResponse")
 public class SetPricePlanResponse {
@@ -42,11 +40,9 @@ public class SetPricePlanResponse {
 
     /**
      * Gets the value of the types property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     * {@link String }
      */
     public String getTypes() {
         return types;
@@ -54,11 +50,9 @@ public class SetPricePlanResponse {
 
     /**
      * Sets the value of the types property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setTypes(String value) {
         this.types = value;

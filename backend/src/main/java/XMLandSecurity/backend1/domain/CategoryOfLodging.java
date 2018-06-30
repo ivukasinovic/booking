@@ -1,33 +1,34 @@
 package XMLandSecurity.backend1.domain;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
-
 import java.io.Serializable;
 import java.util.List;
 
 @Entity
 @Table
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlRootElement(name="categoryOfLodging")
+@XmlRootElement(name = "categoryOfLodging")
 
 public class CategoryOfLodging implements Serializable {
 
     @Id
     @Column(name = "id")
-    @XmlElement(name="id", required=true)
+    @XmlElement(name = "id", required = true)
     private Long id;
 
     @Column(name = "label")
-    @XmlElement(name="label", required=true)
+    @XmlElement(name = "label", required = true)
     private String label;
 
     @Column(name = "name")
-    @XmlElement(name="name", required=true)
+    @XmlElement(name = "name", required = true)
     private String name;
 
     public CategoryOfLodging() {

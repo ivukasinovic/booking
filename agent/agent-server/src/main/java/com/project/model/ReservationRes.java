@@ -1,8 +1,6 @@
-
 package com.project.model;
 
 import javax.persistence.*;
-
 
 
 @Entity

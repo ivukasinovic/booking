@@ -15,5 +15,5 @@ public interface PriceListService {
 
     void delete(Long id);
 
-    List<PriceList>findByLodging(Long id);
+    List<PriceList> findByLodging(Long id);
 }

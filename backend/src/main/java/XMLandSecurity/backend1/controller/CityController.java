@@ -23,7 +23,7 @@ public class CityController {
             produces = MediaType.APPLICATION_JSON_VALUE
     )
     public ResponseEntity<City> getUser(@PathVariable("id") Long id) {
-        City listaAdminaFanZone = cityService.findOne(id) ; //findOne(user);
+        City listaAdminaFanZone = cityService.findOne(id); //findOne(user);
         return new ResponseEntity<>(listaAdminaFanZone, HttpStatus.OK);     // "200 OK"
     }
 
@@ -35,7 +35,7 @@ public class CityController {
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public ResponseEntity<City> CreateCity (@RequestBody City city) {
+    public ResponseEntity<City> CreateCity(@RequestBody City city) {
         City userNew = cityService.save(city);
         return new ResponseEntity(userNew, HttpStatus.OK);
     }
@@ -47,7 +47,7 @@ public class CityController {
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public ResponseEntity<City> updateUsers (@PathVariable("id") Long id) {
+    public ResponseEntity<City> updateUsers(@PathVariable("id") Long id) {
         City listaAdminaFanZone = cityService.findOne(id);
         return new ResponseEntity(listaAdminaFanZone, HttpStatus.OK);     // "200 OK"
     }
@@ -57,7 +57,7 @@ public class CityController {
             method = RequestMethod.DELETE,
             consumes = MediaType.APPLICATION_JSON_VALUE
     )
-    public ResponseEntity<City> izbrisi(@PathVariable("id") Long id){
+    public ResponseEntity<City> izbrisi(@PathVariable("id") Long id) {
         cityService.delete(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
@@ -67,7 +67,7 @@ public class CityController {
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public ResponseEntity<List<City>> getCities(){
+    public ResponseEntity<List<City>> getCities() {
         List<City> cities = cityService.findAll();
         return new ResponseEntity(cities, HttpStatus.OK);
     }

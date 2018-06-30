@@ -1,4 +1,3 @@
-
 package com.project.ws;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for image complex type.
- * 
+ *
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ *
  * <pre>
  * &lt;complexType name="image">
  *   &lt;complexContent>
@@ -31,14 +30,12 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "image", propOrder = {
-    "id",
-    "url",
-    "lodging"
+        "id",
+        "url",
+        "lodging"
 })
 public class Image {
 
@@ -50,7 +47,6 @@ public class Image {
 
     /**
      * Gets the value of the id property.
-     * 
      */
     public long getId() {
         return id;
@@ -58,7 +54,6 @@ public class Image {
 
     /**
      * Sets the value of the id property.
-     * 
      */
     public void setId(long value) {
         this.id = value;
@@ -66,11 +61,9 @@ public class Image {
 
     /**
      * Gets the value of the url property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     * {@link String }
      */
     public String getUrl() {
         return url;
@@ -78,11 +71,9 @@ public class Image {
 
     /**
      * Sets the value of the url property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setUrl(String value) {
         this.url = value;
@@ -90,11 +81,9 @@ public class Image {
 
     /**
      * Gets the value of the lodging property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Lodging }
-     *     
+     *
+     * @return possible object is
+     * {@link Lodging }
      */
     public Lodging getLodging() {
         return lodging;
@@ -102,11 +91,9 @@ public class Image {
 
     /**
      * Sets the value of the lodging property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Lodging }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Lodging }
      */
     public void setLodging(Lodging value) {
         this.lodging = value;

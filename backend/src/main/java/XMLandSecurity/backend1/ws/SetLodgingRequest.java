@@ -14,9 +14,9 @@ import javax.xml.bind.annotation.*;
 
 /**
  * <p>Java class for anonymous complex type.
- * 
+ *
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ *
  * <pre>
  * &lt;complexType>
  *   &lt;complexContent>
@@ -28,12 +28,10 @@ import javax.xml.bind.annotation.*;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "lodging"
+        "lodging"
 })
 @XmlRootElement(name = "setLodgingRequest")
 public class SetLodgingRequest {
@@ -44,10 +42,8 @@ public class SetLodgingRequest {
     /**
      * Gets the value of the lodging property.
      *
-     * @return
-     *     possible object is
-     *     {@link LodgingRes }
-     *
+     * @return possible object is
+     * {@link LodgingRes }
      */
     public LodgingRes getLodging() {
         return lodging;
@@ -56,10 +52,8 @@ public class SetLodgingRequest {
     /**
      * Sets the value of the lodging property.
      *
-     * @param value
-     *     allowed object is
-     *     {@link LodgingRes }
-     *     
+     * @param value allowed object is
+     *              {@link LodgingRes }
      */
     public void setLodging(LodgingRes value) {
         this.lodging = value;

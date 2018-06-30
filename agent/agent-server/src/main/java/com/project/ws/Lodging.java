@@ -1,19 +1,18 @@
-
 package com.project.ws;
 
-import java.util.ArrayList;
-import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
  * <p>Java class for lodging complex type.
- * 
+ *
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ *
  * <pre>
  * &lt;complexType name="lodging">
  *   &lt;complexContent>
@@ -100,27 +99,25 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "lodging", propOrder = {
-    "id",
-    "title",
-    "address",
-    "details",
-    "rating",
-    "personsNumber",
-    "category",
-    "type",
-    "city",
-    "priceLists",
-    "agent",
-    "comments",
-    "reservations",
-    "ratingList",
-    "additionalServiceList",
-    "imagesList"
+        "id",
+        "title",
+        "address",
+        "details",
+        "rating",
+        "personsNumber",
+        "category",
+        "type",
+        "city",
+        "priceLists",
+        "agent",
+        "comments",
+        "reservations",
+        "ratingList",
+        "additionalServiceList",
+        "imagesList"
 })
 public class Lodging {
 
@@ -156,7 +153,6 @@ public class Lodging {
 
     /**
      * Gets the value of the id property.
-     * 
      */
     public long getId() {
         return id;
@@ -164,7 +160,6 @@ public class Lodging {
 
     /**
      * Sets the value of the id property.
-     * 
      */
     public void setId(long value) {
         this.id = value;
@@ -172,11 +167,9 @@ public class Lodging {
 
     /**
      * Gets the value of the title property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     * {@link String }
      */
     public String getTitle() {
         return title;
@@ -184,11 +177,9 @@ public class Lodging {
 
     /**
      * Sets the value of the title property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setTitle(String value) {
         this.title = value;
@@ -196,11 +187,9 @@ public class Lodging {
 
     /**
      * Gets the value of the address property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     * {@link String }
      */
     public String getAddress() {
         return address;
@@ -208,11 +197,9 @@ public class Lodging {
 
     /**
      * Sets the value of the address property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setAddress(String value) {
         this.address = value;
@@ -220,11 +207,9 @@ public class Lodging {
 
     /**
      * Gets the value of the details property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     * {@link String }
      */
     public String getDetails() {
         return details;
@@ -232,11 +217,9 @@ public class Lodging {
 
     /**
      * Sets the value of the details property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setDetails(String value) {
         this.details = value;
@@ -244,7 +227,6 @@ public class Lodging {
 
     /**
      * Gets the value of the rating property.
-     * 
      */
     public double getRating() {
         return rating;
@@ -252,7 +234,6 @@ public class Lodging {
 
     /**
      * Sets the value of the rating property.
-     * 
      */
     public void setRating(double value) {
         this.rating = value;
@@ -260,7 +241,6 @@ public class Lodging {
 
     /**
      * Gets the value of the personsNumber property.
-     * 
      */
     public int getPersonsNumber() {
         return personsNumber;
@@ -268,7 +248,6 @@ public class Lodging {
 
     /**
      * Sets the value of the personsNumber property.
-     * 
      */
     public void setPersonsNumber(int value) {
         this.personsNumber = value;
@@ -276,11 +255,9 @@ public class Lodging {
 
     /**
      * Gets the value of the category property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link CategoryOfLodging }
-     *     
+     *
+     * @return possible object is
+     * {@link CategoryOfLodging }
      */
     public CategoryOfLodging getCategory() {
         return category;
@@ -288,11 +265,9 @@ public class Lodging {
 
     /**
      * Sets the value of the category property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link CategoryOfLodging }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link CategoryOfLodging }
      */
     public void setCategory(CategoryOfLodging value) {
         this.category = value;
@@ -300,11 +275,9 @@ public class Lodging {
 
     /**
      * Gets the value of the type property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link TypeOfLodging }
-     *     
+     *
+     * @return possible object is
+     * {@link TypeOfLodging }
      */
     public TypeOfLodging getType() {
         return type;
@@ -312,11 +285,9 @@ public class Lodging {
 
     /**
      * Sets the value of the type property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link TypeOfLodging }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link TypeOfLodging }
      */
     public void setType(TypeOfLodging value) {
         this.type = value;
@@ -324,11 +295,9 @@ public class Lodging {
 
     /**
      * Gets the value of the city property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link City }
-     *     
+     *
+     * @return possible object is
+     * {@link City }
      */
     public City getCity() {
         return city;
@@ -336,11 +305,9 @@ public class Lodging {
 
     /**
      * Sets the value of the city property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link City }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link City }
      */
     public void setCity(City value) {
         this.city = value;
@@ -348,11 +315,9 @@ public class Lodging {
 
     /**
      * Gets the value of the priceLists property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link PriceLists }
-     *     
+     *
+     * @return possible object is
+     * {@link PriceLists }
      */
     public PriceLists getPriceLists() {
         return priceLists;
@@ -360,11 +325,9 @@ public class Lodging {
 
     /**
      * Sets the value of the priceLists property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link PriceLists }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link PriceLists }
      */
     public void setPriceLists(PriceLists value) {
         this.priceLists = value;
@@ -372,11 +335,9 @@ public class Lodging {
 
     /**
      * Gets the value of the agent property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link User }
-     *     
+     *
+     * @return possible object is
+     * {@link User }
      */
     public User getAgent() {
         return agent;
@@ -384,11 +345,9 @@ public class Lodging {
 
     /**
      * Sets the value of the agent property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link User }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link User }
      */
     public void setAgent(User value) {
         this.agent = value;
@@ -396,11 +355,9 @@ public class Lodging {
 
     /**
      * Gets the value of the comments property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Comments }
-     *     
+     *
+     * @return possible object is
+     * {@link Comments }
      */
     public Comments getComments() {
         return comments;
@@ -408,11 +365,9 @@ public class Lodging {
 
     /**
      * Sets the value of the comments property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Comments }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Comments }
      */
     public void setComments(Comments value) {
         this.comments = value;
@@ -420,11 +375,9 @@ public class Lodging {
 
     /**
      * Gets the value of the reservations property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Reservations }
-     *     
+     *
+     * @return possible object is
+     * {@link Reservations }
      */
     public Reservations getReservations() {
         return reservations;
@@ -432,11 +385,9 @@ public class Lodging {
 
     /**
      * Sets the value of the reservations property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Reservations }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Reservations }
      */
     public void setReservations(Reservations value) {
         this.reservations = value;
@@ -444,11 +395,9 @@ public class Lodging {
 
     /**
      * Gets the value of the ratingList property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link RatingList }
-     *     
+     *
+     * @return possible object is
+     * {@link RatingList }
      */
     public RatingList getRatingList() {
         return ratingList;
@@ -456,11 +405,9 @@ public class Lodging {
 
     /**
      * Sets the value of the ratingList property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link RatingList }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link RatingList }
      */
     public void setRatingList(RatingList value) {
         this.ratingList = value;
@@ -468,11 +415,9 @@ public class Lodging {
 
     /**
      * Gets the value of the additionalServiceList property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link AdditionalServiceList }
-     *     
+     *
+     * @return possible object is
+     * {@link AdditionalServiceList }
      */
     public AdditionalServiceList getAdditionalServiceList() {
         return additionalServiceList;
@@ -480,11 +425,9 @@ public class Lodging {
 
     /**
      * Sets the value of the additionalServiceList property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link AdditionalServiceList }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link AdditionalServiceList }
      */
     public void setAdditionalServiceList(AdditionalServiceList value) {
         this.additionalServiceList = value;
@@ -492,11 +435,9 @@ public class Lodging {
 
     /**
      * Gets the value of the imagesList property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link ImagesList }
-     *     
+     *
+     * @return possible object is
+     * {@link ImagesList }
      */
     public ImagesList getImagesList() {
         return imagesList;
@@ -504,11 +445,9 @@ public class Lodging {
 
     /**
      * Sets the value of the imagesList property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link ImagesList }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link ImagesList }
      */
     public void setImagesList(ImagesList value) {
         this.imagesList = value;
@@ -517,9 +456,9 @@ public class Lodging {
 
     /**
      * <p>Java class for anonymous complex type.
-     * 
+     *
      * <p>The following schema fragment specifies the expected content contained within this class.
-     * 
+     *
      * <pre>
      * &lt;complexType>
      *   &lt;complexContent>
@@ -531,12 +470,10 @@ public class Lodging {
      *   &lt;/complexContent>
      * &lt;/complexType>
      * </pre>
-     * 
-     * 
      */
     @XmlAccessorType(XmlAccessType.FIELD)
     @XmlType(name = "", propOrder = {
-        "additionalService"
+            "additionalService"
     })
     public static class AdditionalServiceList {
 
@@ -545,25 +482,23 @@ public class Lodging {
 
         /**
          * Gets the value of the additionalService property.
-         * 
+         *
          * <p>
          * This accessor method returns a reference to the live list,
          * not a snapshot. Therefore any modification you make to the
          * returned list will be present inside the JAXB object.
          * This is why there is not a <CODE>set</CODE> method for the additionalService property.
-         * 
+         *
          * <p>
          * For example, to add a new item, do as follows:
          * <pre>
          *    getAdditionalService().add(newItem);
          * </pre>
-         * 
-         * 
+         *
+         *
          * <p>
          * Objects of the following type(s) are allowed in the list
          * {@link AdditionalService }
-         * 
-         * 
          */
         public List<AdditionalService> getAdditionalService() {
             if (additionalService == null) {
@@ -577,9 +512,9 @@ public class Lodging {
 
     /**
      * <p>Java class for anonymous complex type.
-     * 
+     *
      * <p>The following schema fragment specifies the expected content contained within this class.
-     * 
+     *
      * <pre>
      * &lt;complexType>
      *   &lt;complexContent>
@@ -591,12 +526,10 @@ public class Lodging {
      *   &lt;/complexContent>
      * &lt;/complexType>
      * </pre>
-     * 
-     * 
      */
     @XmlAccessorType(XmlAccessType.FIELD)
     @XmlType(name = "", propOrder = {
-        "comment"
+            "comment"
     })
     public static class Comments {
 
@@ -605,25 +538,23 @@ public class Lodging {
 
         /**
          * Gets the value of the comment property.
-         * 
+         *
          * <p>
          * This accessor method returns a reference to the live list,
          * not a snapshot. Therefore any modification you make to the
          * returned list will be present inside the JAXB object.
          * This is why there is not a <CODE>set</CODE> method for the comment property.
-         * 
+         *
          * <p>
          * For example, to add a new item, do as follows:
          * <pre>
          *    getComment().add(newItem);
          * </pre>
-         * 
-         * 
+         *
+         *
          * <p>
          * Objects of the following type(s) are allowed in the list
          * {@link Comment }
-         * 
-         * 
          */
         public List<Comment> getComment() {
             if (comment == null) {
@@ -637,9 +568,9 @@ public class Lodging {
 
     /**
      * <p>Java class for anonymous complex type.
-     * 
+     *
      * <p>The following schema fragment specifies the expected content contained within this class.
-     * 
+     *
      * <pre>
      * &lt;complexType>
      *   &lt;complexContent>
@@ -651,12 +582,10 @@ public class Lodging {
      *   &lt;/complexContent>
      * &lt;/complexType>
      * </pre>
-     * 
-     * 
      */
     @XmlAccessorType(XmlAccessType.FIELD)
     @XmlType(name = "", propOrder = {
-        "image"
+            "image"
     })
     public static class ImagesList {
 
@@ -665,25 +594,23 @@ public class Lodging {
 
         /**
          * Gets the value of the image property.
-         * 
+         *
          * <p>
          * This accessor method returns a reference to the live list,
          * not a snapshot. Therefore any modification you make to the
          * returned list will be present inside the JAXB object.
          * This is why there is not a <CODE>set</CODE> method for the image property.
-         * 
+         *
          * <p>
          * For example, to add a new item, do as follows:
          * <pre>
          *    getImage().add(newItem);
          * </pre>
-         * 
-         * 
+         *
+         *
          * <p>
          * Objects of the following type(s) are allowed in the list
          * {@link Image }
-         * 
-         * 
          */
         public List<Image> getImage() {
             if (image == null) {
@@ -697,9 +624,9 @@ public class Lodging {
 
     /**
      * <p>Java class for anonymous complex type.
-     * 
+     *
      * <p>The following schema fragment specifies the expected content contained within this class.
-     * 
+     *
      * <pre>
      * &lt;complexType>
      *   &lt;complexContent>
@@ -711,12 +638,10 @@ public class Lodging {
      *   &lt;/complexContent>
      * &lt;/complexType>
      * </pre>
-     * 
-     * 
      */
     @XmlAccessorType(XmlAccessType.FIELD)
     @XmlType(name = "", propOrder = {
-        "priceList"
+            "priceList"
     })
     public static class PriceLists {
 
@@ -725,25 +650,23 @@ public class Lodging {
 
         /**
          * Gets the value of the priceList property.
-         * 
+         *
          * <p>
          * This accessor method returns a reference to the live list,
          * not a snapshot. Therefore any modification you make to the
          * returned list will be present inside the JAXB object.
          * This is why there is not a <CODE>set</CODE> method for the priceList property.
-         * 
+         *
          * <p>
          * For example, to add a new item, do as follows:
          * <pre>
          *    getPriceList().add(newItem);
          * </pre>
-         * 
-         * 
+         *
+         *
          * <p>
          * Objects of the following type(s) are allowed in the list
          * {@link PriceList }
-         * 
-         * 
          */
         public List<PriceList> getPriceList() {
             if (priceList == null) {
@@ -757,9 +680,9 @@ public class Lodging {
 
     /**
      * <p>Java class for anonymous complex type.
-     * 
+     *
      * <p>The following schema fragment specifies the expected content contained within this class.
-     * 
+     *
      * <pre>
      * &lt;complexType>
      *   &lt;complexContent>
@@ -771,12 +694,10 @@ public class Lodging {
      *   &lt;/complexContent>
      * &lt;/complexType>
      * </pre>
-     * 
-     * 
      */
     @XmlAccessorType(XmlAccessType.FIELD)
     @XmlType(name = "", propOrder = {
-        "rating"
+            "rating"
     })
     public static class RatingList {
 
@@ -785,25 +706,23 @@ public class Lodging {
 
         /**
          * Gets the value of the rating property.
-         * 
+         *
          * <p>
          * This accessor method returns a reference to the live list,
          * not a snapshot. Therefore any modification you make to the
          * returned list will be present inside the JAXB object.
          * This is why there is not a <CODE>set</CODE> method for the rating property.
-         * 
+         *
          * <p>
          * For example, to add a new item, do as follows:
          * <pre>
          *    getRating().add(newItem);
          * </pre>
-         * 
-         * 
+         *
+         *
          * <p>
          * Objects of the following type(s) are allowed in the list
          * {@link Rating }
-         * 
-         * 
          */
         public List<Rating> getRating() {
             if (rating == null) {
@@ -817,9 +736,9 @@ public class Lodging {
 
     /**
      * <p>Java class for anonymous complex type.
-     * 
+     *
      * <p>The following schema fragment specifies the expected content contained within this class.
-     * 
+     *
      * <pre>
      * &lt;complexType>
      *   &lt;complexContent>
@@ -831,12 +750,10 @@ public class Lodging {
      *   &lt;/complexContent>
      * &lt;/complexType>
      * </pre>
-     * 
-     * 
      */
     @XmlAccessorType(XmlAccessType.FIELD)
     @XmlType(name = "", propOrder = {
-        "reservation"
+            "reservation"
     })
     public static class Reservations {
 
@@ -845,25 +762,23 @@ public class Lodging {
 
         /**
          * Gets the value of the reservation property.
-         * 
+         *
          * <p>
          * This accessor method returns a reference to the live list,
          * not a snapshot. Therefore any modification you make to the
          * returned list will be present inside the JAXB object.
          * This is why there is not a <CODE>set</CODE> method for the reservation property.
-         * 
+         *
          * <p>
          * For example, to add a new item, do as follows:
          * <pre>
          *    getReservation().add(newItem);
          * </pre>
-         * 
-         * 
+         *
+         *
          * <p>
          * Objects of the following type(s) are allowed in the list
          * {@link Reservation }
-         * 
-         * 
          */
         public List<Reservation> getReservation() {
             if (reservation == null) {

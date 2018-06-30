@@ -4,7 +4,6 @@ import XMLandSecurity.backend1.domain.Reservation;
 import XMLandSecurity.backend1.domain.User;
 import XMLandSecurity.backend1.service.EmailService;
 import XMLandSecurity.backend1.utility.EncDecSimple;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -14,10 +13,8 @@ import org.springframework.stereotype.Service;
 
 import javax.mail.internet.MimeMessage;
 import javax.xml.bind.DatatypeConverter;
-import java.io.File;
 import java.io.StringWriter;
 import java.security.PrivateKey;
-import java.security.cert.CertificateEncodingException;
 
 /**
  * Created by Ivan V. on 19-May-18
@@ -39,9 +36,9 @@ public class EmailServiceImpl implements EmailService {
         try {
             MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, false, "utf-8");
             String htmlMsg = "<h3>Profile activation!</h3><br>"
-                    + "<div>Welcome "+user.getUsername()+"  on <b>Booking.com </b></div>"
+                    + "<div>Welcome " + user.getUsername() + "  on <b>Booking.com </b></div>"
                     + "<div>Click  <a href ="
-                    + " \"https://localhost:4200/api/activate/"+encryptedString+"\">"
+                    + " \"https://localhost:4200/api/activate/" + encryptedString + "\">"
                     + "<u>here</u></a> for activation.</div>";
             mimeMessage.setContent(htmlMsg, "text/html");
             helper.setTo(user.getEmail());
@@ -60,9 +57,9 @@ public class EmailServiceImpl implements EmailService {
         try {
             MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, false, "utf-8");
             String htmlMsg = "<h3>Reset password!</h3><br>"
-                    + "<div>Hi "+user.getUsername()+", you want reset password on <b>Booking.com </b></div>"
+                    + "<div>Hi " + user.getUsername() + ", you want reset password on <b>Booking.com </b></div>"
                     + "<div>Click  <a href ="
-                    + " \"https://localhost:4200/reset-password/"+encryptedString+"\">"
+                    + " \"https://localhost:4200/reset-password/" + encryptedString + "\">"
                     + "<u>here</u></a> to reset your password.</div>";
             mimeMessage.setContent(htmlMsg, "text/html");
             helper.setTo(user.getEmail());

@@ -10,6 +10,7 @@ import java.security.PrivateKey;
  */
 public interface EmailService {
     void sendActivationMail(User user);
+
     void sendResetPassword(User user);
 
     void sendReservationDetails(User user, Reservation reservation);

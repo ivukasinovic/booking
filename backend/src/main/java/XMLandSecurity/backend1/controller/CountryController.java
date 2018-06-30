@@ -20,8 +20,8 @@ public class CountryController {
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public ResponseEntity<Country> getUser (@PathVariable("id") Long id) {
-        Country listaAdminaFanZone = countryService.findOne(id) ; //findOne(user);
+    public ResponseEntity<Country> getUser(@PathVariable("id") Long id) {
+        Country listaAdminaFanZone = countryService.findOne(id); //findOne(user);
         return new ResponseEntity<>(listaAdminaFanZone, HttpStatus.OK);     // "200 OK"
     }
 
@@ -33,7 +33,7 @@ public class CountryController {
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public ResponseEntity<Country> CreateCity (@RequestBody Country country) {
+    public ResponseEntity<Country> CreateCity(@RequestBody Country country) {
         Country userNew = countryService.save(country);
         return new ResponseEntity(userNew, HttpStatus.OK);
     }
@@ -45,7 +45,7 @@ public class CountryController {
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public ResponseEntity<Country> updateUsers (@PathVariable("id") Long id) {
+    public ResponseEntity<Country> updateUsers(@PathVariable("id") Long id) {
         Country listaAdminaFanZone = countryService.findOne(id);
         return new ResponseEntity(listaAdminaFanZone, HttpStatus.OK);     // "200 OK"
     }
@@ -55,7 +55,7 @@ public class CountryController {
             method = RequestMethod.DELETE,
             consumes = MediaType.APPLICATION_JSON_VALUE
     )
-    public ResponseEntity<Country> izbrisi(@PathVariable("id") Long id){
+    public ResponseEntity<Country> izbrisi(@PathVariable("id") Long id) {
         countryService.delete(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }

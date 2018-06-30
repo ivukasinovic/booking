@@ -1,19 +1,14 @@
-
 package com.project.ws;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 import javax.xml.datatype.XMLGregorianCalendar;
 
 
 /**
  * <p>Java class for rating complex type.
- * 
+ *
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ *
  * <pre>
  * &lt;complexType name="rating">
  *   &lt;complexContent>
@@ -29,16 +24,14 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "rating", propOrder = {
-    "id",
-    "dateCreated",
-    "star",
-    "user",
-    "lodging"
+        "id",
+        "dateCreated",
+        "star",
+        "user",
+        "lodging"
 })
 public class Rating {
 
@@ -54,7 +47,6 @@ public class Rating {
 
     /**
      * Gets the value of the id property.
-     * 
      */
     public long getId() {
         return id;
@@ -62,7 +54,6 @@ public class Rating {
 
     /**
      * Sets the value of the id property.
-     * 
      */
     public void setId(long value) {
         this.id = value;
@@ -70,11 +61,9 @@ public class Rating {
 
     /**
      * Gets the value of the dateCreated property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @return possible object is
+     * {@link XMLGregorianCalendar }
      */
     public XMLGregorianCalendar getDateCreated() {
         return dateCreated;
@@ -82,11 +71,9 @@ public class Rating {
 
     /**
      * Sets the value of the dateCreated property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link XMLGregorianCalendar }
      */
     public void setDateCreated(XMLGregorianCalendar value) {
         this.dateCreated = value;
@@ -94,7 +81,6 @@ public class Rating {
 
     /**
      * Gets the value of the star property.
-     * 
      */
     public long getStar() {
         return star;
@@ -102,7 +88,6 @@ public class Rating {
 
     /**
      * Sets the value of the star property.
-     * 
      */
     public void setStar(long value) {
         this.star = value;
@@ -110,11 +95,9 @@ public class Rating {
 
     /**
      * Gets the value of the user property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link User }
-     *     
+     *
+     * @return possible object is
+     * {@link User }
      */
     public User getUser() {
         return user;
@@ -122,11 +105,9 @@ public class Rating {
 
     /**
      * Sets the value of the user property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link User }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link User }
      */
     public void setUser(User value) {
         this.user = value;
@@ -134,11 +115,9 @@ public class Rating {
 
     /**
      * Gets the value of the lodging property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Lodging }
-     *     
+     *
+     * @return possible object is
+     * {@link Lodging }
      */
     public Lodging getLodging() {
         return lodging;
@@ -146,11 +125,9 @@ public class Rating {
 
     /**
      * Sets the value of the lodging property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Lodging }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Lodging }
      */
     public void setLodging(Lodging value) {
         this.lodging = value;

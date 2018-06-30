@@ -23,7 +23,7 @@ public class TypeOfLodgingController {
             produces = MediaType.APPLICATION_JSON_VALUE
     )
     public ResponseEntity<List<TypeOfLodging>> getAll() {
-        List<TypeOfLodging> listaAdminaFanZone = typeOfLodgingService.findAll() ; //findOne(user);
+        List<TypeOfLodging> listaAdminaFanZone = typeOfLodgingService.findAll(); //findOne(user);
         return new ResponseEntity<>(listaAdminaFanZone, HttpStatus.OK);     // "200 OK"
     }
 
@@ -33,7 +33,7 @@ public class TypeOfLodgingController {
             produces = MediaType.APPLICATION_JSON_VALUE
     )
     public ResponseEntity<TypeOfLodging> getUser(@PathVariable("id") Long id) {
-        TypeOfLodging listaAdminaFanZone = typeOfLodgingService.findOne(id) ; //findOne(user);
+        TypeOfLodging listaAdminaFanZone = typeOfLodgingService.findOne(id); //findOne(user);
         return new ResponseEntity<>(listaAdminaFanZone, HttpStatus.OK);     // "200 OK"
     }
 
@@ -43,7 +43,7 @@ public class TypeOfLodgingController {
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public ResponseEntity<TypeOfLodging> CreateCity (@RequestBody TypeOfLodging categoryOfLodging) {
+    public ResponseEntity<TypeOfLodging> CreateCity(@RequestBody TypeOfLodging categoryOfLodging) {
         TypeOfLodging userNew = typeOfLodgingService.save(categoryOfLodging);
         return new ResponseEntity(userNew, HttpStatus.OK);
     }
@@ -54,7 +54,7 @@ public class TypeOfLodgingController {
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public ResponseEntity<TypeOfLodging> updateUsers (@PathVariable("id") Long id) {
+    public ResponseEntity<TypeOfLodging> updateUsers(@PathVariable("id") Long id) {
         TypeOfLodging listaAdminaFanZone = typeOfLodgingService.findOne(id);
         return new ResponseEntity(listaAdminaFanZone, HttpStatus.OK);     // "200 OK"
     }
@@ -63,7 +63,7 @@ public class TypeOfLodgingController {
             value = "/{id}",
             method = RequestMethod.DELETE
     )
-    public ResponseEntity<TypeOfLodging> izbrisi(@PathVariable("id") Long id){
+    public ResponseEntity<TypeOfLodging> izbrisi(@PathVariable("id") Long id) {
         typeOfLodgingService.delete(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }

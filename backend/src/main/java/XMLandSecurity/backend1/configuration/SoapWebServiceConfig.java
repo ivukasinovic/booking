@@ -27,8 +27,9 @@ public class SoapWebServiceConfig extends WsConfigurerAdapter {
         // register global interceptor
         interceptors.add(new GlobalEndpointInterceptor());
     }
+
     @Bean
-    public ServletRegistrationBean messageDispatcherServlet(ApplicationContext context){
+    public ServletRegistrationBean messageDispatcherServlet(ApplicationContext context) {
         MessageDispatcherServlet servlet = new MessageDispatcherServlet();
         servlet.setApplicationContext(context);
         servlet.setTransformWsdlLocations(true);
@@ -36,12 +37,12 @@ public class SoapWebServiceConfig extends WsConfigurerAdapter {
     }
 
     @Bean
-    public XsdSchema lodgingSchema(){
-       return new SimpleXsdSchema(new ClassPathResource("booking.xsd"));
+    public XsdSchema lodgingSchema() {
+        return new SimpleXsdSchema(new ClassPathResource("booking.xsd"));
     }
 
     @Bean("lodging")
-    public DefaultWsdl11Definition defaultWsdl11Definition(XsdSchema lodgingSchema){
+    public DefaultWsdl11Definition defaultWsdl11Definition(XsdSchema lodgingSchema) {
         DefaultWsdl11Definition definition = new DefaultWsdl11Definition();
         definition.setSchema(lodgingSchema);
         definition.setLocationUri("/ws");

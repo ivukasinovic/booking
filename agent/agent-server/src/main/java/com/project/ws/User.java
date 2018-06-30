@@ -1,21 +1,16 @@
-
 package com.project.ws;
 
+import javax.xml.bind.annotation.*;
+import javax.xml.datatype.XMLGregorianCalendar;
 import java.util.ArrayList;
 import java.util.List;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
-import javax.xml.datatype.XMLGregorianCalendar;
 
 
 /**
  * <p>Java class for user complex type.
- * 
+ *
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ *
  * <pre>
  * &lt;complexType name="user">
  *   &lt;complexContent>
@@ -104,29 +99,27 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "user", propOrder = {
-    "id",
-    "username",
-    "passwordHash",
-    "name",
-    "surname",
-    "email",
-    "city",
-    "adress",
-    "number",
-    "role",
-    "lastPasswordReset",
-    "activated",
-    "receviedMessages",
-    "sentMessages",
-    "reservations",
-    "lodgings",
-    "ratings",
-    "comments"
+        "id",
+        "username",
+        "passwordHash",
+        "name",
+        "surname",
+        "email",
+        "city",
+        "adress",
+        "number",
+        "role",
+        "lastPasswordReset",
+        "activated",
+        "receviedMessages",
+        "sentMessages",
+        "reservations",
+        "lodgings",
+        "ratings",
+        "comments"
 })
 public class User {
 
@@ -162,7 +155,6 @@ public class User {
 
     /**
      * Gets the value of the id property.
-     * 
      */
     public long getId() {
         return id;
@@ -170,7 +162,6 @@ public class User {
 
     /**
      * Sets the value of the id property.
-     * 
      */
     public void setId(long value) {
         this.id = value;
@@ -178,11 +169,9 @@ public class User {
 
     /**
      * Gets the value of the username property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     * {@link String }
      */
     public String getUsername() {
         return username;
@@ -190,11 +179,9 @@ public class User {
 
     /**
      * Sets the value of the username property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setUsername(String value) {
         this.username = value;
@@ -202,11 +189,9 @@ public class User {
 
     /**
      * Gets the value of the passwordHash property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     * {@link String }
      */
     public String getPasswordHash() {
         return passwordHash;
@@ -214,11 +199,9 @@ public class User {
 
     /**
      * Sets the value of the passwordHash property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setPasswordHash(String value) {
         this.passwordHash = value;
@@ -226,11 +209,9 @@ public class User {
 
     /**
      * Gets the value of the name property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     * {@link String }
      */
     public String getName() {
         return name;
@@ -238,11 +219,9 @@ public class User {
 
     /**
      * Sets the value of the name property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setName(String value) {
         this.name = value;
@@ -250,11 +229,9 @@ public class User {
 
     /**
      * Gets the value of the surname property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     * {@link String }
      */
     public String getSurname() {
         return surname;
@@ -262,11 +239,9 @@ public class User {
 
     /**
      * Sets the value of the surname property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setSurname(String value) {
         this.surname = value;
@@ -274,11 +249,9 @@ public class User {
 
     /**
      * Gets the value of the email property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     * {@link String }
      */
     public String getEmail() {
         return email;
@@ -286,11 +259,9 @@ public class User {
 
     /**
      * Sets the value of the email property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setEmail(String value) {
         this.email = value;
@@ -298,11 +269,9 @@ public class User {
 
     /**
      * Gets the value of the city property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     * {@link String }
      */
     public String getCity() {
         return city;
@@ -310,11 +279,9 @@ public class User {
 
     /**
      * Sets the value of the city property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCity(String value) {
         this.city = value;
@@ -322,11 +289,9 @@ public class User {
 
     /**
      * Gets the value of the adress property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     * {@link String }
      */
     public String getAdress() {
         return adress;
@@ -334,11 +299,9 @@ public class User {
 
     /**
      * Sets the value of the adress property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setAdress(String value) {
         this.adress = value;
@@ -346,11 +309,9 @@ public class User {
 
     /**
      * Gets the value of the number property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     * {@link String }
      */
     public String getNumber() {
         return number;
@@ -358,11 +319,9 @@ public class User {
 
     /**
      * Sets the value of the number property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setNumber(String value) {
         this.number = value;
@@ -370,11 +329,9 @@ public class User {
 
     /**
      * Gets the value of the role property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Role }
-     *     
+     *
+     * @return possible object is
+     * {@link Role }
      */
     public Role getRole() {
         return role;
@@ -382,11 +339,9 @@ public class User {
 
     /**
      * Sets the value of the role property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Role }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Role }
      */
     public void setRole(Role value) {
         this.role = value;
@@ -394,11 +349,9 @@ public class User {
 
     /**
      * Gets the value of the lastPasswordReset property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @return possible object is
+     * {@link XMLGregorianCalendar }
      */
     public XMLGregorianCalendar getLastPasswordReset() {
         return lastPasswordReset;
@@ -406,11 +359,9 @@ public class User {
 
     /**
      * Sets the value of the lastPasswordReset property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link XMLGregorianCalendar }
      */
     public void setLastPasswordReset(XMLGregorianCalendar value) {
         this.lastPasswordReset = value;
@@ -418,7 +369,6 @@ public class User {
 
     /**
      * Gets the value of the activated property.
-     * 
      */
     public boolean isActivated() {
         return activated;
@@ -426,7 +376,6 @@ public class User {
 
     /**
      * Sets the value of the activated property.
-     * 
      */
     public void setActivated(boolean value) {
         this.activated = value;
@@ -434,11 +383,9 @@ public class User {
 
     /**
      * Gets the value of the receviedMessages property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link ReceviedMessages }
-     *     
+     *
+     * @return possible object is
+     * {@link ReceviedMessages }
      */
     public ReceviedMessages getReceviedMessages() {
         return receviedMessages;
@@ -446,11 +393,9 @@ public class User {
 
     /**
      * Sets the value of the receviedMessages property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link ReceviedMessages }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link ReceviedMessages }
      */
     public void setReceviedMessages(ReceviedMessages value) {
         this.receviedMessages = value;
@@ -458,11 +403,9 @@ public class User {
 
     /**
      * Gets the value of the sentMessages property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link SentMessages }
-     *     
+     *
+     * @return possible object is
+     * {@link SentMessages }
      */
     public SentMessages getSentMessages() {
         return sentMessages;
@@ -470,11 +413,9 @@ public class User {
 
     /**
      * Sets the value of the sentMessages property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link SentMessages }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link SentMessages }
      */
     public void setSentMessages(SentMessages value) {
         this.sentMessages = value;
@@ -482,11 +423,9 @@ public class User {
 
     /**
      * Gets the value of the reservations property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Reservations }
-     *     
+     *
+     * @return possible object is
+     * {@link Reservations }
      */
     public Reservations getReservations() {
         return reservations;
@@ -494,11 +433,9 @@ public class User {
 
     /**
      * Sets the value of the reservations property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Reservations }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Reservations }
      */
     public void setReservations(Reservations value) {
         this.reservations = value;
@@ -506,11 +443,9 @@ public class User {
 
     /**
      * Gets the value of the lodgings property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Lodgings }
-     *     
+     *
+     * @return possible object is
+     * {@link Lodgings }
      */
     public Lodgings getLodgings() {
         return lodgings;
@@ -518,11 +453,9 @@ public class User {
 
     /**
      * Sets the value of the lodgings property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Lodgings }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Lodgings }
      */
     public void setLodgings(Lodgings value) {
         this.lodgings = value;
@@ -530,11 +463,9 @@ public class User {
 
     /**
      * Gets the value of the ratings property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Ratings }
-     *     
+     *
+     * @return possible object is
+     * {@link Ratings }
      */
     public Ratings getRatings() {
         return ratings;
@@ -542,11 +473,9 @@ public class User {
 
     /**
      * Sets the value of the ratings property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Ratings }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Ratings }
      */
     public void setRatings(Ratings value) {
         this.ratings = value;
@@ -554,11 +483,9 @@ public class User {
 
     /**
      * Gets the value of the comments property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Comments }
-     *     
+     *
+     * @return possible object is
+     * {@link Comments }
      */
     public Comments getComments() {
         return comments;
@@ -566,11 +493,9 @@ public class User {
 
     /**
      * Sets the value of the comments property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Comments }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Comments }
      */
     public void setComments(Comments value) {
         this.comments = value;
@@ -579,9 +504,9 @@ public class User {
 
     /**
      * <p>Java class for anonymous complex type.
-     * 
+     *
      * <p>The following schema fragment specifies the expected content contained within this class.
-     * 
+     *
      * <pre>
      * &lt;complexType>
      *   &lt;complexContent>
@@ -593,12 +518,10 @@ public class User {
      *   &lt;/complexContent>
      * &lt;/complexType>
      * </pre>
-     * 
-     * 
      */
     @XmlAccessorType(XmlAccessType.FIELD)
     @XmlType(name = "", propOrder = {
-        "comment"
+            "comment"
     })
     public static class Comments {
 
@@ -607,25 +530,23 @@ public class User {
 
         /**
          * Gets the value of the comment property.
-         * 
+         *
          * <p>
          * This accessor method returns a reference to the live list,
          * not a snapshot. Therefore any modification you make to the
          * returned list will be present inside the JAXB object.
          * This is why there is not a <CODE>set</CODE> method for the comment property.
-         * 
+         *
          * <p>
          * For example, to add a new item, do as follows:
          * <pre>
          *    getComment().add(newItem);
          * </pre>
-         * 
-         * 
+         *
+         *
          * <p>
          * Objects of the following type(s) are allowed in the list
          * {@link Comment }
-         * 
-         * 
          */
         public List<Comment> getComment() {
             if (comment == null) {
@@ -639,9 +560,9 @@ public class User {
 
     /**
      * <p>Java class for anonymous complex type.
-     * 
+     *
      * <p>The following schema fragment specifies the expected content contained within this class.
-     * 
+     *
      * <pre>
      * &lt;complexType>
      *   &lt;complexContent>
@@ -653,12 +574,10 @@ public class User {
      *   &lt;/complexContent>
      * &lt;/complexType>
      * </pre>
-     * 
-     * 
      */
     @XmlAccessorType(XmlAccessType.FIELD)
     @XmlType(name = "", propOrder = {
-        "lodging"
+            "lodging"
     })
     public static class Lodgings {
 
@@ -666,25 +585,23 @@ public class User {
 
         /**
          * Gets the value of the lodging property.
-         * 
+         *
          * <p>
          * This accessor method returns a reference to the live list,
          * not a snapshot. Therefore any modification you make to the
          * returned list will be present inside the JAXB object.
          * This is why there is not a <CODE>set</CODE> method for the lodging property.
-         * 
+         *
          * <p>
          * For example, to add a new item, do as follows:
          * <pre>
          *    getLodging().add(newItem);
          * </pre>
-         * 
-         * 
+         *
+         *
          * <p>
          * Objects of the following type(s) are allowed in the list
          * {@link Lodging }
-         * 
-         * 
          */
         public List<Lodging> getLodging() {
             if (lodging == null) {
@@ -698,9 +615,9 @@ public class User {
 
     /**
      * <p>Java class for anonymous complex type.
-     * 
+     *
      * <p>The following schema fragment specifies the expected content contained within this class.
-     * 
+     *
      * <pre>
      * &lt;complexType>
      *   &lt;complexContent>
@@ -712,12 +629,10 @@ public class User {
      *   &lt;/complexContent>
      * &lt;/complexType>
      * </pre>
-     * 
-     * 
      */
     @XmlAccessorType(XmlAccessType.FIELD)
     @XmlType(name = "", propOrder = {
-        "rating"
+            "rating"
     })
     public static class Ratings {
 
@@ -725,25 +640,23 @@ public class User {
 
         /**
          * Gets the value of the rating property.
-         * 
+         *
          * <p>
          * This accessor method returns a reference to the live list,
          * not a snapshot. Therefore any modification you make to the
          * returned list will be present inside the JAXB object.
          * This is why there is not a <CODE>set</CODE> method for the rating property.
-         * 
+         *
          * <p>
          * For example, to add a new item, do as follows:
          * <pre>
          *    getRating().add(newItem);
          * </pre>
-         * 
-         * 
+         *
+         *
          * <p>
          * Objects of the following type(s) are allowed in the list
          * {@link Rating }
-         * 
-         * 
          */
         public List<Rating> getRating() {
             if (rating == null) {
@@ -757,9 +670,9 @@ public class User {
 
     /**
      * <p>Java class for anonymous complex type.
-     * 
+     *
      * <p>The following schema fragment specifies the expected content contained within this class.
-     * 
+     *
      * <pre>
      * &lt;complexType>
      *   &lt;complexContent>
@@ -771,12 +684,10 @@ public class User {
      *   &lt;/complexContent>
      * &lt;/complexType>
      * </pre>
-     * 
-     * 
      */
     @XmlAccessorType(XmlAccessType.FIELD)
     @XmlType(name = "", propOrder = {
-        "message"
+            "message"
     })
     public static class ReceviedMessages {
 
@@ -784,25 +695,23 @@ public class User {
 
         /**
          * Gets the value of the message property.
-         * 
+         *
          * <p>
          * This accessor method returns a reference to the live list,
          * not a snapshot. Therefore any modification you make to the
          * returned list will be present inside the JAXB object.
          * This is why there is not a <CODE>set</CODE> method for the message property.
-         * 
+         *
          * <p>
          * For example, to add a new item, do as follows:
          * <pre>
          *    getMessage().add(newItem);
          * </pre>
-         * 
-         * 
+         *
+         *
          * <p>
          * Objects of the following type(s) are allowed in the list
          * {@link Message }
-         * 
-         * 
          */
         public List<Message> getMessage() {
             if (message == null) {
@@ -816,9 +725,9 @@ public class User {
 
     /**
      * <p>Java class for anonymous complex type.
-     * 
+     *
      * <p>The following schema fragment specifies the expected content contained within this class.
-     * 
+     *
      * <pre>
      * &lt;complexType>
      *   &lt;complexContent>
@@ -830,12 +739,10 @@ public class User {
      *   &lt;/complexContent>
      * &lt;/complexType>
      * </pre>
-     * 
-     * 
      */
     @XmlAccessorType(XmlAccessType.FIELD)
     @XmlType(name = "", propOrder = {
-        "reservation"
+            "reservation"
     })
     public static class Reservations {
 
@@ -843,25 +750,23 @@ public class User {
 
         /**
          * Gets the value of the reservation property.
-         * 
+         *
          * <p>
          * This accessor method returns a reference to the live list,
          * not a snapshot. Therefore any modification you make to the
          * returned list will be present inside the JAXB object.
          * This is why there is not a <CODE>set</CODE> method for the reservation property.
-         * 
+         *
          * <p>
          * For example, to add a new item, do as follows:
          * <pre>
          *    getReservation().add(newItem);
          * </pre>
-         * 
-         * 
+         *
+         *
          * <p>
          * Objects of the following type(s) are allowed in the list
          * {@link Reservation }
-         * 
-         * 
          */
         public List<Reservation> getReservation() {
             if (reservation == null) {
@@ -875,9 +780,9 @@ public class User {
 
     /**
      * <p>Java class for anonymous complex type.
-     * 
+     *
      * <p>The following schema fragment specifies the expected content contained within this class.
-     * 
+     *
      * <pre>
      * &lt;complexType>
      *   &lt;complexContent>
@@ -889,12 +794,10 @@ public class User {
      *   &lt;/complexContent>
      * &lt;/complexType>
      * </pre>
-     * 
-     * 
      */
     @XmlAccessorType(XmlAccessType.FIELD)
     @XmlType(name = "", propOrder = {
-        "message"
+            "message"
     })
     public static class SentMessages {
 
@@ -902,25 +805,23 @@ public class User {
 
         /**
          * Gets the value of the message property.
-         * 
+         *
          * <p>
          * This accessor method returns a reference to the live list,
          * not a snapshot. Therefore any modification you make to the
          * returned list will be present inside the JAXB object.
          * This is why there is not a <CODE>set</CODE> method for the message property.
-         * 
+         *
          * <p>
          * For example, to add a new item, do as follows:
          * <pre>
          *    getMessage().add(newItem);
          * </pre>
-         * 
-         * 
+         *
+         *
          * <p>
          * Objects of the following type(s) are allowed in the list
          * {@link Message }
-         * 
-         * 
          */
         public List<Message> getMessage() {
             if (message == null) {

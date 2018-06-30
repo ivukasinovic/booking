@@ -3,7 +3,6 @@ package XMLandSecurity.backend1.controller;
 import XMLandSecurity.backend1.domain.Lodging;
 import XMLandSecurity.backend1.domain.Reservation;
 import XMLandSecurity.backend1.domain.User;
-import XMLandSecurity.backend1.repository.LodgingRepository;
 import XMLandSecurity.backend1.service.EmailService;
 import XMLandSecurity.backend1.service.LodgingService;
 import XMLandSecurity.backend1.service.ReservationService;
@@ -14,7 +13,6 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.websocket.server.PathParam;
 import java.io.IOException;
 import java.security.Principal;
 import java.text.DateFormat;
@@ -44,8 +42,8 @@ public class ReservationController {
     public ResponseEntity createReservation(@RequestBody Reservation reservation, @PathVariable("idLodging") Long idLodging, Principal principal) throws IOException {
 
 
-        if (reservationService.checkIfOverlapingDate(idLodging,reservation.getDateStart(),reservation.getDateEnd())) {
-            XMLandSecurity.backend1.logger.Logger.getInstance().logError( " Neuspesna rezervacija " + reservation.getLodging().getTitle() +  "  " + new Date());
+        if (reservationService.checkIfOverlapingDate(idLodging, reservation.getDateStart(), reservation.getDateEnd())) {
+            XMLandSecurity.backend1.logger.Logger.getInstance().logError(" Neuspesna rezervacija " + reservation.getLodging().getTitle() + "  " + new Date());
             return new ResponseEntity(HttpStatus.CONFLICT);
         }
 
@@ -53,13 +51,12 @@ public class ReservationController {
         reservation.setLodging(lodging);
 
 
-
         User loggedUser = userService.findByUsername(principal.getName());
         reservation.setUser(loggedUser);
         reservationService.save(reservation);
         emailService.sendReservationDetails(loggedUser, reservation);
 
-        XMLandSecurity.backend1.logger.Logger.getInstance().log( " Rezervisali ste: " +reservation.getLodging().getTitle()+ "  " + new Date());
+        XMLandSecurity.backend1.logger.Logger.getInstance().log(" Rezervisali ste: " + reservation.getLodging().getTitle() + "  " + new Date());
 
         return new ResponseEntity(HttpStatus.OK);
 
@@ -91,8 +88,8 @@ public class ReservationController {
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public ResponseEntity<Reservation> getReservation (@PathVariable("id") Long id) {
-        Reservation listaAdminaFanZone = reservationService.findOne(id) ; //findOne(user);
+    public ResponseEntity<Reservation> getReservation(@PathVariable("id") Long id) {
+        Reservation listaAdminaFanZone = reservationService.findOne(id); //findOne(user);
         return new ResponseEntity<>(listaAdminaFanZone, HttpStatus.OK);     // "200 OK"
     }
 
@@ -102,7 +99,7 @@ public class ReservationController {
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public ResponseEntity<Reservation> updateReservation (@PathVariable("id") Long id) {
+    public ResponseEntity<Reservation> updateReservation(@PathVariable("id") Long id) {
         Reservation listaAdminaFanZone = reservationService.findOne(id);
         return new ResponseEntity(listaAdminaFanZone, HttpStatus.OK);     // "200 OK"
     }
@@ -111,7 +108,7 @@ public class ReservationController {
             value = "/{id}",
             method = RequestMethod.DELETE
     )
-    public ResponseEntity<Reservation> deleteReservation(@PathVariable("id") Long id){
+    public ResponseEntity<Reservation> deleteReservation(@PathVariable("id") Long id) {
         reservationService.delete(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
@@ -121,7 +118,7 @@ public class ReservationController {
             value = "/getReservationByLodging/{idLodg}",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> search(@PathVariable("idLodg") Long idLodg){
+    public ResponseEntity<?> search(@PathVariable("idLodg") Long idLodg) {
 
         List<Reservation> reservations = reservationService.findByLodging(idLodg);
 
@@ -132,20 +129,20 @@ public class ReservationController {
             value = "/check/{id}/{startDate}/{endDate}",
             method = RequestMethod.GET
     )
-    public ResponseEntity checkAvaliability(@PathVariable("id")Long id, @PathVariable("startDate")String startDate,
-                                            @PathVariable("endDate")String endDate){
+    public ResponseEntity checkAvaliability(@PathVariable("id") Long id, @PathVariable("startDate") String startDate,
+                                            @PathVariable("endDate") String endDate) {
         DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        Date dateS = null,dateE = null;
+        Date dateS = null, dateE = null;
         try {
             dateS = format.parse(startDate);
             dateE = format.parse(endDate);
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        if(reservationService.checkIfOverlapingDate(id,dateS,dateE))
+        if (reservationService.checkIfOverlapingDate(id, dateS, dateE))
             return new ResponseEntity(HttpStatus.CONFLICT);
 
-        return  new ResponseEntity(HttpStatus.OK);
+        return new ResponseEntity(HttpStatus.OK);
     }
 
 

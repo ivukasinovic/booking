@@ -9,8 +9,8 @@ import javax.validation.ValidatorFactory;
 public class Validator {
 
     private static Validator instance = null;
-    private ValidatorFactory validatorFactory;
     javax.validation.Validator validator;
+    private ValidatorFactory validatorFactory;
 
     private Validator() {
         validatorFactory = Validation.buildDefaultValidatorFactory();
@@ -24,13 +24,12 @@ public class Validator {
         return instance;
     }
 
+    public static void setInstance(Validator instance) {
+        Validator.instance = instance;
+    }
 
     public javax.validation.Validator getValidator() {
         return validator;
-    }
-
-    public static void setInstance(Validator instance) {
-        Validator.instance = instance;
     }
 
 

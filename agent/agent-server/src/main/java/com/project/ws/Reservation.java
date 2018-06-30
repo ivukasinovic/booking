@@ -1,19 +1,14 @@
-
 package com.project.ws;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 import javax.xml.datatype.XMLGregorianCalendar;
 
 
 /**
  * <p>Java class for reservation complex type.
- * 
+ *
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ *
  * <pre>
  * &lt;complexType name="reservation">
  *   &lt;complexContent>
@@ -31,18 +26,16 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "reservation", propOrder = {
-    "id",
-    "dateStart",
-    "dateEnd",
-    "active",
-    "visited",
-    "lodging",
-    "user"
+        "id",
+        "dateStart",
+        "dateEnd",
+        "active",
+        "visited",
+        "lodging",
+        "user"
 })
 public class Reservation {
 
@@ -62,7 +55,6 @@ public class Reservation {
 
     /**
      * Gets the value of the id property.
-     * 
      */
     public long getId() {
         return id;
@@ -70,7 +62,6 @@ public class Reservation {
 
     /**
      * Sets the value of the id property.
-     * 
      */
     public void setId(long value) {
         this.id = value;
@@ -78,11 +69,9 @@ public class Reservation {
 
     /**
      * Gets the value of the dateStart property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @return possible object is
+     * {@link XMLGregorianCalendar }
      */
     public XMLGregorianCalendar getDateStart() {
         return dateStart;
@@ -90,11 +79,9 @@ public class Reservation {
 
     /**
      * Sets the value of the dateStart property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link XMLGregorianCalendar }
      */
     public void setDateStart(XMLGregorianCalendar value) {
         this.dateStart = value;
@@ -102,11 +89,9 @@ public class Reservation {
 
     /**
      * Gets the value of the dateEnd property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @return possible object is
+     * {@link XMLGregorianCalendar }
      */
     public XMLGregorianCalendar getDateEnd() {
         return dateEnd;
@@ -114,11 +99,9 @@ public class Reservation {
 
     /**
      * Sets the value of the dateEnd property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link XMLGregorianCalendar }
      */
     public void setDateEnd(XMLGregorianCalendar value) {
         this.dateEnd = value;
@@ -126,7 +109,6 @@ public class Reservation {
 
     /**
      * Gets the value of the active property.
-     * 
      */
     public boolean isActive() {
         return active;
@@ -134,7 +116,6 @@ public class Reservation {
 
     /**
      * Sets the value of the active property.
-     * 
      */
     public void setActive(boolean value) {
         this.active = value;
@@ -142,7 +123,6 @@ public class Reservation {
 
     /**
      * Gets the value of the visited property.
-     * 
      */
     public boolean isVisited() {
         return visited;
@@ -150,7 +130,6 @@ public class Reservation {
 
     /**
      * Sets the value of the visited property.
-     * 
      */
     public void setVisited(boolean value) {
         this.visited = value;
@@ -158,11 +137,9 @@ public class Reservation {
 
     /**
      * Gets the value of the lodging property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Lodging }
-     *     
+     *
+     * @return possible object is
+     * {@link Lodging }
      */
     public Lodging getLodging() {
         return lodging;
@@ -170,11 +147,9 @@ public class Reservation {
 
     /**
      * Sets the value of the lodging property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Lodging }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Lodging }
      */
     public void setLodging(Lodging value) {
         this.lodging = value;
@@ -182,11 +157,9 @@ public class Reservation {
 
     /**
      * Gets the value of the user property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link User }
-     *     
+     *
+     * @return possible object is
+     * {@link User }
      */
     public User getUser() {
         return user;
@@ -194,11 +167,9 @@ public class Reservation {
 
     /**
      * Sets the value of the user property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link User }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link User }
      */
     public void setUser(User value) {
         this.user = value;

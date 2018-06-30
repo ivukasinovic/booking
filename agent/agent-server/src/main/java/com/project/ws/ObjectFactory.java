@@ -1,4 +1,3 @@
-
 package com.project.ws;
 
 import javax.xml.bind.JAXBElement;
@@ -8,18 +7,17 @@ import javax.xml.namespace.QName;
 
 
 /**
- * This object contains factory methods for each 
- * Java content interface and Java element interface 
- * generated in the com.bookingxml.soap_example package. 
- * <p>An ObjectFactory allows you to programatically 
- * construct new instances of the Java representation 
- * for XML content. The Java representation of XML 
- * content can consist of schema derived interfaces 
- * and classes representing the binding of schema 
- * type definitions, element declarations and model 
- * groups.  Factory methods for each of these are 
+ * This object contains factory methods for each
+ * Java content interface and Java element interface
+ * generated in the com.bookingxml.soap_example package.
+ * <p>An ObjectFactory allows you to programatically
+ * construct new instances of the Java representation
+ * for XML content. The Java representation of XML
+ * content can consist of schema derived interfaces
+ * and classes representing the binding of schema
+ * type definitions, element declarations and model
+ * groups.  Factory methods for each of these are
  * provided in this class.
- * 
  */
 @XmlRegistry
 public class ObjectFactory {
@@ -42,14 +40,12 @@ public class ObjectFactory {
 
     /**
      * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: com.bookingxml.soap_example
-     * 
      */
     public ObjectFactory() {
     }
 
     /**
      * Create an instance of {@link User }
-     * 
      */
     public User createUser() {
         return new User();
@@ -57,7 +53,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link Lodging }
-     * 
      */
     public Lodging createLodging() {
         return new Lodging();
@@ -65,7 +60,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link AdditionalService }
-     * 
      */
     public AdditionalService createAdditionalService() {
         return new AdditionalService();
@@ -73,7 +67,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link Country }
-     * 
      */
     public Country createCountry() {
         return new Country();
@@ -81,7 +74,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link TypeOfLodging }
-     * 
      */
     public TypeOfLodging createTypeOfLodging() {
         return new TypeOfLodging();
@@ -89,7 +81,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetLodgingCategoriesResponse }
-     * 
      */
     public GetLodgingCategoriesResponse createGetLodgingCategoriesResponse() {
         return new GetLodgingCategoriesResponse();
@@ -97,7 +88,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link CategoryOfLodging }
-     * 
      */
     public CategoryOfLodging createCategoryOfLodging() {
         return new CategoryOfLodging();
@@ -105,7 +95,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link City }
-     * 
      */
     public City createCity() {
         return new City();
@@ -113,7 +102,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetCitiesRequest }
-     * 
      */
     public GetCitiesRequest createGetCitiesRequest() {
         return new GetCitiesRequest();
@@ -121,7 +109,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link Rating }
-     * 
      */
     public Rating createRating() {
         return new Rating();
@@ -129,7 +116,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetLodgingTypesRequest }
-     * 
      */
     public GetLodgingTypesRequest createGetLodgingTypesRequest() {
         return new GetLodgingTypesRequest();
@@ -137,7 +123,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link LodgingRes }
-     * 
      */
     public LodgingRes createLodgingRes() {
         return new LodgingRes();
@@ -145,7 +130,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetCitiesResponse }
-     * 
      */
     public GetCitiesResponse createGetCitiesResponse() {
         return new GetCitiesResponse();
@@ -153,7 +137,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link PriceList }
-     * 
      */
     public PriceList createPriceList() {
         return new PriceList();
@@ -161,7 +144,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link SetMessagesRequest }
-     * 
      */
     public SetMessagesRequest createSetMessagesRequest() {
         return new SetMessagesRequest();
@@ -169,7 +151,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link MessageRes }
-     * 
      */
     public MessageRes createMessageRes() {
         return new MessageRes();
@@ -177,7 +158,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link SetCompletedLodgingRequest }
-     * 
      */
     public SetCompletedLodgingRequest createSetCompletedLodgingRequest() {
         return new SetCompletedLodgingRequest();
@@ -185,7 +165,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link Reservation }
-     * 
      */
     public Reservation createReservation() {
         return new Reservation();
@@ -193,7 +172,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetLodgingsRequest }
-     * 
      */
     public GetLodgingsRequest createGetLodgingsRequest() {
         return new GetLodgingsRequest();
@@ -201,7 +179,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetLodgingCategoriesRequest }
-     * 
      */
     public GetLodgingCategoriesRequest createGetLodgingCategoriesRequest() {
         return new GetLodgingCategoriesRequest();
@@ -209,7 +186,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetAdditionsResponse }
-     * 
      */
     public GetAdditionsResponse createGetAdditionsResponse() {
         return new GetAdditionsResponse();
@@ -217,7 +193,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetAdditionsRequest }
-     * 
      */
     public GetAdditionsRequest createGetAdditionsRequest() {
         return new GetAdditionsRequest();
@@ -225,7 +200,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link SetPricePlanRequest }
-     * 
      */
     public SetPricePlanRequest createSetPricePlanRequest() {
         return new SetPricePlanRequest();
@@ -233,7 +207,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link SetPricePlanResponse }
-     * 
      */
     public SetPricePlanResponse createSetPricePlanResponse() {
         return new SetPricePlanResponse();
@@ -241,7 +214,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link SetCompletedLodgingResponse }
-     * 
      */
     public SetCompletedLodgingResponse createSetCompletedLodgingResponse() {
         return new SetCompletedLodgingResponse();
@@ -249,7 +221,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link Image }
-     * 
      */
     public Image createImage() {
         return new Image();
@@ -257,7 +228,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetImagesRequest }
-     * 
      */
     public GetImagesRequest createGetImagesRequest() {
         return new GetImagesRequest();
@@ -265,7 +235,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link SetOccupancyResponse }
-     * 
      */
     public SetOccupancyResponse createSetOccupancyResponse() {
         return new SetOccupancyResponse();
@@ -273,7 +242,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link SetLodgingRequest }
-     * 
      */
     public SetLodgingRequest createSetLodgingRequest() {
         return new SetLodgingRequest();
@@ -281,7 +249,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link SetLodgingResponse }
-     * 
      */
     public SetLodgingResponse createSetLodgingResponse() {
         return new SetLodgingResponse();
@@ -289,7 +256,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link Message }
-     * 
      */
     public Message createMessage() {
         return new Message();
@@ -297,7 +263,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetLodgingsResponse }
-     * 
      */
     public GetLodgingsResponse createGetLodgingsResponse() {
         return new GetLodgingsResponse();
@@ -305,7 +270,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link SetMessagesResponse }
-     * 
      */
     public SetMessagesResponse createSetMessagesResponse() {
         return new SetMessagesResponse();
@@ -313,7 +277,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link SetOccupancyRequest }
-     * 
      */
     public SetOccupancyRequest createSetOccupancyRequest() {
         return new SetOccupancyRequest();
@@ -321,7 +284,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetMessagesRequest }
-     * 
      */
     public GetMessagesRequest createGetMessagesRequest() {
         return new GetMessagesRequest();
@@ -329,7 +291,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetReservationsResponse }
-     * 
      */
     public GetReservationsResponse createGetReservationsResponse() {
         return new GetReservationsResponse();
@@ -337,7 +298,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetImagesResponse }
-     * 
      */
     public GetImagesResponse createGetImagesResponse() {
         return new GetImagesResponse();
@@ -345,7 +305,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link Comment }
-     * 
      */
     public Comment createComment() {
         return new Comment();
@@ -353,7 +312,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetReservationsRequest }
-     * 
      */
     public GetReservationsRequest createGetReservationsRequest() {
         return new GetReservationsRequest();
@@ -361,7 +319,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetMessagesResponse }
-     * 
      */
     public GetMessagesResponse createGetMessagesResponse() {
         return new GetMessagesResponse();
@@ -369,7 +326,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetLodgingTypesResponse }
-     * 
      */
     public GetLodgingTypesResponse createGetLodgingTypesResponse() {
         return new GetLodgingTypesResponse();
@@ -377,7 +333,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link User.ReceviedMessages }
-     * 
      */
     public User.ReceviedMessages createUserReceviedMessages() {
         return new User.ReceviedMessages();
@@ -385,7 +340,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link User.SentMessages }
-     * 
      */
     public User.SentMessages createUserSentMessages() {
         return new User.SentMessages();
@@ -393,7 +347,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link User.Reservations }
-     * 
      */
     public User.Reservations createUserReservations() {
         return new User.Reservations();
@@ -401,7 +354,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link User.Lodgings }
-     * 
      */
     public User.Lodgings createUserLodgings() {
         return new User.Lodgings();
@@ -409,7 +361,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link User.Ratings }
-     * 
      */
     public User.Ratings createUserRatings() {
         return new User.Ratings();
@@ -417,7 +368,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link User.Comments }
-     * 
      */
     public User.Comments createUserComments() {
         return new User.Comments();
@@ -425,7 +375,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link Lodging.PriceLists }
-     * 
      */
     public Lodging.PriceLists createLodgingPriceLists() {
         return new Lodging.PriceLists();
@@ -433,7 +382,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link Lodging.Comments }
-     * 
      */
     public Lodging.Comments createLodgingComments() {
         return new Lodging.Comments();
@@ -441,7 +389,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link Lodging.Reservations }
-     * 
      */
     public Lodging.Reservations createLodgingReservations() {
         return new Lodging.Reservations();
@@ -449,7 +396,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link Lodging.RatingList }
-     * 
      */
     public Lodging.RatingList createLodgingRatingList() {
         return new Lodging.RatingList();
@@ -457,7 +403,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link Lodging.AdditionalServiceList }
-     * 
      */
     public Lodging.AdditionalServiceList createLodgingAdditionalServiceList() {
         return new Lodging.AdditionalServiceList();
@@ -465,7 +410,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link Lodging.ImagesList }
-     * 
      */
     public Lodging.ImagesList createLodgingImagesList() {
         return new Lodging.ImagesList();
@@ -473,7 +417,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link AdditionalService.LodgingList }
-     * 
      */
     public AdditionalService.LodgingList createAdditionalServiceLodgingList() {
         return new AdditionalService.LodgingList();
@@ -481,7 +424,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link Country.CityList }
-     * 
      */
     public Country.CityList createCountryCityList() {
         return new Country.CityList();
@@ -489,7 +431,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link City }{@code >}}
-     * 
      */
     @XmlElementDecl(namespace = "http://bookingxml.com/soap-example", name = "city")
     public JAXBElement<City> createCity(City value) {
@@ -498,7 +439,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link TypeOfLodging }{@code >}}
-     * 
      */
     @XmlElementDecl(namespace = "http://bookingxml.com/soap-example", name = "typeOfLodging")
     public JAXBElement<TypeOfLodging> createTypeOfLodging(TypeOfLodging value) {
@@ -507,7 +447,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link Country }{@code >}}
-     * 
      */
     @XmlElementDecl(namespace = "http://bookingxml.com/soap-example", name = "country")
     public JAXBElement<Country> createCountry(Country value) {
@@ -516,7 +455,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link Image }{@code >}}
-     * 
      */
     @XmlElementDecl(namespace = "http://bookingxml.com/soap-example", name = "image")
     public JAXBElement<Image> createImage(Image value) {
@@ -525,7 +463,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link MessageRes }{@code >}}
-     * 
      */
     @XmlElementDecl(namespace = "http://bookingxml.com/soap-example", name = "messageRes")
     public JAXBElement<MessageRes> createMessageRes(MessageRes value) {
@@ -534,7 +471,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link Lodging }{@code >}}
-     * 
      */
     @XmlElementDecl(namespace = "http://bookingxml.com/soap-example", name = "lodging")
     public JAXBElement<Lodging> createLodging(Lodging value) {
@@ -543,7 +479,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link PriceList }{@code >}}
-     * 
      */
     @XmlElementDecl(namespace = "http://bookingxml.com/soap-example", name = "priceList")
     public JAXBElement<PriceList> createPriceList(PriceList value) {
@@ -552,7 +487,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link LodgingRes }{@code >}}
-     * 
      */
     @XmlElementDecl(namespace = "http://bookingxml.com/soap-example", name = "lodgingRes")
     public JAXBElement<LodgingRes> createLodgingRes(LodgingRes value) {
@@ -561,7 +495,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link AdditionalService }{@code >}}
-     * 
      */
     @XmlElementDecl(namespace = "http://bookingxml.com/soap-example", name = "additionalService")
     public JAXBElement<AdditionalService> createAdditionalService(AdditionalService value) {
@@ -570,7 +503,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link Message }{@code >}}
-     * 
      */
     @XmlElementDecl(namespace = "http://bookingxml.com/soap-example", name = "message")
     public JAXBElement<Message> createMessage(Message value) {
@@ -579,7 +511,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link Rating }{@code >}}
-     * 
      */
     @XmlElementDecl(namespace = "http://bookingxml.com/soap-example", name = "rating")
     public JAXBElement<Rating> createRating(Rating value) {
@@ -588,7 +519,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link CategoryOfLodging }{@code >}}
-     * 
      */
     @XmlElementDecl(namespace = "http://bookingxml.com/soap-example", name = "categoryOfLodging")
     public JAXBElement<CategoryOfLodging> createCategoryOfLodging(CategoryOfLodging value) {
@@ -597,7 +527,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link User }{@code >}}
-     * 
      */
     @XmlElementDecl(namespace = "http://bookingxml.com/soap-example", name = "user")
     public JAXBElement<User> createUser(User value) {
@@ -606,7 +535,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link Comment }{@code >}}
-     * 
      */
     @XmlElementDecl(namespace = "http://bookingxml.com/soap-example", name = "comment")
     public JAXBElement<Comment> createComment(Comment value) {
@@ -615,7 +543,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link Reservation }{@code >}}
-     * 
      */
     @XmlElementDecl(namespace = "http://bookingxml.com/soap-example", name = "reservation")
     public JAXBElement<Reservation> createReservation(Reservation value) {

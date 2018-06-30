@@ -18,13 +18,13 @@ public interface KeyStoreService {
 
     ArrayList<String> getCertficatesSN();
 
-   // CertificateDTO getCertificateDTO(String alias);
+    // CertificateDTO getCertificateDTO(String alias);
 
-   // List<CertificateDTO> getCertificatesDTO();
+    // List<CertificateDTO> getCertificatesDTO();
 
     void writeCertificate(boolean isCa, Certificate certificate, String alias, PrivateKey pk);
 
-   // IssuerData readIssuerFromStore(String alias);
+    // IssuerData readIssuerFromStore(String alias);
 
     ArrayList<String> getIssuers();
 

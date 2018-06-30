@@ -15,9 +15,9 @@ import java.util.List;
 
 /**
  * <p>Java class for anonymous complex type.
- * 
+ *
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ *
  * <pre>
  * &lt;complexType>
  *   &lt;complexContent>
@@ -29,12 +29,10 @@ import java.util.List;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "lodgingRes"
+        "lodgingRes"
 })
 @XmlRootElement(name = "getLodgingsResponse")
 public class GetLodgingsResponse {
@@ -61,8 +59,6 @@ public class GetLodgingsResponse {
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link LodgingRes }
-     *
-     *
      */
     public List<LodgingRes> getLodgingRes() {
         if (lodgingRes == null) {

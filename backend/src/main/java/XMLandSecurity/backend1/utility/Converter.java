@@ -11,7 +11,8 @@ import java.util.GregorianCalendar;
  */
 public class Converter {
 
-    public Converter(){}
+    public Converter() {
+    }
 
     public static XMLGregorianCalendar vracaXmlDate(Date daatiDatum) throws DatatypeConfigurationException {
         GregorianCalendar c = new GregorianCalendar();

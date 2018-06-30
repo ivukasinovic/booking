@@ -12,6 +12,6 @@ public abstract class WsSecurityValidationException extends Throwable { /*extend
     }
 
     public WsSecurityValidationException(String msg, Throwable ex) {
-       // super(msg, ex);
+        // super(msg, ex);
     }
 }

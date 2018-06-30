@@ -159,8 +159,8 @@ public class CertificateController {
 
     @RequestMapping(value = "/revoke/{id}", method = RequestMethod.GET)
     public ResponseEntity<CertificateDTO> revoke(@PathVariable String id, Principal principal) {
-        Role permission = permissionService.findByEndpointAndMethod("/certificates/revoke/{id}","GET").getRole();
-        if(!permission.equals(getRole(principal.getName()))){
+        Role permission = permissionService.findByEndpointAndMethod("/certificates/revoke/{id}", "GET").getRole();
+        if (!permission.equals(getRole(principal.getName()))) {
             return new ResponseEntity<>(HttpStatus.FORBIDDEN);
         }
         certificateService.revoke(id);
@@ -170,8 +170,8 @@ public class CertificateController {
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<CertificateDTO> delete(@PathVariable String id, Principal principal) {
         Role permission = permissionService.findByEndpointAndMethod("/certificates/{id}", "DELETE").getRole();
-        if(!permission.equals(Role.USER)){
-            if(!permission.equals(getRole(principal.getName()))){
+        if (!permission.equals(Role.USER)) {
+            if (!permission.equals(getRole(principal.getName()))) {
                 return new ResponseEntity<>(HttpStatus.FORBIDDEN);
             }
         }
