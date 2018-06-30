@@ -16,6 +16,7 @@ Frontend, admin and agent-client (Angular)
   2. npm start
   
 Main backend and agent-server (Spring Boot)
-run BookShowApplication from 'backend/src/main/java/XMLandSecurity/backend1/Backend1Application.java' (Main backend) 
-run BookShowApplication from 'agent/agent-server/src/main/java/com/project/ProjectApplication.java' (Agent-server)
+
+run Backend1Application from 'backend/src/main/java/XMLandSecurity/backend1/Backend1Application.java' (Main backend) 
+run ProjectApplication from 'agent/agent-server/src/main/java/com/project/ProjectApplication.java' (Agent-server)
 
